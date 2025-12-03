@@ -59,11 +59,15 @@ export default function TopBar() {
       </div>
 
       {/* new: orange logo bar */}
-      <div className="w-full bg-orange-500 text-white">
-        <div className="h-14 max-w-6xl mx-auto flex items-center justify-between px-4">
+      <div className="w-full bg-orange-500 text-white py-4">
+        <div className="h-16 md:h-20 max-w-6xl mx-auto flex items-center justify-between px-4">
           <div className="flex items-center space-x-3">
             {/* replace /logo.svg with your logo path */}
-            <img src="/img/mainlogo.png" alt="Logo" className="h-10 md:h-12 w-auto" />
+            <img
+              src="/img/mainlogo.png"
+              alt="Logo"
+              className="h-14 md:h-16 lg:h-20 w-auto my-1 md:my-2 lg:my-3"
+            />
           </div>
 
           {/* desktop nav */}
