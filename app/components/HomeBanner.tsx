@@ -11,7 +11,7 @@ export default function HomeBanner() {
           <a
             href="/plans"
             aria-label="Shop Sustainable Plans"
-            className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-md shadow-md"
+            className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 text-sm md:px-6 md:py-3 md:text-base rounded-md shadow-md"
           >
             shop Sustainable Plans
           </a>
@@ -19,7 +19,7 @@ export default function HomeBanner() {
           <a
             href="/stores"
             aria-label="Find Store Nearby"
-            className="inline-block border border-white text-white bg-transparent hover:bg-white/10 font-semibold px-6 py-3 rounded-md"
+            className="inline-block border border-white text-white bg-transparent hover:bg-white/10 font-semibold px-3 py-2 text-sm md:px-6 md:py-3 md:text-base rounded-md"
           >
             Find Store Nearby
           </a>
