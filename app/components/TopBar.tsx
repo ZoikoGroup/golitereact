@@ -58,8 +58,8 @@ export default function TopBar() {
         )}
       </div>
 
-      {/* new: orange logo bar */}
-      <div className="w-full bg-orange-500 text-white py-4">
+      {/* new: orange logo bar (sticky) */}
+      <div className="w-full bg-orange-500 text-white py-4 sticky top-0 z-50 shadow-md">
         <div className="h-16 md:h-20 max-w-6xl mx-auto flex items-center justify-between px-4">
           <div className="flex items-center space-x-3">
             {/* replace /logo.svg with your logo path */}

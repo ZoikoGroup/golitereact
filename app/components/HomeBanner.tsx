@@ -13,7 +13,7 @@ export default function HomeBanner() {
             aria-label="Shop Sustainable Plans"
             className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 text-sm md:px-6 md:py-3 md:text-base rounded-md shadow-md"
           >
-            shop Sustainable Plans
+            Shop Sustainable Plans
           </a>
 
           <a
