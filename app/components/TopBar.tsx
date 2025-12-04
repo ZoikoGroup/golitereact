@@ -71,7 +71,7 @@ export default function TopBar() {
           </div>
 
           {/* desktop nav */}
-          <nav className="hidden md:flex space-x-6 text-sm">
+          <nav className="hidden md:flex space-x-6 text-lg">
             <a className="hover:underline">Prepaid Plans</a>
             <a className="hover:underline">Postpaid Plans</a>
             <a className="hover:underline">Family Plans</a>
