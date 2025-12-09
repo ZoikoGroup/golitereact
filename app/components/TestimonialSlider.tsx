@@ -1,7 +1,7 @@
 export default function CustomerFeedback() {
   const testimonials = [
     {
-      rating: 5,
+      rating: 3,
       text: `"Switched to GoLite 6 months ago and couldn’t be happier. The 5G speeds are incredible and customer service is top-notch. Best decision I made!"`,
       name: "Rajesh Kumar",
       location: "Mumbai, Maharashtra",
@@ -45,7 +45,7 @@ export default function CustomerFeedback() {
               </div>
 
               {/* Feedback */}
-              <p className="text-gray-700 text-sm leading-relaxed mb-6">
+              <p className="text-gray-700 text-sm leading-relaxed mb-6 text-left">
                 {t.text}
               </p>
 

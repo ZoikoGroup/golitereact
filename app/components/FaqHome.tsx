@@ -11,7 +11,7 @@ const faqs = [
     answer: "Yes, all Zoiko Mobile plans include free international calling minutes to over 246 countries. The allowance varies depending on the destination country and whether you are calling a landline or mobile number."
   },
   {
-    question: "How does Zoiko Mobile compare to other carriers for international calling?",
+    question: "What happens if I exceed my data limit?",
     answer: "Zoiko Mobile offers free international calling minutes to over 246 countries as part of every plan, with no additional activation or hidden fees. Most other carriers charge extra for similar services or cover fewer countries, making Zoiko Mobile a more affordable and comprehensive choice."
   },
   {

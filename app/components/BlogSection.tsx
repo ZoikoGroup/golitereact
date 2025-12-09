@@ -5,21 +5,21 @@ export default function BlogSection() {
       date: "Dec 1, 2025",
       title: "How 5G is Transforming Mobile Connectivity in India",
       desc: "Discover the revolutionary impact of 5G technology and how it’s changing the way we connect, work, and live.",
-      img: "/img/blog1.jpg",
+      img: "/img/BlogPost1.png",
     },
     {
       tag: "SUSTAINABILITY",
       date: "Nov 28, 2025",
       title: "Our Green Promise: 1 Plan, 1 Tree Initiative",
       desc: "Learn about our commitment to sustainability and how your mobile plan is helping create a greener India.",
-      img: "/img/blog2.jpg",
+      img: "/img/BlogPost2.png",
     },
     {
       tag: "TIPS & TRICKS",
       date: "Nov 25, 2025",
       title: "10 Ways to Maximize Your Mobile Data Usage",
       desc: "Expert tips to get the most out of your data plan and save money on your monthly mobile bill.",
-      img: "/img/blog3.jpg",
+      img: "/img/BlogPost3.png",
     },
   ];
 

@@ -11,32 +11,37 @@ export default function Home() {
       title: "Student Connect+",
       desc: "Special discounts for students with edu email verification",
       badge: "NEW",
-      gradient: "from-blue-500 via-purple-500 to-indigo-500",
+      gradient: "from-[#667EEA] to-[#764BA2]",
+      href: "#",
     },
     {
       title: "Senior Saver",
       desc: "Simplified plans with dedicated support for seniors 60+",
-      gradient: "from-pink-400 via-red-400 to-orange-400",
+      gradient: "from-[#F093FB] to-[#F5576C]",
     },
     {
       title: "Work-Life Unlimited",
       desc: "Business features with personal benefits in one plan",
-      gradient: "from-blue-400 to-cyan-400",
+      gradient: "from-[#4FACFE] to-[#00F2FE]",
+       href: "#",
     },
     {
       title: "Family Bundle",
       desc: "Connect up to 5 lines with shared data and savings",
-      gradient: "from-green-400 to-teal-400",
+      gradient: "from-[#43E97B] to-[#38F9D7]",
+       href: "#",
     },
     {
       title: "Gamer's Paradise",
       desc: "Low latency 5G with priority bandwidth for gaming",
-      gradient: "from-red-400 via-orange-300 to-yellow-300",
+      gradient: "from-[#FA709A] to-[#FEE140]",
+       href: "#",
     },
     {
       title: "Traveler's Choice",
       desc: "International roaming in 200+ countries included",
-      gradient: "from-indigo-500 via-purple-500 to-blue-500",
+      gradient: "from-[#30CFD0] to-[#330867]",
+       href: "#",
     },
   ];
   return (
@@ -57,58 +62,85 @@ export default function Home() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-24">
 
           {/* Card 1 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm text-center hover:shadow-md transition">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-orange-100 flex items-center justify-center">
-              <span className="text-orange-500 text-2xl">📄</span>
+          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-12 py-12">
+  
+            {/* IMAGE LEFT */}
+            <div className="w-12 h-12 mb-4 rounded-xl bg-green-100 flex items-center justify-center">
+              <img src="/img/payRecharge.png" alt="Recharge & Bill Pay" />
             </div>
+
+            {/* TEXT LEFT */}
             <h3 className="font-semibold text-lg text-gray-900">
               Recharge & Bill Pay
             </h3>
+
             <p className="text-gray-500 mt-2 text-sm">
               Quick and secure payments with instant confirmation
             </p>
+
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm text-center hover:shadow-md transition">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-blue-100 flex items-center justify-center">
-              <span className="text-blue-500 text-2xl">🔄</span>
+          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-12 py-12">
+  
+            {/* IMAGE LEFT */}
+            <div className="w-12 h-12 mb-4 rounded-xl bg-green-100 flex items-center justify-center">
+              <img src="/img/switch.png" alt="Recharge & Bill Pay" />
             </div>
+
+            {/* TEXT LEFT */}
             <h3 className="font-semibold text-lg text-gray-900">
               Switch To GoLite
             </h3>
+
             <p className="text-gray-500 mt-2 text-sm">
               Make the smart move today and switch from any network to GoLite
             </p>
+
           </div>
 
+
+
+
           {/* Card 3 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm text-center hover:shadow-md transition">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-yellow-100 flex items-center justify-center">
-              <span className="text-yellow-500 text-2xl">📲</span>
+          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-12 py-12">
+  
+            {/* IMAGE LEFT */}
+            <div className="w-12 h-12 mb-4 rounded-xl bg-green-100 flex items-center justify-center">
+              <img src="/img/sim.png" alt="Recharge & Bill Pay" />
             </div>
+
+            {/* TEXT LEFT */}
             <h3 className="font-semibold text-lg text-gray-900">
               SIM Activation
             </h3>
+
             <p className="text-gray-500 mt-2 text-sm">
               Activate GoLite SIM instantly and step into seamless connectivity
             </p>
+
           </div>
 
           {/* Card 4 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm text-center hover:shadow-md transition">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-green-100 flex items-center justify-center">
-              <span className="text-green-500 text-2xl">📱</span>
+          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-12 py-12">
+  
+            {/* IMAGE LEFT */}
+            <div className="w-12 h-12 mb-4 rounded-xl bg-green-100 flex items-center justify-center">
+              <img src="/img/mobile.png" alt="Recharge & Bill Pay" />
             </div>
+
+            {/* TEXT LEFT */}
             <h3 className="font-semibold text-lg text-gray-900">
               Shop Mobile
             </h3>
+
             <p className="text-gray-500 mt-2 text-sm">
               Find your perfect mobile device and enhance connectivity with GoLite.
             </p>
+
           </div>
 
         </div>
@@ -116,59 +148,61 @@ export default function Home() {
     </section>
 
 
-    <section className="w-full bg-[#11A683] text-white py-16 relative overflow-hidden">
+    <section className="w-full bg-[#11A683] text-white  relative overflow-hidden">
 
       {/* Content */}
-      <div className="container mx-auto px-6 md:px-12 text-center">
+      <div className="container mx-auto text-center relative z-10">
 
         {/* Title */}
-        <h2 className="text-3xl md:text-4xl font-bold">
+        <h2 className="text-3xl md:text-4xl font-bold pt-12">
           Stay Connected Anywhere with Affordable Prepaid Travel Plans!
         </h2>
 
         {/* Feature List */}
-        <div className="flex flex-wrap justify-center gap-6 mt-8 text-white text-lg">
-          <p className="flex items-center gap-2">
-            <span className="text-green-300 text-2xl">✔</span>
-            Free Talk & Text
-          </p>
+<div className="flex flex-wrap justify-center gap-8 mt-8 text-white text-lg px-64">
 
-          <p className="flex items-center gap-2">
-            <span className="text-green-300 text-2xl">✔</span>
-            Mobile Hotspot Access
-          </p>
+  <p className="flex items-center gap-2">
+    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+    Free Talk & Text
+  </p>
 
-          <p className="flex items-center gap-2">
-            <span className="text-green-300 text-2xl">✔</span>
-            Unlimited 5G Data
-          </p>
+  <p className="flex items-center gap-2">
+    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+    Mobile Hotspot Access
+  </p>
 
-          <p className="flex items-center gap-2">
-            <span className="text-green-300 text-2xl">✔</span>
-            24 × 7 Customer Support
-          </p>
+  <p className="flex items-center gap-2">
+    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+    Unlimited 5G Data
+  </p>
 
-          <p className="flex items-center gap-2">
-            <span className="text-green-300 text-2xl">✔</span>
-            FREE Roaming Canada & Mexico
-          </p>
-        </div>
+  <p className="flex items-center gap-2">
+    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+    24 × 7 Customer Support
+  </p>
+
+  <p className="flex items-center gap-2">
+    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+    FREE Roaming Canada & Mexico
+  </p>
+
+</div>
+
 
         {/* Button */}
-        <button className="mt-10 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-10 py-3 rounded-xl">
+        <button className="w-[20vw] mt-10 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-10 py-3 rounded">
           View Plans
         </button>
 
       </div>
 
-      {/* Bottom Landmark Image */}
-      <div className="w-full mt-12 flex justify-center">
-        <img
-          src="/img/travelplansection.png"
-          alt="World Landmarks"
-          className="w-full max-w-5xl pointer-events-none select-none"
-        />
-      </div>
+     <div className="w-full">
+  <img
+    src="/img/travelplansection.png"
+    alt="World Landmarks"
+    className="w-full object-cover pointer-events-none select-none"
+  />
+</div>
 
     </section>
 
@@ -189,8 +223,8 @@ export default function Home() {
 
       {/* Image Box */}
       <div className="w-full flex justify-center">
-        <div className="bg-white shadow-sm rounded-3xl p-6 max-w-5xl w-full">
-          <div className="border-2 border-blue-300 rounded-xl flex justify-center items-center p-4">
+        <div className=" bg-[#F8F9FA]  shadow-[0_0_0_0_#000000,5px_5px_20px_5px_var(--tw-shadow-color,#0000001a)] rounded-3xl p-6 max-w-5xl w-full">
+          <div className="rounded-xl flex justify-center items-center p-4">
             <img
               src="/img/mobilesHome.png" 
               alt="mobile"
@@ -202,17 +236,17 @@ export default function Home() {
 
       {/* Brand Buttons */}
       <div className="flex flex-wrap justify-center gap-4 mt-10 px-4">
-        <button className="bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold">SAMSUNG</button>
-        <button className="bg-red-600 text-white px-6 py-3 rounded-xl font-semibold">OnePlus</button>
-        <button className="bg-blue-500 text-white px-6 py-3 rounded-xl font-semibold">Apple</button>
-        <button className="bg-green-600 text-white px-6 py-3 rounded-xl font-semibold">realme</button>
-        <button className="bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold">Google</button>
-        <button className="bg-orange-500 text-white px-6 py-3 rounded-xl font-semibold">OPPO</button>
+        <button className="bg-[#034EA2] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">SAMSUNG</button>
+        <button className="bg-[#F50514] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">OnePlus</button>
+        <button className="bg-[#3478A8] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">Apple</button>
+        <button className="bg-[#34A853] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">realme</button>
+        <button className="bg-[#034EA2] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">Google</button>
+        <button className="bg-[#FD4C0E] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">OPPO</button>
       </div>
 
       {/* Browse Button */}
       <div className="flex justify-center mt-10">
-        <button className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold shadow">
+        <button className="bg-[#FF5722] text-white px-8 py-3 rounded-lg font-semibold shadow">
           Browse All Devices
         </button>
       </div>
@@ -220,7 +254,7 @@ export default function Home() {
 
     <section className="w-full py-16 bg-white">
       {/* Heading */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-4">
         <h2 className="text-3xl font-bold text-gray-900">
           Plans for Your Lifestyle
         </h2>
@@ -230,7 +264,7 @@ export default function Home() {
       </div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 lg:px-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 lg:px-70">
         {cards.map((c, i) => (
           <div
             key={i}
@@ -248,7 +282,7 @@ export default function Home() {
             <p className="mt-3 text-sm opacity-90">{c.desc}</p>
 
             <a
-              href="#"
+              href="{c.href}"
               className="mt-6 inline-block text-sm font-medium underline-offset-2 hover:underline"
             >
               View Plans →
@@ -260,6 +294,37 @@ export default function Home() {
     <TestimonialSlider/>
     <BlogSection/>
     <FaqHome/>
+    <section className="w-full bg-[#FD4C0E] py-16 text-center text-white">
+  <div className="container mx-auto px-6">
+
+    {/* Heading */}
+    <h2 className="text-3xl md:text-4xl font-bold">
+      Ready to Go Green with GoLite?
+    </h2>
+
+    {/* Subtext */}
+    <p className="text-white/90 mt-3 text-lg  mx-auto">
+      Join thousands of satisfied customers enjoying fast, affordable, 
+      and sustainable mobile service.
+    </p>
+
+    {/* Buttons */}
+    <div className="flex justify-center gap-4 mt-8">
+
+      {/* Filled Button */}
+      <button className="bg-white text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition">
+        View Plans
+      </button>
+
+      {/* Outline Button */}
+      <button className="border border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition">
+        Talk to Sales
+      </button>
+
+    </div>
+
+  </div>
+</section>
     <Footer/>
     </>
   );
