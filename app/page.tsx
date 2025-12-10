@@ -53,50 +53,49 @@ export default function Home() {
 
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-[4vw]  lg:text-[2vw] font-bold text-gray-900">
             Manage Your Mobile Needs with Ease
           </h2>
-          <p className="text-gray-500 mt-2">
+          <p className="text-gray-500 mt-2 text-[3vw] lg:text-[1.2vw]">
             Everything you need in one powerful platform
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-12">
 
           {/* Card 1 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-12 py-12">
-  
+          <div className="bg-white border rounded-2xl shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">  
             {/* IMAGE LEFT */}
-            <div className="w-12 h-12 mb-4 rounded-xl bg-green-100 flex items-center justify-center">
+            <div className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center">
               <img src="/img/payRecharge.png" alt="Recharge & Bill Pay" />
             </div>
 
             {/* TEXT LEFT */}
-            <h3 className="font-semibold text-lg text-gray-900">
+            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900">
               Recharge & Bill Pay
             </h3>
 
-            <p className="text-gray-500 mt-2 text-sm">
+            <p className="text-gray-500 mt-2 text-[3vw] lg:text-[1vw] md:text-[1vw]">
               Quick and secure payments with instant confirmation
             </p>
 
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-12 py-12">
+          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
   
             {/* IMAGE LEFT */}
-            <div className="w-12 h-12 mb-4 rounded-xl bg-green-100 flex items-center justify-center">
+            <div className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center">
               <img src="/img/switch.png" alt="Recharge & Bill Pay" />
             </div>
 
             {/* TEXT LEFT */}
-            <h3 className="font-semibold text-lg text-gray-900">
+            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900 ">
               Switch To GoLite
             </h3>
 
-            <p className="text-gray-500 mt-2 text-sm">
+            <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw]">
               Make the smart move today and switch from any network to GoLite
             </p>
 
@@ -106,38 +105,38 @@ export default function Home() {
 
 
           {/* Card 3 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-12 py-12">
+          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
   
             {/* IMAGE LEFT */}
-            <div className="w-12 h-12 mb-4 rounded-xl bg-green-100 flex items-center justify-center">
+            <div className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center">
               <img src="/img/sim.png" alt="Recharge & Bill Pay" />
             </div>
 
             {/* TEXT LEFT */}
-            <h3 className="font-semibold text-lg text-gray-900">
+            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900">
               SIM Activation
             </h3>
 
-            <p className="text-gray-500 mt-2 text-sm">
+            <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw]">
               Activate GoLite SIM instantly and step into seamless connectivity
             </p>
 
           </div>
 
           {/* Card 4 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-12 py-12">
+          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
   
             {/* IMAGE LEFT */}
-            <div className="w-12 h-12 mb-4 rounded-xl bg-green-100 flex items-center justify-center">
+            <div className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center">
               <img src="/img/mobile.png" alt="Recharge & Bill Pay" />
             </div>
 
             {/* TEXT LEFT */}
-            <h3 className="font-semibold text-lg text-gray-900">
+            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900">
               Shop Mobile
             </h3>
 
-            <p className="text-gray-500 mt-2 text-sm">
+            <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw]">
               Find your perfect mobile device and enhance connectivity with GoLite.
             </p>
 
@@ -154,34 +153,34 @@ export default function Home() {
       <div className="container mx-auto text-center relative z-10">
 
         {/* Title */}
-        <h2 className="text-3xl md:text-4xl font-bold pt-12">
+        <h2 className="lg:text-3xl md:text-[3vw] text-[4vw] font-bold pt-[4vw] px-[3vw]">
           Stay Connected Anywhere with Affordable Prepaid Travel Plans!
         </h2>
 
         {/* Feature List */}
-<div className="flex flex-wrap justify-center gap-8 mt-8 text-white text-lg px-64">
+<div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-8 text-white text-sm md:text-lg px-4 md:px-64">
 
-  <p className="flex items-center gap-2">
+  <p className="flex items-center gap-2 whitespace-nowrap">
     <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
     Free Talk & Text
   </p>
 
-  <p className="flex items-center gap-2">
+  <p className="flex items-center gap-2 whitespace-nowrap">
     <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
     Mobile Hotspot Access
   </p>
 
-  <p className="flex items-center gap-2">
+  <p className="flex items-center gap-2 whitespace-nowrap">
     <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
     Unlimited 5G Data
   </p>
 
-  <p className="flex items-center gap-2">
+  <p className="flex items-center gap-2 whitespace-nowrap">
     <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
-    24 × 7 Customer Support
+    24 x 7 Customer Support
   </p>
 
-  <p className="flex items-center gap-2">
+  <p className="flex items-center gap-2 whitespace-nowrap">
     <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
     FREE Roaming Canada & Mexico
   </p>
@@ -197,17 +196,16 @@ export default function Home() {
       </div>
 
      <div className="w-full">
-  <img
-    src="/img/travelplansection.png"
-    alt="World Landmarks"
-    className="w-full object-cover pointer-events-none select-none"
-  />
-</div>
+      <img
+        src="/img/travelplansection.png"
+        alt="World Landmarks"
+        className="w-full object-cover pointer-events-none select-none"
+      />
+    </div>
 
     </section>
 
     <PlanSlider/>
-
 
 
     <section className="w-full py-14 bg-white">
@@ -236,12 +234,12 @@ export default function Home() {
 
       {/* Brand Buttons */}
       <div className="flex flex-wrap justify-center gap-4 mt-10 px-4">
-        <button className="bg-[#034EA2] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">SAMSUNG</button>
-        <button className="bg-[#F50514] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">OnePlus</button>
-        <button className="bg-[#3478A8] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">Apple</button>
-        <button className="bg-[#34A853] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">realme</button>
-        <button className="bg-[#034EA2] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">Google</button>
-        <button className="bg-[#FD4C0E] text-white px-6 py-3 rounded-xl font-semibold p-[1.5vw]">OPPO</button>
+        <button className="bg-[#034EA2] text-white px-6 py-3 rounded-[.5vw] font-semibold p-[1.5vw]">SAMSUNG</button>
+        <button className="bg-[#F50514] text-white px-6 py-3 rounded-[.5vw] font-semibold p-[1.5vw]">OnePlus</button>
+        <button className="bg-[#3478A8] text-white px-6 py-3 rounded-[.5vw] font-semibold p-[1.5vw]">Apple</button>
+        <button className="bg-[#34A853] text-white px-6 py-3 rounded-[.5vw] font-semibold p-[1.5vw]">realme</button>
+        <button className="bg-[#034EA2] text-white px-6 py-3 rounded-[.5vw] font-semibold p-[1.5vw]">Google</button>
+        <button className="bg-[#FD4C0E] text-white px-6 py-3 rounded-[.5vw] font-semibold p-[1.5vw]">OPPO</button>
       </div>
 
       {/* Browse Button */}

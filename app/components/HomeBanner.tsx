@@ -3,46 +3,45 @@
 export default function HomeBanner() {
   return (
     
-
-    <section className="w-full bg-gradient-to-r from-[#6C63FF] to-[#4A90E2] text-white">
-      <div className="container  grid md:grid-cols-2 gap-10 items-center">
+<section className="w-full bg-gradient-to-r from-[#6C63FF] to-[#4A90E2] text-white overflow-hidden">
+      <div className="max-w-full grid md:grid-cols-2 gap-0 items-center">
 
         {/* LEFT CONTENT */}
-        <div className="mx-auto px-8 md:px-20">
-          <span className="inline-block bg-white/20 text-white text-xs font-semibold px-4 py-1 rounded-full mb-4">
+        <div className="px-6  md:px-16 md:py-0">
+          <span className="inline-block bg-white/20 text-white text-xs mt-4 font-semibold px-4 py-1 rounded-full mb-4 md:text-[1vw]">
             5G NETWORK NOW LIVE
           </span>
 
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight md:text-[3vw]">
             Experience 5G in India
           </h1>
 
-          <h2 className="text-3xl md:text-4xl font-extrabold text-yellow-400 mt-2">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-yellow-400 mt-2 md:text-[2vw]">
             GoLite: Go Green!
           </h2>
 
-          <p className="text-white/90 mt-4 leading-relaxed">
+          <p className="text-white/90 mt-4 leading-relaxed text-sm md:text-base md:text-[1.2vw]">
             Join India's fastest-growing eco-conscious mobile network.
             Lightning-fast 5G speeds, sustainable practices, and unbeatable value.
           </p>
 
-          <div className="flex gap-4 mt-6">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold">
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold [@media(min-width:640px)_and_(max-width:768px)]:w-1/2  md:text-[1vw]">
               Explore Plans
             </button>
 
-            <button className="border border-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-semibold">
+            <button className="border border-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-semibold [@media(min-width:640px)_and_(max-width:768px)]:w-1/2  md:text-[1vw]">
               Check Coverage
             </button>
           </div>
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="flex  md:justify-end">
+        <div className="flex justify-end h-full">
           <img 
             src="/img/homebanner.png" 
             alt="People using mobile" 
-            className=""
+            className="w-full h-full object-cover object-left"
           />
         </div>
 
