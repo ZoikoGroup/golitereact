@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -18,16 +18,34 @@ width: 30px !important;
 height: 8px !important;
     
 }
-    .slick-dots li.slick-active .dots {
-    background: #fd4c0e;
-    width: 1.3vw;
-    }
+.slick-dots li.slick-active .dots {
+background: #fd4c0e;
+width: 1.3vw;
+}
 `;
 
 export default function PricingPlans() {
   const [activeCategory, setActiveCategory] = useState("prepaid");
   const [activeSimType, setActiveSimType] = useState("eSim");
+  const [slidesToShow, setSlidesToShow] = useState(3);
   const sliderRef = useRef<any>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width <= 640) {
+        setSlidesToShow(1);
+      } else if (width <= 1024) {
+        setSlidesToShow(2);
+      } else {
+        setSlidesToShow(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const plans = [
     // PREPAID - eSIM
@@ -81,29 +99,13 @@ export default function PricingPlans() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
     arrows: false,
     customPaging: () => (
       <div className="h-2 w-2 bg-gray-300 rounded-full mx-1 mt-2 dots"></div>
     ),
-    dotsClass: "slick-dots !important flex justify-center",
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      }
-    ]
+    dotsClass: "slick-dots flex justify-center",
   };
 
   return (
@@ -111,18 +113,19 @@ export default function PricingPlans() {
       <style>{customStyles}</style>
       <h2 className="text-3xl font-bold text-center mb-8">Shop Sustainable Plans</h2>
 
-      {/* Category Tabs */}
-      <div className="flex justify-center mb-4">
-        <div className="inline-flex bg-[#FD4C0E] rounded-full p-1 w-[75vw] h-[4vw] justify-center">
+      {/* Category Tabs - RESPONSIVE FIX */}
+      <div className="flex justify-center mb-4 px-4">
+        <div className="inline-flex bg-[#FD4C0E] rounded-full p-1 w-full max-w-4xl">
           {["prepaid", "postpaid", "travel", "business"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveCategory(tab)}
-              className={`px-4 py-2 text-sm font-semibold rounded-full w-[15vw] cursor-pointer capitalize transition-all ${
+              className={`flex-1 px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold rounded-full cursor-pointer capitalize transition-all whitespace-nowrap ${
                 activeCategory === tab ? "bg-[#FFFFFF] text-[#FD4C0E]" : "text-[#FFFFFF]"
               }`}
             >
-              {tab} Plans
+              <span className="hidden sm:inline">{tab} Plans</span>
+              <span className="sm:hidden">{tab}</span>
             </button>
           ))}
         </div>
@@ -130,12 +133,12 @@ export default function PricingPlans() {
 
       {/* SIM Type Tabs */}
       <div className="flex justify-center">
-        <div className="inline-flex  p-1">
-          {["pSim", "eSim" ].map((simType) => (
+        <div className="inline-flex p-1">
+          {["pSim", "eSim"].map((simType) => (
             <button
               key={simType}
               onClick={() => setActiveSimType(simType)}
-              className={`px-8 py-2 text-sm font-semibold  cursor-pointer transition-all ${
+              className={`px-8 py-2 text-sm font-semibold cursor-pointer transition-all ${
                 activeSimType === simType ? "text-[#FD4C0E] underline" : "text-gray-600"
               }`}
             >
@@ -164,7 +167,7 @@ export default function PricingPlans() {
           <ChevronRight className="w-6 h-6 text-[#FD4C0E]" />
         </button>
 
-        <Slider ref={sliderRef} {...sliderSettings} className="my-4">
+        <Slider key={slidesToShow} ref={sliderRef} {...sliderSettings} className="my-4">
           {filteredPlans.map((plan, idx) => (
             <div key={idx} className="px-12">
               <div
@@ -197,7 +200,7 @@ export default function PricingPlans() {
                 <p className="text-gray-500 mb-4 text-left pt-6 text-sm">{plan.desc}</p>
 
                 {/* Features */}
-                <ul className="mt-4 space-y-2 text-gray-700 text-sm h-[15vw]">
+                <ul className="mt-4 space-y-2 text-gray-700 text-sm lg:h-[20vw] md:h-[20vw]">
                   {plan.features.map((f, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <svg 
@@ -224,7 +227,7 @@ export default function PricingPlans() {
         </Slider>
 
         <div className="flex justify-center mt-6">
-          <button className="bg-[#FD4C0E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#E63D00] w-[15vw] transition-all">
+          <button className="bg-[#FD4C0E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#E63D00] w-full sm:w-auto sm:min-w-[200px] transition-all">
             View All
           </button>
         </div>
