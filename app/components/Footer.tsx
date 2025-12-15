@@ -1,4 +1,5 @@
 export default function Footer() {
+  const curyear = new Date().getFullYear();
   return (
     <footer className="bg-[#0e0e0e] text-gray-300 py-16">
       <div className="max-w-7xl mx-auto px-6">
@@ -103,7 +104,7 @@ export default function Footer() {
 
         {/* BOTTOM ROW */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm">
-          <p>© 2025 GoLite Mobile. All rights reserved.</p>
+          <p>&copy; {curyear} GoLite Mobile. All rights reserved.</p>
 
           <div className="flex items-center gap-3 mt-4 md:mt-0">
             <span>Download App:</span>
