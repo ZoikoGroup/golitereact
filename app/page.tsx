@@ -189,7 +189,7 @@ export default function Home() {
 
 
         {/* Button */}
-        <button className="w-[20vw] mt-10 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-10 py-3 rounded">
+        <button className="mt-10 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-10 py-3 rounded">
           View Plans
         </button>
 
