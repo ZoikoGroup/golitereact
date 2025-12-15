@@ -21,7 +21,7 @@ export default function HomeBanner() {
           </h2>
 
           <p className="text-white/90 mt-4 leading-relaxed text-sm md:text-base md:text-[1.2vw]">
-            Join India's fastest-growing eco-conscious mobile network.
+            Join India&apos;s fastest-growing eco-conscious mobile network.
             Lightning-fast 5G speeds, sustainable practices, and unbeatable value.
           </p>
 
