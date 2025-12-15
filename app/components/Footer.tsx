@@ -14,7 +14,7 @@ export default function Footer() {
               className="h-12 mb-4"
             />
             <p className="text-sm leading-relaxed">
-              America's fastest-growing eco-conscious mobile network provider.
+              America&apos;s fastest-growing eco-conscious mobile network provider.
               Experience the future of connectivity.
             </p>
 
@@ -57,7 +57,7 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-white mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              <li>Plans & Pricing</li>
+              <li>Plans &amp; Pricing</li>
               <li>Shop Devices</li>
               <li>Coverage Map</li>
               <li>Support Center</li>
