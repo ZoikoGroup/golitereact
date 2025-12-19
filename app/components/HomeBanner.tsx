@@ -7,6 +7,9 @@ export default function HomeBanner() {
   const allplans = () => {
     router.push('/all-plans');
   };
+  const coverage = () => {
+    router.push('/coverage-area');
+  };
   return (
     
 <section className="w-full bg-gradient-to-r from-[#6C63FF] to-[#4A90E2] text-white overflow-hidden">
@@ -36,7 +39,7 @@ export default function HomeBanner() {
               Explore Plans
             </button>
 
-            <button className="border border-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-semibold [@media(min-width:640px)_and_(max-width:768px)]:w-1/2  md:text-[1vw]">
+            <button onClick={coverage} className="border border-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-semibold [@media(min-width:640px)_and_(max-width:768px)]:w-1/2  md:text-[1vw]">
               Check Coverage
             </button>
           </div>
