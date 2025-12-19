@@ -373,7 +373,7 @@ const cards = [
                 Select Your Primary Plan
               </h3>
               <p className="text-gray-600 mb-6 text-sm lg:text-base">
-                Choose the plan for all lines (only $18 & match after checkout)
+                Choose the plan for all lines (only $18 &amp; match after checkout)
               </p>
 
               {/* Plan Cards Grid - First Row */}
@@ -432,7 +432,7 @@ const cards = [
               <div className="mb-4 lg:mb-6">
                 <p className="text-gray-600 text-sm mb-2">Total Monthly Cost:</p>
                 <p className="text-4xl lg:text-5xl font-bold text-orange-500">${calculateTotal()}</p>
-                <p className="text-gray-500 text-sm mt-1">Taxes and fees included</p>
+                <p className="text-gray-500 text-sm mt-1">Taxes &amp; fees included</p>
               </div>
 
               <button className="w-full bg-[#FD4C0E] hover:bg-[#E63D00] text-white font-semibold py-3 px-6 rounded-lg transition-colors">

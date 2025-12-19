@@ -1,6 +1,12 @@
-"use client"
+"use client";
+import { useRouter } from "next/navigation";
 
 export default function HomeBanner() {
+  const router = useRouter();
+  
+  const allplans = () => {
+    router.push('/all-plans');
+  };
   return (
     
 <section className="w-full bg-gradient-to-r from-[#6C63FF] to-[#4A90E2] text-white overflow-hidden">
@@ -26,7 +32,7 @@ export default function HomeBanner() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold [@media(min-width:640px)_and_(max-width:768px)]:w-1/2  md:text-[1vw]">
+            <button onClick={allplans} className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold [@media(min-width:640px)_and_(max-width:768px)]:w-1/2  md:text-[1vw] cursor-pointer">
               Explore Plans
             </button>
 
