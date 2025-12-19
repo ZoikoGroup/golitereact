@@ -8,28 +8,29 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Check } from 'lucide-react';
 import { FaSimCard, FaPhoneAlt, FaPlane, FaBriefcase } from "react-icons/fa";
+
 /* Custom Dots Style */
 const customStyles = `
-.slick-dots li button:before {
-font-size: 10px;
-color: #d1d1d1;
-opacity: 1;
-}
-.slick-dots li.slick-active button:before {
-color: #ff6600 !important;
-width: 30px !important;
-height: 8px !important;
-    
-}
-.slick-dots li.slick-active .dots {
-background: #fd4c0e;
-width: 1.3vw;
-}
+  .slick-dots li button:before {
+  font-size: 10px;
+  color: #d1d1d1;
+  opacity: 1;
+  }
+  .slick-dots li.slick-active button:before {
+  color: #ff6600 !important;
+  width: 30px !important;
+  height: 8px !important;
+      
+  }
+  .slick-dots li.slick-active .dots {
+  background: #fd4c0e;
+  width: 1.3vw;
+  }
 `;
 
 export default function AllPlans() {
 
-   const [selectedPlan, setSelectedPlan] = useState('Go-Connect');
+  const [selectedPlan, setSelectedPlan] = useState('Go-Connect');
   const [additionalLines, setAdditionalLines] = useState(0);
 
   const Familyplans = [
@@ -149,7 +150,6 @@ const tabs = [
   { key: "business", label: "Business Plans", icon: FaBriefcase },
 ];
 
-
 const cards = [
     {
       title: "Student Connect+",
@@ -203,7 +203,6 @@ const cards = [
     dotsClass: "slick-dots flex justify-center",
   };
 
-
   return (
     <>
     <Header />
@@ -219,13 +218,6 @@ const cards = [
         </p>
       </div>
     </div>
-
-
-
-
-
-
-
 
      <div className="w-full bg-white py-10">
       <style>{customStyles}</style>
@@ -360,9 +352,6 @@ const cards = [
         </div>
       </div>
     </div>
-
-
-
 
 <div className="w-full bg-gray-50 py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">

@@ -5,6 +5,7 @@ import TestimonialSlider from "./components/TestimonialSlider";
 import BlogSection from "./components/BlogSection";
 import FaqHome from "./components/FaqHome";
 import Footer from "./components/Footer";
+
 export default function Home() {
   const cards = [
     {
@@ -48,7 +49,7 @@ export default function Home() {
     <>
     <Header />
     <HomeBanner />
-     <section className="w-full bg-gray-50 py-16">
+    <section className="w-full bg-gray-50 py-16">
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Heading */}
@@ -73,7 +74,7 @@ export default function Home() {
 
             {/* TEXT LEFT */}
             <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900">
-              Recharge & Bill Pay
+              Recharge &amp; Bill Pay
             </h3>
 
             <p className="text-gray-500 mt-2 text-[3vw] lg:text-[1vw] md:text-[1vw]">
@@ -98,11 +99,7 @@ export default function Home() {
             <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw]">
               Make the smart move today and switch from any network to GoLite
             </p>
-
           </div>
-
-
-
 
           {/* Card 3 */}
           <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
@@ -120,7 +117,6 @@ export default function Home() {
             <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw]">
               Activate GoLite SIM instantly and step into seamless connectivity
             </p>
-
           </div>
 
           {/* Card 4 */}
@@ -139,13 +135,10 @@ export default function Home() {
             <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw]">
               Find your perfect mobile device and enhance connectivity with GoLite.
             </p>
-
           </div>
-
         </div>
       </div>
     </section>
-
 
     <section className="w-full bg-[#11A683] text-white  relative overflow-hidden">
 
@@ -158,55 +151,50 @@ export default function Home() {
         </h2>
 
         {/* Feature List */}
-<div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-8 text-white text-sm md:text-lg px-4 md:px-64">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-8 text-white text-sm md:text-lg px-4 md:px-64">
 
-  <p className="flex items-center gap-2 whitespace-nowrap">
-    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
-    Free Talk & Text
-  </p>
+          <p className="flex items-center gap-2 whitespace-nowrap">
+            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+            Free Talk &amp; Text
+          </p>
 
-  <p className="flex items-center gap-2 whitespace-nowrap">
-    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
-    Mobile Hotspot Access
-  </p>
+          <p className="flex items-center gap-2 whitespace-nowrap">
+            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+            Mobile Hotspot Access
+          </p>
 
-  <p className="flex items-center gap-2 whitespace-nowrap">
-    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
-    Unlimited 5G Data
-  </p>
+          <p className="flex items-center gap-2 whitespace-nowrap">
+            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+            Unlimited 5G Data
+          </p>
 
-  <p className="flex items-center gap-2 whitespace-nowrap">
-    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
-    24 x 7 Customer Support
-  </p>
+          <p className="flex items-center gap-2 whitespace-nowrap">
+            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+            24 x 7 Customer Support
+          </p>
 
-  <p className="flex items-center gap-2 whitespace-nowrap">
-    <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
-    FREE Roaming Canada & Mexico
-  </p>
-
-</div>
-
+          <p className="flex items-center gap-2 whitespace-nowrap">
+            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+            FREE Roaming Canada &amp; Mexico
+          </p>
+        </div>
 
         {/* Button */}
         <button className="mt-10 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-10 py-3 rounded">
           View Plans
         </button>
-
       </div>
 
-     <div className="w-full">
-      <img
-        src="/img/travelplansection.png"
-        alt="World Landmarks"
-        className="w-full object-cover pointer-events-none select-none"
-      />
-    </div>
-
+      <div className="w-full">
+        <img
+          src="/img/travelplansection.png"
+          alt="World Landmarks"
+          className="w-full object-cover pointer-events-none select-none"
+        />
+      </div>
     </section>
 
     <PlanSlider/>
-
 
     <section className="w-full py-14 bg-white">
       {/* Heading */}
@@ -278,7 +266,6 @@ export default function Home() {
             </div>
 
             <p className="mt-3 text-sm opacity-90">{c.desc}</p>
-
             <a
               href="{c.href}"
               className="mt-6 inline-block text-sm font-medium underline-offset-2 hover:underline"
@@ -293,36 +280,34 @@ export default function Home() {
     <BlogSection/>
     <FaqHome/>
     <section className="w-full bg-[#FD4C0E] py-16 text-center text-white">
-  <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6">
 
-    {/* Heading */}
-    <h2 className="text-3xl md:text-4xl font-bold">
-      Ready to Go Green with GoLite?
-    </h2>
+        {/* Heading */}
+        <h2 className="text-3xl md:text-4xl font-bold">
+          Ready to Go Green with GoLite?
+        </h2>
 
-    {/* Subtext */}
-    <p className="text-white/90 mt-3 text-lg  mx-auto">
-      Join thousands of satisfied customers enjoying fast, affordable, 
-      and sustainable mobile service.
-    </p>
+        {/* Subtext */}
+        <p className="text-white/90 mt-3 text-lg  mx-auto">
+          Join thousands of satisfied customers enjoying fast, affordable, 
+          and sustainable mobile service.
+        </p>
 
-    {/* Buttons */}
-    <div className="flex justify-center gap-4 mt-8">
+        {/* Buttons */}
+        <div className="flex justify-center gap-4 mt-8">
 
-      {/* Filled Button */}
-      <button className="bg-white text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition">
-        View Plans
-      </button>
+          {/* Filled Button */}
+          <button className="bg-white text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition">
+            View Plans
+          </button>
 
-      {/* Outline Button */}
-      <button className="border border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition">
-        Talk to Sales
-      </button>
-
-    </div>
-
-  </div>
-</section>
+          {/* Outline Button */}
+          <button className="border border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition">
+            Talk to Sales
+          </button>
+        </div>
+      </div>
+    </section>
     <Footer/>
     </>
   );
