@@ -1,5 +1,6 @@
 export default function Footer() {
   const curyear = new Date().getFullYear();
+  
   return (
     <footer className="bg-[#0e0e0e] text-gray-300 py-16">
       <div className="max-w-7xl mx-auto px-6">
@@ -8,11 +9,13 @@ export default function Footer() {
           
           {/* LOGO + TEXT */}
           <div className="col-span-1">
-            <img
-              src="/img/footerLogo.png"
-              alt="GoLite Logo"
-              className="h-12 mb-4"
-            />
+            <a href="/" className="cursour-pointer">
+              <img
+                src="/img/footerLogo.png"
+                alt="GoLite Logo"
+                className="h-12 mb-4"
+              />
+            </a>
             <p className="text-sm leading-relaxed">
               America&apos;s fastest-growing eco-conscious mobile network provider.
               Experience the future of connectivity.

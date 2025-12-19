@@ -1,3 +1,5 @@
+"use client";
+import { useRouter } from "next/navigation";
 import Header from "./components/Header";
 import HomeBanner from "./components/HomeBanner";
 import PlanSlider from "./components/PlanSlider";
@@ -7,6 +9,11 @@ import FaqHome from "./components/FaqHome";
 import Footer from "./components/Footer";
 
 export default function Home() {
+  const router = useRouter();
+
+  const allplans = () => {
+    router.push('/all-plans');
+  };
   const cards = [
     {
       title: "Student Connect+",
@@ -180,7 +187,7 @@ export default function Home() {
         </div>
 
         {/* Button */}
-        <button className="mt-10 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-10 py-3 rounded">
+        <button onClick={allplans} className="mt-10 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-10 py-3 rounded cursor-pointer">
           View Plans
         </button>
       </div>
@@ -267,7 +274,7 @@ export default function Home() {
 
             <p className="mt-3 text-sm opacity-90">{c.desc}</p>
             <a
-              href="{c.href}"
+              href={c.href}
               className="mt-6 inline-block text-sm font-medium underline-offset-2 hover:underline"
             >
               View Plans →
@@ -297,12 +304,12 @@ export default function Home() {
         <div className="flex justify-center gap-4 mt-8">
 
           {/* Filled Button */}
-          <button className="bg-white text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition">
+          <button onClick={allplans} className="bg-white text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition cursor-pointer">
             View Plans
           </button>
 
           {/* Outline Button */}
-          <button className="border border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition">
+          <button className="border border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition cursor-pointer">
             Talk to Sales
           </button>
         </div>
