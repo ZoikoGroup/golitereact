@@ -72,7 +72,7 @@ export default function AboutUs() {
         
         {/* Image Container */}
         <div className="bg-white rounded-2xl shadow-[5px_14px_16px_rgba(0,0,0,0.31)] overflow-hidden">
-          <div className="relative w-full h-96 md:h-[500px] bg-orange-300">
+          <div className="relative bg-orange-300">
             
             {/* If you have the actual image, uncomment and use this: */}
             <img 
@@ -119,7 +119,7 @@ export default function AboutUs() {
       </div>
     </div>
 
-    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-white py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-center text-gray-900 mb-16 px-4">
