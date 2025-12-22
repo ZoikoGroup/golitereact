@@ -31,7 +31,7 @@ export default function Navbar() {
           <a href="/devices" className="hover:text-black">Devices</a>
           <a href="/coverage" className="hover:text-black">Coverage</a>
           <a href="/support" className="hover:text-black">Support</a>
-          <a href="/about" className="hover:text-black">About</a>
+          <a href="/about-us" className="hover:text-black">About</a>
         </div>
 
         {/* Login Button */}
