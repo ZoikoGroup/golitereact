@@ -1,36 +1,36 @@
 "use client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Clock, Layers, Timer, FileText, User,Check  } from 'lucide-react';
+import { Clock, Layers, PlusCircle , FileText, User,Check  } from 'lucide-react';
 
 const features = [
     {
-      icon: <Clock className="w-8 h-8" />,
+      icon: <Clock className="w-12 h-12" />,
       title: "Premium Service Without the Premium Price",
       description: "Get the same nationwide coverage as the big carriers at a fraction of the cost. We believe premium service shouldn't come with a premium price tag."
     },
     {
-      icon: <Layers className="w-8 h-8" />,
+      icon: <Layers className="w-12 h-12" />,
       title: "Total Transparency, Zero Hidden Fees",
       description: "No fine print. No hidden charges. What you see is what you pay. We're committed to straightforward pricing and honest communication."
     },
     {
-      icon: <Timer className="w-8 h-8" />,
+      icon: <PlusCircle  className="w-12 h-12" />,
       title: "Sustainability That Creates Real Impact",
       description: "Every plan supports tree-planting campaigns, e-waste recycling, and eco-friendly packaging. Feel good knowing your mobile service makes a difference."
     },
     {
-      icon: <FileText className="w-8 h-8" />,
+      icon: <FileText className="w-12 h-12" />,
       title: "Smarter, Personalized Plans with AI",
       description: "Our AI-driven tools analyze your usage to recommend the plan that perfectly matches your needs and budget. No more overpaying for data you don't use."
     },
     {
-      icon: <Clock className="w-8 h-8" />,
+      icon: <Clock className="w-12 h-12" />,
       title: "Seamless, Hassle-Free Experience",
       description: "Easy-to-use app, fast activation, and 24/7 customer support. We make switching carriers effortless, and seamless. VOIP-compatible for international use."
     },
     {
-      icon: <User className="w-8 h-8" />,
+      icon: <User className="w-12 h-12" />,
       title: "A Community That Gives Back",
       description: "Join a tribe of socially-conscious, forward-thinking customers committed to making a positive impact. Together, we can create meaningful, lasting change."
     }
@@ -50,15 +50,15 @@ const team = [
     }
   ];
 const missions = [
-    "We fight for the environment – in-house events like those promoting our footprint recycling program.",
-    "We fight for price equity – affordable, truly quality plans for families facing financial stress.",
-    "We fight to meet need – Go-Bag Rescue Missions and more to save in the impact."
+    "We fight for the environment - in-house events like those promoting our footprint recycling program.",
+    "We fight for price equity - affordable, truly quality plans for families facing financial stress.",
+    "We fight to meet need - Go-Bag Rescue Missions and more to save in the impact."
   ];
 export default function AboutUs() {
   return (
     <>
         <Header />
-    <div className="min-h-screen bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center p-8">
+    <div className="min-h-screen bg-gradient-to-b from-[#FF6B35] via-[#FF6B35] via-[30%] to-white flex items-center justify-center p-8">
       <div className="max-w-6xl w-full">
         {/* Heading */}
         <h1 className="text-white text-5xl md:text-6xl font-bold text-center mb-8 tracking-wide">
@@ -71,7 +71,7 @@ export default function AboutUs() {
         </p>
         
         {/* Image Container */}
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-[5px_14px_16px_rgba(0,0,0,0.31)] overflow-hidden">
           <div className="relative w-full h-96 md:h-[500px] bg-orange-300">
             
             {/* If you have the actual image, uncomment and use this: */}
@@ -85,7 +85,7 @@ export default function AboutUs() {
       </div>
     </div>
 
-    <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-16">
@@ -97,7 +97,7 @@ export default function AboutUs() {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 flex flex-col items-center text-center"
+              className="bg-white border-2 border-[#e8e7e7] rounded-xl rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 flex flex-col items-center text-center"
             >
               {/* Icon Circle */}
               <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center text-white mb-6">
@@ -122,7 +122,7 @@ export default function AboutUs() {
     <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-16 px-4">
+        <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-center text-gray-900 mb-16 px-4">
           MEET THE VISIONARIES DRIVING GOLITE MOBILE FORWARD
         </h2>
         
@@ -161,7 +161,7 @@ export default function AboutUs() {
       </div>
     </div>
 
-    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -202,18 +202,10 @@ export default function AboutUs() {
           </div>
           
           {/* Right Image */}
-          <div className="relative">
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <div className="relative w-full h-96 lg:h-[500px] bg-gradient-to-br from-blue-400 to-blue-600">
-                {/* Placeholder for underwater image */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <svg className="w-24 h-24 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <p className="text-sm opacity-75">Underwater diver image placeholder</p>
-                  </div>
-                </div>
+          <div className="space-y-6">
+            {/* <div className="rounded-2xl overflow-hidden shadow-2xl"> */}
+              {/* <div className="relative w-full h-96 lg:h-[500px] bg-gradient-to-br from-blue-400 to-blue-600"> */}
+                
                 
                 {/* If you have the actual image, uncomment and use this: */}
                 <img 
@@ -221,8 +213,8 @@ export default function AboutUs() {
                   alt="Scuba diver holding GoLite Mobile sign underwater"
                   className="w-full h-full object-cover"
                 />
-              </div>
-            </div>
+              {/* </div> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
