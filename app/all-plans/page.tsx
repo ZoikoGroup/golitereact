@@ -146,7 +146,7 @@ export default function AllPlans() {
 const tabs = [
   { key: "prepaid", label: "Prepaid Plans", icon: FaSimCard },
   { key: "postpaid", label: "Postpaid Plans", icon: FaPhoneAlt },
-  { key: "travel", label: "Travel Plans", icon: FaPlane },
+  // { key: "travel", label: "Travel Plans", icon: FaPlane },
   { key: "business", label: "Business Plans", icon: FaBriefcase },
 ];
 

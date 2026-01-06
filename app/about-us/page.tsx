@@ -3,6 +3,15 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Clock, Layers, PlusCircle , FileText, User,Check  } from 'lucide-react';
 
+import { encodeIds,encodeString } from "../utils/helper";
+
+const encodedIds = encodeString(["test_1","test"]);
+
+fetch(`http://127.0.0.1:8000/api/v1/plans/type?slug=${encodedIds}`)
+  .then(res => res.json())
+  .then(data => console.log(data));
+
+  console.log("Encoded IDs:", encodedIds);
 const features = [
     {
       icon: <Clock className="w-12 h-12" />,
@@ -53,7 +62,8 @@ const missions = [
     "We fight for the environment - in-house events like those promoting our footprint recycling program.",
     "We fight for price equity - affordable, truly quality plans for families facing financial stress.",
     "We fight to meet need - Go-Bag Rescue Missions and more to save in the impact."
-  ];
+];
+
 export default function AboutUs() {
   return (
     <>
