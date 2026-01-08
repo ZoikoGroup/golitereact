@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import SuccessModal from "../components/SuccessModal";
 import { Smartphone, FileText, BadgeCheck } from "lucide-react";
 import { checkDeviceCompatibility } from "../utils/vcareapi";
 
@@ -14,6 +15,7 @@ export default function ByodPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleCheckDevice = async () => {
     if (!imei.trim()) {
@@ -25,16 +27,45 @@ export default function ByodPage() {
     setError("");
     setResult(null);
 
-    const response = await checkDeviceCompatibility(imei);
+    try {
+      const response = await checkDeviceCompatibility(imei);
+      const data = response.data;
 
-    if (response.success) {
-      setResult(response.data);
-    } else {
-      setError(response.message || "Failed to check device compatibility");
+      // Safely extract attCompatibility
+      const attCompatibility =
+        data?.RESULT?.responseDetails?.inquireDeviceStatusResponse
+          ?.deviceStatusDetails?.attCompatibility;
+
+      setResult(data);
+
+      // ✅ USE SWITCH (AS REQUESTED)
+      switch (attCompatibility) {
+        case "GREEN":
+          setShowSuccess(true); // ✅ success popup
+          break;
+
+        case "RED":
+          setError(
+            "This device is not compatible with GoLite Mobile’s eSIM technology."
+          );
+          break;
+
+        case "YELLOW":
+          setError(
+            "Your device compatibility is limited. Please contact support."
+          );
+          break;
+
+        default:
+          setError("Compatibility could not be determined.");
+      }
+    } catch (err: any) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
+
 
   const faqs = [
     {
@@ -290,7 +321,13 @@ export default function ByodPage() {
           </div>
         </section>
       </div>
+      <SuccessModal
+  open={showSuccess}
+  onClose={() => setShowSuccess(false)}
+  message="Your device is compatible with GoLite Mobile's eSIM technology. You're ready to enjoy fast, seamless, and eco-friendly activation — no physical SIM required."
+/>
       <Footer />
+      
     </>
   );
 }
