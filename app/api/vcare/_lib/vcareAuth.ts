@@ -7,7 +7,9 @@ export async function getVcareToken(forceRefresh = false) {
 
   const res = await fetch("https://www.vcareapi.com:8080/authenticate", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       vendor_id: process.env.VCARE_VENDOR_ID,
       username: process.env.VCARE_USERNAME,
@@ -15,7 +17,7 @@ export async function getVcareToken(forceRefresh = false) {
       pin: process.env.VCARE_PIN,
     }),
   });
-console.log("VCare auth response:", process.env.VCARE_PASSWORD);
+
   const data = await res.json();
 
   if (!data?.token) {

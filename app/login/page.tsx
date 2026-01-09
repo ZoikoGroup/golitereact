@@ -24,7 +24,7 @@ export default function LoginPage() {
     try {
 
       setLoading(true);
-      const response = await fetch("http://34.100.195.29/api/v1/login", {
+      const response = await fetch("https://goliteapi.golitemobile.com/api/v1/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

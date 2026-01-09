@@ -12,7 +12,13 @@ export async function POST(req: Request) {
       );
     }
 
-    const data = await vcareFetch("inventory", { imei });
+    const data = await vcareFetch("inventory", {
+      action: "get_query_device",
+      carrier: "BLUECONNECTSATT",
+      source: "WEBSITE",
+      agent_id: "ewebsiteapi",
+      imei: imei,
+    });
 
     return NextResponse.json(data);
   } catch (err: any) {
