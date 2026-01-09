@@ -107,7 +107,7 @@ export default function Footer() {
 
         {/* BOTTOM ROW */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm">
-          <p>&copy; {curyear} GoLite Mobile. All rights reserved.</p>
+          <p>&copy; {curyear} GoLite Mobile | GoLite Mobile is a subsidiary of Zoiko Communications Group Inc | Headquartered at 1401 21st Street, Suite R, Sacramento CA 95811. All rights reserved</p>
 
           <div className="flex items-center gap-3 mt-4 md:mt-0">
             <span>Download App:</span>
