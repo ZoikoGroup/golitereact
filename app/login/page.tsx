@@ -1,20 +1,26 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import api from "axios";
+import { isLoggedIn } from "../utils/auth";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [user, setUser] = useState(null);
 
-
+     // 🔒 Block logged-in users
+      useEffect(() => {
+        if (isLoggedIn()) {
+          window.location.href = "/my-account";
+        }
+      }, []);
 
   /* =========================
-     EMAIL / PASSWORD LOGIN
+     EMAIL / PASSWORD LOGIN (DJANGO API)
      ========================= */
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +30,7 @@ export default function LoginPage() {
     try {
 
       setLoading(true);
-      const response = await fetch("https://goliteapi.golitemobile.com/api/v1/login", {
+      const response = await fetch("http://34.100.195.29/api/v1/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -34,18 +40,18 @@ export default function LoginPage() {
       });
 
       const data = await response.json();
-      setLoading(false);
 
-      const { access, refresh } = data.tokens;
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
 
-      // Store JWT tokens
-      localStorage.setItem("golite_accessToken", access);
-      localStorage.setItem("golite_refreshToken", refresh);
+      // ✅ Save token & user
+      localStorage.setItem("golite_token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-      window.location.href = "/dashboard";
 
+      window.location.href = "/my-account";
     } catch (err: any) {
-      setError(err.response?.data?.error || "Invalid credentials");
+      setError(err.message || "Invalid credentials");
     } finally {
       setLoading(false);
     }
@@ -56,6 +62,7 @@ export default function LoginPage() {
      ========================= */
   const handleGoogleSignIn = () => {
     setError(null);
+
     const width = 600;
     const height = 700;
     const left = window.screenX + (window.innerWidth - width) / 2;
@@ -79,6 +86,7 @@ export default function LoginPage() {
       if (e.origin !== window.location.origin) return;
 
       const data: any = e.data;
+
       if (data?.type === "oauth" && data?.provider === "google") {
         window.removeEventListener("message", messageHandler);
         setLoading(false);
@@ -104,7 +112,7 @@ export default function LoginPage() {
             Login to Your Account
           </h2>
 
-          {/* ===== EMAIL LOGIN FORM ===== */}
+          {/* ===== LOGIN FORM ===== */}
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -141,6 +149,23 @@ export default function LoginPage() {
             >
               {loading ? "Logging in..." : "Login"}
             </button>
+
+            {/* REGISTER + FORGOT */}
+            <div className="flex justify-between text-sm">
+              <Link
+                href="/forgot-password"
+                className="text-gray-500 hover:text-gray-700"
+              >
+                Forgot password?
+              </Link>
+
+              <Link
+                href="/register"
+                className="font-medium text-orange-600 hover:text-orange-700"
+              >
+                Register
+              </Link>
+            </div>
           </form>
 
           {/* ===== DIVIDER ===== */}
