@@ -1,28 +1,36 @@
 import { getVcareToken } from "./vcareAuth";
 
 export async function vcareFetch(endpoint: string, body: any) {
-  let token = await getVcareToken();
+  const token = await getVcareToken();
+
+  if (!token) {
+    throw new Error("VCare token missing");
+  }
 
   let res = await fetch(`https://www.vcareapi.com:8080/${endpoint}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // ✅ REQUIRED
+      token, // ✅ now string only
     },
     body: JSON.stringify(body),
   });
 
   let data = await res.json();
 
-  // 🔁 Token invalid → re-auth once
+  // 🔁 Retry once if token expired
   if (data?.msg_code === "RESTAPI001") {
-    token = await getVcareToken(true);
+    const newToken = await getVcareToken(true);
+
+    if (!newToken) {
+      throw new Error("VCare token refresh failed");
+    }
 
     res = await fetch(`https://www.vcareapi.com:8080/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        token: newToken,
       },
       body: JSON.stringify(body),
     });

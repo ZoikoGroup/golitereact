@@ -7,7 +7,7 @@ import { encodeIds,encodeString } from "../utils/helper";
 
 const encodedIds = encodeString(["test_1","test"]);
 
-fetch(`http://34.100.195.29/api/v1/plans/type?slug=${encodedIds}`)
+fetch(`https://goliteapi.golitemobile.com/api/v1/plans/type?slug=${encodedIds}`)
   .then(res => res.json())
   .then(data => console.log(data));
 
