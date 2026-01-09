@@ -1,12 +1,9 @@
-export async function checkDeviceCompatibility(imei: string) {
-  const res = await fetch("/api/check-device", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: imei }),
-  });
+import axios from "axios";
 
-  const data = await res.json();
-  if (!data.success) throw new Error(data.message);
+export const checkDeviceCompatibility = (imei: string) => {
+  return axios.post("/api/vcare/check-device", { imei });
+};
 
-  return data;
-}
+export const activateSim = (payload: any) => {
+  return axios.post("/api/vcare/activate-sim", payload);
+};
