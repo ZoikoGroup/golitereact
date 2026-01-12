@@ -115,7 +115,7 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Desktop Auth */}
+          {/* Desktop Auth Menu */}
           {isLoggedIn ? (
             <div className="relative hidden md:block" ref={dropdownRef}>
               <button
