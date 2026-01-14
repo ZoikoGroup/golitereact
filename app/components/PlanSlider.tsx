@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 /* Custom Dots Style */
 const customStyles = `
@@ -29,6 +30,7 @@ export default function PricingPlans() {
   const [activeSimType, setActiveSimType] = useState("eSim");
   const [slidesToShow, setSlidesToShow] = useState(3);
   const sliderRef = useRef<any>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -227,10 +229,13 @@ export default function PricingPlans() {
         </Slider>
 
         <div className="flex justify-center mt-6">
-          <button className="bg-[#FD4C0E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#E63D00] w-full sm:w-auto sm:min-w-[200px] transition-all">
-            View All
-          </button>
-        </div>
+  <button
+    onClick={() => router.push(`${activeCategory}`)}
+    className="bg-[#FD4C0E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#E63D00] w-full sm:w-auto sm:min-w-[200px] transition-all"
+  >
+    View All
+  </button>
+</div>
       </div>
     </div>
   );
