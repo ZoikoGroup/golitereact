@@ -168,9 +168,11 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden border-t bg-white px-6 py-4 space-y-4">
-          <a href="/all-plans" className="block">Plans</a>
+          <a href="/prepaid" className="block">Prepaid Plans</a>
+          <a href="/postpaid" className="block">Postpaid Plans</a>
+          <a href="/family-plans" className="block">Family Plans</a>
           <a href="/devices" className="block">Devices</a>
-          <a href="/coverage" className="block">Coverage</a>
+          <a href="https://www.att.com/idpmaps/reseller" className="block">Coverage</a>
           <a href="/support" className="block">Support</a>
 
           {isLoggedIn ? (
