@@ -90,6 +90,7 @@ export default function Navbar() {
           <a href="/prepaid" className="hover:text-black">Prepaid Plans</a>
           <a href="/postpaid" className="hover:text-black">Postpaid Plans</a>
           <a href="/family-plans" className="hover:text-black">Family Plans</a>
+          <a href="/special-plans" className="hover:text-black">Special Plans</a>
           <a href="/devices" className="hover:text-black">Devices</a>
           <a href="https://www.att.com/idpmaps/reseller" className="hover:text-black">Coverage</a>
           <a href="/support" className="hover:text-black">Support</a>
@@ -171,6 +172,7 @@ export default function Navbar() {
           <a href="/prepaid" className="block">Prepaid Plans</a>
           <a href="/postpaid" className="block">Postpaid Plans</a>
           <a href="/family-plans" className="block">Family Plans</a>
+          <a href="/special-plans" className="block">Special Plans</a>
           <a href="/devices" className="block">Devices</a>
           <a href="https://www.att.com/idpmaps/reseller" className="block">Coverage</a>
           <a href="/support" className="block">Support</a>
