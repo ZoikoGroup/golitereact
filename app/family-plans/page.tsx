@@ -6,7 +6,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, Check, CircleCheck, ArrowDownUp, TabletSmartphone, Receipt, Sigma, Headset, Clock, Layers, PlusCircle, FileText, User   } from "lucide-react";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 /* Custom Dots Style */
 const customStyles = `
@@ -243,6 +243,59 @@ const [activeSimType, setActiveSimType] = useState("eSim");
     },
   ];
   
+const features = [
+  {
+    title: "All Purpose Plans Available",
+    desc: "Choose from a variety of plans - one size doesn't fit all. Mix and match plans for each family member based on their needs and usage patterns.",
+    Icon: CircleCheck,
+  },
+  {
+    title: "Shared Data",
+    desc: "Pool your data allowance across all lines. When one person runs low, they can use data from another line. No more data waste!",
+    Icon: ArrowDownUp,
+  },
+  {
+    title: "Bring Your Own Device",
+    desc: "Keep your existing phones! Our family plans work with any unlocked device. Just insert your SIM and you're ready to go.",
+    Icon: TabletSmartphone,
+  },
+  {
+    title: "More Economical Plan",
+    desc: "Save up to 38% per line when you add more family members. The more lines you add, the more everyone saves each month.",
+    Icon: Receipt,
+  },
+  {
+    title: "Mix and Match Plans",
+    desc: "Everyone in your family has different needs. Mix plans to get the perfect balance of data, features, and price for each member.",
+    Icon: Sigma,
+  },
+  {
+    title: "Easy International Calling",
+    desc: "Stay connected with family abroad. All our plans include international calling to 50+ countries at no extra charge.",
+    Icon: Headset,
+  },
+];
+
+const getStarted = [
+    {
+      title: "Choose Your Plan",
+      description: "Select the number of lines and base plan that fits your family's needs. You can mix and match later."
+    },
+    {
+      
+      title: "Add Family Members",
+      description: "Invite family members via email or phone. Each person gets their own login and can manage their line."
+    },
+    {
+      title: "Activate & Connect",
+      description: "Receive your SIM cards, activate them online or via our app, and start saving immediately!"
+    },
+    {
+      title: "Manage Your Account",
+      description: "The primary account holder can view all lines, manage billing and adjust plans as needed from one dashboard."
+    }
+  ];
+
 const faqs = [
   {
     question: "What is international long distance calling?",
@@ -595,33 +648,84 @@ const faqs = [
         </Slider>
         </div>
 
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+
+      {/* Benefits Section */}
+          <section className="max-w-7xl mx-auto px-6 py-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+        {/* LEFT CONTENT */}
+        <div>
+          <h2 className="text-[32px] font-bold text-gray-900 mb-10 leading-tight">
+            Why Choose a GoLite Mobile<br />Family Plan?
+          </h2>
+
+          <ul className="space-y-7">
+            {features.map((item, index) => (
+              <li key={index} className="flex items-start gap-4">
+                
+                {/* ICON */}
+                <div className="w-15 h-15 rounded-2xl bg-[#FF57221A] flex items-center justify-center text-orange-500 text-lg font-semibold">
+                  {item.Icon && <item.Icon className="w-8 h-8 color-[#FF5722]" />}
+                </div>
+
+                {/* TEXT */}
+                <div>
+                  <h3 className="text-base font-semibold text-gray-900 text-lg">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 mt-1 leading-relaxed max-w-md text-[1rem]">
+                    {item.desc}
+                  </p>
+                </div>
+
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* RIGHT IMAGE */}
+        <div className="relative w-full h-full rounded-2xl overflow-hidden flex items-center justify-center">
+          <Image
+            src="/img/familyFeatures.png"
+            alt="GoLite family plan"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+
+      </div>
+    </section>
+    {/* Benefits Section */}
+
+
+<div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <h1 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-gray-900 text-center mb-12 px-4">
-          Best Postpaid Mobile Plans With Many Exciting Benefits
-        </h1>
-
-        {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((benefit, index) => (
-            <div
+        {/* Heading */}
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-16">
+          How to Get Started
+        </h2>
+        <p className="text-gray-600 text-center mb-12">Setting up your family plan is quick and easy</p>
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          {getStarted.map((feature, index) => (
+            <div 
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="bg-white border-2 border-[#e8e7e7] rounded-xl rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 flex flex-col items-center text-center"
             >
-              {/* Icon */}
-              <div className={`w-[5rem] h-[5rem]   flex items-center justify-center mb-6`}>
-                {benefit.icon}
+              {/* Icon Circle */}
+              <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center text-white mb-6">
+                <span className="text-3xl font-bold">{index + 1}</span>
               </div>
-
+              
               {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 mb-4 leading-snug">
-                {benefit.title}
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                {feature.title}
               </h3>
-
+              
               {/* Description */}
               <p className="text-gray-600 leading-relaxed">
-                {benefit.description}
+                {feature.description}
               </p>
             </div>
           ))}
@@ -630,45 +734,7 @@ const faqs = [
     </div>
 
 
-<section className="w-full py-16 bg-white">
-      {/* Heading */}
-      <div className="text-center mb-4">
-        <h2 className="text-3xl font-bold text-gray-900">
-          Plans for Your Lifestyle
-        </h2>
-        <p className="text-gray-500 mt-2">
-          Tailored solutions for every need
-        </p>
-      </div>
 
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 lg:px-50">
-        {cards.map((c, i) => (
-          <div
-            key={i}
-            className={`rounded-2xl p-12 text-white shadow-lg bg-gradient-to-br ${c.gradient}`}
-          >
-            <div className="flex justify-between items-start">
-              <h3 className="text-xl font-semibold">{c.title}</h3>
-              {c.badge && (
-                <span className="text-xs font-semibold bg-white/30 backdrop-blur px-3 py-1 rounded-full">
-                  {c.badge}
-                </span>
-              )}
-            </div>
-
-            <p className="mt-3 text-sm opacity-90">{c.desc}</p>
-
-            <a
-              href="{c.href}"
-              className="mt-6 inline-block text-sm font-medium underline-offset-2 hover:underline"
-            >
-              View Plans →
-            </a>
-          </div>
-        ))}
-      </div>
-    </section>
     <div className="bg-gray-50 py-10">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
         {/* Left Column */}
@@ -740,6 +806,10 @@ const faqs = [
         </div>
       </div>
     </div>
+
+
+
+
 
 
       <Footer />
