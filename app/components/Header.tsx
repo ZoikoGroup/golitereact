@@ -87,7 +87,9 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-gray-600">
-          <a href="/all-plans" className="hover:text-black">Plans</a>
+          <a href="/prepaid" className="hover:text-black">Prepaid Plans</a>
+          <a href="/postpaid" className="hover:text-black">Postpaid Plans</a>
+          <a href="/family-plans" className="hover:text-black">Family Plans</a>
           <a href="/devices" className="hover:text-black">Devices</a>
           <a href="https://www.att.com/idpmaps/reseller" className="hover:text-black">Coverage</a>
           <a href="/support" className="hover:text-black">Support</a>

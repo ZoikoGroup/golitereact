@@ -8,7 +8,7 @@ export default function HomeBanner() {
     router.push('/all-plans');
   };
   const coverage = () => {
-    router.push('/coverage-area');
+    router.push('https://www.att.com/idpmaps/reseller');
   };
   return (
     
