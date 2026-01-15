@@ -339,12 +339,14 @@ const faqs = [
 
 
       {/* Banner Section */}
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-12">
+        {/* <h1 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-12"> */}
+          <h2 className="text-3xl font-bold text-center p-4">
           Shop Prepaid Family & Multi-Line Plans
-        </h1>
+          </h2>
+        {/* </h1> */}
 
         {/* Hero Card */}
         <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
@@ -373,24 +375,24 @@ const faqs = [
     </div>
     {/* END Banner Section */}
 
-<div className="w-full bg-gray-50 py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
+<div className="w-full py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8 lg:mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
-            Create Your Family Plan (Prepaid Plans)
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-center">
+            Create Your Family Plan
           </h2>
-          <p className="text-gray-600 text-base lg:text-lg">
+          <p className="text-gray-600 text-base lg:text-lg mt-2">
             Build a custom plan for your family. Select number of lines and choose your base plan.
           </p>
         </div>
 
 
-      <div className="bg-gray-50 py-14 px-4">
+      <div className=" py-14 px-4">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
 
           {/* LEFT */}
-          <div className="lg:col-span-2 bg-white p-6 rounded-xl">
+          <div className="lg:col-span-2  p-6 rounded-xl bg-gray-100">
             <h3 className="text-xl font-bold mb-4">Select Primary Plan</h3>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -403,20 +405,42 @@ const faqs = [
                       setPrimaryKey(key);
                       setAdditionalLines(0);
                     }}
-                    className={`relative p-4 border-2 rounded-lg cursor-pointer ${
+                    className={`relative p-4 border-2 rounded-lg cursor-pointer w-full max-w-sm rounded-2xl border border-gray-200 px-6 py-5 ${
                       primaryKey === key
-                        ? "border-orange-500 bg-orange-50"
-                        : "border-gray-200"
+                        ? "border-orange-500 bg-[#FF5722] text-white hover:border-orange-500"
+                        : "border-gray-200 bg-white hover:border-orange-500 text-gray-800 hover:bg-orange-50"
                     }`}
                   >
                     {primaryKey === key && (
-                      <Check className="absolute top-3 right-3 text-orange-500" />
+                      <Check className="absolute top-3 right-3 text-[#FF5722] bg-white border border-[#FF5722] rounded-full" />
                     )}
-                    <h4 className="font-bold">{p.name}</h4>
-                    <p className="text-sm">{p.simType}</p>
-                    <p className="font-bold mt-2">${p.price}</p>
+                   
+                  <h3 className="text-base font-semibold mb-4 ">{p.name}</h3>
+                  
+
+
+                    {/* Rows */}
+                    <div className="space-y-2 text-sm">
+                      <div className="grid grid-cols-[130px_10px_1fr]">
+                        <span>Call Duration</span>
+                        <span> : </span>
+                        <span className="font-medium">30 Days</span>
+                      </div>
+
+                      <div className="grid grid-cols-[130px_10px_1fr]">
+                        <span>SIM Type</span>
+                        <span> : </span>
+                        <span className="font-medium">{p.simType}</span>
+                      </div>
+
+                      <div className="grid grid-cols-[130px_10px_1fr]">
+                        <span>Price</span>
+                        <span> : </span>
+                        <span className="font-medium">${p.price}</span>
+                      </div>
+                    </div>
                   </div>
-                );
+             );     
               })}
             </div>
 
@@ -482,9 +506,9 @@ const faqs = [
 
           {/* RIGHT – SUMMARY */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 lg:sticky lg:top-8"></div>
-            <div className="bg-white p-6 rounded-xl sticky top-6">
-              <h3 className="text-xl font-bold mb-4">Summary</h3>
+            
+            <div className="bg-white p-6 rounded-xl sticky top-6  border-[3px] border-[#d3cbcb] rounded-[12px]">
+              <h3 className="text-xl flex items-center justify-center font-bold mb-4">Your Plan Summary</h3>
 
               {summary.primaryPlan && (
                 <div className="mb-4">
@@ -493,6 +517,7 @@ const faqs = [
                     <span>
                       {summary.primaryPlan.name} ({summary.primaryPlan.simType})
                     </span>
+                    
                     <span>${summary.primaryPrice.toFixed(2)}</span>
                   </div>
                 </div>
@@ -521,20 +546,31 @@ const faqs = [
                 </div>
               )}
 
-              <hr className="my-3" />
+              <hr className="my-3 text-gray-300 mb-4" />
 
-              <div className="flex justify-between items-center">
-                <span className="text-lg font-semibold">Total</span>
-                <span className="text-3xl font-bold text-orange-500">
+              
+
+              <div className="max-w-sm mx-auto rounded-2xl bg-gray-50 shadow-sm px-4 py-10 text-center">
+      
+                <p className="text-sm text-gray-500 mb-3">
+                  Total Monthly Cost:
+                </p>
+
+                <p className="text-[42px] font-bold text-orange-500 leading-none mb-3">
                   ${summary.total.toFixed(2)}
-                </span>
+                </p>
+
+                <p className="text-sm text-gray-400">
+                  Taxes and fees included
+                </p>
+
               </div>
 
               <button
                 disabled={!primaryKey}
-                className="mt-6 w-full bg-orange-500 text-white py-3 rounded-lg disabled:opacity-50"
+                className="mt-6 w-full bg-[#FF5722] text-white py-3 rounded-lg disabled:opacity-50"
               >
-                Continue
+                Continue to Checkout
               </button>
             </div>
           </div>
@@ -545,6 +581,12 @@ const faqs = [
   
 
 {/* SIM Type Tabs */}
+<section className="max-w-7xl mx-auto py-12">
+      
+      {/* Heading */}
+      <h2 className="text-3xl font-bold text-center">
+        Know your Plans
+      </h2>
       <div className="flex justify-center">
   <div className="inline-flex bg-[#FD4C0E] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
     
@@ -570,7 +612,7 @@ const faqs = [
 </div>
 
       {/* Slider with Navigation */}
-      <div className="px-4 md:px-40 mt-10 relative">
+      <div className="px-4 md:px-20 mt-10 relative">
         {/* Custom Arrow Buttons */}
         <button
           onClick={() => sliderRef.current?.slickPrev()}
@@ -648,7 +690,7 @@ const faqs = [
         </Slider>
         </div>
 
-
+</section>
       {/* Benefits Section */}
           <section className="max-w-7xl mx-auto px-6 py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
@@ -699,10 +741,10 @@ const faqs = [
     {/* Benefits Section */}
 
 
-<div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+<div className="py-16 px-4 sm:px-6 lg:px-8 bg-[#F9FAFB]">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-16">
+        <h2 className="text-4xl md:text-3xl font-bold text-center text-gray-900 mb-4">
           How to Get Started
         </h2>
         <p className="text-gray-600 text-center mb-12">Setting up your family plan is quick and easy</p>
@@ -735,14 +777,17 @@ const faqs = [
 
 
 
-    <div className="bg-gray-50 py-10">
+    <div className="bg-gray-50 mb-12">
+      <h2 className="text-4xl md:text-3xl font-bold text-center text-gray-900 mb-10">
+          Frequently Asked Questions
+        </h2>
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
         {/* Left Column */}
         <div className="flex-1 flex flex-col gap-4">
           {leftColumn.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
-                <div className="border border-gray-200 rounded-md bg-white shadow-sm">
+                <div className="border border-gray-200 rounded-md bg-white shadow-sm py-4">
                   <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
                     <span>{item.question}</span>
                     <svg
@@ -776,7 +821,7 @@ const faqs = [
           {rightColumn.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
-                <div className="border border-gray-200 rounded-md bg-white shadow-sm">
+                <div className="border border-gray-200 rounded-md bg-white shadow-sm py-4">
                   <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
                     <span>{item.question}</span>
                     <svg
