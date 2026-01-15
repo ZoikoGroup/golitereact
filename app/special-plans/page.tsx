@@ -105,7 +105,7 @@ export default function ShopSpecialPlans() {
       </div>
     </section>
    <section className="relative max-w-7xl mx-auto mb-20 px-4">
-  <div className="grid grid-cols-1 md:grid-cols-[4fr_3fr] rounded-2xl overflow-hidden">
+  <div className="grid grid-cols-1 md:grid-cols-[7fr_6fr] rounded-2xl overflow-hidden">
 
     {/* LEFT – SOLID BLUE (NO GRADIENT) */}
     <div className="bg-[#005EB6] p-12 text-white flex flex-col justify-center">
@@ -123,14 +123,14 @@ export default function ShopSpecialPlans() {
     </div>
 
     {/* RIGHT – IMAGE WITH WHITE FADE ON LEFT */}
-    <div className="relative min-h-[360px]">
+    <div className="relative overflow-hidden">
       <Image
-        src="/img/specialPlanFooterBanner.jpg"
-        alt="Ocean support"
-        fill
-        className="object-cover"
-        priority
-      />
+    src="/img/specialPlanFooterBanner.jpg"
+    alt="Ocean support"
+    fill
+    className="object-cover scale-[1.4]"
+    priority
+  />
 
       {/* ✅ WHITE IMAGE FADE (THIS IS THE KEY) */}
       <div className="absolute inset-y-0 left-0 w-20
