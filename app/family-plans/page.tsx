@@ -777,7 +777,7 @@ const faqs = [
 
 
 
-    <div className="bg-gray-50 mb-12">
+    <div className="bg-gray-50 pb-12">
       <h2 className="text-4xl md:text-3xl font-bold text-center text-gray-900 mb-10">
           Frequently Asked Questions
         </h2>
