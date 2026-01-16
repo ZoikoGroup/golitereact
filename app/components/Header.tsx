@@ -87,7 +87,10 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-gray-600">
-          <a href="/all-plans" className="hover:text-black">Plans</a>
+          <a href="/prepaid" className="hover:text-black">Prepaid Plans</a>
+          <a href="/postpaid" className="hover:text-black">Postpaid Plans</a>
+          <a href="/family-plans" className="hover:text-black">Family Plans</a>
+          <a href="/special-plans" className="hover:text-black">Special Plans</a>
           <a href="/devices" className="hover:text-black">Devices</a>
           <a href="https://www.att.com/idpmaps/reseller" className="hover:text-black">Coverage</a>
           <a href="/support" className="hover:text-black">Support</a>
@@ -167,9 +170,12 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden border-t bg-white px-6 py-4 space-y-4">
-          <a href="/all-plans" className="block">Plans</a>
+          <a href="/prepaid" className="block">Prepaid Plans</a>
+          <a href="/postpaid" className="block">Postpaid Plans</a>
+          <a href="/family-plans" className="block">Family Plans</a>
+          <a href="/special-plans" className="block">Special Plans</a>
           <a href="/devices" className="block">Devices</a>
-          <a href="/coverage" className="block">Coverage</a>
+          <a href="https://www.att.com/idpmaps/reseller" className="block">Coverage</a>
           <a href="/support" className="block">Support</a>
 
           {isLoggedIn ? (
