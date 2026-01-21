@@ -7,7 +7,7 @@ import Image from "next/image";
 import { link } from "node:fs";
 
 const plans = [
-  { title: "Frequent Travelers", bg: "bg-orange-50", img: "/img/specialTraveler.png" },
+  { title: "Frequent Travelers", bg: "bg-orange-50", img: "/img/specialTraveler.png", link:"/travel-plans" },
   { title: "Students", bg: "bg-pink-50", img: "/img/specialStudent.png", offer: true, link: "/students-discount-application" },
   { title: "Streaming Enthusiasts", bg: "bg-purple-50", img: "/img/specialStreaming-enthusiasts.png", link: "/streaming-enthusiasts-plans" },
   { title: "First Responders", bg: "bg-teal-50", img: "/img/specialRirst-responder-img.png", offer: true, link: "/first-responder-discount-application" },
