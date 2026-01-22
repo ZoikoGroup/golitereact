@@ -17,7 +17,6 @@ import {
   Plus,
   Minus,
   X,
-  CheckCircle2,
   Loader2
 } from "lucide-react";
 
