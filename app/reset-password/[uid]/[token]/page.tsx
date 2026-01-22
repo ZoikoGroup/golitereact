@@ -1,13 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import { use, useState } from "react";
+import { useRouter } from "next/navigation";
+import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
 
-export default function ResetPasswordPage() {
+type PageProps = {
+  params: Promise<{
+    uid: string;
+    token: string;
+  }>;
+};
+
+export default function ResetPasswordPage({ params }: PageProps) {
+  // ✅ REQUIRED FIX (unwrap params)
+  const { uid, token } = use(params);
+
   const router = useRouter();
-  const { uid, token } = router.query as { uid: string; token: string };
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -25,9 +34,12 @@ export default function ResetPasswordPage() {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/reset-password/${uid}/${token}/`,
         {
-          method: "PUT",
+          method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password, password2 }),
+          body: JSON.stringify({
+            password,
+            password2,
+          }),
         }
       );
 
@@ -37,15 +49,14 @@ export default function ResetPasswordPage() {
         if (typeof data === "object") {
           const messages = Object.values(data).flat().join(" | ");
           throw new Error(messages || "Reset failed");
-        } else {
-          throw new Error(data.message || "Reset failed");
         }
+        throw new Error("Reset failed");
       }
 
       setSuccess("Password reset successful! Redirecting to login...");
       setTimeout(() => router.push("/login"), 1500);
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -54,6 +65,7 @@ export default function ResetPasswordPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
+
       <main className="flex-grow flex items-center justify-center bg-gray-100 py-12 px-4">
         <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-bold mb-6 text-center">
@@ -69,6 +81,7 @@ export default function ResetPasswordPage() {
               required
               className="w-full px-3 py-2 border rounded-md"
             />
+
             <input
               type="password"
               placeholder="Confirm New Password"
@@ -91,6 +104,7 @@ export default function ResetPasswordPage() {
           </form>
         </div>
       </main>
+
       <Footer />
     </div>
   );

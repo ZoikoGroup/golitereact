@@ -32,7 +32,8 @@ export default function LoginPage() {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/login/`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+                     "X-Frontend-Origin": window.location.origin, },
           body: JSON.stringify({
             email: email.trim(),
             password,
