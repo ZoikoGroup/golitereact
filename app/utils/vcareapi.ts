@@ -11,3 +11,7 @@ export const activateSim = (payload: any) => {
 export const submitPortIn = (payload: any) => {
   return axios.post("/api/vcare/port-in", payload);
 };
+
+export async function processOrder(postData: Record<string, unknown>) {
+  console.log("Processing order with vCare API...", postData);  
+}

@@ -32,8 +32,7 @@ export default function LoginPage() {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/login/`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json",
-                     "X-Frontend-Origin": window.location.origin, },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             email: email.trim(),
             password,
@@ -65,11 +64,11 @@ export default function LoginPage() {
   const handleGoogleSignIn = () => {
     setError(null);
 
-    const googlePopupWidth = 600;
-    const googlePopupHeight = 700;
-    const left = window.screenX + (window.innerWidth - googlePopupWidth) / 2;
-    const top = window.screenY + (window.innerHeight - googlePopupHeight) / 2;
-    const features = `toolbar=no,menubar=no,width=${googlePopupWidth},height=${googlePopupHeight},top=${top},left=${left}`;
+    const width = 600;
+    const height = 700;
+    const left = window.screenX + (window.innerWidth - width) / 2;
+    const top = window.screenY + (window.innerHeight - height) / 2;
+    const features = `toolbar=no,menubar=no,width=${width},height=${height},top=${top},left=${left}`;
 
     const popup = window.open(
       "/api/auth/google?popup=1",
