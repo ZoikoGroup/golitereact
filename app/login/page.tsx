@@ -102,7 +102,10 @@ export default function LoginPage() {
 
     window.addEventListener("message", messageHandler);
   };
-
+console.log(
+  "ENV CHECK:",
+  process.env.NEXT_PUBLIC_API_BASE_URL
+)
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
