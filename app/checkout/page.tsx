@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripePaymentForm from "../components/StripePaymentForm";
+import type { Appearance } from "@stripe/stripe-js";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 console.log("Stripe Public Key:", process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 import { 
@@ -82,6 +83,13 @@ export default function CheckoutPage() {
   const [shippingFee, setShippingFee] = useState(9.99);
   const [clientSecret, setClientSecret] = useState("");
   const stripeFormRef = useRef<any>(null);
+
+  useEffect(() => {
+  fetch("/api/create-payment-intent", { method: "POST" })
+    .then(res => res.json())
+    .then(data => setClientSecret(data.clientSecret));
+}, []);
+
 
   const shippingOptions: ShippingOption[] = [
     { label: "Standard (3-5 Days)", value: 9.99 },
@@ -280,13 +288,13 @@ export default function CheckoutPage() {
     const num = parseFloat(value);
     return Number.isInteger(num) ? num.toString() : num.toFixed(2);
   };
-
-   const appearance = {
-    theme: "stripe",
-    variables: {
-      colorPrimary: "#dc3545",
-    },
-  };
+type Theme = "flat" | "stripe" | "night";
+const appearance: Appearance = {
+  theme: "stripe",
+  variables: {
+    colorPrimary: "#DF1E5A",
+  },
+};
 
   return (
     <>
@@ -591,14 +599,13 @@ export default function CheckoutPage() {
                   
                   <div className="p-4 bg-gray-50 rounded-lg mb-4">
                     {clientSecret && (
-                      <Elements stripe={stripePromise} options={{ clientSecret, appearance }}>
-                        <StripePaymentForm
-                          ref={stripeFormRef}
-                          onPaymentSuccess={() => console.log("Payment successful")}
-                          onPaymentError={(error) => console.error("Payment error:", error)}
-                        />
-                      </Elements>
-                    )}
+  <Elements
+    stripe={stripePromise}
+    options={{ clientSecret, appearance }}
+  >
+    <StripePaymentForm ref={stripeFormRef} />
+  </Elements>
+)}
 
                   </div>
 
