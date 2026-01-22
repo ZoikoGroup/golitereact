@@ -7,7 +7,6 @@ import { Elements } from "@stripe/react-stripe-js";
 import StripePaymentForm from "../components/StripePaymentForm";
 import type { Appearance } from "@stripe/stripe-js";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
-console.log("Stripe Public Key:", process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 import { 
   Phone, 
   Smartphone, 
@@ -599,13 +598,13 @@ const appearance: Appearance = {
                   
                   <div className="p-4 bg-gray-50 rounded-lg mb-4">
                     {clientSecret && (
-  <Elements
-    stripe={stripePromise}
-    options={{ clientSecret, appearance }}
-  >
-    <StripePaymentForm ref={stripeFormRef} />
-  </Elements>
-)}
+                      <Elements
+                        stripe={stripePromise}
+                        options={{ clientSecret, appearance }}
+                      >
+                        <StripePaymentForm ref={stripeFormRef} />
+                      </Elements>
+                    )}
 
                   </div>
 
