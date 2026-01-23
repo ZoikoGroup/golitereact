@@ -11,9 +11,9 @@ import { checkDeviceCompatibility } from "../utils/vcareapi";
 
 export default function ByodPage() {
   const [modalOpen, setModalOpen] = useState(false);
-const [modalType, setModalType] = useState<"success" | "error">("success");
-const [modalMessage, setModalMessage] = useState("");
-const [inputError, setInputError] = useState("");
+  const [modalType, setModalType] = useState<"success" | "error">("success");
+  const [modalMessage, setModalMessage] = useState("");
+  const [inputError, setInputError] = useState("");
 
   // Device checker states
   const [imei, setImei] = useState("");

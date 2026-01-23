@@ -6,6 +6,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripePaymentForm from "../components/StripePaymentForm";
 import type { Appearance } from "@stripe/stripe-js";
+import { usStates } from "../utils/usStates";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 import { 
   Phone, 
@@ -66,16 +67,6 @@ interface DiscountData {
 interface Errors {
   [key: string]: string;
 }
-
-const usStates = [
-  { code: "AL", name: "Alabama" },
-  { code: "AK", name: "Alaska" },
-  { code: "AZ", name: "Arizona" },
-  { code: "CA", name: "California" },
-  { code: "FL", name: "Florida" },
-  { code: "NY", name: "New York" },
-  { code: "TX", name: "Texas" },
-];
 
 export default function CheckoutPage() {
   const [shippingFee, setShippingFee] = useState(9.99);
@@ -156,9 +147,21 @@ export default function CheckoutPage() {
     const storedCart = [
       {
         planId: "1",
+        vcPlanID: "12345",
         planSlug: "unlimited-5g",
         planTitle: "Unlimited 5G Plan",
         planPrice: 49.99,
+        planDuration: "month",
+        lineType: "postpaid",
+        simType: "eSIM",
+        formData: { priceQty: 1, price: 49.99 }
+      },
+      {
+        planId: "2",
+        vcPlanID: "123456",
+        planSlug: "unlimited-5g-1",
+        planTitle: "Unlimited 5G Plan1",
+        planPrice: 19.99,
         planDuration: "month",
         lineType: "postpaid",
         simType: "eSIM",
@@ -298,7 +301,7 @@ const appearance: Appearance = {
     <>
       <Header />
 
-     <div className="min-h-screen bg-gray-50">
+     <div className="min-h-screen bg-gray-50 ">
 
 
       <div className="bg-[#FD4C0E] text-white py-3">
@@ -307,7 +310,7 @@ const appearance: Appearance = {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto py-4 md:py-8 lg:py-12 xl:py-12 2xl:py-12 px-4  md:px-12 lg:px-24 xl:px-30 2xl:px-32 bg-[#fd4c0e0d]">  
         {cart.length === 0 ? (
           <div className="flex flex-col justify-center items-center text-center min-h-[60vh]">
             <ShoppingCart className="w-32 h-32 text-gray-300 mb-6" />
@@ -335,13 +338,18 @@ const appearance: Appearance = {
           </div>
         ) : (
           <>
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
+              {/* Title */}
               <div>
                 <h3 className="text-2xl font-bold text-[#FD4C0E]">Checkout</h3>
-                <p className="text-gray-500 text-sm">Connecting Every Possibility with Zoiko Mobile!</p>
+                <p className="text-sm text-gray-500">
+                  Connecting Every Possibility with Zoiko Mobile!
+                </p>
               </div>
-              <button 
-                className="flex items-center gap-2 bg-[#FD4C0E] hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
+
+              {/* Clear Cart Button */}
+              <button
+                className="flex w-full sm:w-auto items-center justify-center gap-2 bg-[#FD4C0E] hover:bg-red-700 text-white px-4 py-2 rounded-lg transition disabled:opacity-50"
                 onClick={handleClearCart}
                 disabled={loading}
               >
@@ -396,31 +404,23 @@ const appearance: Appearance = {
 
                 <div className="bg-white rounded-lg shadow p-6">
                   <h5 className="font-bold mb-4">Have a Coupon?</h5>
-                  <div className="flex gap-2">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                     <input
                       type="text"
-                      className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
                       placeholder="Enter coupon code"
                       value={coupon}
                       onChange={(e) => setCoupon(e.target.value)}
                       disabled={loading}
                     />
+
                     <button
-                      className="bg-[#FD4C0E] hover:bg-red-700 text-white px-6 py-2 rounded-lg transition disabled:opacity-50"
+                      className="w-full sm:w-auto bg-[#FD4C0E] hover:bg-red-700 text-white px-6 py-2 rounded-lg transition disabled:opacity-50"
                       onClick={handleApplyCoupon}
                       disabled={loading}
                     >
-                      {loading ? "Applying..." : "Apply"}
+                      Apply
                     </button>
-                    {discountData && (
-                      <button
-                        className="border border-[#FD4C0E] text-[#FD4C0E] hover:bg-red-50 px-4 py-2 rounded-lg transition"
-                        onClick={handleCancelCoupon}
-                        disabled={loading}
-                      >
-                        Cancel
-                      </button>
-                    )}
                   </div>
                   {couponMessage && (
                     <p className={`mt-2 text-sm ${discountData ? "text-green-600" : "text-[#FD4C0E]"}`}>
