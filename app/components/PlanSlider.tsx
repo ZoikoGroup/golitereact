@@ -33,9 +33,6 @@ export default function PricingPlans() {
   const sliderRef = useRef<any>(null);
   const router = useRouter();
 
-  const router = useRouter();
-
-
   /* Responsive slider */
   useEffect(() => {
     const handleResize = () => {
