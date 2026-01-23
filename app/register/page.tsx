@@ -31,7 +31,8 @@ export default function RegisterPage() {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/register/`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+                     "X-Frontend-Origin": window.location.origin, },
           body: JSON.stringify({
             username: username.trim(),
             email: email.trim(),
