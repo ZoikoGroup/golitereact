@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     // Build the Google OAuth consent screen URL with proper parameters
     const params = new URLSearchParams({
       client_id: process.env.GOOGLE_CLIENT_ID || "",
-      redirect_uri: `${baseUrl}/api/auth/google/callback`,
+      redirect_uri: `${baseUrl}/api/auth/callback/google`,
       response_type: "code",
       scope: "openid profile email",
       state: Math.random().toString(36).substring(7), // Simple state token

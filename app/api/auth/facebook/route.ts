@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     // Build the Facebook OAuth URL with proper parameters
     const params = new URLSearchParams({
       client_id: process.env.FACEBOOK_CLIENT_ID || "",
-      redirect_uri: `${baseUrl}/api/auth/facebook/callback`,
+      redirect_uri: `${baseUrl}/api/auth/callback/facebook`,
       response_type: "code",
       scope: "public_profile,email",
       state: Math.random().toString(36).substring(7), // Simple state token
