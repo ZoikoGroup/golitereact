@@ -1,56 +1,71 @@
 "use client";
 
-import { CheckCircle, X } from "lucide-react";
+import { X, CheckCircle, XCircle } from "lucide-react";
 
-interface SuccessModalProps {
+interface ModalProps {
   open: boolean;
   onClose: () => void;
-  message?: string;
+  message: string;
+  type: "success" | "error";
 }
 
 export default function SuccessModal({
   open,
   onClose,
   message,
-}: SuccessModalProps) {
+  type,
+}: ModalProps) {
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* BACKDROP */}
-      <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-        onClick={onClose}
-      />
+  const isSuccess = type === "success";
 
-      {/* MODAL */}
-      <div className="relative bg-white w-[90%] max-w-md rounded-xl shadow-xl p-8 text-center z-10 animate-scaleIn">
-        {/* CLOSE BUTTON */}
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 relative animate-scaleIn">
+        {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
         >
-          <X className="w-5 h-5" />
+          <X size={20} />
         </button>
 
-        {/* ICON */}
+        {/* Icon */}
         <div className="flex justify-center mb-4">
-          <CheckCircle className="w-14 h-14 text-green-500" />
+          {isSuccess ? (
+            <CheckCircle className="text-green-500" size={64} />
+          ) : (
+            <XCircle className="text-red-500" size={64} />
+          )}
         </div>
 
-        {/* MESSAGE */}
-        <p className="text-gray-800 leading-relaxed text-base">
-          {message ||
-            "Your device is compatible with GoLite Mobile’s eSIM technology. You’re ready to enjoy fast, seamless, and eco-friendly activation — no physical SIM required."}
+        {/* Title */}
+        <h3
+          className={`text-2xl font-bold text-center ${
+            isSuccess ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {isSuccess ? "Device Compatible 🎉" : "Device Not Compatible"}
+        </h3>
+
+        {/* Message */}
+        <p className="mt-3 text-center text-gray-600 leading-relaxed">
+          {message}
         </p>
 
-        {/* ACTION */}
-        <button
-          onClick={onClose}
-          className="mt-6 bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md font-semibold"
-        >
-          OK
-        </button>
+        {/* CTA */}
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={onClose}
+            className={`px-6 py-3 rounded-lg font-semibold transition ${
+              isSuccess
+                ? "bg-green-500 hover:bg-green-600 text-white"
+                : "bg-red-500 hover:bg-red-600 text-white"
+            }`}
+          >
+            {isSuccess ? "Continue" : "Close"}
+          </button>
+        </div>
       </div>
     </div>
   );

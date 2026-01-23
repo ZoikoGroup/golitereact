@@ -31,6 +31,7 @@ export default function PricingPlans() {
   const [loading, setLoading] = useState(true);
 
   const sliderRef = useRef<any>(null);
+  const router = useRouter();
 
   const router = useRouter();
 
