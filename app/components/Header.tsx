@@ -94,6 +94,7 @@ export default function Navbar() {
           <a href="/devices" className="hover:text-black">Devices</a>
           <a href="https://www.att.com/idpmaps/reseller" className="hover:text-black">Coverage</a>
           <a href="/support" className="hover:text-black">Support</a>
+          <a href="/about-us" className="hover:text-black">About</a>
         </div>
         {isLoggedIn && (
           <p className="text-sm text-gray-500 block lg:hidden  xl:hidden  md:hidden">
