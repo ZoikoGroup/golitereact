@@ -62,7 +62,14 @@ export default function PostpaidPlansHero() {
         { category: "prepaid", simType: "pSim", title: "Go-Unlimited postpaid", desc:"Heavy users, streamers, and those who demand consistent high-speed data", price: "$60.00/mo", tag: "Most Popular", features: ["Unlimited data","Unlimited talk & text","4.5 GB Hotspot","Physical SIM included","24-Month Contract"] },
     
       ];
-    
+    const specialPlans = [
+  { title: "Frequent Travelers", bg: "bg-orange-50", img: "/img/specialTraveler.png", link:"/travel-plans" },
+  { title: "Students", bg: "bg-pink-50", img: "/img/specialStudent.png", offer: true, link: "/students-discount-application" },
+  { title: "Streaming Enthusiasts", bg: "bg-purple-50", img: "/img/specialStreaming-enthusiasts.png", link: "/streaming-enthusiasts-plans" },
+  { title: "First Responders", bg: "bg-teal-50", img: "/img/specialRirst-responder-img.png", offer: true, link: "/first-responder-discount-application" },
+  { title: "Age 55+", bg: "bg-blue-50", img: "/img/specialAge-55.png", offer: true, link: "/senior-citizen-discount-enrollment-form" },
+  { title: "Military & Veterans", bg: "bg-green-50", img: "/img/specialMilitary.png", offer: true, link: "/military-discount-eligibility-form" },
+];
       const filteredPlans = plans.filter((p) =>  p.simType === activeSimType);
     
       const sliderSettings = {
@@ -77,70 +84,7 @@ export default function PostpaidPlansHero() {
         ),
         dotsClass: "slick-dots flex justify-center",
       };
-    const benefits = [
-        {
-        icon: <Image src="/img/network.png" alt="FREE 5G Network" width={32} height={32} className="w-[5rem] h-[5rem]" />,
-        title: "Nationwide FREE 5G Network",
-        description: "Experience ultra-fast speeds with our expansive 5G coverage at no extra cost!",
-        bgColor: "bg-orange-50"
-        },
-        {
-        icon: <Image src="/img/hotspot.png" alt="20GB Mobile Hotspot" width={32} height={32} className="w-[5rem] h-[5rem]" />,
-        title: "Up to 20GB Mobile Hotspot",
-        description: "Stay connected. Use your phone to let your other devices surf the web for work on the go.",
-        bgColor: "bg-orange-50"
-        },
-        {
-        icon: <Image src="/img/phone.png" alt="International Calls" width={32} height={32} className="w-[5rem] h-[5rem]" />,
-        title: "Free International Calls",
-        description: "Call your loved ones without border worries. Enjoy international calls at no extra charges.",
-        bgColor: "bg-orange-50"
-        },
-        {
-        icon: <Image src="/img/roam.png" alt="Free Roaming"  width={32} height={32} className="w-[5rem] h-[5rem]" />,
-        title: "Canada & Mexico-Free Roaming",
-        description: "Travel freely across North America with unlimited calling & texting. No extra roaming fees.",
-        bgColor: "bg-blue-50"
-        }
-    ];
-  const cards = [
-    {
-      title: "Student Connect+",
-      desc: "Special discounts for students with edu email verification",
-      badge: "NEW",
-      gradient: "from-[#667EEA] to-[#764BA2]",
-      href: "#",
-    },
-    {
-      title: "Senior Saver",
-      desc: "Simplified plans with dedicated support for seniors 60+",
-      gradient: "from-[#F093FB] to-[#F5576C]",
-    },
-    {
-      title: "Work-Life Unlimited",
-      desc: "Business features with personal benefits in one plan",
-      gradient: "from-[#4FACFE] to-[#00F2FE]",
-       href: "#",
-    },
-    {
-      title: "Family Bundle",
-      desc: "Connect up to 5 lines with shared data and savings",
-      gradient: "from-[#43E97B] to-[#38F9D7]",
-       href: "#",
-    },
-    {
-      title: "Gamer's Paradise",
-      desc: "Low latency 5G with priority bandwidth for gaming",
-      gradient: "from-[#FA709A] to-[#FEE140]",
-       href: "#",
-    },
-    {
-      title: "Traveler's Choice",
-      desc: "International roaming in 200+ countries included",
-      gradient: "from-[#30CFD0] to-[#330867]",
-       href: "#",
-    },
-  ];
+   
   
 const faqs = [
   {
@@ -175,6 +119,7 @@ const faqs = [
     )
   }
 ];
+
   // Split into two columns
   const mid = Math.ceil(faqs.length / 2);
   const leftColumn = faqs.slice(0, mid);
@@ -187,61 +132,8 @@ const faqs = [
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-12">
-          Shop Prepaid Plans
+          Shop Prepaid Travel Plans
         </h1>
-
-        {/* Hero Card */}
-        <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-          <div className="grid md:grid-cols-2 gap-0">
-            {/* Left Content Section */}
-            <div className="bg-orange-600 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-white mb-6 leading-tight">
-                Smarter Prepaid Faster 5G Unmatched Value.
-              </h2>
-              <p className="text-white text-lg md:text-[1.2rem] leading-relaxed">
-                Why sit in lines for prepaid, when mobile recharge is online and instant? Get ultimate freedom with GoLite's eco-friendly 5G prepaid plans, starting from just ₹7.99/mo with unlimited talk & text!
-              </p>
-            </div>
-
-            {/* Right Image Section */}
-            <div className="relative h-64 md:h-auto">
-              <img
-                src="./img/prepaidBanner.png"
-                alt="Three friends looking at a smartphone together"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {/* END Banner Section */}
-    
-{/* SIM Type Tabs */}
-      <div className="flex justify-center">
-  <div className="inline-flex bg-[#FD4C0E] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
-    
-    {["pSim", "eSim"].map((simType, idx) => (
-      <button
-        key={simType}
-        onClick={() => setActiveSimType(simType)}
-        className={`
-          flex-1 m-[.2rem]
-          flex items-center justify-center
-          text-sm font-semibold transition-all
-          rounded-full
-          ${activeSimType === simType 
-            ? "bg-white text-[#FD4C0E]" 
-            : "text-white"}
-        `}
-      >
-        {simType === "pSim" ? "Phecial Sim" : "eSim"}
-      </button>
-    ))}
-
-  </div>
-</div>
-
       {/* Slider with Navigation */}
       <div className="px-4 md:px-40 mt-10 relative">
         {/* Custom Arrow Buttons */}
@@ -320,81 +212,58 @@ const faqs = [
           ))}
         </Slider>
         </div>
-
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <h1 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-gray-900 text-center mb-12 px-4">
-          Best Postpaid Mobile Plans With Many Exciting Benefits
-        </h1>
-
-        {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((benefit, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
-            >
-              {/* Icon */}
-              <div className={`w-[5rem] h-[5rem]   flex items-center justify-center mb-6`}>
-                {benefit.icon}
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 mb-4 leading-snug">
-                {benefit.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-gray-600 leading-relaxed">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+ </div>
     </div>
 
+        {/* Header */}
+       
 
-<section className="w-full py-16 bg-white">
-      {/* Heading */}
-      <div className="text-center mb-4">
-        <h2 className="text-3xl font-bold text-gray-900">
-          Plans for Your Lifestyle
-        </h2>
-        <p className="text-gray-500 mt-2">
-          Tailored solutions for every need
-        </p>
+      <section className="max-w-7xl mx-auto px-6 py-20">
+      
+            {/* Heading */}
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Plans for your Lifestyle
+            </h2>
+      
+            {/* Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+              {specialPlans.map((item, i) => (
+                <div
+                  key={i}
+                  className={`relative rounded-2xl border border-gray-200 p-6 text-center ${item.bg}`}
+                >
+                  {item.offer && (
+                    <span className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-md">
+                      SPECIAL OFFER
+                    </span>
+                  )}
+      
+                  <div className="relative aspect-[7/5] w-full">
+        <Image
+          src={item.img}
+          alt={item.title}
+          fill
+          className="object-contain"
+        />
       </div>
-
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 lg:px-50">
-        {cards.map((c, i) => (
-          <div
-            key={i}
-            className={`rounded-2xl p-12 text-white shadow-lg bg-gradient-to-br ${c.gradient}`}
-          >
-            <div className="flex justify-between items-start">
-              <h3 className="text-xl font-semibold">{c.title}</h3>
-              {c.badge && (
-                <span className="text-xs font-semibold bg-white/30 backdrop-blur px-3 py-1 rounded-full">
-                  {c.badge}
-                </span>
-              )}
+      
+                  <h3 className="text-lg font-semibold text-blue-900 flex items-center justify-center gap-1 pt-8">
+                    <a
+                    href={item.link}
+                    className="flex items-center gap-1 hover:underline"
+                  >
+                    {item.title}
+                    <span>↗</span>
+                    </a>
+                  </h3>
+                </div>
+              ))}
             </div>
+      </section>
+        
 
-            <p className="mt-3 text-sm opacity-90">{c.desc}</p>
 
-            <a
-              href="{c.href}"
-              className="mt-6 inline-block text-sm font-medium underline-offset-2 hover:underline"
-            >
-              View Plans →
-            </a>
-          </div>
-        ))}
-      </div>
-    </section>
+
     <div className="bg-gray-50 py-10">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
         {/* Left Column */}

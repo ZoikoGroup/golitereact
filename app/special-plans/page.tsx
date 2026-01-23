@@ -1,19 +1,23 @@
 "use client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useRouter } from "next/navigation";
 
 import Image from "next/image";
+import { link } from "node:fs";
 
 const plans = [
-  { title: "Frequent Travelers", bg: "bg-orange-50", img: "/img/specialTraveler.png" },
-  { title: "Students", bg: "bg-pink-50", img: "/img/specialStudent.png", offer: true },
-  { title: "Streaming Enthusiasts", bg: "bg-purple-50", img: "/img/specialStreaming-enthusiasts.png" },
-  { title: "First Responders", bg: "bg-teal-50", img: "/img/specialRirst-responder-img.png", offer: true },
-  { title: "Age 55+", bg: "bg-blue-50", img: "/img/specialAge-55.png", offer: true },
-  { title: "Military & Veterans", bg: "bg-green-50", img: "/img/specialMilitary.png", offer: true },
+  { title: "Frequent Travelers", bg: "bg-orange-50", img: "/img/specialTraveler.png", link:"/travel-plans" },
+  { title: "Students", bg: "bg-pink-50", img: "/img/specialStudent.png", offer: true, link: "/students-discount-application" },
+  { title: "Streaming Enthusiasts", bg: "bg-purple-50", img: "/img/specialStreaming-enthusiasts.png", link: "/streaming-enthusiasts-plans" },
+  { title: "First Responders", bg: "bg-teal-50", img: "/img/specialRirst-responder-img.png", offer: true, link: "/first-responder-discount-application" },
+  { title: "Age 55+", bg: "bg-blue-50", img: "/img/specialAge-55.png", offer: true, link: "/senior-citizen-discount-enrollment-form" },
+  { title: "Military & Veterans", bg: "bg-green-50", img: "/img/specialMilitary.png", offer: true, link: "/military-discount-eligibility-form" },
 ];
 
 export default function ShopSpecialPlans() {
+  const router = useRouter();
+
   return (
     <>
     <Header />
@@ -47,8 +51,13 @@ export default function ShopSpecialPlans() {
 </div>
 
             <h3 className="text-lg font-semibold text-blue-900 flex items-center justify-center gap-1 pt-8">
+              <a
+              href={item.link}
+              className="flex items-center gap-1 hover:underline"
+            >
               {item.title}
               <span>↗</span>
+              </a>
             </h3>
           </div>
         ))}
@@ -117,7 +126,7 @@ export default function ShopSpecialPlans() {
         As a thank-you for your dedication to marine and aquatic life conservation, we're offering exclusive savings on our plans. Stay connected while making a difference!
       </p>
 
-      <button className="bg-white text-[#005EB6] font-semibold px-24 py-3 rounded-lg w-fit px-6 py-3 mt-4 hover:bg-gray-100 transition">
+      <button onClick={() => router.push("/marine-discount-application")} className="bg-white text-[#005EB6] font-semibold px-24 py-3 rounded-lg w-fit px-6 py-3 mt-4 hover:bg-gray-100 transition">
         Apply for Discount
       </button>
     </div>
