@@ -15,6 +15,7 @@ import "slick-carousel/slick/slick-theme.css";
 type Plan = {
   id: number;
   name: string;
+  vcPlanID: string;
   short_description: string;
   final_price: number;
   is_popular: boolean;
@@ -68,6 +69,7 @@ export default function PrepaidPlansClient({ plans }: { plans: Plan[] }) {
     const normalizedPlans = plans.map(p => ({
   id: p.id,
   title: p.name,
+  vcPlanID : p.vcPlanID,
   desc: p.short_description,
   price: `$${p.final_price}/mo`,
   tag: p.is_popular ? "Most Popular" : null,
