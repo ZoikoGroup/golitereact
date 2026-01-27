@@ -358,6 +358,31 @@ const appearance: Appearance = {
               </button>
             </div>
 
+           <div className="bg-white rounded-lg shadow p-6 mb-6">
+  <h5 className="font-bold mb-2">Selected Plan(s) JSON (from popup)</h5>
+  <pre className="text-xs bg-gray-100 p-3 rounded overflow-x-auto">
+    {JSON.stringify(
+      JSON.parse(localStorage.getItem("cart") || "[]"),
+      null,
+      2
+    )}
+  </pre>
+</div>
+
+{/* Clear Cart Button */}
+  <button
+    onClick={() => {
+      localStorage.removeItem("cart");
+      // Trigger re-render
+      window.location.reload();
+    }}
+    className="mt-3 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold"
+  >
+    Clear Cart
+  </button>
+
+
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-6">
                 {cart.map((item, idx) => (
