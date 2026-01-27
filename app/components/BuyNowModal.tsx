@@ -83,12 +83,12 @@ export default function BuyNowModal({
         {/* Body */}
         <div className="p-6 space-y-6">
 
-          {/* CONTRACT OPTIONS */}
+          {/* CONTRACT OPTIONS
 
           Show all selected data in JSON format
 <pre className="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto">
   {JSON.stringify({ ...plan, duration, simType }, null, 2)}
-</pre>
+</pre> */}
 
 
           {/* 12 Month */}
