@@ -26,9 +26,42 @@ export default function Navbar() {
   const [user, setUser] = useState<UserData | null>(null);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const cartCount = 3;
+ const [cartCount, setCartCount] = useState(0);
 
   /* ---------- AUTH STATE ---------- */
+  useEffect(() => {
+  if (typeof window === "undefined") return;
+
+  const updateCartCount = () => {
+    try {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+      if (!Array.isArray(cart)) {
+        setCartCount(0);
+        return;
+      }
+
+      const count = cart.reduce(
+        (total, item) => total + Number(item?.formData?.priceQty ?? 1),
+        0
+      );
+
+      setCartCount(count);
+    } catch {
+      setCartCount(0);
+    }
+  };
+
+  // Initial load
+  updateCartCount();
+
+  // Sync across tabs / popup → checkout → header
+  window.addEventListener("storage", updateCartCount);
+
+  return () => window.removeEventListener("storage", updateCartCount);
+}, []);
+
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -109,7 +142,7 @@ export default function Navbar() {
           {/* Cart */}
           <div
             className="relative cursor-pointer"
-            onClick={() => router.push("/cart")}
+            onClick={() => router.push("/checkout")}
           >
             <ShoppingCart className="w-6 h-6 text-gray-800" />
             {cartCount > 0 && (
