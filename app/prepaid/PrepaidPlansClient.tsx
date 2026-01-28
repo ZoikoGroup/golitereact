@@ -8,13 +8,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
+import PrepaidBuyNowModal from "../components/PrepaidBuyNowModal";
 
 /* ---------- Types ---------- */
 type Plan = {
   id: number;
   name: string;
+  vcPlanID: string;
+  slug: string;
   short_description: string;
   final_price: number;
+  duration_days: number;
   is_popular: boolean;
   sim_type: "esim" | "psim";
   features: { title: string }[];
@@ -45,6 +49,16 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
       const [slidesToShow, setSlidesToShow] = useState(3);
       const sliderRef = useRef<any>(null);
 
+      const [openBuyModal, setOpenBuyModal] = useState(false);
+      const [selectedPlan, setSelectedPlan] = useState<any>(null);
+
+      const handleBuyPlan = (plan:any) => {
+        setSelectedPlan(plan);
+        setOpenBuyModal(true);
+      };
+
+
+
 /* ---------- Responsive slider ---------- */
   useEffect(() => {
     const resize = () => {
@@ -74,8 +88,13 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
     const normalizedPlans = plans.map(p => ({
   id: p.id,
   title: p.name,
+  vcPlanID: p.vcPlanID,
+  slug: p.slug,
   desc: p.short_description,
   price: `$${p.final_price}/mo`,
+  final_price: p.final_price,
+  duration_days: p.duration_days,
+  simType: p.sim_type === "esim" ? "eSim" : "pSim",
   tag: p.is_popular ? "Most Popular" : null,
   features: p.features?.map(f => f.title) || [],
 }));
@@ -337,9 +356,14 @@ const faqs = [
                 <p className="text-gray-500 mb-4 text-center text-sm">(taxes and fees included)</p>
 
                 {/* Button */}
-                <button className="w-full border-2 border-orange-500 text-orange-500 font-semibold py-2 rounded-lg hover:bg-orange-500 hover:text-white transition-all">
+
+                <button
+                  onClick={() => handleBuyPlan(plan)}
+                  className="w-full border-2 border-orange-500 text-orange-500 font-semibold py-2 rounded-lg hover:bg-orange-500 hover:text-white transition-all"
+                >
                   Buy Plan
                 </button>
+
 
                 {/* Description */}
                 <p className="text-gray-500 mb-4 text-left pt-6 text-sm">{plan.desc}</p>
@@ -517,6 +541,14 @@ const faqs = [
         </div>
       </div>
     </div>
+
+    <PrepaidBuyNowModal
+      open={openBuyModal}
+      onClose={() => setOpenBuyModal(false)}
+      plan={selectedPlan}
+      simType={activeSimType}
+    />
+
     <Footer />
     </>
   );
