@@ -69,23 +69,14 @@ interface Errors {
 }
 
 export default function CheckoutPage() {
-  const [shippingFee, setShippingFee] = useState(9.99);
-  const [clientSecret, setClientSecret] = useState("");
-  const stripeFormRef = useRef<any>(null);
-
-  useEffect(() => {
-  fetch("/api/create-payment-intent", { method: "POST" })
-    .then(res => res.json())
-    .then(data => setClientSecret(data.clientSecret));
-}, []);
-
-
   const shippingOptions: ShippingOption[] = [
     { label: "Standard (3-5 Days)", value: 9.99 },
     { label: "Expedited (2-3 Days)", value: 14.99 },
     { label: "Overnight", value: 24.99 },
   ];
-
+  const [shippingFee, setShippingFee] = useState(9.99);
+  const [clientSecret, setClientSecret] = useState("");
+  const stripeFormRef = useRef<any>(null);
   const [showThankYou, setShowThankYou] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showShipping, setShowShipping] = useState(false);
@@ -143,32 +134,42 @@ export default function CheckoutPage() {
     email: "",
   });
 
+  
+ /* ================= CART SYNC ================= */
+  const syncCart = (updatedCart: CartItem[]) => {
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    window.dispatchEvent(new Event("storage"));
+  };
   useEffect(() => {
-    const storedCart = [
-      {
-        planId: "1",
-        vcPlanID: "12345",
-        planSlug: "unlimited-5g",
-        planTitle: "Unlimited 5G Plan",
-        planPrice: 49.99,
-        planDuration: "month",
-        lineType: "postpaid",
-        simType: "eSIM",
-        formData: { priceQty: 1, price: 49.99 }
-      },
-      {
-        planId: "2",
-        vcPlanID: "123456",
-        planSlug: "unlimited-5g-1",
-        planTitle: "Unlimited 5G Plan1",
-        planPrice: 19.99,
-        planDuration: "month",
-        lineType: "postpaid",
-        simType: "eSIM",
-        formData: { priceQty: 1, price: 49.99 }
+    if (typeof window === "undefined") return;
+
+    try {
+      const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+      if (!Array.isArray(storedCart)) {
+        syncCart([]);
+        return;
       }
-    ];
-    setCart(storedCart);
+
+      const normalized: CartItem[] = storedCart.map((item: any) => ({
+        planId: item.planId ? String(item.planId) : null,
+        planSlug: item.planSlug ?? null,
+        planTitle: item.planTitle ?? "Unknown Plan",
+        planPrice: Number(item.planPrice ?? 0),
+        planDuration: item.planDuration ?? "",
+        lineType: item.lineType ?? "",
+        simType: item.simType ?? "",
+        formData: {
+          priceQty: Number(item.formData?.priceQty ?? 1),
+          price: Number(item.planPrice ?? 0),
+        },
+      }));
+
+      setCart(normalized);
+    } catch {
+      syncCart([]);
+    }
   }, []);
 
   // ✅ Check login status and close popup when user logs in
@@ -185,24 +186,19 @@ export default function CheckoutPage() {
 
   const hasDeviceItem = cart.some((item) => item.type === "device");
 
-  const handleQuantity = (index: number, delta: number) => {
-    const newCart = [...cart];
-    const curQty = Number(newCart[index].formData?.priceQty || 1);
-    newCart[index].formData = {
-      ...newCart[index].formData,
-      priceQty: Math.max(1, curQty + delta),
-    };
-    setCart(newCart);
+   const handleQuantity = (index: number, delta: number) => {
+    const updated = [...cart];
+    const qty = Number(updated[index].formData.priceQty);
+    updated[index].formData.priceQty = Math.max(1, qty + delta);
+    syncCart(updated);
   };
 
-  const handleRemove = (index: number) => {
-    const newCart = [...cart];
-    newCart.splice(index, 1);
-    setCart(newCart);
+   const handleRemove = (index: number) => {
+    syncCart(cart.filter((_, i) => i !== index));
   };
 
   const handleClearCart = () => {
-    setCart([]);
+    syncCart([]);
   };
 
   const handleApplyCoupon = async () => {
@@ -279,23 +275,35 @@ export default function CheckoutPage() {
   };
 
   const handlePlaceOrder = async () => {
-    if (!agreeTerms) {
-      setShowTermsPopup(true);
-      return;
-    }
+  if (!agreeTerms) {
+    setShowTermsPopup(true);
+    return;
+  }
 
-    if (!validateFields()) {
-      alert("Please fill all required fields correctly");
-      return;
-    }
+  if (!validateFields()) {
+    alert("Please fill all required fields correctly");
+    return;
+  }
 
-    setLoading(true);
-    setTimeout(() => {
-      setShowThankYou(true);
-      setCart([]);
-      setLoading(false);
-    }, 2000);
-  };
+  if (!stripeFormRef.current) {
+    alert("Payment form not ready");
+    return;
+  }
+
+  setLoading(true);
+
+  const result = await stripeFormRef.current.submitPayment();
+
+  if (!result.success) {
+    setLoading(false);
+    return;
+  }
+
+  // ✅ Payment succeeded → webhook will save order
+  setShowThankYou(true);
+  syncCart([]);
+  setLoading(false);
+};
 
   const formatDiscount = (value: string) => {
     const num = parseFloat(value);
@@ -309,6 +317,34 @@ const appearance: Appearance = {
   },
 };
 
+
+useEffect(() => {
+  if (cart.length === 0) return;
+
+  const createIntent = async () => {
+    const res = await fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        cart,
+        billingAddress,
+        shippingAddress: showShipping ? shippingAddress : billingAddress,
+        subtotal,
+        shippingFee,
+        discountAmount,
+        total,
+      }),
+    });
+
+    const data = await res.json();
+    setClientSecret(data.clientSecret);
+  };
+
+  createIntent();
+}, [cart, billingAddress, shippingAddress, subtotal, shippingFee, discountAmount, total]);
+
+
+  
   return (
     <>
       <Header />
@@ -371,314 +407,300 @@ const appearance: Appearance = {
             </div>
 
            <div className="bg-white rounded-lg shadow p-6 mb-6">
-  <h5 className="font-bold mb-2">Selected Plan(s) JSON (from popup)</h5>
-  <pre className="text-xs bg-gray-100 p-3 rounded overflow-x-auto">
-    {JSON.stringify(
-      JSON.parse(localStorage.getItem("cart") || "[]"),
-      null,
-      2
-    )}
-  </pre>
-</div>
+            <h5 className="font-bold mb-2">Selected Plan(s) JSON (from popup)</h5>
+            <pre className="text-xs bg-gray-100 p-3 rounded overflow-x-auto">
+              {JSON.stringify(
+                JSON.parse(localStorage.getItem("cart") || "[]"),
+                null,
+                2
+              )}
+            </pre>
+          </div>
 
-{/* Clear Cart Button */}
-  <button
-    onClick={() => {
-      localStorage.removeItem("cart");
-      // Trigger re-render
-      window.location.reload();
-    }}
-    className="mt-3 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold"
-  >
-    Clear Cart
-  </button>
-
-
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 space-y-6">
-                {cart.map((item, idx) => (
-                  <div key={idx} className="bg-white rounded-lg shadow p-6">
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h5 className="text-lg font-bold text-[#FD4C0E]">{item.planTitle}</h5>
-                        <p className="text-sm text-gray-500">
-                          Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType || "N/A"}
-                        </p>
-                      </div>
-                      <button
-                        className="text-[#FD4C0E] hover:text-red-700 p-2"
-                        onClick={() => handleRemove(idx)}
-                        disabled={loading}
-                      >
-                        <X className="w-5 h-5" />
-                      </button>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 space-y-6">
+              {cart.map((item, idx) => (
+                <div key={idx} className="bg-white rounded-lg shadow p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h5 className="text-lg font-bold text-[#FD4C0E]">{item.planTitle}</h5>
+                      <p className="text-sm text-gray-500">
+                        Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType || "N/A"}
+                      </p>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-bold">
-                        ${Number(item.planPrice ?? item.formData?.price ?? 0).toFixed(2)} / {item.planDuration}
-                      </span>
-                      <div className="flex items-center gap-3">
-                        <button
-                          className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
-                          onClick={() => handleQuantity(idx, -1)}
-                          disabled={loading}
-                        >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="font-semibold">{item.formData?.priceQty ?? 1}</span>
-                        <button
-                          className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
-                          onClick={() => handleQuantity(idx, 1)}
-                          disabled={loading}
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-                <div className="bg-white rounded-lg shadow p-6">
-                  <h5 className="font-bold mb-4">Have a Coupon?</h5>
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                    <input
-                      type="text"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
-                      placeholder="Enter coupon code"
-                      value={coupon}
-                      onChange={(e) => setCoupon(e.target.value)}
-                      disabled={loading}
-                    />
-
                     <button
-                      className="w-full sm:w-auto bg-[#FD4C0E] hover:bg-red-700 text-white px-6 py-2 rounded-lg transition disabled:opacity-50"
-                      onClick={handleApplyCoupon}
+                      className="text-[#FD4C0E] hover:text-red-700 p-2"
+                      onClick={() => handleRemove(idx)}
                       disabled={loading}
                     >
-                      Apply
+                      <X className="w-5 h-5" />
                     </button>
                   </div>
-                  {couponMessage && (
-                    <p className={`mt-2 text-sm ${discountData ? "text-green-600" : "text-[#FD4C0E]"}`}>
-                      {couponMessage}
-                    </p>
-                  )}
-                </div>
-
-                <div className="bg-white rounded-lg shadow p-6">
-                  <h5 className="font-bold mb-4">Service/Billing Details</h5>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {Object.keys(billingAddress).map((key) => {
-                      const meta = billingFieldMeta[key] || {};
-                      const errorKey = `billing${key.charAt(0).toUpperCase() + key.slice(1)}`;
-                      const isRequired = ["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key);
-                      
-                      return (
-                        <div key={key}>
-                          <label className="block text-sm font-semibold mb-1">
-                            {meta.label || key.replace(/([A-Z])/g, " $1")}
-                            {isRequired && <span className="text-[#FD4C0E] ml-1">*</span>}
-                          </label>
-                          {key === "state" ? (
-                            <select
-                              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E] ${
-                                errors[errorKey] ? "border-[#FD4C0E]" : "border-gray-300"
-                              }`}
-                              value={billingAddress.state}
-                              onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value })}
-                              disabled={loading}
-                            >
-                              <option value="">Select state</option>
-                              {usStates.map((s) => (
-                                <option key={s.code} value={s.code}>{s.name}</option>
-                              ))}
-                            </select>
-                          ) : (
-                            <input
-                              type="text"
-                              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E] ${
-                                errors[errorKey] ? "border-[#FD4C0E]" : "border-gray-300"
-                              }`}
-                              placeholder={meta.placeholder || `Enter ${key}`}
-                              value={billingAddress[key as keyof Address]}
-                              disabled={meta.disabled || loading}
-                              onChange={(e) => setBillingAddress({ ...billingAddress, [key]: e.target.value })}
-                            />
-                          )}
-                          {errors[errorKey] && <p className="text-[#FD4C0E] text-xs mt-1">{errors[errorKey]}</p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  <div className="mt-4">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="w-4 h-4 text-[#FD4C0E] border-gray-300 rounded focus:ring-[#FD4C0E]"
-                        checked={showShipping}
-                        onChange={(e) => setShowShipping(e.target.checked)}
+                  <div className="flex justify-between items-center">
+                    <span className="font-bold">
+                      ${Number(item.planPrice ?? item.formData?.price ?? 0).toFixed(2)} / {item.planDuration}
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <button
+                        className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        onClick={() => handleQuantity(idx, -1)}
                         disabled={loading}
-                      />
-                      <span className="text-sm">Ship to a different address?</span>
-                    </label>
-                  </div>
-
-                  {showShipping && (
-                    <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                      <h6 className="font-bold mb-4 text-[#FD4C0E]">Shipping Address</h6>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {Object.keys(shippingAddress).map((key) => {
-                          const meta = billingFieldMeta[key] || {};
-                          const errorKey = `shipping${key.charAt(0).toUpperCase() + key.slice(1)}`;
-                          const isRequired = ["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key);
-                          
-                          return (
-                            <div key={key}>
-                              <label className="block text-sm font-semibold mb-1">
-                                {meta.label || key.replace(/([A-Z])/g, " $1")}
-                                {isRequired && <span className="text-[#FD4C0E] ml-1">*</span>}
-                              </label>
-                              {key === "state" ? (
-                                <select
-                                  className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E] ${
-                                    errors[errorKey] ? "border-[#FD4C0E]" : "border-gray-300"
-                                  }`}
-                                  value={shippingAddress.state}
-                                  onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value })}
-                                  disabled={loading}
-                                >
-                                  <option value="">Select state</option>
-                                  {usStates.map((s) => (
-                                    <option key={s.code} value={s.code}>{s.name}</option>
-                                  ))}
-                                </select>
-                              ) : (
-                                <input
-                                  type="text"
-                                  className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E] ${
-                                    errors[errorKey] ? "border-[#FD4C0E]" : "border-gray-300"
-                                  }`}
-                                  placeholder={meta.placeholder || `Enter ${key}`}
-                                  value={shippingAddress[key as keyof Address]}
-                                  disabled={meta.disabled || loading}
-                                  onChange={(e) => setShippingAddress({ ...shippingAddress, [key]: e.target.value })}
-                                />
-                              )}
-                              {errors[errorKey] && <p className="text-[#FD4C0E] text-xs mt-1">{errors[errorKey]}</p>}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div className="bg-white rounded-lg shadow p-6">
-                  <h5 className="font-bold mb-4">Your Order</h5>
-                  <div className="space-y-2 mb-4">
-                    {cart.map((item, idx) => (
-                      <div key={idx} className="flex justify-between text-sm">
-                        <span>{item.planTitle} ({item.simType}) x {item.formData?.priceQty || 1}</span>
-                        <span className="font-semibold">${(item.planPrice * (item.formData?.priceQty || 1)).toFixed(2)}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {hasDeviceItem && (
-                    <div className="border-t border-b border-gray-200 py-4 my-4">
-                      <label className="block text-sm font-semibold mb-2">Shipping Options</label>
-                      <select
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
-                        value={selectedShippingOption.value}
-                        onChange={(e) => {
-                          const option = shippingOptions.find((opt) => opt.value === parseFloat(e.target.value));
-                          if (option) setSelectedShippingOption(option);
-                        }}
                       >
-                        {shippingOptions.map((opt, i) => (
-                          <option key={i} value={opt.value}>{opt.label} - ${opt.value}</option>
-                        ))}
-                      </select>
-                      <div className="flex justify-between mt-3 text-sm">
-                        <span>Shipping Fee</span>
-                        <span className="font-semibold">${shippingFee.toFixed(2)}</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {discountData && (
-                    <div className="flex justify-between text-sm text-green-600 mb-2">
-                      <span>
-                        Discount ({discountData.type === "percentage" 
-                          ? formatDiscount(discountData.discount) + "%" 
-                          : "$" + formatDiscount(discountData.discount)})
-                      </span>
-                      <span className="font-semibold">- ${discountAmount.toFixed(2)}</span>
-                    </div>
-                  )}
-
-                  <div className="border-t border-gray-200 pt-4 mt-4">
-                    <div className="flex justify-between text-lg font-bold">
-                      <span>Total</span>
-                      <span className="text-[#FD4C0E]">${total.toFixed(2)}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-lg shadow p-6">
-                  <h5 className="font-bold mb-4">Payment Method</h5>
-                  
-                  <div className="p-4 bg-gray-50 rounded-lg mb-4">
-                    {clientSecret && (
-                      <Elements
-                        stripe={stripePromise}
-                        options={{ clientSecret, appearance }}
-                      >
-                        <StripePaymentForm ref={stripeFormRef} />
-                      </Elements>
-                    )}
-
-                  </div>
-
-                  <div className="mb-4">
-                    <label className="flex items-start gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="w-4 h-4 mt-1 text-[#FD4C0E] border-gray-300 rounded focus:ring-[#FD4C0E]"
-                        checked={agreeTerms}
-                        onChange={(e) => setAgreeTerms(e.target.checked)}
+                        <Minus className="w-4 h-4" />
+                      </button>
+                      <span className="font-semibold">{item.formData?.priceQty ?? 1}</span>
+                      <button
+                        className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        onClick={() => handleQuantity(idx, 1)}
                         disabled={loading}
-                      />
-                      <span className="text-sm">
-                        I have read and agree to the website terms and conditions.
-                      </span>
-                    </label>
+                      >
+                        <Plus className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
+                </div>
+              ))}
+
+              <div className="bg-white rounded-lg shadow p-6">
+                <h5 className="font-bold mb-4">Have a Coupon?</h5>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <input
+                    type="text"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
+                    placeholder="Enter coupon code"
+                    value={coupon}
+                    onChange={(e) => setCoupon(e.target.value)}
+                    disabled={loading}
+                  />
 
                   <button
-                    className="w-full bg-[#FD4C0E] hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition disabled:opacity-50 flex items-center justify-center gap-2"
-                    onClick={handlePlaceOrder}
+                    className="w-full sm:w-auto bg-[#FD4C0E] hover:bg-red-700 text-white px-6 py-2 rounded-lg transition disabled:opacity-50"
+                    onClick={handleApplyCoupon}
                     disabled={loading}
                   >
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Processing Order...
-                      </>
-                    ) : (
-                      "Place Order"
-                    )}
+                    Apply
                   </button>
                 </div>
+                {couponMessage && (
+                  <p className={`mt-2 text-sm ${discountData ? "text-green-600" : "text-[#FD4C0E]"}`}>
+                    {couponMessage}
+                  </p>
+                )}
+              </div>
+
+              <div className="bg-white rounded-lg shadow p-6">
+                <h5 className="font-bold mb-4">Service/Billing Details</h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {Object.keys(billingAddress).map((key) => {
+                    const meta = billingFieldMeta[key] || {};
+                    const errorKey = `billing${key.charAt(0).toUpperCase() + key.slice(1)}`;
+                    const isRequired = ["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key);
+                    
+                    return (
+                      <div key={key}>
+                        <label className="block text-sm font-semibold mb-1">
+                          {meta.label || key.replace(/([A-Z])/g, " $1")}
+                          {isRequired && <span className="text-[#FD4C0E] ml-1">*</span>}
+                        </label>
+                        {key === "state" ? (
+                          <select
+                            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E] ${
+                              errors[errorKey] ? "border-[#FD4C0E]" : "border-gray-300"
+                            }`}
+                            value={billingAddress.state}
+                            onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value })}
+                            disabled={loading}
+                          >
+                            <option value="">Select state</option>
+                            {usStates.map((s) => (
+                              <option key={s.code} value={s.code}>{s.name}</option>
+                            ))}
+                          </select>
+                        ) : (
+                          <input
+                            type="text"
+                            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E] ${
+                              errors[errorKey] ? "border-[#FD4C0E]" : "border-gray-300"
+                            }`}
+                            placeholder={meta.placeholder || `Enter ${key}`}
+                            value={billingAddress[key as keyof Address]}
+                            disabled={meta.disabled || loading}
+                            onChange={(e) => setBillingAddress({ ...billingAddress, [key]: e.target.value })}
+                          />
+                        )}
+                        {errors[errorKey] && <p className="text-[#FD4C0E] text-xs mt-1">{errors[errorKey]}</p>}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 text-[#FD4C0E] border-gray-300 rounded focus:ring-[#FD4C0E]"
+                      checked={showShipping}
+                      onChange={(e) => setShowShipping(e.target.checked)}
+                      disabled={loading}
+                    />
+                    <span className="text-sm">Ship to a different address?</span>
+                  </label>
+                </div>
+
+                {showShipping && (
+                  <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <h6 className="font-bold mb-4 text-[#FD4C0E]">Shipping Address</h6>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {Object.keys(shippingAddress).map((key) => {
+                        const meta = billingFieldMeta[key] || {};
+                        const errorKey = `shipping${key.charAt(0).toUpperCase() + key.slice(1)}`;
+                        const isRequired = ["firstName", "lastName", "state", "city", "houseNumber", "zip", "email"].includes(key);
+                        
+                        return (
+                          <div key={key}>
+                            <label className="block text-sm font-semibold mb-1">
+                              {meta.label || key.replace(/([A-Z])/g, " $1")}
+                              {isRequired && <span className="text-[#FD4C0E] ml-1">*</span>}
+                            </label>
+                            {key === "state" ? (
+                              <select
+                                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E] ${
+                                  errors[errorKey] ? "border-[#FD4C0E]" : "border-gray-300"
+                                }`}
+                                value={shippingAddress.state}
+                                onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value })}
+                                disabled={loading}
+                              >
+                                <option value="">Select state</option>
+                                {usStates.map((s) => (
+                                  <option key={s.code} value={s.code}>{s.name}</option>
+                                ))}
+                              </select>
+                            ) : (
+                              <input
+                                type="text"
+                                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E] ${
+                                  errors[errorKey] ? "border-[#FD4C0E]" : "border-gray-300"
+                                }`}
+                                placeholder={meta.placeholder || `Enter ${key}`}
+                                value={shippingAddress[key as keyof Address]}
+                                disabled={meta.disabled || loading}
+                                onChange={(e) => setShippingAddress({ ...shippingAddress, [key]: e.target.value })}
+                              />
+                            )}
+                            {errors[errorKey] && <p className="text-[#FD4C0E] text-xs mt-1">{errors[errorKey]}</p>}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          </>
+
+            <div className="space-y-6">
+              <div className="bg-white rounded-lg shadow p-6">
+                <h5 className="font-bold mb-4">Your Order</h5>
+                <div className="space-y-2 mb-4">
+                  {cart.map((item, idx) => (
+                    <div key={idx} className="flex justify-between text-sm">
+                      <span>{item.planTitle} ({item.simType}) x {item.formData?.priceQty || 1}</span>
+                      <span className="font-semibold">${(item.planPrice * (item.formData?.priceQty || 1)).toFixed(2)}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {hasDeviceItem && (
+                  <div className="border-t border-b border-gray-200 py-4 my-4">
+                    <label className="block text-sm font-semibold mb-2">Shipping Options</label>
+                    <select
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
+                      value={selectedShippingOption.value}
+                      onChange={(e) => {
+                        const option = shippingOptions.find((opt) => opt.value === parseFloat(e.target.value));
+                        if (option) setSelectedShippingOption(option);
+                      }}
+                    >
+                      {shippingOptions.map((opt, i) => (
+                        <option key={i} value={opt.value}>{opt.label} - ${opt.value}</option>
+                      ))}
+                    </select>
+                    <div className="flex justify-between mt-3 text-sm">
+                      <span>Shipping Fee</span>
+                      <span className="font-semibold">${shippingFee.toFixed(2)}</span>
+                    </div>
+                  </div>
+                )}
+
+                {discountData && (
+                  <div className="flex justify-between text-sm text-green-600 mb-2">
+                    <span>
+                      Discount ({discountData.type === "percentage" 
+                        ? formatDiscount(discountData.discount) + "%" 
+                        : "$" + formatDiscount(discountData.discount)})
+                    </span>
+                    <span className="font-semibold">- ${discountAmount.toFixed(2)}</span>
+                  </div>
+                )}
+
+                <div className="border-t border-gray-200 pt-4 mt-4">
+                  <div className="flex justify-between text-lg font-bold">
+                    <span>Total</span>
+                    <span className="text-[#FD4C0E]">${total.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow p-6">
+                <h5 className="font-bold mb-4">Payment Method</h5>
+                
+                <div className="p-4 bg-gray-50 rounded-lg mb-4">
+                  {clientSecret && (
+                    <Elements
+                      stripe={stripePromise}
+                      options={{ clientSecret, appearance }}
+                    >
+                      <StripePaymentForm ref={stripeFormRef} />
+                    </Elements>
+                  )}
+
+                </div>
+
+                <div className="mb-4">
+                  <label className="flex items-start gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 mt-1 text-[#FD4C0E] border-gray-300 rounded focus:ring-[#FD4C0E]"
+                      checked={agreeTerms}
+                      onChange={(e) => setAgreeTerms(e.target.checked)}
+                      disabled={loading}
+                    />
+                    <span className="text-sm">
+                      I have read and agree to the website terms and conditions.
+                    </span>
+                  </label>
+                </div>
+
+                <button
+                  className="w-full bg-[#FD4C0E] hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition disabled:opacity-50 flex items-center justify-center gap-2"
+                  onClick={handlePlaceOrder}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Processing Order...
+                    </>
+                  ) : (
+                    "Place Order"
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
         )}
-      </div>
+        </div>
 
       <Footer />
 
