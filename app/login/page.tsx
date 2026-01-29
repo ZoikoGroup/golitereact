@@ -1,23 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { isLoggedIn } from "../utils/auth";
 
-export default function LoginPage() {
+function LoginPageContent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const redirect = searchParams?.get("redirect");
 
      // 🔒 Block logged-in users
       useEffect(() => {
         if (isLoggedIn()) {
-          window.location.href = "/my-account";
+          window.location.href = redirect || "/my-account";
         }
-      }, []);
+      }, [redirect]);
 
   /* =========================
      EMAIL / PASSWORD LOGIN (DJANGO API)
@@ -51,7 +54,7 @@ export default function LoginPage() {
       localStorage.setItem("golite_token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      window.location.href = "/my-account";
+      window.location.href = redirect || "/my-account";
     } catch (err: any) {
       setError(err.message || "Invalid credentials");
     } finally {
@@ -94,7 +97,7 @@ export default function LoginPage() {
         setLoading(false);
 
         if (data.success) {
-          window.location.reload();
+          window.location.href = redirect || "/my-account";
         } else {
           setError(data.error || "Google login failed");
         }
@@ -139,7 +142,7 @@ export default function LoginPage() {
         setLoading(false);
 
         if (data.success) {
-          window.location.reload();
+          window.location.href = redirect || "/my-account";
         } else {
           setError(data.error || "Facebook login failed");
         }
@@ -257,5 +260,13 @@ export default function LoginPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginPageContent />
+    </Suspense>
   );
 }
