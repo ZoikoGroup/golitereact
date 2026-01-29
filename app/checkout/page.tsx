@@ -69,23 +69,14 @@ interface Errors {
 }
 
 export default function CheckoutPage() {
-  const [shippingFee, setShippingFee] = useState(9.99);
-  const [clientSecret, setClientSecret] = useState("");
-  const stripeFormRef = useRef<any>(null);
-
-  useEffect(() => {
-  fetch("/api/create-payment-intent", { method: "POST" })
-    .then(res => res.json())
-    .then(data => setClientSecret(data.clientSecret));
-}, []);
-
-
   const shippingOptions: ShippingOption[] = [
     { label: "Standard (3-5 Days)", value: 9.99 },
     { label: "Expedited (2-3 Days)", value: 14.99 },
     { label: "Overnight", value: 24.99 },
   ];
-
+  const [shippingFee, setShippingFee] = useState(9.99);
+  const [clientSecret, setClientSecret] = useState("");
+  const stripeFormRef = useRef<any>(null);
   const [showThankYou, setShowThankYou] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showShipping, setShowShipping] = useState(false);
@@ -142,6 +133,8 @@ export default function CheckoutPage() {
     phone: "",
     email: "",
   });
+
+  
  /* ================= CART SYNC ================= */
   const syncCart = (updatedCart: CartItem[]) => {
     setCart(updatedCart);
@@ -271,23 +264,35 @@ export default function CheckoutPage() {
   };
 
   const handlePlaceOrder = async () => {
-    if (!agreeTerms) {
-      setShowTermsPopup(true);
-      return;
-    }
+  if (!agreeTerms) {
+    setShowTermsPopup(true);
+    return;
+  }
 
-    if (!validateFields()) {
-      alert("Please fill all required fields correctly");
-      return;
-    }
+  if (!validateFields()) {
+    alert("Please fill all required fields correctly");
+    return;
+  }
 
-    setLoading(true);
-    setTimeout(() => {
-      setShowThankYou(true);
-      setCart([]);
-      setLoading(false);
-    }, 2000);
-  };
+  if (!stripeFormRef.current) {
+    alert("Payment form not ready");
+    return;
+  }
+
+  setLoading(true);
+
+  const result = await stripeFormRef.current.submitPayment();
+
+  if (!result.success) {
+    setLoading(false);
+    return;
+  }
+
+  // ✅ Payment succeeded → webhook will save order
+  setShowThankYou(true);
+  syncCart([]);
+  setLoading(false);
+};
 
   const formatDiscount = (value: string) => {
     const num = parseFloat(value);
@@ -301,6 +306,34 @@ const appearance: Appearance = {
   },
 };
 
+
+useEffect(() => {
+  if (cart.length === 0) return;
+
+  const createIntent = async () => {
+    const res = await fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        cart,
+        billingAddress,
+        shippingAddress: showShipping ? shippingAddress : billingAddress,
+        subtotal,
+        shippingFee,
+        discountAmount,
+        total,
+      }),
+    });
+
+    const data = await res.json();
+    setClientSecret(data.clientSecret);
+  };
+
+  createIntent();
+}, [cart, billingAddress, shippingAddress, subtotal, shippingFee, discountAmount, total]);
+
+
+  
   return (
     <>
       <Header />
