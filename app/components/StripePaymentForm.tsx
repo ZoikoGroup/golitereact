@@ -8,7 +8,11 @@ import {
 import { forwardRef, useImperativeHandle, useState } from "react";
 
 export type StripePaymentFormRef = {
-  submitPayment: () => Promise<{ success: boolean; error?: string }>;
+  submitPayment: () => Promise<{
+    success: boolean;
+    paymentIntentId?: string;
+    error?: string;
+  }>;
 };
 
 interface StripePaymentFormProps {
@@ -36,20 +40,21 @@ const StripePaymentForm = forwardRef<StripePaymentFormRef, StripePaymentFormProp
         setErrorMessage("");
 
         try {
-          const { error } = await stripe.confirmPayment({
+          const { error, paymentIntent } = await stripe.confirmPayment({
             elements,
             redirect: "if_required",
           });
 
           if (error) {
-            const errorMsg = error.message || "Payment failed";
-            setErrorMessage(errorMsg);
-            onPaymentError?.(errorMsg);
-            return { success: false, error: errorMsg };
+            return { success: false, error: error.message };
           }
 
           onPaymentSuccess?.();
-          return { success: true };
+
+          return {
+            success: true,
+            paymentIntentId: paymentIntent?.id,
+          };
         } catch (err: any) {
           const errorMsg = err.message || "An unexpected error occurred";
           setErrorMessage(errorMsg);
@@ -63,11 +68,7 @@ const StripePaymentForm = forwardRef<StripePaymentFormRef, StripePaymentFormProp
 
     return (
       <div>
-        <PaymentElement
-          options={{
-            layout: "tabs",
-          }}
-        />
+        <PaymentElement options={{ layout: "tabs" }} />
         {errorMessage && (
           <div className="alert alert-danger mt-3" role="alert">
             {errorMessage}

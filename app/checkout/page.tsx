@@ -283,10 +283,32 @@ export default function CheckoutPage() {
 
   const result = await stripeFormRef.current.submitPayment();
 
-  if (!result.success) {
-    setLoading(false);
-    return;
-  }
+  if (!result.success || !result.paymentIntentId) {
+  setLoading(false);
+  return;
+}
+
+// 🔥 PROCESS ORDER (NO WEBHOOK FOR NOW)
+const res = await fetch("/api/process-order", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    paymentIntentId: result.paymentIntentId,
+    cart,
+    billingAddress,
+    shippingAddress: showShipping ? shippingAddress : billingAddress,
+    subtotal,
+    shippingFee,
+    discountAmount,
+    total,
+  }),
+});
+
+if (!res.ok) {
+  alert("Order processing failed");
+  setLoading(false);
+  return;
+}
 
   // ✅ Payment succeeded → webhook will save order
   setShowThankYou(true);
@@ -802,7 +824,7 @@ useEffect(() => {
           type="button"
           onClick={() => {
             setShowThankYou(false);
-            window.location.href = "/";
+            // window.location.href = "/";
           }}
           className="w-full rounded-lg bg-green-600 py-3 font-semibold text-white transition hover:bg-green-700"
         >
