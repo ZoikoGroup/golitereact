@@ -10,15 +10,35 @@ export default function MyAccountPage() {
 
   // 🔐 AUTH CHECK
   useEffect(() => {
-    const token = localStorage.getItem("golite_token");
-    const storedUser = localStorage.getItem("user");
+    (async () => {
+      const token = localStorage.getItem("golite_token");
+      const storedUser = localStorage.getItem("user");
 
-    if (!token || !storedUser) {
+      if (token && storedUser) {
+        setUser(JSON.parse(storedUser));
+        return;
+      }
+
+      // If no local token/user, try NextAuth session (popup or redirect flows)
+      try {
+        const res = await fetch('/api/auth/session', { credentials: 'same-origin' });
+        if (res.ok) {
+          const session = await res.json();
+          if (session?.user) {
+            // Populate localStorage so other code paths that expect `golite_token` work
+            localStorage.setItem('user', JSON.stringify(session.user));
+            localStorage.setItem('golite_token', 'nextauth');
+            setUser(session.user);
+            return;
+          }
+        }
+      } catch (e) {
+        console.error('Failed to read NextAuth session', e);
+      }
+
       window.location.href = "/login";
       return;
-    }
-
-    setUser(JSON.parse(storedUser));
+    })();
   }, []);
 
   // 🚪 LOGOUT
