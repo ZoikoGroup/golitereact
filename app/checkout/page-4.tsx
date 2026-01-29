@@ -69,20 +69,36 @@ interface Errors {
 }
 
 export default function CheckoutPage() {
+  const [shippingFee, setShippingFee] = useState(9.99);
+  const [clientSecret, setClientSecret] = useState("");
+  const stripeFormRef = useRef<any>(null);
+
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [discountData, setDiscountData] = useState<any | null>(null);
+  const [familyDiscount, setFamilyDiscount] = useState<number>(0);
+
+
+
+
+  useEffect(() => {
+  fetch("/api/create-payment-intent", { method: "POST" })
+    .then(res => res.json())
+    .then(data => setClientSecret(data.clientSecret));
+}, []);
+
+
   const shippingOptions: ShippingOption[] = [
     { label: "Standard (3-5 Days)", value: 9.99 },
     { label: "Expedited (2-3 Days)", value: 14.99 },
     { label: "Overnight", value: 24.99 },
   ];
-  const [shippingFee, setShippingFee] = useState(9.99);
-  const [clientSecret, setClientSecret] = useState("");
-  const stripeFormRef = useRef<any>(null);
+
   const [showThankYou, setShowThankYou] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showShipping, setShowShipping] = useState(false);
   const [coupon, setCoupon] = useState("");
   const [loading, setLoading] = useState(false);
-  const [discountData, setDiscountData] = useState<DiscountData | null>(null);
+  //const [discountData, setDiscountData] = useState<DiscountData | null>(null);
   const [couponMessage, setCouponMessage] = useState("");
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -91,6 +107,24 @@ export default function CheckoutPage() {
   const [selectedShippingOption, setSelectedShippingOption] = useState<ShippingOption>(shippingOptions[0]);
 
   const [errors, setErrors] = useState<Errors>({});
+
+  useEffect(() => {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  setCartItems(cart);
+
+  try {
+    const stored = JSON.parse(
+      localStorage.getItem("familyDiscount") || "null"
+    );
+
+    if (stored?.amount) {
+      setFamilyDiscount(Number(stored.amount));
+    }
+  } catch {
+    setFamilyDiscount(0);
+  }
+}, []);
+
 
   const billingFieldMeta: Record<string, { label: string; placeholder: string; disabled?: boolean }> = {
     firstName: { label: "First Name", placeholder: "Enter your first name" },
@@ -133,8 +167,6 @@ export default function CheckoutPage() {
     phone: "",
     email: "",
   });
-
-  
  /* ================= CART SYNC ================= */
   const syncCart = (updatedCart: CartItem[]) => {
     setCart(updatedCart);
@@ -172,17 +204,6 @@ export default function CheckoutPage() {
     }
   }, []);
 
-  // ✅ Check login status and close popup when user logs in
-  useEffect(() => {
-    const token = localStorage.getItem("golite_token") || localStorage.getItem("golite_accessToken");
-    const wasLoggedIn = isLoggedIn;
-    setIsLoggedIn(!!token);
-
-    // If user just logged in and popup was open, close it
-    if (token && !wasLoggedIn && showLoginPopup) {
-      setShowLoginPopup(false);
-    }
-  }, [showLoginPopup]);
 
   const hasDeviceItem = cart.some((item) => item.type === "device");
 
@@ -198,18 +219,8 @@ export default function CheckoutPage() {
   };
 
   const handleClearCart = () => {
-  // Clear cart
-  syncCart([]);
-
-  // Clear discounts
-  localStorage.removeItem("discounts");
-
-  // Clear coupon & manual discount state
-  setCoupon("");
-  setDiscountData(null);
-  setCouponMessage("");
-};
-
+    syncCart([]);
+  };
 
   const handleApplyCoupon = async () => {
     if (!coupon) {
@@ -244,6 +255,7 @@ export default function CheckoutPage() {
       ? (subtotal * Number(discountData.discount)) / 100
       : Number(discountData.discount)
     : 0;
+const totalDiscount = discountAmount + familyDiscount;
 
   useEffect(() => {
     if (hasDeviceItem && selectedShippingOption) {
@@ -253,7 +265,7 @@ export default function CheckoutPage() {
     }
   }, [selectedShippingOption, hasDeviceItem]);
 
-  const total = Math.max(subtotal + shippingFee - discountAmount, 0);
+  const total = Math.max(subtotal + shippingFee - totalDiscount, 0);
 
   const validateFields = () => {
     const newErrors: Errors = {};
@@ -285,35 +297,23 @@ export default function CheckoutPage() {
   };
 
   const handlePlaceOrder = async () => {
-  if (!agreeTerms) {
-    setShowTermsPopup(true);
-    return;
-  }
+    if (!agreeTerms) {
+      setShowTermsPopup(true);
+      return;
+    }
 
-  if (!validateFields()) {
-    alert("Please fill all required fields correctly");
-    return;
-  }
+    if (!validateFields()) {
+      alert("Please fill all required fields correctly");
+      return;
+    }
 
-  if (!stripeFormRef.current) {
-    alert("Payment form not ready");
-    return;
-  }
-
-  setLoading(true);
-
-  const result = await stripeFormRef.current.submitPayment();
-
-  if (!result.success) {
-    setLoading(false);
-    return;
-  }
-
-  // ✅ Payment succeeded → webhook will save order
-  setShowThankYou(true);
-  syncCart([]);
-  setLoading(false);
-};
+    setLoading(true);
+    setTimeout(() => {
+      setShowThankYou(true);
+      setCart([]);
+      setLoading(false);
+    }, 2000);
+  };
 
   const formatDiscount = (value: string) => {
     const num = parseFloat(value);
@@ -327,34 +327,6 @@ const appearance: Appearance = {
   },
 };
 
-
-useEffect(() => {
-  if (cart.length === 0) return;
-
-  const createIntent = async () => {
-    const res = await fetch("/api/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        cart,
-        billingAddress,
-        shippingAddress: showShipping ? shippingAddress : billingAddress,
-        subtotal,
-        shippingFee,
-        discountAmount,
-        total,
-      }),
-    });
-
-    const data = await res.json();
-    setClientSecret(data.clientSecret);
-  };
-
-  createIntent();
-}, [cart, billingAddress, shippingAddress, subtotal, shippingFee, discountAmount, total]);
-
-
-  
   return (
     <>
       <Header />
@@ -421,13 +393,6 @@ useEffect(() => {
             <pre className="text-xs bg-gray-100 p-3 rounded overflow-x-auto">
               {JSON.stringify(
                 JSON.parse(localStorage.getItem("cart") || "[]"),
-                null,
-                2
-              )}
-            </pre>
-            <pre className="text-xs bg-gray-100 p-3 rounded overflow-x-auto">
-              {JSON.stringify(
-                JSON.parse(localStorage.getItem("discounts") || "[]"),
                 null,
                 2
               )}
@@ -659,6 +624,18 @@ useEffect(() => {
                     <span className="font-semibold">- ${discountAmount.toFixed(2)}</span>
                   </div>
                 )}
+                {familyDiscount > 0 && (
+                  <div className="flex justify-between text-sm text-green-600 mb-2">
+                    <span>
+                      Family Discount ($
+                      {familyDiscount.toFixed(2)})
+                    </span>
+                    <span className="font-semibold">
+                      - ${familyDiscount.toFixed(2)}
+                    </span>
+                  </div>
+                )}
+
 
                 <div className="border-t border-gray-200 pt-4 mt-4">
                   <div className="flex justify-between text-lg font-bold">

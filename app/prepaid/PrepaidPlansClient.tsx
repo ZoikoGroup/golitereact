@@ -305,7 +305,7 @@ const faqs = [
             : "text-white"}
         `}
       >
-        {simType === "pSim" ? "Phecial Sim" : "eSim"}
+        {simType === "pSim" ? "Physical Sim" : "eSim"}
       </button>
     ))}
 

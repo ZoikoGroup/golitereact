@@ -102,7 +102,7 @@ export default function PrepaidBuyNowModal({
           <h2 className="text-2xl font-bold">
             {simType === "pSim"
               ? "You've Selected Physical SIM"
-              : "You've Selected eSim"}
+              : "Great! You've Selected Your eSIM — Instant Setup, No Waiting."}
           </h2>
 
           <button
