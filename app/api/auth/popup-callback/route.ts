@@ -1,7 +1,11 @@
+import { getServerSession } from "next-auth";
+
 export async function GET(req: Request) {
-  const url = new URL(req.url);
-  const error = url.searchParams.get("error");
-  const success = !error;
+  // Add a small delay to ensure session is created
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  const session = await getServerSession();
+  const success = !!session;
 
   const html = `<!doctype html>
   <html>
@@ -13,21 +17,23 @@ export async function GET(req: Request) {
     <body>
       <script>
         try {
-          const params = new URLSearchParams(window.location.search);
-          const error = params.get('error');
-          const success = !error;
+          const success = ${success};
+          
+          console.log('Popup callback - Session success:', success);
           
           const message = {
             type: 'oauth',
             provider: 'google',
             success: success,
-            error: error || null
+            error: success ? null : 'Authentication failed'
           };
           
           // Post message back to the parent window (the login page)
           if (window.opener && !window.opener.closed) {
             window.opener.postMessage(message, window.location.origin);
             console.log('Message sent to opener:', message);
+          } else {
+            console.log('No opener found - window.opener:', window.opener);
           }
         } catch (e) {
           console.error('Popup callback error:', e);
@@ -44,7 +50,7 @@ export async function GET(req: Request) {
         // Close the popup after a brief delay
         setTimeout(() => {
           window.close();
-        }, 500);
+        }, 1500);
       </script>
       <div style="font-family: system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial; padding: 2rem; text-align: center; color: #333;">
         <p>Authentication complete. Closing window...</p>

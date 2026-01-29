@@ -171,6 +171,18 @@ export default function CheckoutPage() {
     setCart(storedCart);
   }, []);
 
+  // ✅ Check login status and close popup when user logs in
+  useEffect(() => {
+    const token = localStorage.getItem("golite_token") || localStorage.getItem("golite_accessToken");
+    const wasLoggedIn = isLoggedIn;
+    setIsLoggedIn(!!token);
+
+    // If user just logged in and popup was open, close it
+    if (token && !wasLoggedIn && showLoginPopup) {
+      setShowLoginPopup(false);
+    }
+  }, [showLoginPopup]);
+
   const hasDeviceItem = cart.some((item) => item.type === "device");
 
   const handleQuantity = (index: number, delta: number) => {
