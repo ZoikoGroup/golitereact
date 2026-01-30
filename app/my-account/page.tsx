@@ -1,77 +1,45 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
 export default function MyAccountPage() {
-  const [user, setUser] = useState<any>(null);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-  // 🔐 AUTH CHECK
+  const user = session?.user;
+
+  /* =========================
+     AUTH PROTECTION
+     ========================= */
   useEffect(() => {
-    (async () => {
-      const token = localStorage.getItem("golite_token");
-      const storedUser = localStorage.getItem("user");
-
-      if (token && storedUser) {
-        setUser(JSON.parse(storedUser));
-        return;
-      }
-
-      // If no local token/user, try NextAuth session (popup or redirect flows)
-      try {
-        const res = await fetch('/api/auth/session', { credentials: 'same-origin' });
-        if (res.ok) {
-          const session = await res.json();
-          if (session?.user) {
-            // Populate localStorage so other code paths that expect `golite_token` work
-            localStorage.setItem('user', JSON.stringify(session.user));
-            localStorage.setItem('golite_token', 'nextauth');
-            setUser(session.user);
-            return;
-          }
-        }
-      } catch (e) {
-        console.error('Failed to read NextAuth session', e);
-      }
-
-      window.location.href = "/login";
-      return;
-    })();
-  }, []);
-
-  // 🚪 LOGOUT
-  const handleLogout = async () => {
-    const token = localStorage.getItem("golite_token");
-
-    try {
-      if (token) {
-        await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/logout/`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Token ${token}`,
-            },
-          }
-        );
-      }
-    } catch (error) {
-      console.error("Logout failed", error);
-    } finally {
-      localStorage.removeItem("golite_token");
-      localStorage.removeItem("user");
-      try {
-        const { signOut } = await import('next-auth/react');
-        await signOut({ callbackUrl: '/login' });
-      } catch (e) {
-        window.location.href = "/login";
-      }
+    if (status === "unauthenticated") {
+      router.replace("/login");
     }
+  }, [status, router]);
+
+  /* =========================
+     LOADING STATE
+     ========================= */
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  /* =========================
+     LOGOUT
+     ========================= */
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/login" });
   };
 
-  
   return (
     <div className="flex flex-col min-h-screen bg-[#f6f7f9]">
       <Header />
@@ -82,9 +50,7 @@ export default function MyAccountPage() {
                   <div className="flex flex-col gap-1">
                     <h2 className="text-lg font-semibold text-gray-800">
                       Welcome,&nbsp;
-                      {user?.first_name || user?.last_name
-                        ? `${user?.first_name ?? ""} ${user?.last_name ?? ""}`.trim()
-                        : user?.username}
+                      {user?.name || user?.email}
                     </h2>
 
                     <p className="text-sm text-gray-500">
