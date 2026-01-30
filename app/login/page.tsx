@@ -1,23 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { isLoggedIn } from "../utils/auth";
+import { signIn } from "next-auth/react";
 
-export default function LoginPage() {
+function LoginPageContent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const redirect = searchParams?.get("redirect");
 
      // 🔒 Block logged-in users
       useEffect(() => {
         if (isLoggedIn()) {
-          window.location.href = "/my-account";
+          window.location.href = redirect || "/my-account";
         }
-      }, []);
+      }, [redirect]);
 
   /* =========================
      EMAIL / PASSWORD LOGIN (DJANGO API)
@@ -51,102 +55,12 @@ export default function LoginPage() {
       localStorage.setItem("golite_token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      window.location.href = "/my-account";
+      window.location.href = redirect || "/my-account";
     } catch (err: any) {
       setError(err.message || "Invalid credentials");
     } finally {
       setLoading(false);
     }
-  };
-
-  /* =========================
-     GOOGLE OAUTH LOGIN
-     ========================= */
-  const handleGoogleSignIn = () => {
-    setError(null);
-
-    const width = 600;
-    const height = 700;
-    const left = window.screenX + (window.innerWidth - width) / 2;
-    const top = window.screenY + (window.innerHeight - height) / 2;
-    const features = `toolbar=no,menubar=no,width=${width},height=${height},top=${top},left=${left}`;
-
-    const popup = window.open(
-      "/api/auth/google?popup=1",
-      "golitereact_google_oauth",
-      features
-    );
-
-    if (!popup) {
-      setError("Please allow popups for this site.");
-      return;
-    }
-
-    setLoading(true);
-
-    const messageHandler = (e: MessageEvent) => {
-      if (e.origin !== window.location.origin) return;
-
-      const data: any = e.data;
-
-      if (data?.type === "oauth" && data?.provider === "google") {
-        window.removeEventListener("message", messageHandler);
-        setLoading(false);
-
-        if (data.success) {
-          window.location.reload();
-        } else {
-          setError(data.error || "Google login failed");
-        }
-      }
-    };
-
-    window.addEventListener("message", messageHandler);
-  };
-
-  /* =========================
-     FACEBOOK OAUTH LOGIN
-     ========================= */
-  const handleFacebookSignIn = () => {
-    setError(null);
-
-    const width = 600;
-    const height = 700;
-    const left = window.screenX + (window.innerWidth - width) / 2;
-    const top = window.screenY + (window.innerHeight - height) / 2;
-    const features = `toolbar=no,menubar=no,width=${width},height=${height},top=${top},left=${left}`;
-
-    const popup = window.open(
-      "/api/auth/facebook?popup=1",
-      "golitereact_facebook_oauth",
-      features
-    );
-
-    if (!popup) {
-      setError("Please allow popups for this site.");
-      return;
-    }
-
-    setLoading(true);
-
-    const messageHandler = (e: MessageEvent) => {
-      if (e.origin !== window.location.origin) return;
-
-      const data: any = e.data;
-
-      if (data?.type === "oauth" && data?.provider === "facebook") {
-        window.removeEventListener("message", messageHandler);
-        setLoading(false);
-
-        if (data.success) {
-          window.location.reload();
-        } else {
-          setError(data.error || "Facebook login failed");
-        }
-      }
-    };
-
-    window.addEventListener("message", messageHandler);
   };
 
   return (
@@ -232,11 +146,15 @@ export default function LoginPage() {
             <div className="mt-4">
               <button
                 type="button"
-                onClick={handleGoogleSignIn}
+                onClick={() =>
+                  signIn("google", {
+                    callbackUrl: redirect || "/my-account",
+                  })
+                }
                 disabled={loading}
-                className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-white hover:bg-gray-50 disabled:opacity-60"
+                className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-white hover:bg-gray-50"
               >
-                {loading ? "Signing in..." : "Sign in with Google"}
+                Sign in with Google
               </button>
             </div>
 
@@ -244,11 +162,15 @@ export default function LoginPage() {
             <div className="mt-3">
               <button
                 type="button"
-                onClick={handleFacebookSignIn}
+                onClick={() =>
+                  signIn("facebook", {
+                    callbackUrl: redirect || "/my-account",
+                  })
+                }
                 disabled={loading}
-                className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-60"
+                className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-blue-600 text-white hover:bg-blue-700"
               >
-                {loading ? "Signing in..." : "Sign in with Facebook"}
+                Sign in with Facebook
               </button>
             </div>
           </div>
@@ -257,5 +179,13 @@ export default function LoginPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginPageContent />
+    </Suspense>
   );
 }

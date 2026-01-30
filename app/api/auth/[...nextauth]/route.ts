@@ -11,6 +11,7 @@ if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -21,18 +22,20 @@ const handler = NextAuth({
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
     }),
   ],
+
   secret: process.env.NEXTAUTH_SECRET,
+
   session: {
     strategy: "database",
   },
+
   pages: {
     signIn: "/login",
-    error: "/login",
   },
+
   callbacks: {
     async session({ session, user }) {
-      // attach user id to session
-      if (session && user) {
+      if (session?.user) {
         (session.user as any).id = user.id;
       }
       return session;
