@@ -3,6 +3,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import StreamingSlider from "../components/StreamingSlider";
+import StreamingPlanSlider from "../components/StreamingPlanSlider";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 export default function StreamingPlans() {
 
@@ -75,14 +76,15 @@ export default function StreamingPlans() {
       </section>
 
       {/* Title */}
-      <section className="text-center mt-16 px-4">
+      {/* <section className="text-center mt-16 px-4">
         <h2 className="text-3xl font-bold text-gray-800">
           Shop Streaming Enthusiasts Plans
         </h2>
-      </section>
+      </section> */}
 
       {/* Tabs */}
-      <StreamingSlider />
+      <StreamingPlanSlider />
+      {/* <StreamingSlider /> */}
 
       {/* FAQ */}
       <section className="mx-auto px-4 pt-20 pb-20  bg-[#FFF7F7] w-full">

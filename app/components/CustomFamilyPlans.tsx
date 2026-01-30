@@ -172,6 +172,9 @@ const handleCheckout = () => {
   const newCartItems: any[] = [];
   const newDiscounts: any[] = [];
 
+  // 🔑 Unique bundle id
+  const bundleId = `bundle_${Date.now()}`;
+
   /* ============================
       PRIMARY PLAN
   ============================ */
@@ -186,6 +189,7 @@ const handleCheckout = () => {
     simType: summary.primaryPlan.simType,
     lineType: "family-primary",
     line: "primary",
+    bundleId,
     quantity: 1,
   });
 
@@ -217,6 +221,7 @@ const handleCheckout = () => {
         simType: plan.simType,
         lineType: "family-additional",
         line: lineKey,
+        bundleId,
         quantity: 1,
       });
 
@@ -224,6 +229,7 @@ const handleCheckout = () => {
       if (item.discount > 0) {
         newDiscounts.push({
           type: "family",
+          bundleId,
           line: lineKey,
           amount: item.discount,
           description: "Family Plan Discount",
@@ -233,12 +239,13 @@ const handleCheckout = () => {
   );
 
   /* ============================
-      BUNDLE / SUMMARY DISCOUNT
+      BUNDLE DISCOUNT
   ============================ */
 
   if (summary.discount > 0) {
     newDiscounts.push({
       type: "bundle",
+      bundleId,
       line: "all",
       amount: summary.discount,
       description: "Family Bundle Discount",
@@ -246,15 +253,7 @@ const handleCheckout = () => {
   }
 
   /* ============================
-      REMOVE OLD FAMILY/BUNDLE
-  ============================ */
-
-  const filteredDiscounts = existingDiscounts.filter(
-    (d: any) => d.type !== "family" && d.type !== "bundle"
-  );
-
-  /* ============================
-      SAVE STORAGE
+      SAVE STORAGE (NO REMOVAL)
   ============================ */
 
   localStorage.setItem(
@@ -264,7 +263,7 @@ const handleCheckout = () => {
 
   localStorage.setItem(
     "discounts",
-    JSON.stringify([...filteredDiscounts, ...newDiscounts])
+    JSON.stringify([...existingDiscounts, ...newDiscounts])
   );
 
   window.location.href = "/checkout";
