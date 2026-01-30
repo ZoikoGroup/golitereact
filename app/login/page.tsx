@@ -5,8 +5,10 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { isLoggedIn } from "../utils/auth";
 import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { logout } from "../utils/auth";
 
 function LoginPageContent() {
   const [email, setEmail] = useState("");
@@ -15,13 +17,16 @@ function LoginPageContent() {
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const redirect = searchParams?.get("redirect");
+  const callbackUrl = searchParams.get("callbackUrl") || "/my-account";
 
-     // 🔒 Block logged-in users
-      useEffect(() => {
-        if (isLoggedIn()) {
-          window.location.href = redirect || "/my-account";
-        }
-      }, [redirect]);
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push(callbackUrl);
+    }
+  }, [status, callbackUrl]);
 
   /* =========================
      EMAIL / PASSWORD LOGIN (DJANGO API)
@@ -144,34 +149,48 @@ function LoginPageContent() {
 
             {/* ===== GOOGLE LOGIN ===== */}
             <div className="mt-4">
-              <button
-                type="button"
-                onClick={() =>
-                  signIn("google", {
-                    callbackUrl: redirect || "/my-account",
-                  })
-                }
-                disabled={loading}
-                className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-white hover:bg-gray-50"
-              >
-                Sign in with Google
-              </button>
+              {(status === "authenticated" || (typeof window !== 'undefined' && !!localStorage.getItem('golite_token'))) ? (
+                <button
+                  type="button"
+                  onClick={() => logout()}
+                  disabled={loading}
+                  className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-white hover:bg-gray-50"
+                >
+                  Logout
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => signIn("google", { callbackUrl })}
+                  disabled={loading}
+                  className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-white hover:bg-gray-50"
+                >
+                  Sign in with Google
+                </button>
+              )}
             </div>
 
             {/* ===== FACEBOOK LOGIN ===== */}
             <div className="mt-3">
-              <button
-                type="button"
-                onClick={() =>
-                  signIn("facebook", {
-                    callbackUrl: redirect || "/my-account",
-                  })
-                }
-                disabled={loading}
-                className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-blue-600 text-white hover:bg-blue-700"
-              >
-                Sign in with Facebook
-              </button>
+              {(status === "authenticated" || (typeof window !== 'undefined' && !!localStorage.getItem('golite_token'))) ? (
+                <button
+                  type="button"
+                  onClick={() => logout()}
+                  disabled={loading}
+                  className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-blue-600 text-white hover:bg-blue-700"
+                >
+                  Logout
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => signIn("facebook", { callbackUrl })}
+                  disabled={loading}
+                  className="w-full inline-flex items-center justify-center py-2 px-4 border rounded-md bg-blue-600 text-white hover:bg-blue-700"
+                >
+                  Sign in with Facebook
+                </button>
+              )}
             </div>
           </div>
         </div>

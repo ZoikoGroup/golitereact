@@ -62,7 +62,12 @@ export default function MyAccountPage() {
     } finally {
       localStorage.removeItem("golite_token");
       localStorage.removeItem("user");
-      window.location.href = "/login";
+      try {
+        const { signOut } = await import('next-auth/react');
+        await signOut({ callbackUrl: '/login' });
+      } catch (e) {
+        window.location.href = "/login";
+      }
     }
   };
 
