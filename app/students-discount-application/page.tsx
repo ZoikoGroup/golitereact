@@ -1,4 +1,5 @@
 "use client";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import React, { useState } from "react";
@@ -24,11 +25,14 @@ export default function StudentDiscountApplication() {
     const form = e.currentTarget;
     const newErrors: Errors = {};
 
-    const fullName = form.full_name.value.trim();
-    const dob = form.dob.value;
-    const email = form.student_email.value.trim();
-    const documentType = form.document_type.value;
-    const file = form.document_file.files[0];
+    const fullName = (form.elements.namedItem("full_name") as HTMLInputElement).value.trim();
+    const dob = (form.elements.namedItem("dob") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("student_email") as HTMLInputElement).value.trim();
+    const documentType = (form.elements.namedItem("document_type") as HTMLSelectElement).value;
+    const fileInput = form.elements.namedItem("document_file") as HTMLInputElement;
+    const file = fileInput.files?.[0];
+
+    // ---------------- VALIDATION ----------------
 
     if (!fullName) newErrors.full_name = "Full Name is required";
     if (!dob) newErrors.dob = "Date of Birth is required";
@@ -49,13 +53,17 @@ export default function StudentDiscountApplication() {
 
     if (Object.keys(newErrors).length > 0) return;
 
+    // ---------------- SUBMIT ----------------
+
     setLoading(true);
     const formData = new FormData(form);
 
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+
     try {
-        console.log("Submitting form data:", Array.from(formData.entries()));
       const response = await fetch(
-        "https://api.golite.com/student-discount-form",
+        `${API_BASE_URL}/api/students/student-discount-form`,
         {
           method: "POST",
           body: formData,
@@ -65,7 +73,7 @@ export default function StudentDiscountApplication() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || "Submission failed");
+        throw new Error(result?.message || "Submission failed");
       }
 
       setMessage("Application submitted successfully ✅");
@@ -87,7 +95,8 @@ export default function StudentDiscountApplication() {
 
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Image */}
+
+          {/* IMAGE */}
           <div className="flex justify-center">
             <img
               src="/img/studentForm.webp"
@@ -96,21 +105,25 @@ export default function StudentDiscountApplication() {
             />
           </div>
 
-          {/* Form */}
+          {/* FORM */}
           <div>
             <h1 className="text-3xl font-semibold text-gray-900 mb-3">
               Student Discount Application
             </h1>
 
             <p className="text-gray-600 mb-8">
-              Students deserve seamless connectivity at an affordable price. Apply now for our exclusive student discount and enjoy great savings on your mobile plan
+              Students deserve seamless connectivity at an affordable price.
+              Apply now for our exclusive student discount and enjoy great
+              savings on your mobile plan.
             </p>
 
             <form
               onSubmit={handleSubmit}
               className="grid md:grid-cols-2 gap-x-10 gap-y-8"
               noValidate
+              encType="multipart/form-data"
             >
+
               {/* LEFT COLUMN */}
               <div>
                 <h3 className="font-semibold text-gray-900 mb-6">
@@ -118,16 +131,20 @@ export default function StudentDiscountApplication() {
                 </h3>
 
                 <div className="space-y-6">
+
+                  {/* FULL NAME */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-800 mb-2">
+                    <label className="block text-sm font-medium mb-2">
                       Full Name <span className="text-red-500">*</span>
                     </label>
+
                     <input
                       name="full_name"
                       type="text"
                       placeholder="Enter your Full Name"
-                      className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                      className="w-full rounded-xl border px-4 py-3"
                     />
+
                     {errors.full_name && (
                       <p className="text-red-500 text-sm mt-1">
                         {errors.full_name}
@@ -135,15 +152,18 @@ export default function StudentDiscountApplication() {
                     )}
                   </div>
 
+                  {/* DOB */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-800 mb-2">
+                    <label className="block text-sm font-medium mb-2">
                       Date of Birth <span className="text-red-500">*</span>
                     </label>
+
                     <input
                       name="dob"
                       type="date"
-                      className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                      className="w-full rounded-xl border px-4 py-3"
                     />
+
                     {errors.dob && (
                       <p className="text-red-500 text-sm mt-1">
                         {errors.dob}
@@ -151,23 +171,27 @@ export default function StudentDiscountApplication() {
                     )}
                   </div>
 
+                  {/* EMAIL */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-800 mb-2">
+                    <label className="block text-sm font-medium mb-2">
                       School/University E-mail ID{" "}
                       <span className="text-red-500">*</span>
                     </label>
+
                     <input
                       name="student_email"
                       type="email"
-                      placeholder="Enter School/University E-mail ID"
-                      className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                      placeholder="Enter your email"
+                      className="w-full rounded-xl border px-4 py-3"
                     />
+
                     {errors.student_email && (
                       <p className="text-red-500 text-sm mt-1">
                         {errors.student_email}
                       </p>
                     )}
                   </div>
+
                 </div>
               </div>
 
@@ -178,20 +202,24 @@ export default function StudentDiscountApplication() {
                 </h3>
 
                 <div className="space-y-6">
+
+                  {/* DOCUMENT TYPE */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-800 mb-2">
+                    <label className="block text-sm font-medium mb-2">
                       Verification Document type{" "}
                       <span className="text-red-500">*</span>
                     </label>
+
                     <select
                       name="document_type"
-                      className="appearance-none w-full rounded-xl border border-gray-300 bg-white px-4 py-3 pr-10 focus:ring-2 focus:ring-orange-500"
+                      className="w-full rounded-xl border px-4 py-3"
                     >
                       <option value="">Select Document</option>
                       <option>Valid Student ID (Front & Back)</option>
                       <option>Enrollment Verification Letter</option>
                       <option>Transcript</option>
                     </select>
+
                     {errors.document_type && (
                       <p className="text-red-500 text-sm mt-1">
                         {errors.document_type}
@@ -199,13 +227,14 @@ export default function StudentDiscountApplication() {
                     )}
                   </div>
 
+                  {/* FILE */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-800 mb-3">
+                    <label className="block text-sm font-medium mb-3">
                       Upload Supporting Document{" "}
                       <span className="text-red-500">*</span>
                     </label>
 
-                   <label className="flex w-full items-center justify-center rounded-xl bg-orange-500 px-4 py-3 text-white font-medium cursor-pointer hover:bg-orange-600 transition">
+                    <label className="flex w-full justify-center rounded-xl bg-orange-500 px-4 py-3 text-white cursor-pointer">
                       Select File
                       <input
                         name="document_file"
@@ -218,7 +247,7 @@ export default function StudentDiscountApplication() {
                     </label>
 
                     {fileName && (
-                      <p className="mt-2 text-sm text-gray-600 truncate">
+                      <p className="mt-2 text-sm text-gray-600">
                         {fileName}
                       </p>
                     )}
@@ -229,9 +258,11 @@ export default function StudentDiscountApplication() {
                       </p>
                     )}
                   </div>
+
                 </div>
               </div>
 
+              {/* SUBMIT */}
               <div className="md:col-span-2 flex justify-center mt-10">
                 <button
                   type="submit"
@@ -247,6 +278,7 @@ export default function StudentDiscountApplication() {
                   {message}
                 </p>
               )}
+
             </form>
           </div>
         </div>
