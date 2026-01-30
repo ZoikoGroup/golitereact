@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description: "GoLite Mobile offers the best mobile plans USA with unlimited international calls, 5G data, global coverage &amp; flexible plans for every user’s needs.",
 };
 
+import SessionProviderClient from "./providers/SessionProviderClient";
+import SessionSync from "./providers/SessionSync";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SessionProviderClient>
+          <SessionSync />
+          {children}
+        </SessionProviderClient>
       </body>
     </html>
   );

@@ -65,13 +65,31 @@ export default function Navbar() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const token = localStorage.getItem("golite_accessToken");
-    const userData = localStorage.getItem("user");
+    const updateAuthState = () => {
+      const token = localStorage.getItem("golite_accessToken") || localStorage.getItem("golite_token");
+      const userData = localStorage.getItem("user");
 
-    if (token && userData) {
-      setIsLoggedIn(true);
-      setUser(JSON.parse(userData));
-    }
+      if (token && userData) {
+        setIsLoggedIn(true);
+        setUser(JSON.parse(userData));
+      } else {
+        setIsLoggedIn(false);
+        setUser(null);
+      }
+    };
+
+    // Initial
+    updateAuthState();
+
+    // Update across tabs/popups and after popup login
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'golite_token' || e.key === 'golite_accessToken' || e.key === 'user') {
+        updateAuthState();
+      }
+    };
+
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
   }, []);
 
   /* ---------- CHUNK ERROR FIX ---------- */
@@ -100,13 +118,22 @@ export default function Navbar() {
   }, []);
 
   /* ---------- LOGOUT (FIXED) ---------- */
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    // clear all known local tokens
     localStorage.removeItem("golite_accessToken");
+    localStorage.removeItem("golite_token");
     localStorage.removeItem("user");
     setIsLoggedIn(false);
     setUser(null);
     setAccountOpen(false);
-    router.replace("/login");
+
+    try {
+      // clear NextAuth session and redirect to /login
+      await (await import('next-auth/react')).signOut({ callbackUrl: '/login' });
+    } catch (e) {
+      // fallback redirect
+      router.replace('/login');
+    }
   };
 
   return (
@@ -160,14 +187,14 @@ export default function Navbar() {
                 className="flex items-center gap-2 font-medium"
               >
                 <User className="w-5 h-5" />
-                {user?.first_name || "Account"}
+                {user?.first_name || " My Account"}
                 <ChevronDown className="w-4 h-4" />
               </button>
 
               {accountOpen && (
                 <div className="absolute right-0 mt-3 w-44 bg-white border rounded-lg shadow-lg z-50">
                   <button
-                    onClick={() => router.push("/dashboard")}
+                    onClick={() => router.push("/my-account")}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
                     Dashboard
@@ -213,8 +240,8 @@ export default function Navbar() {
 
           {isLoggedIn ? (
             <>
-              <button onClick={() => router.push("/dashboard")} className="block w-full text-left">
-                Dashboard
+              <button onClick={() => router.push("/my-account")} className="block w-full text-left">
+                My Account
               </button>
               <button
                 onClick={handleLogout}
