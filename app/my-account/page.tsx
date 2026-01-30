@@ -1,44 +1,118 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { signOut } from "next-auth/react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
+type User = {
+  username?: string;
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+};
+
 export default function MyAccountPage() {
-  const { data: session, status } = useSession();
   const router = useRouter();
 
-  const user = session?.user;
+  const [user, setUser] = useState<User | null>(null);
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
-  /* =========================
-     AUTH PROTECTION
-     ========================= */
+  /* =================================================
+     🔐 AUTH CHECK (safe for Vercel + production)
+  ================================================= */
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.replace("/login");
-    }
-  }, [status, router]);
+    const checkAuth = async () => {
+      try {
+        /* ------------------------------
+           1️⃣ Local token (Django login)
+        ------------------------------ */
+        const token = localStorage.getItem("golite_token");
+        const storedUser = localStorage.getItem("user");
 
-  /* =========================
-     LOADING STATE
-     ========================= */
-  if (status === "loading") {
+        if (token && storedUser) {
+          setUser(JSON.parse(storedUser));
+          setCheckingAuth(false);
+          return;
+        }
+
+        /* ------------------------------
+           2️⃣ NextAuth session (Google)
+        ------------------------------ */
+        const res = await fetch("/api/auth/session", {
+          credentials: "same-origin",
+        });
+
+        if (res.ok) {
+          const session = await res.json();
+
+          if (session?.user) {
+            localStorage.setItem("golite_token", "nextauth");
+            localStorage.setItem("user", JSON.stringify(session.user));
+
+            setUser(session.user);
+            setCheckingAuth(false);
+            return;
+          }
+        }
+
+        /* ------------------------------
+           ❌ Not logged in
+        ------------------------------ */
+        router.replace("/login");
+      } catch (err) {
+        console.error("Auth check failed:", err);
+        router.replace("/login");
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
+  /* =================================================
+     🚪 LOGOUT
+  ================================================= */
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("golite_token");
+
+      if (token && token !== "nextauth") {
+        await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/logout/`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          }
+        );
+      }
+    } catch (err) {
+      console.error("Logout API failed:", err);
+    }
+
+    localStorage.removeItem("golite_token");
+    localStorage.removeItem("user");
+
+    await signOut({ redirect: false });
+
+    router.replace("/login");
+  };
+
+  /* =================================================
+     ⏳ LOADING (prevents redirect race)
+  ================================================= */
+  if (checkingAuth) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading...
+      <div className="flex items-center justify-center h-screen text-lg font-medium">
+        Loading account...
       </div>
     );
   }
 
-  /* =========================
-     LOGOUT
-     ========================= */
-  const handleLogout = async () => {
-    await signOut({ callbackUrl: "/login" });
-  };
+  if (!user) return null;
 
   return (
     <div className="flex flex-col min-h-screen bg-[#f6f7f9]">
@@ -49,8 +123,10 @@ export default function MyAccountPage() {
                 <div className="bg-white rounded-xl shadow-sm p-4 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                   <div className="flex flex-col gap-1">
                     <h2 className="text-lg font-semibold text-gray-800">
-                      Welcome,&nbsp;
-                      {user?.name || user?.email}
+                      Welcome{" "}
+                      {user.first_name || user.last_name
+                        ? `${user.first_name ?? ""} ${user.last_name ?? ""}`
+                        : user.username}
                     </h2>
 
                     <p className="text-sm text-gray-500">
