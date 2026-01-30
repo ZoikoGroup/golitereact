@@ -10,8 +10,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Check } from 'lucide-react';
 import { FaSimCard, FaPhoneAlt, FaPlane, FaBriefcase } from "react-icons/fa";
 
-import PlanSlider from "../components/PlanSlider";
-
 /* Custom Dots Style */
 const customStyles = `
   .slick-dots li button:before {
@@ -221,7 +219,140 @@ const cards = [
         </p>
       </div>
     </div>
-<PlanSlider/>
+
+     <div className="w-full bg-white py-10">
+      <style>{customStyles}</style>
+      <h2 className="text-3xl font-bold text-center mb-8">Shop Sustainable Plans</h2>
+
+      {/* Category Tabs - RESPONSIVE FIX */}
+      <div className="border-b border-gray-200">
+  <div className="flex justify-between max-w-5xl mx-auto px-4">
+    {tabs.map(({ key, label, icon: Icon }) => (
+      <button
+        key={key}
+        onClick={() => setActiveCategory(key)}
+        className={`flex flex-col items-center justify-center flex-1 py-3 text-xs sm:text-sm font-medium transition relative
+          ${
+            activeCategory === key
+              ? "text-[#FD4C0E]"
+              : "text-gray-500 hover:text-[#FD4C0E]"
+          }`}
+      >
+        <Icon className="text-base sm:text-lg mb-1" />
+
+        <span className="whitespace-nowrap">{label}</span>
+
+        {/* Active underline */}
+        {activeCategory === key && (
+          <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#FD4C0E] rounded-t-full" />
+        )}
+      </button>
+    ))}
+  </div>
+</div>
+
+      {/* SIM Type Tabs */}
+      {/* <div className="flex justify-center">
+        <div className="inline-flex p-1">
+          {["pSim", "eSim"].map((simType) => (
+            <button
+              key={simType}
+              onClick={() => setActiveSimType(simType)}
+              className={`px-8 py-2 text-sm font-semibold cursor-pointer transition-all ${
+                activeSimType === simType ? "text-[#FD4C0E] underline" : "text-gray-600"
+              }`}
+            >
+              {simType}
+            </button>
+          ))}
+        </div>
+      </div> */}
+
+      {/* Slider with Navigation */}
+      <div className="px-4 md:px-40 mt-10 relative">
+        {/* Custom Arrow Buttons */}
+        <button
+          onClick={() => sliderRef.current?.slickPrev()}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-6 h-6 text-[#FD4C0E]" />
+        </button>
+
+        <button
+          onClick={() => sliderRef.current?.slickNext()}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-6 h-6 text-[#FD4C0E]" />
+        </button>
+
+        <Slider key={slidesToShow} ref={sliderRef} {...sliderSettings} className="my-4">
+          {filteredPlans.map((plan, idx) => (
+            <div key={idx} className="px-12">
+              <div
+                className={`relative border p-6 rounded-2xl shadow-sm min-h-[40vw] overflow-hidden ${
+                  plan.tag ? "bg-blue-50" : "bg-white"
+                }`}
+              >
+                {/* Diagonal Ribbon Tag */}
+                {plan.tag && (
+                  <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden">
+                    <span className="absolute top-7 -right-8 rotate-45 bg-green-600 text-white text-xs font-semibold px-8 py-1 shadow-md tracking-wide">
+                      {plan.tag}
+                    </span>
+                  </div>
+                )}
+
+                {/* Plan Title */}
+                <h3 className="text-xl lg:text-[1.2vw] font-semibold mb-2 text-center mt-8">{plan.title}</h3>
+
+                {/* Price */}
+                <p className="text-3xl font-bold mb-1 text-center">{plan.price}</p>
+                <p className="text-gray-500 mb-4 text-center text-sm">(taxes and fees included)</p>
+
+                {/* Button */}
+                <button className="w-full border-2 border-orange-500 text-orange-500 font-semibold py-2 rounded-lg hover:bg-orange-500 hover:text-white transition-all">
+                  Buy Plan
+                </button>
+
+                {/* Description */}
+                <p className="text-gray-500 mb-4 text-left pt-6 text-sm">{plan.desc}</p>
+
+                {/* Features */}
+                <ul className="mt-4 space-y-2 text-gray-700 text-sm lg:h-[20vw] md:h-[20vw]">
+                  {plan.features.map((f, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        strokeWidth="2" 
+                        stroke="currentColor" 
+                        className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          d="m4.5 12.75 6 6 9-13.5" 
+                        />
+                      </svg>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </Slider>
+
+        <div className="flex justify-center mt-6">
+          <button className="bg-[#FD4C0E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#E63D00] w-full sm:w-auto sm:min-w-[200px] transition-all">
+            View All
+          </button>
+        </div>
+      </div>
+    </div>
 
 <CustomFamilyPlansComponent />
 

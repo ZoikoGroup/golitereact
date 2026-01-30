@@ -9,10 +9,6 @@ import { useRouter } from "next/navigation";
 import { checkDeviceCompatibility } from "../utils/vcareapi";
 import SuccessModalForBuy from "../components/SuccessModalForBuy";
 
-import BuyNowModal from "../components/BuyNowModal";
-import PrepaidBuyNowModal from "../components/PrepaidBuyNowModal";
-
-
 /* Custom Dots Style */
 const customStyles = `
 .slick-dots li button:before {
@@ -35,16 +31,18 @@ export default function PricingPlans() {
 
   /* UI States */
   const [activeCategory, setActiveCategory] = useState("prepaid");
-  const [activeSimType, setActiveSimType] = useState("pSim");
+  const [activeSimType, setActiveSimType] = useState("eSim");
   const [slidesToShow, setSlidesToShow] = useState(3);
 
   /* Data States */
   const [plans, setPlans] = useState<any[]>([]);
   const [plansLoading, setPlansLoading] = useState(true);
 
-  const [showPostpaidModal, setShowPostpaidModal] = useState(false);
-  const [showPrepaidModal, setShowPrepaidModal] = useState(false);
-  
+  /* eSIM Check States */
+  const [showEsimPopup, setShowEsimPopup] = useState(false);
+  const [imei, setImei] = useState("");
+  const [inputError, setInputError] = useState("");
+  const [deviceLoading, setDeviceLoading] = useState(false);
 
   /* Modal States */
   const [modalOpen, setModalOpen] = useState(false);
@@ -66,41 +64,6 @@ export default function PricingPlans() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleBuyPlan = (plan: any) => {
-  setSelectedPlan(plan);
-
-  if (activeCategory === "postpaid") {
-    setShowPostpaidModal(true);
-    return;
-  }
-
-  if (activeCategory === "prepaid") {
-    setShowPrepaidModal(true);
-    return;
-  }
-
-  // travel / business / others → direct checkout
-  const item = {
-    planId: plan.id,
-    vcPlanID: plan.vcPlanID || null,
-    planSlug: plan.slug || "",
-    planTitle: plan.title,
-    planPrice: Number(plan.final_price),
-    planDuration: plan.duration_days || "",
-    simType: activeSimType,
-    imei: null,
-    lineType: activeCategory,
-    quantity: 1,
-  };
-
-  const cart =
-    JSON.parse(localStorage.getItem("cart") || "[]") || [];
-
-  localStorage.setItem("cart", JSON.stringify([...cart, item]));
-  router.push("/checkout");
-};
-
-
   /* Fetch Plans – RUNS ONLY ONCE */
   useEffect(() => {
     const fetchPlans = async () => {
@@ -115,21 +78,17 @@ export default function PricingPlans() {
         const data = await res.json();
 
         const normalized = data.map((item: any) => ({
-  id: item.id,
-  slug: item.slug,
-  vcPlanID: item.vcPlanID,
-  title: item.name,
-  desc: item.short_description,
-  final_price: item.final_price,
-  duration_days: item.duration_days || "",
-  category: item.category.slug
-    .replace("-plans", "")
-    .replace("-", ""),
-  simType: item.sim_type === "esim" ? "eSim" : "pSim",
-  tag: item.is_popular ? "Most Popular" : null,
-  features: item.features.map((f: any) => f.title),
-}));
-
+          id: item.id,
+          title: item.name,
+          desc: item.short_description,
+          price: `$${item.final_price}/mo`,
+          category: item.category.slug
+            .replace("-plans", "")
+            .replace("-", ""),
+          simType: item.sim_type === "esim" ? "eSim" : "pSim",
+          tag: item.is_popular ? "Most Popular" : null,
+          features: item.features.map((f: any) => f.title),
+        }));
 
         setPlans(normalized);
       } catch (err) {
@@ -161,7 +120,64 @@ export default function PricingPlans() {
     dotsClass: "slick-dots flex justify-center",
   };
 
-  
+  /* Device Compatibility Check */
+  const handleCheckDevice = async () => {
+    if (!imei) {
+      setInputError("IMEI or MEID is required");
+      return;
+    }
+
+    if (!/^\d+$/.test(imei)) {
+      setInputError("Only numbers are allowed");
+      return;
+    }
+
+    if (imei.length < 14) {
+      setInputError("IMEI or MEID must be at least 14 digits");
+      return;
+    }
+
+    setInputError("");
+    setDeviceLoading(true);
+
+    try {
+      const response = await checkDeviceCompatibility(imei);
+      const data = response.data;
+
+      const attCompatibility =
+        data?.data?.RESULT?.responseDetails?.inquireDeviceStatusResponse
+          ?.deviceStatusDetails?.attCompatibility;
+
+      if (attCompatibility === "GREEN") {
+        sessionStorage.setItem(
+          "checkoutPlan",
+          JSON.stringify({
+            ...selectedPlan,
+            imei,
+            simType: activeSimType,
+            category: activeCategory,
+          })
+        );
+        setModalType("success");
+        setModalMessage(
+          "Your device is compatible with GoLite Mobile's eSIM technology. You're ready to activate."
+        );
+      } else {
+        setModalType("error");
+        setModalMessage(
+          "This device is not compatible with GoLite Mobile's eSIM technology."
+        );
+      }
+
+      setModalOpen(true);
+    } catch {
+      setModalType("error");
+      setModalMessage("Something went wrong. Please try again.");
+      setModalOpen(true);
+    } finally {
+      setDeviceLoading(false);
+    }
+  };
 
   return (
     <>
@@ -256,7 +272,10 @@ export default function PricingPlans() {
                       </p>
 
                       <button
-                        onClick={() => handleBuyPlan(plan)}
+                        onClick={() => {
+                          setSelectedPlan(plan);
+                          setShowEsimPopup(true);
+                        }}
                         
                         className="w-full mt-4 border-2 border-orange-500 text-orange-500 font-semibold py-2 rounded-lg hover:bg-orange-500 hover:text-white transition"
                       >
@@ -293,29 +312,55 @@ export default function PricingPlans() {
         </div>
 
         {/* eSIM Popup */}
-   
+        {showEsimPopup && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+            <div className="relative w-full max-w-2xl rounded-xl bg-white p-6 sm:p-8 shadow-xl">
+              <button
+                onClick={() => setShowEsimPopup(false)}
+                className="absolute right-4 top-4 text-gray-400 text-xl"
+              >
+                ✕
+              </button>
+
+              <h3 className="text-xl sm:text-2xl font-bold text-center">
+                Great! You've Selected Your eSIM — Instant Setup, No Waiting.
+              </h3>
+
+              <input
+                type="text"
+                placeholder="Enter your device IMEI"
+                value={imei}
+                onChange={(e) => setImei(e.target.value)}
+                className="mt-6 w-full rounded-lg border px-4 py-3"
+              />
+
+              {inputError && (
+                <p className="text-center text-red-600 mt-2 font-semibold">
+                  {inputError}
+                </p>
+              )}
+
+              <div className="mt-6 flex justify-center">
+                <button
+                  onClick={handleCheckDevice}
+                  disabled={deviceLoading}
+                  className="rounded-lg bg-[#FD4C0E] px-8 py-3 font-semibold text-white"
+                >
+                  {deviceLoading ? "Checking..." : "Check Compatibility"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-{/* POSTPAID */}
-{showPostpaidModal && selectedPlan && (
-  <BuyNowModal
-    open={showPostpaidModal}
-    onClose={() => setShowPostpaidModal(false)}
-    plan={selectedPlan}
-    simType={activeSimType as "eSim" | "pSim"}
-  />
-)}
-
-{/* PREPAID */}
-{showPrepaidModal && selectedPlan && (
-  <PrepaidBuyNowModal
-    open={showPrepaidModal}
-    onClose={() => setShowPrepaidModal(false)}
-    plan={selectedPlan}
-    simType={activeSimType}
-  />
-)}
-
+      <SuccessModalForBuy
+        open={modalOpen}
+        message={modalMessage}
+        type={modalType}
+        onContinue={() => router.push("/checkout")}
+        onClose={() => setModalOpen(false)}
+      />
     </>
   );
 }

@@ -36,7 +36,7 @@ export default function BuyNowModal({
   const price =
     duration === 12
       ? Number(plan.final_price)
-      : Number(plan.final_price) - 5;
+      : Math.ceil(Number(plan.final_price) * 0.9);
 
   /* ---------------- ADD TO CART ---------------- */
 
@@ -135,7 +135,7 @@ export default function BuyNowModal({
           <h2 className="text-2xl font-bold">
             {step === "contract"
               ? "Choose Your Contract Length"
-              : "Check Device Compatibility"}
+              : "Great! You've Selected Your eSIM — Instant Setup, No Waiting."}
           </h2>
 
           <p className="text-gray-500 mt-2">
@@ -189,7 +189,7 @@ export default function BuyNowModal({
                 <p className="font-semibold">24 Month Contract</p>
 
                 <p className="text-2xl font-bold">
-                  ${(Number(plan.final_price) - 5).toFixed(2)}
+                  ${Math.ceil(Number(plan.final_price) * 0.9)}.00
                   <span className="text-sm">/mo</span>
                 </p>
               </div>
