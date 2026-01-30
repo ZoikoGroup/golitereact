@@ -41,8 +41,10 @@ function LoginPageContent() {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/login/`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json",
-                     "X-Frontend-Origin": window.location.origin, },
+          headers: {
+            "Content-Type": "application/json",
+            "X-Frontend-Origin": window.location.origin,
+          },
           body: JSON.stringify({
             email: email.trim(),
             password,
@@ -56,11 +58,10 @@ function LoginPageContent() {
         throw new Error(data.message || "Login failed");
       }
 
-      // ✅ Save token & user
       localStorage.setItem("golite_token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      window.location.href = redirect || "/my-account";
+      router.replace(redirect || "/my-account");
     } catch (err: any) {
       setError(err.message || "Invalid credentials");
     } finally {
