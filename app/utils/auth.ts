@@ -9,8 +9,13 @@ export const getUser = () => {
   return user ? JSON.parse(user) : null;
 };
 
-export const logout = () => {
+export const logout = async () => {
   localStorage.removeItem("golite_token");
   localStorage.removeItem("user");
-  window.location.href = "/login";
+  try {
+    const { signOut } = await import('next-auth/react');
+    await signOut({ callbackUrl: '/login' });
+  } catch (e) {
+    window.location.href = '/login';
+  }
 };

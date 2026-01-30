@@ -1,52 +1,45 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
 export default function MyAccountPage() {
-  const [user, setUser] = useState<any>(null);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-  // 🔐 AUTH CHECK
+  const user = session?.user;
+
+  /* =========================
+     AUTH PROTECTION
+     ========================= */
   useEffect(() => {
-    const token = localStorage.getItem("golite_token");
-    const storedUser = localStorage.getItem("user");
-
-    if (!token || !storedUser) {
-      window.location.href = "/login";
-      return;
+    if (status === "unauthenticated") {
+      router.replace("/login");
     }
+  }, [status, router]);
 
-    setUser(JSON.parse(storedUser));
-  }, []);
+  /* =========================
+     LOADING STATE
+     ========================= */
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
-  // 🚪 LOGOUT
+  /* =========================
+     LOGOUT
+     ========================= */
   const handleLogout = async () => {
-    const token = localStorage.getItem("golite_token");
-
-    try {
-      if (token) {
-        await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/logout/`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Token ${token}`,
-            },
-          }
-        );
-      }
-    } catch (error) {
-      console.error("Logout failed", error);
-    } finally {
-      localStorage.removeItem("golite_token");
-      localStorage.removeItem("user");
-      window.location.href = "/login";
-    }
+    await signOut({ callbackUrl: "/login" });
   };
 
-  
   return (
     <div className="flex flex-col min-h-screen bg-[#f6f7f9]">
       <Header />
@@ -57,9 +50,7 @@ export default function MyAccountPage() {
                   <div className="flex flex-col gap-1">
                     <h2 className="text-lg font-semibold text-gray-800">
                       Welcome,&nbsp;
-                      {user?.first_name || user?.last_name
-                        ? `${user?.first_name ?? ""} ${user?.last_name ?? ""}`.trim()
-                        : user?.username}
+                      {user?.name || user?.email}
                     </h2>
 
                     <p className="text-sm text-gray-500">
