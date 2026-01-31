@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import Image from "next/image";
 import { link } from "node:fs";
+import Link from "next/link";
 
 const plans = [
   { title: "Frequent Travelers", bg: "bg-orange-50", img: "/img/specialTraveler.png", link:"/travel-plans" },
@@ -107,9 +108,12 @@ export default function ShopSpecialPlans() {
           </div>
 
           {/* CTA */}
-          <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+          <Link
+            href="/travel-plans"
+            className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition inline-block"
+          >
             View Travel Plans
-          </button>
+          </Link>
         </div>
       </div>
     </section>
