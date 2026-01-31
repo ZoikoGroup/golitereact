@@ -55,7 +55,7 @@ function LoginPageContent() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "incorrect email or password");
+        throw new Error(data.message || "Incorrect email or password");
       }
 
       localStorage.setItem("golite_token", data.token);
