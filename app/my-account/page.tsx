@@ -152,8 +152,6 @@ export default function MyAccountPage() {
       
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-12 gap-6">
 
-          
-
           {/* ================= USERS ================= */}
           <div className="col-span-12 lg:col-span-3">
             <h4 className="section-title">USERS</h4>
@@ -163,10 +161,9 @@ export default function MyAccountPage() {
                 <span className="text-xl">+</span>
               </div>
 
-              <h5 className="card-title">Add Family & Friends</h5>
+              <h5 className="card-title">Add Family &amp; Friends</h5>
               <p className="card-text">
-                Link numbers of your family and friends for discounts & bill
-                payments.
+                Link numbers of your family and friends for discounts &amp; bill payments.
               </p>
             </div>
           </div>
@@ -189,8 +186,7 @@ export default function MyAccountPage() {
                 GET STARTED BY CHOOSING A PLAN
               </h5>
               <p className="card-text mb-6">
-                You haven’t selected a plan yet. Purchase a plan to unlock full
-                details and manage your services.
+                You haven&apos;t selected a plan yet. Purchase a plan to unlock full details and manage your services.
               </p>
 
               <button className="btn-primary">
@@ -236,14 +232,14 @@ export default function MyAccountPage() {
 
               <div>
                 <h5 className="font-semibold mb-1">
-                  Share & Save Together!
+                  Share &amp; Save Together!
                 </h5>
                 <p className="card-text mb-3">
                   Invite your friends to join and enjoy exclusive rewards. The
                   more you refer, the more you earn.
                 </p>
                 <button className="btn-primary">
-                  Invite & Earn Today
+                  Invite &amp; Earn Today
                 </button>
               </div>
             </div>
@@ -275,7 +271,7 @@ export default function MyAccountPage() {
 
             <div className="card">
               <h5 className="text-sm font-semibold mb-3">
-                DISCOUNT & OFFERS
+                DISCOUNT &amp; OFFERS
               </h5>
 
               <div className="flex items-center gap-3 bg-[#fff4ee] p-3 rounded-md">
@@ -293,9 +289,6 @@ export default function MyAccountPage() {
               </div>
             </div>
           </div>
-
-          
-
         </div>
       </main>
 
