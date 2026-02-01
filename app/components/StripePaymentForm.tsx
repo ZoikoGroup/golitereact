@@ -49,6 +49,29 @@ const StripePaymentForm = forwardRef<StripePaymentFormRef, StripePaymentFormProp
             return { success: false, error: error.message };
           }
 
+          if (!paymentIntent?.id) {
+            return { success: false, error: "PaymentIntent ID missing" };
+          }
+
+          // 🔥 NEW STEP: fetch pm_ and ch_ from backend
+          const confirmRes = await fetch("/api/stripe/confirm", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              paymentIntentId: paymentIntent.id,
+            }),
+          });
+
+          const confirmData = await confirmRes.json();
+
+          if (!confirmRes.ok) {
+            return {
+              success: false,
+              error: confirmData.error || "Failed to confirm payment",
+            };
+          }
+
+
           onPaymentSuccess?.();
 
           return {
