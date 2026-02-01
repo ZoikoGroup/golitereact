@@ -148,7 +148,7 @@ function LoginPageContent() {
             </div>
 
             {/* ===== GOOGLE LOGIN ===== */}
-            <div className="mt-4">
+            {/* <div className="mt-4">
               {(status === "authenticated" || (typeof window !== 'undefined' && !!localStorage.getItem('golite_token'))) ? (
                 <button
                   type="button"
@@ -168,7 +168,7 @@ function LoginPageContent() {
                   Sign in with Google
                 </button>
               )}
-            </div>
+            </div> */}
 
             {/* ===== FACEBOOK LOGIN ===== */}
             <div className="mt-3">

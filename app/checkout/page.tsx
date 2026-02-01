@@ -30,6 +30,7 @@ interface FormData {
 interface CartItem {
   planId: string | null;
   planSlug: string | null;
+  vcPlanID : string | null;
   planTitle: string;
   planPrice: number;
   planDuration: string;
@@ -153,17 +154,20 @@ export default function CheckoutPage() {
       }
 
       const normalized: CartItem[] = storedCart.map((item: any) => ({
-        planId: item.planId ? String(item.planId) : null,
+        planId: item.vcPlanID ? String(item.vcPlanID) : null,
+        vcPlanID: item.vcPlanID ? String(item.vcPlanID) : null,
         planSlug: item.planSlug ?? null,
         planTitle: item.planTitle ?? "Unknown Plan",
         planPrice: Number(item.planPrice ?? 0),
         planDuration: item.planDuration ?? "",
         lineType: item.lineType ?? "",
         simType: item.simType ?? "",
+        type: item.type ?? undefined,
         formData: {
           priceQty: Number(item.formData?.priceQty ?? 1),
           price: Number(item.planPrice ?? 0),
         },
+        _raw: item._raw ?? undefined,
       }));
 
       setCart(normalized);
@@ -315,6 +319,7 @@ const res = await fetch("/api/process-order", {
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     paymentIntentId: result.paymentIntentId,
+    paymentResponse: result,  
     cart,
     billingAddress,
     shippingAddress: showShipping ? shippingAddress : billingAddress,
@@ -324,7 +329,7 @@ const res = await fetch("/api/process-order", {
     total,
   }),
 });
-
+console.log("❇️ process-order response:", res);
 if (!res.ok) {
   alert("Order processing failed");
   setLoading(false);
@@ -333,7 +338,7 @@ if (!res.ok) {
 
   // ✅ Payment succeeded → webhook will save order
   setShowThankYou(true);
-  syncCart([]);
+  // syncCart([]);
   setLoading(false);
 };
 

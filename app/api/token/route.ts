@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST() {
   try {
-    const response = await fetch(process.env.VCARE_AUTH_URL!, {
+    const response = await fetch(process.env.VCR_API_BASE!, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export async function POST() {
     }
 
     const data = await response.json();
-
+    console.log("VCare Token Response:", data);
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.error("Token API Error:", error);

@@ -44,6 +44,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       clientSecret: paymentIntent.client_secret,
+      paymentIntentResponse: paymentIntent,
     });
   } catch (err: any) {
     console.error("❌ Stripe PI Error:", err.message);

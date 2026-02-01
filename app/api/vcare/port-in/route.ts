@@ -24,8 +24,8 @@ export async function POST(req: Request) {
       // static values (same as PHP)
       action:
         "create_portin_v2_when_create_customer_was_called_without_portin_tag",
-      agent_id: "ewebsiteapi",
-      source: "WEBSITE",
+      agent_id: process.env.VCR_AGENT_ID as string,
+      source: "API",
     };
 
     const data = await vcareFetch("port", payload);
