@@ -26,7 +26,9 @@ export async function processOrder(orderData: any) {
   }
 
   type CartItem = {
+    simType: string;
     planId: string | number;
+    eSim?: string; // "eSim" or "pSIM"
   };
 
   const cart = orderData.cart as CartItem[];
@@ -57,6 +59,9 @@ export async function processOrder(orderData: any) {
   };
   console.log("📡 Payment API request data:", paymentData);
   const paymentRes = await makePaymentRequest( paymentData );
+  if (!paymentRes.status) {
+    throw new Error(paymentRes.error || "Payment failed");
+  }
   console.log("📡 Payment API response:", paymentRes);
 
 
@@ -73,12 +78,11 @@ export async function processOrder(orderData: any) {
   const portIn = Boolean(orderData.portIn);
   const portDetails = orderData.portDetails ?? {};
   const telgoPlan = orderData.telgoPlan ?? {};
-  const parentEnrollmentId =
-    orderData.parentEnrollmentId ?? null;
+  const parentEnrollmentId = enrollmentRes.enrollment_id  ?? null;
 
   const customerPayload: MakeCustomerPayload = {
-    lines: planIds.map((planId) => ({
-      enrollment_id:        enrollmentRes.enrollment_id,
+    lines: orderData.cart.map((cartItem: CartItem, index: number) => ({
+      enrollment_id:        index === 0 ? enrollmentRes.enrollment_id : null,
       order_id:             orderId,
       first_name:           String(orderData.shippingAddress?.firstName ?? orderData.billingAddress?.firstName ?? ""),
       last_name:            String(orderData.shippingAddress?.lastName ?? orderData.billingAddress?.lastName ?? ""),
@@ -92,12 +96,12 @@ export async function processOrder(orderData: any) {
       billing_state:        String(orderData.shippingAddress?.state ?? orderData.billingAddress?.state ?? ""),
       billing_city:         String(orderData.shippingAddress?.city ?? orderData.billingAddress?.city ?? ""),
       billing_zip:          String(orderData.shippingAddress?.zip ?? orderData.billingAddress?.zip ?? ""),
-      plan_id:              planId,
+      plan_id:              cartItem?.planId ? Number(cartItem.planId) : 0,
       carrier:              "BLUECONNECTSATT",
       is_portin:            portIn ? "Y" : "N",
       port_number:          portIn ? portDetails?.phoneNumber ?? null : null,
       port_current_carrier: portIn ? portDetails?.carrier ?? null : null,
-      port_account_number:  portIn  ? portDetails?.accountNumber ?? null : null,
+      port_account_number:  portIn ? portDetails?.accountNumber ?? null : null,
       port_account_password: portIn ? portDetails?.accountPassword ?? null : null,
       port_first_name:      portIn ? customerName[0] : null,
       port_last_name:       portIn ? customerName[1] ?? "N/A" : null,
@@ -108,29 +112,55 @@ export async function processOrder(orderData: any) {
       port_zip_code:        portIn ? orderData.customer?.address?.postal_code : null,
       pin:                  portIn ? portDetails?.pin ?? null : null,
       enrollment_type:      "SHIPMENT",
-      is_esim:              telgoPlan?.[planId]?.eSim === "pSIM" ? "N" : "Y",
+      is_esim:              cartItem?.simType === "pSim" ? "N" : "Y",
       parent_enrollment_id: parentEnrollmentId,
     })),
   };
 
-  console.log("📡 Customer API request data:", customerPayload);
+  // console.log("📡 Customer API request data:", customerPayload);
 
   const customerRes = await customerRequest(
     customerPayload
   );
 
-  console.log("📡 Customer API response:", customerRes);
+  if (!customerRes.status) {
+    throw new Error(customerRes.error || "Customer creation failed");
+  }
 
-  // if (!(customerRes as any)?.status) {
-  //   throw new Error(
-  //     (customerRes as any)?.error ||
-  //       "Customer creation failed"
-  //   );
-  // }
+  // ✅ MERGE ALL API RESPONSES + ORIGINAL ORDER
+  const finalOrderPayload = {
+    order: {
+      ...orderData,
+    },
+    enrollment: enrollmentRes,
+    payment: paymentRes,
+    customer: customerRes,
+  };
+
+  console.log(
+    "📦 Final order payload:",
+    JSON.stringify(finalOrderPayload, null, 2)
+  );
+
+  const backendRes = await fetch(`${process.env.VCR_API_BASE}/api/v2/order/create`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json",  },
+    body: JSON.stringify(finalOrderPayload),
+  } );
+
+if (!backendRes.ok) {
+  const error = await backendRes.text();
+  throw new Error("Backend order save failed: " + error);
+}
+
+const backendData = await backendRes.json();
+
+console.log("📦 Backend API response:", backendData);
 
   return {
     success: true,
     enrollment_id: enrollmentRes.enrollment_id,
-    order_id: (paymentRes as any)?.order_id ?? null,
+    order_id: paymentRes.order_id,
+    backend_order_id: backendData?.id ?? null,
   };
 }
