@@ -69,7 +69,7 @@ export default function SeniorCitizenDiscountEnrollment() {
     try {
         console.log("Submitting form data:", Array.from(formData.entries()));
       const response = await fetch(
-        "https://api.golite.com/senior-citizen-discount",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/senior-discount/senior-citizen-discount`,
         {
           method: "POST",
           body: formData,
