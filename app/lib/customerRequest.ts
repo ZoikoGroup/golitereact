@@ -1,13 +1,11 @@
-// lib/customerRequest.ts
 import { callApi } from "./vcareApiCall";
 
 /* -----------------------------------------
- * Line payload (one per plan)
+ * Line payload (unchanged)
  * ----------------------------------------- */
 export type CustomerLine = {
   enrollment_id: string;
   order_id: string;
-
   first_name: string;
   last_name: string;
   email: string;
@@ -50,15 +48,12 @@ export type CustomerLine = {
   parent_enrollment_id: string | null;
 };
 
-/* -----------------------------------------
- * Request payload
- * ----------------------------------------- */
 export type MakeCustomerPayload = {
   lines: CustomerLine[];
 };
 
 /* -----------------------------------------
- * API response types
+ * API response data (per line)
  * ----------------------------------------- */
 export type EsimDetails = {
   ACTIVATION_CODE: string;
@@ -77,21 +72,47 @@ export type CustomerLineResponse = {
   esim?: EsimDetails;
 };
 
-export type CustomerApiResponse = {
-  data: {
-    data: CustomerLineResponse;
-  }[];
+/* -----------------------------------------
+ * callApi wrapper (what vcareApiCall returns)
+ * ----------------------------------------- */
+interface CallApiWrapper {
+  status: boolean;
+  http_code: number;
+  response: {
+    data: { data: CustomerLineResponse }[];
+    msg: string;
+    msg_code: string;
+    token?: string;
+  };
+}
+
+/* -----------------------------------------
+ * Normalized response (LIKE PAYMENT)
+ * ----------------------------------------- */
+export interface CustomerSuccess {
+  status: true;
   msg: string;
   msg_code: string;
   token?: string;
-};
+  data: CustomerLineResponse[];
+}
 
+export interface CustomerFailure {
+  status: false;
+  error: string;
+  http_code?: number;
+  response?: any;
+}
+
+export type CustomerResponse =
+  | CustomerSuccess
+  | CustomerFailure;
 /* -----------------------------------------
  * API call (PHP createUser equivalent)
  * ----------------------------------------- */
 export async function customerRequest(
   payload: MakeCustomerPayload
-): Promise<CustomerApiResponse> {
+): Promise<CustomerResponse> {
   const requestBody = {
     lines: payload.lines,
     action: "create_prepaid_postpaid_customer_v2",
@@ -100,35 +121,63 @@ export async function customerRequest(
     request_name: "customer",
   };
 
-  console.log("📡 Customer API request body:", requestBody);
-
-  const response = await callApi(
-    "/customer",
-    "POST",
-    requestBody
+  console.log(
+    "📡 Customer API request body:",
+    JSON.stringify(requestBody, null, 2)
   );
 
-  console.log("📡 Customer API response:", response);
+  try {
+    const apiResult = (await callApi(
+      "/customer",
+      "POST",
+      requestBody
+    )) as CallApiWrapper;
 
-  // Map the API response to the expected CustomerApiResponse shape
-  if (
-    response &&
-    response.status === true &&
-    response.response &&
-    Array.isArray(response.response.data)
-  ) {
+    // 🔍 FULL RAW RESPONSE (no [Object])
+    console.log(
+      "📡 Customer API RAW response:",
+      JSON.stringify(apiResult, null, 2)
+    );
+
+    const payload = apiResult?.response;
+
+    if (
+      apiResult?.status === true &&
+      payload?.msg_code === "RESTAPI000"
+    ) {
+      // 🔥 Flatten: [{ data: {...} }] → [{...}]
+      const lines =
+        payload.data?.map(item => item.data) ?? [];
+
+      console.log(
+        "📡 Customer API normalized data:",
+        JSON.stringify(lines, null, 2)
+      );
+
+      return {
+        status: true,
+        msg: payload.msg,
+        msg_code: payload.msg_code,
+        token: payload.token,
+        data: lines,
+      };
+    }
+
+    // ❌ Failure path
     return {
-      data: response.response.data,
-      msg: response.response.msg ?? "",
-      msg_code: response.response.msg_code ?? "",
-      token: response.response.token,
+      status: false,
+      error: payload?.msg ?? "Customer creation failed",
+      http_code: apiResult?.http_code,
+      response: apiResult,
     };
-  } else {
-    // Return a default error shape if the response is not as expected
+  } catch (error) {
     return {
-      data: [],
-      msg: response?.error ?? "Unknown error",
-      msg_code: "",
+      status: false,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Unexpected error",
+      response: error,
     };
   }
 }
