@@ -142,7 +142,7 @@ export async function processOrder(orderData: any) {
     JSON.stringify(finalOrderPayload, null, 2)
   );
 
-  const backendRes = await fetch(`${process.env.VCR_API_BASE}/api/v2/order/create`, {
+  const backendRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v2/order/create`, {
     method: "POST",
     headers: { "Content-Type": "application/json",  },
     body: JSON.stringify(finalOrderPayload),
