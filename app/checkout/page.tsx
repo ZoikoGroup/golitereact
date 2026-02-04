@@ -443,7 +443,7 @@ useEffect(() => {
               </button>
             </div>
 
-           <div className="bg-white rounded-lg shadow p-6 mb-6">
+           {/* <div className="bg-white rounded-lg shadow p-6 mb-6">
             <h5 className="font-bold mb-2">Selected Plan(s) JSON (from popup)</h5>
             <pre className="text-xs bg-gray-100 p-3 rounded overflow-x-auto">
               {JSON.stringify(
@@ -459,7 +459,7 @@ useEffect(() => {
                 2
               )}
             </pre>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-6">
