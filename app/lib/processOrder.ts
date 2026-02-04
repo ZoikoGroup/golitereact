@@ -126,7 +126,7 @@ export async function processOrder(orderData: any) {
   if (!customerRes.status) {
     throw new Error(customerRes.error || "Customer creation failed");
   }
-
+  // const loggedUser = JSON.parse(localStorage.getItem("user") || "{}");
   // ✅ MERGE ALL API RESPONSES + ORIGINAL ORDER
   const finalOrderPayload = {
     order: {
@@ -135,6 +135,7 @@ export async function processOrder(orderData: any) {
     enrollment: enrollmentRes,
     payment: paymentRes,
     customer: customerRes,
+   
   };
 
   console.log(
