@@ -1,118 +1,74 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Image from "next/image";
+import { logout } from "../utils/auth";
 
-type User = {
-  username?: string;
+type LocalUser = {
+  id?: string;
+  name?: string;
   email?: string;
-  first_name?: string;
-  last_name?: string;
+  image?: string;
 };
 
 export default function MyAccountPage() {
+  const { data: session, status } = useSession();
   const router = useRouter();
 
-  const [user, setUser] = useState<User | null>(null);
-  const [checkingAuth, setCheckingAuth] = useState(true);
+  const [localUser, setLocalUser] = useState<LocalUser | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  /* =================================================
-     🔐 AUTH CHECK (safe for Vercel + production)
-  ================================================= */
+  /* =========================
+     LOAD LOCALSTORAGE USER
+     ========================= */
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        /* ------------------------------
-           1️⃣ Local token (Django login)
-        ------------------------------ */
-        const token = localStorage.getItem("golite_token");
-        const storedUser = localStorage.getItem("user");
-
-        if (token && storedUser) {
-          setUser(JSON.parse(storedUser));
-          setCheckingAuth(false);
-          return;
-        }
-
-        /* ------------------------------
-           2️⃣ NextAuth session (Google)
-        ------------------------------ */
-        const res = await fetch("/api/auth/session", {
-          credentials: "same-origin",
-        });
-
-        if (res.ok) {
-          const session = await res.json();
-
-          if (session?.user) {
-            localStorage.setItem("golite_token", "nextauth");
-            localStorage.setItem("user", JSON.stringify(session.user));
-
-            setUser(session.user);
-            setCheckingAuth(false);
-            return;
-          }
-        }
-
-        /* ------------------------------
-           ❌ Not logged in
-        ------------------------------ */
-        router.replace("/login");
-      } catch (err) {
-        console.error("Auth check failed:", err);
-        router.replace("/login");
-      }
-    };
-
-    checkAuth();
-  }, [router]);
-
-  /* =================================================
-     🚪 LOGOUT
-  ================================================= */
-  const handleLogout = async () => {
-    try {
-      const token = localStorage.getItem("golite_token");
-
-      if (token && token !== "nextauth") {
-        await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/logout/`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Token ${token}`,
-            },
-          }
-        );
-      }
-    } catch (err) {
-      console.error("Logout API failed:", err);
+    const stored = localStorage.getItem("user");
+    if (stored) {
+      setLocalUser(JSON.parse(stored));
     }
+    setLoading(false);
+  }, []);
 
-    localStorage.removeItem("golite_token");
-    localStorage.removeItem("user");
+  /* =========================
+     REDIRECT IF NOT LOGGED IN
+     ========================= */
+  useEffect(() => {
+    if (
+      status !== "loading" &&
+      !session &&
+      !localStorage.getItem("golite_token")
+    ) {
+      router.replace("/login?callbackUrl=/my-account");
+    }
+  }, [status, session, router]);
 
-    await signOut({ redirect: false });
+  /* =========================
+     RESOLVE USER (OAuth or Local)
+     ========================= */
+  const user = session?.user || localUser;
 
-    router.replace("/login");
-  };
-
-  /* =================================================
-     ⏳ LOADING (prevents redirect race)
-  ================================================= */
-  if (checkingAuth) {
-    return (
-      <div className="flex items-center justify-center h-screen text-lg font-medium">
-        Loading account...
-      </div>
-    );
+  if (loading || status === "loading") {
+    return <div className="p-10 text-center">Loading...</div>;
   }
 
   if (!user) return null;
+
+  /* =========================
+     LOGOUT HANDLER
+     ========================= */
+  const handleLogout = async () => {
+    if (session) {
+      // NextAuth logout
+      await signOut({ callbackUrl: "/login" });
+    } else {
+      // Django logout
+      logout();
+      router.replace("/login");
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-[#f6f7f9]">
@@ -123,10 +79,7 @@ export default function MyAccountPage() {
                 <div className="bg-white rounded-xl shadow-sm p-4 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                   <div className="flex flex-col gap-1">
                     <h2 className="text-lg font-semibold text-gray-800">
-                      Welcome{" "}
-                      {user.first_name || user.last_name
-                        ? `${user.first_name ?? ""} ${user.last_name ?? ""}`
-                        : user.username}
+                      Welcome {user?.name}
                     </h2>
 
                     <p className="text-sm text-gray-500">
@@ -174,7 +127,7 @@ export default function MyAccountPage() {
 
             <div className="card card-highlight text-center">
               <div className="flex justify-center mb-5">
-                <Image
+                <img
                   src="/img/plan-placeholder.png"
                   alt="Plan"
                   width={260}
@@ -223,7 +176,7 @@ export default function MyAccountPage() {
           {/* ================= REFER & EARN ================= */}
           <div className="col-span-12 lg:col-span-6">
             <div className="card card-highlight flex gap-4 items-center">
-              <Image
+              <img
                 src="/img/pana.png"
                 alt="Refer"
                 width={120}
@@ -252,7 +205,7 @@ export default function MyAccountPage() {
 
             <div className="card text-center mb-4">
               <div className="flex justify-center mb-3">
-                <Image
+                <img
                   src="/img/refer-placeholder.png"
                   alt="Payment"
                   width={120}
