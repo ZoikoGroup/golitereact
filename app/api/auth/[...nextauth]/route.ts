@@ -1,37 +1,18 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
 
-/* ===============================
-   ✅ Prisma singleton (CRITICAL for Vercel)
-================================ */
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
-
-const prisma =
-  globalForPrisma.prisma ||
-  new PrismaClient({
-    log: ["error"],
-  });
-
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
-}
-
-/* ===============================
-   ✅ NextAuth
-================================ */
 const handler = NextAuth({
-  adapter: PrismaAdapter(prisma),
 
   providers: [
-    /* ================= Google ================= */
+    // =========================
+    // GOOGLE
+    // =========================
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
 
-      // ensure full name is captured
+      // ensure full name comes correctly
       profile(profile) {
         return {
           id: profile.sub,
@@ -42,7 +23,9 @@ const handler = NextAuth({
       },
     }),
 
-    /* ================= Facebook ================= */
+    // =========================
+    // FACEBOOK
+    // =========================
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID!,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
@@ -51,14 +34,17 @@ const handler = NextAuth({
 
   secret: process.env.NEXTAUTH_SECRET,
 
-  /* ⭐⭐⭐ IMPORTANT FOR VERCEL ⭐⭐⭐ */
+  // ✅ JWT session (NO DB)
   session: {
-    strategy: "jwt", // ✅ DO NOT use database on serverless
+    strategy: "jwt",
   },
 
+  // =========================
+  // CALLBACKS
+  // =========================
   callbacks: {
-    /* attach data to JWT */
     async jwt({ token, user }) {
+      // Runs on login
       if (user) {
         token.id = user.id;
         token.name = user.name;
@@ -68,8 +54,8 @@ const handler = NextAuth({
       return token;
     },
 
-    /* expose to session */
     async session({ session, token }) {
+      // Makes data available in useSession()
       if (session.user) {
         (session.user as any).id = token.id as string;
         session.user.name = token.name as string;
@@ -80,6 +66,7 @@ const handler = NextAuth({
     },
   },
 
+  // custom login page
   pages: {
     signIn: "/login",
   },
