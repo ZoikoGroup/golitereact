@@ -269,7 +269,7 @@ const faqs = [
                 Smarter Prepaid Faster 5G Unmatched Value.
               </h2>
               <p className="text-white text-lg md:text-[1.2rem] leading-relaxed">
-                Why sit in lines for prepaid, when mobile recharge is online and instant? Get ultimate freedom with GoLite's eco-friendly 5G prepaid plans, starting from just ₹7.99/mo with unlimited talk & text!
+                Why sit in lines for prepaid, when mobile recharge is online and instant? Get ultimate freedom with GoLite's eco-friendly 5G prepaid plans, starting from just $7.99/mo with unlimited talk & text!
               </p>
             </div>
 

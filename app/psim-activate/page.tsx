@@ -22,13 +22,13 @@ export default function SimActivationForm() {
   const [simType, setSimType] = useState("");
   const [simSerial, setSimSerial] = useState("");
 
-  const handleFetchInformation = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!email) {
-      alert("Email is required");
-      return;
-    }
+  const fetchCustomerInfo = async () => {
+      
+  
+      if (!email) {
+        alert("Email is required");
+        return;
+      }
 
     setLoading(true);
     setShowExtraFields(false);
@@ -88,7 +88,7 @@ export default function SimActivationForm() {
   try {
     setLoading(true);
 
-    const res = await fetch("/api/userLine-info", {
+    const res = await fetch("/api/user-line-info", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -108,7 +108,16 @@ export default function SimActivationForm() {
     setLoading(false);
   }
 };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
+  if (step === "fetchCustomer") {
+    await fetchCustomerInfo();
+    setStep("fetchLine");
+  } else {
+    await fetchUserLineInfo();
+  }
+};
   return (
     <>
       <Header />
@@ -119,7 +128,7 @@ export default function SimActivationForm() {
             SIM Activation Form
           </h1>
 
-          <form className="space-y-6" onSubmit={handleFetchInformation}>
+          <form className="space-y-6" onSubmit={handleSubmit}>
             {/* STEP 1 */}
             <div>
               <label className="block text-sm font-medium mb-1">
