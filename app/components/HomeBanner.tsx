@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-
+import { useEffect, useState } from "react";
 export default function HomeBanner() {
   const router = useRouter();
   
@@ -10,6 +10,21 @@ export default function HomeBanner() {
   const coverage = () => {
     router.push('https://www.att.com/idpmaps/reseller');
   };
+  
+  const [country, setCountry] = useState("USA");
+
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.country_name) {
+          setCountry(data.country_name);
+        }
+      })
+      .catch(() => setCountry("USA"));
+  }, []);
+
+
   return (
     
 <section className="w-full bg-gradient-to-r from-[#6C63FF] to-[#4A90E2] text-white overflow-hidden">
@@ -22,7 +37,7 @@ export default function HomeBanner() {
           </span>
 
           <h1 className="text-3xl md:text-5xl font-bold leading-tight md:text-[3vw]">
-            Experience 5G in India
+            Experience 5G in {country}
           </h1>
 
           <h2 className="text-2xl md:text-4xl font-extrabold text-yellow-400 mt-2 md:text-[2vw]">
