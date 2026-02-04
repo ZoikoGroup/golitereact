@@ -12,6 +12,7 @@ type ExistingPlanOption = {
 };
 
 export default function SimActivationForm() {
+  const [step, setStep] = useState<"fetchCustomer" | "fetchLine">("fetchCustomer");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [showExtraFields, setShowExtraFields] = useState(false);
@@ -82,6 +83,31 @@ export default function SimActivationForm() {
       setLoading(false);
     }
   };
+
+  const fetchUserLineInfo = async () => {
+  try {
+    setLoading(true);
+
+    const res = await fetch("/api/userLine-info", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        enrollmentId: selectedEnrollment,
+      }),
+    });
+
+    const result = await res.json();
+
+    console.log("Line info result:", result);
+
+    // 👉 handle response here
+  } catch (err) {
+    console.error(err);
+    alert("Error fetching line info");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>

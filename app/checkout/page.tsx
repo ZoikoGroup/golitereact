@@ -313,6 +313,7 @@ export default function CheckoutPage() {
   return;
 }
 
+const user = JSON.parse(localStorage.getItem("user") || "{}");
 // 🔥 PROCESS ORDER (NO WEBHOOK FOR NOW)
 const res = await fetch("/api/process-order", {
   method: "POST",
@@ -327,10 +328,12 @@ const res = await fetch("/api/process-order", {
     shippingFee,
     discountAmount,
     total,
+    logged_user: user ? user?.email : null,
+    order_shipping_email: shippingAddress?.email || billingAddress?.email || null, 
   }),
 });
 console.log("❇️ process-order response:", res);
-if (!res.ok) {
+if (!res) {
   alert("Order processing failed");
   setLoading(false);
   return;
@@ -338,7 +341,7 @@ if (!res.ok) {
 
   // ✅ Payment succeeded → webhook will save order
   setShowThankYou(true);
-  // syncCart([]);
+  syncCart([]);
   setLoading(false);
 };
 
