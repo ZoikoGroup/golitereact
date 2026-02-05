@@ -147,16 +147,17 @@ const user: LocalUser | null =
 
           <div className="user-left">
             <div className="avatar">
-              {user?.first_name?.charAt(0) || user?.email?.charAt(0) || "U"}
+              {user?.first_name?.charAt(0) || user?.name ?.charAt(0) || user?.email?.charAt(0) || "U"}
 
             </div>
 
             <div>
               <h2>
-                Welcome, {user?.first_name && user?.last_name 
-                  ? `${user.first_name} ${user.last_name}` 
-                  : "User"}
+                Welcome, {
+                  user?.first_name || user?.name || "User"
+                }
               </h2>
+
 
               <p>{user?.email}</p>
             </div>
