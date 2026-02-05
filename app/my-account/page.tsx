@@ -315,7 +315,7 @@ const user: LocalUser | null =
 }
 
 .content-wrap{
-  max-width:1150px;
+  max-width:1280px;
   margin:auto;
   padding:40px 16px;
 }
