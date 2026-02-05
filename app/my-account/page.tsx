@@ -7,339 +7,561 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { logout } from "../utils/auth";
 
+import { lineInquiryAction } from "../actions/lineInquiryAction";
+import { orderByUserAction } from "../actions/orderByUserAction";
+
+/* ================= TYPES ================= */
+
 type LocalUser = {
   id?: string;
   name?: string;
+  first_name?: string;
+  last_name?: string;
   email?: string;
   image?: string;
 };
 
 export default function MyAccountPage() {
+
   const { data: session, status } = useSession();
   const router = useRouter();
 
   const [localUser, setLocalUser] = useState<LocalUser | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(true);
 
-  /* =========================
-     LOAD LOCALSTORAGE USER
-     ========================= */
+  const [orders, setOrders] = useState<any>({});
+  const [ordersLoading, setOrdersLoading] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
+
+  const [lineDataMap, setLineDataMap] = useState<Record<string, any>>({});
+  const [lineLoading, setLineLoading] = useState(false);
+
+  /* ================= LOAD LOCAL USER ================= */
+
   useEffect(() => {
     const stored = localStorage.getItem("user");
-    if (stored) {
-      setLocalUser(JSON.parse(stored));
-    }
-    setLoading(false);
+    if (stored) setLocalUser(JSON.parse(stored));
+    setPageLoading(false);
   }, []);
 
-  /* =========================
-     REDIRECT IF NOT LOGGED IN
-     ========================= */
+  /* ================= AUTH CHECK ================= */
+
   useEffect(() => {
     if (
-      status !== "loading" &&
-      !session &&
-      !localStorage.getItem("golite_token")
-    ) {
+      status === "authenticated" ||
+      localStorage.getItem("golite_token")
+    ) return;
+
+    if (status === "unauthenticated") {
       router.replace("/login?callbackUrl=/my-account");
     }
-  }, [status, session, router]);
+  }, [status]);
 
-  /* =========================
-     RESOLVE USER (OAuth or Local)
-     ========================= */
-  const user = session?.user || localUser;
+const user: LocalUser | null =
+  (session?.user as LocalUser) || localUser;
 
-  if (loading || status === "loading") {
-    return <div className="p-10 text-center">Loading...</div>;
-  }
+  /* ================= LOAD ORDERS ================= */
 
-  if (!user) return null;
+  useEffect(() => {
+    if (!user?.email) return;
 
-  /* =========================
-     LOGOUT HANDLER
-     ========================= */
+    async function loadOrders() {
+      setOrdersLoading(true);
+
+      try {
+        const res = await orderByUserAction(user!.email as string);
+
+        if (res?.status && res?.data?.groups) {
+          setOrders(res.data.groups);
+          setSelectedGroup(Object.keys(res.data.groups)[0] || null);
+        } else {
+          setOrders({});
+          setSelectedGroup(null);
+        }
+      } catch {
+        setOrders({});
+      }
+
+      setOrdersLoading(false);
+    }
+
+    loadOrders();
+  }, [user?.email]);
+
+  /* ================= LOAD LINE DATA ================= */
+
+  useEffect(() => {
+    if (!selectedGroup || !orders[selectedGroup]) return;
+
+    async function loadLines() {
+      setLineLoading(true);
+
+      const enrollments = Object.keys(orders[selectedGroup as string]);
+      const temp: Record<string, any> = {};
+
+      await Promise.all(
+        enrollments.map(async (id) => {
+          const res = await lineInquiryAction(id);
+          if (res?.status) temp[id] = res.data;
+        })
+      );
+
+      setLineDataMap(temp);
+      setLineLoading(false);
+    }
+
+    loadLines();
+  }, [selectedGroup, orders]);
+
+  /* ================= LOGOUT ================= */
+
   const handleLogout = async () => {
     if (session) {
-      // NextAuth logout
       await signOut({ callbackUrl: "/login" });
     } else {
-      // Django logout
       logout();
       router.replace("/login");
     }
   };
 
+  /* ================= LOADER ================= */
+
+  if (pageLoading || status === "loading") {
+    return <div className="loader-screen">Loading account...</div>;
+  }
+
+  if (!user) return null;
+
+  /* ================================================= */
+
   return (
-    <div className="flex flex-col min-h-screen bg-[#f6f7f9]">
+    <div className="page-wrap">
+
       <Header />
-      <main className="flex-grow py-8">
-        <div className="max-w-7xl mx-auto px-4 grid col-span-12 gap-6">
-            {/* ================= WELCOME BAR (ADDED) ================= */}
-                <div className="bg-white rounded-xl shadow-sm p-4 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                  <div className="flex flex-col gap-1">
-                    <h2 className="text-lg font-semibold text-gray-800">
-                      Welcome {user?.name}
-                    </h2>
 
-                    <p className="text-sm text-gray-500">
-                      Email: {user?.email}
-                    </p>
-                  </div>
+      <main className="content-wrap">
 
-                  <a
-                    href="my-account/update-profile"
-                    className="text-orange-600 font-medium hover:underline"
-                  >
-                    Update Profile
-                  </a>
+        {/* ================= USER BAR ================= */}
 
-                  <button
-                    onClick={handleLogout}
-                    className="btn-outline w-fit"
-                  >
-                    Logout
-                  </button>
-                </div>
+        <div className="user-bar">
+
+          <div className="user-left">
+            <div className="avatar">
+              {user?.first_name?.charAt(0) || user?.email?.charAt(0) || "U"}
+
             </div>
-      
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-12 gap-6">
 
-          {/* ================= USERS ================= */}
-          <div className="col-span-12 lg:col-span-3">
-            <h4 className="section-title">USERS</h4>
+            <div>
+              <h2>
+                Welcome, {user?.first_name && user?.last_name 
+                  ? `${user.first_name} ${user.last_name}` 
+                  : "User"}
+              </h2>
 
-            <div className="card text-center">
-              <div className="icon-circle mb-3">
-                <span className="text-xl">+</span>
-              </div>
-
-              <h5 className="card-title">Add Family &amp; Friends</h5>
-              <p className="card-text">
-                Link numbers of your family and friends for discounts &amp; bill payments.
-              </p>
+              <p>{user?.email}</p>
             </div>
           </div>
 
-          {/* ================= PLAN DETAILS ================= */}
-          <div className="col-span-12 lg:col-span-6">
-            <h4 className="section-title">PLAN DETAILS</h4>
+          <div className="user-actions">
+            <a href="/my-account/update-profile" className="btn-outline">
+              Update Profile
+            </a>
 
-            <div className="card card-highlight text-center">
-              <div className="flex justify-center mb-5">
-                <img
-                  src="/img/plan-placeholder.png"
-                  alt="Plan"
-                  width={260}
-                  height={180}
-                />
-              </div>
-
-              <h5 className="text-lg font-semibold mb-2">
-                GET STARTED BY CHOOSING A PLAN
-              </h5>
-              <p className="card-text mb-6">
-                You haven&apos;t selected a plan yet. Purchase a plan to unlock full details and manage your services.
-              </p>
-
-              <button className="btn-primary">
-                Buy Plan
-              </button>
-            </div>
-
-            {/* ================= MANAGE ================= */}
-          <div className="col-span-12 lg:col-span-9 py-8">
-            <div className="card card-highlight">
-              <h4 className="section-title mb-4">
-                MANAGE EVERYTHING IN ONE PLACE
-              </h4>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { label: "Order Details", icon: "🛒" },
-                  { label: "Profile Settings", icon: "👤" },
-                  { label: "Device Protection Plan", icon: "🛡️" },
-                  { label: "Pay Bills", icon: "🧾" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="manage-card"
-                  >
-                    <div className="text-2xl mb-2">{item.icon}</div>
-                    <p className="text-sm font-medium">{item.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <button onClick={handleLogout} className="btn-primary">
+              Logout
+            </button>
           </div>
 
-          {/* ================= REFER & EARN ================= */}
-          <div className="col-span-12 lg:col-span-6">
-            <div className="card card-highlight flex gap-4 items-center">
-              <img
-                src="/img/pana.png"
-                alt="Refer"
-                width={120}
-                height={120}
-              />
+        </div>
 
-              <div>
-                <h5 className="font-semibold mb-1">
-                  Share &amp; Save Together!
-                </h5>
-                <p className="card-text mb-3">
-                  Invite your friends to join and enjoy exclusive rewards. The
-                  more you refer, the more you earn.
-                </p>
-                <button className="btn-primary">
-                  Invite &amp; Earn Today
-                </button>
-              </div>
-            </div>
-          </div>
-          </div>
+        {/* ================= GRID ================= */}
 
-          {/* ================= PAYMENT DETAILS ================= */}
-          <div className="col-span-12 lg:col-span-3">
-            <h4 className="section-title">PAYMENT DETAILS</h4>
+        <div className="grid">
 
-            <div className="card text-center mb-4">
-              <div className="flex justify-center mb-3">
-                <img
-                  src="/img/refer-placeholder.png"
-                  alt="Payment"
-                  width={120}
-                  height={120}
-                />
-              </div>
+          {/* LEFT */}
 
-              <button className="btn-outline mb-2">
-                Add New Payment Method
-              </button>
-
-              <p className="text-xs text-gray-400">
-                Learn more about payment methods we accept
-              </p>
-            </div>
+          <div>
+            <p className="section-title">CUSTOMERS</p>
 
             <div className="card">
-              <h5 className="text-sm font-semibold mb-3">
-                DISCOUNT &amp; OFFERS
-              </h5>
 
-              <div className="flex items-center gap-3 bg-[#fff4ee] p-3 rounded-md">
-                <div className="icon-circle-sm">
-                  %
+              {ordersLoading && <p className="center">Loading...</p>}
+
+              {!ordersLoading && Object.keys(orders).length === 0 && (
+                <p className="center muted">No Plan Found</p>
+              )}
+
+              {Object.keys(orders).map((group) => (
+                <div
+                  key={group}
+                  className={`group-item ${selectedGroup === group ? "active" : ""}`}
+                  onClick={() => setSelectedGroup(group)}
+                >
+                  {group}
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-orange-600">
-                    30% Off for New Customers
-                  </p>
-                  <span className="text-xs text-orange-500 cursor-pointer">
-                    View All
-                  </span>
-                </div>
-              </div>
+              ))}
+
             </div>
           </div>
+
+          {/* RIGHT */}
+
+          <div>
+
+            {!ordersLoading && Object.keys(orders).length === 0 && (
+              <div className="card highlight center">
+                <img src="/img/plan-placeholder.png" width="240" />
+                <h3>GET STARTED BY CHOOSING A PLAN</h3>
+                <p>Purchase a plan to manage your services.</p>
+                <button className="btn-primary">Buy Plan</button>
+              </div>
+            )}
+
+            {!ordersLoading &&
+              selectedGroup &&
+              Object.keys(orders[selectedGroup] || {}).map((id) => {
+
+                const order = orders[selectedGroup][id][0];
+                const lineData = lineDataMap[id];
+
+                return (
+                  <div key={id} className="card highlight mb">
+
+                    <h4>Enrollment: {id}</h4>
+
+                    <div className="card mb">
+
+                      <div className="line-head">
+                        <div className="icon">👤</div>
+
+                        <div>
+                          <strong>{lineData?.LINE_INQ?.MDN || "Customer"}</strong>
+                          <p>ESN: {lineData?.ESN || "N/A"}</p>
+                        </div>
+                      </div>
+
+                      {lineLoading ? (
+                        <p className="center muted">Loading line...</p>
+                      ) : (
+                        <div className="stats">
+
+  <div className="stat-box green">
+    <div className="stat-value">
+      {lineData?.DATA_BALANCE ?? 0} GB
+    </div>
+    <div className="stat-sub">used of 1.5 GB</div>
+    <div className="stat-label">HIGH SPEED 5G DATA</div>
+  </div>
+
+  <div className="stat-box purple">
+    <div className="stat-value">
+      {lineData?.TALK_BALANCE ?? 0} Min
+    </div>
+    <div className="stat-sub">used of 8000 min</div>
+    <div className="stat-label">CALLING MINUTES</div>
+  </div>
+
+  <div className="stat-box pink">
+    <div className="stat-value">
+      {lineData?.SMS_BALANCE ?? 0} SMS
+    </div>
+    <div className="stat-sub">used of 4000 SMS</div>
+    <div className="stat-label">SMS</div>
+  </div>
+
+</div>
+
+                      )}
+
+                    </div>
+
+                    {order.plans.map((plan: any) => (
+                      <div key={plan.planId} className="plan-row">
+                        <strong>{plan.planTitle}</strong>
+                        <p>{plan.planDuration} Days • {plan.lineType}</p>
+                        <span>${plan.planPrice}</span>
+                      </div>
+                    ))}
+
+                    <div className="total-row">
+                      <span>Total</span>
+                      <strong>${order.total}</strong>
+                    </div>
+
+                    <div className="actions">
+                      <button className="btn-outline">Upgrade</button>
+                      <button className="btn-primary">Pay Bill</button>
+                    </div>
+
+                  </div>
+                );
+              })}
+
+          </div>
+
         </div>
+
       </main>
 
       <Footer />
 
-      {/* ================= INLINE CSS (DESIGN ACCURACY) ================= */}
-      <style jsx>{`
-        .section-title {
-          font-size: 12px;
-          font-weight: 600;
-          color: #6b7280;
-          margin-bottom: 10px;
-          letter-spacing: 0.05em;
-        }
+{/* ================= STYLES ================= */}
 
-        .card {
-          background: #ffffff;
-          border-radius: 12px;
-          padding: 20px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
+<style jsx>{`
 
-        .card-highlight {
-          border: 2px solid #ff5a1f;
-        }
+.page-wrap{
+  min-height:100vh;
+  background:linear-gradient(180deg,#fff7f2,#f9fafb);
+}
 
-        .card-title {
-          font-weight: 600;
-          margin-bottom: 6px;
-        }
+.content-wrap{
+  max-width:1150px;
+  margin:auto;
+  padding:40px 16px;
+}
 
-        .card-text {
-          font-size: 14px;
-          color: #6b7280;
-        }
+.loader-screen{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:600;
+}
 
-        .icon-circle {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background: #fff4ee;
-          color: #ff5a1f;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: auto;
-          font-weight: bold;
-        }
+/* USER BAR */
 
-        .icon-circle-sm {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background: #ffe6db;
-          color: #ff5a1f;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 14px;
-          font-weight: bold;
-        }
+.user-bar{
+  background:linear-gradient(135deg,#ff5a1f,#ff8a65);
+  border-radius:22px;
+  padding:26px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 20px 40px rgba(255,90,31,.35);
+  margin-bottom:30px;
+}
 
-        .btn-primary {
-          background: #ff5a1f;
-          color: white;
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-size: 14px;
-          font-weight: 600;
-        }
+.user-left{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  color:white;
+}
 
-        .btn-primary:hover {
-          background: #e14c15;
-        }
+.avatar{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:rgba(255,255,255,.25);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  font-weight:700;
+}
 
-        .btn-outline {
-          border: 1.5px solid #ff5a1f;
-          color: #ff5a1f;
-          padding: 8px 16px;
-          border-radius: 8px;
-          font-size: 13px;
-          font-weight: 600;
-        }
+.user-actions{
+  display:flex;
+  gap:14px;
+}
 
-        .manage-card {
-          border: 1px solid #e5e7eb;
-          border-radius: 10px;
-          padding: 18px;
-          text-align: center;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
+/* GRID */
 
-        .manage-card:hover {
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-          border-color: #ff5a1f;
-        }
-      `}</style>
+.grid{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:26px;
+}
+
+/* CARD */
+
+.card{
+  background:white;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 6px 25px rgba(0,0,0,.05);
+}
+
+.highlight{
+  border:2px solid #ff5a1f;
+}
+
+.mb{margin-bottom:22px;}
+.center{text-align:center;}
+.muted{color:#6b7280;}
+
+.section-title{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+  color:#9ca3af;
+  margin-bottom:10px;
+}
+
+/* GROUP */
+
+.group-item{
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:10px;
+  cursor:pointer;
+  background:#f9fafb;
+  font-weight:600;
+}
+
+.group-item.active{
+  background:#ffefe7;
+  color:#ff5a1f;
+}
+
+/* LINE */
+
+.line-head{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.icon{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff5a1f,#ff8a65);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.stat{
+  color:white;
+  padding:14px;
+  border-radius:14px;
+  font-weight:700;
+  text-align:center;
+}
+
+.green{background:#22c55e;}
+.purple{background:#8b5cf6;}
+.pink{background:#ec4899;}
+
+/* PLANS */
+
+.plan-row{
+  border:1px solid #e5e7eb;
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:12px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.plan-row span{
+  color:#ff5a1f;
+  font-weight:700;
+}
+
+/* TOTAL */
+
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  font-weight:700;
+  margin-top:12px;
+}
+
+/* BUTTONS */
+
+.actions{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+
+.btn-primary{
+  background:#ff5a1f;
+  color:white;
+  padding:12px;
+  border-radius:12px;
+  font-weight:700;
+  flex:1;
+}
+
+.btn-outline{
+  border:2px solid #ff5a1f;
+  color:#ff5a1f;
+  padding:12px;
+  border-radius:12px;
+  font-weight:700;
+  flex:1;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .user-bar{
+    flex-direction:column;
+    gap:18px;
+    align-items:flex-start;
+  }
+
+  .user-actions{
+    width:100%;
+  }
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.stat-box{
+  background:#f9fafb;
+  border-radius:16px;
+  padding:16px;
+  text-align:center;
+}
+
+.stat-value{
+  font-size:22px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+
+.stat-sub{
+  font-size:12px;
+  color:#6b7280;
+  margin-bottom:6px;
+}
+
+.stat-label{
+  font-size:12px;
+  font-weight:700;
+}
+
+/* Colors */
+.green .stat-value{color:#16a34a;}
+.purple .stat-value{color:#7c3aed;}
+.pink .stat-value{color:#db2777;}
+
+
+`}</style>
+
     </div>
   );
 }
