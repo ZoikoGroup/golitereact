@@ -383,13 +383,54 @@ if (!res) {
     const num = parseFloat(value);
     return Number.isInteger(num) ? num.toString() : num.toFixed(2);
   };
-type Theme = "flat" | "stripe" | "night";
-const appearance: Appearance = {
-  theme: "stripe",
-  variables: {
-    colorPrimary: "#DF1E5A",
-  },
-};
+
+
+  type Theme = "flat" | "stripe" | "night";
+
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    setIsDark(media.matches);
+
+    const listener = (e: any) => setIsDark(e.matches);
+    media.addEventListener("change", listener);
+
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
+
+  const appearance: Appearance = {
+    theme: isDark ? "night" : "stripe",
+
+    variables: {
+      colorPrimary: "#FD4C0E",
+      colorBackground: isDark ? "#374151" : "#ffffff",
+      colorText: isDark ? "#f3f4f6" : "#111827",
+      colorDanger: "#ef4444",
+      colorTextPlaceholder: isDark ? "#9ca3af" : "#6b7280",
+      borderRadius: "8px",
+    },
+
+    rules: {
+      ".Input": {
+        padding: "12px",
+        border: `1px solid ${isDark ? "#4b5563" : "#d1d5db"}`,
+        backgroundColor: isDark ? "#374151" : "#ffffff",
+        
+      },
+
+      ".Input:focus": {
+        border: "1px solid #FD4C0E",
+        boxShadow: "0 0 0 1px #FD4C0E",
+      },
+
+      ".Label": {
+        fontWeight: "500",
+      },
+    },
+  };
+
 
 
 useEffect(() => {
@@ -423,7 +464,7 @@ useEffect(() => {
     <>
       <Header />
 
-     <div className="min-h-screen bg-gray-50 ">
+     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
 
 
       <div className="bg-[#FD4C0E] text-white py-3">
@@ -498,10 +539,10 @@ useEffect(() => {
             </pre>
           </div> */}
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 ">
             <div className="lg:col-span-2 space-y-6">
               {cart.map((item, idx) => (
-                <div key={idx} className="bg-white rounded-lg shadow p-6">
+                <div key={idx} className="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <h5 className="text-lg font-bold text-[#FD4C0E]">{item.planTitle}</h5>
@@ -542,7 +583,7 @@ useEffect(() => {
                 </div>
               ))}
 
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
                 <h5 className="font-bold mb-4">Have a Coupon?</h5>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <input
@@ -569,7 +610,7 @@ useEffect(() => {
                 )}
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
                 <h5 className="font-bold mb-4">Service/Billing Details</h5>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {Object.keys(billingAddress).map((key) => {
@@ -615,7 +656,7 @@ useEffect(() => {
                   })}
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-4 dark:bg-gray-900">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="checkbox"
@@ -629,7 +670,7 @@ useEffect(() => {
                 </div>
 
                 {showShipping && (
-                  <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200">
                     <h6 className="font-bold mb-4 text-[#FD4C0E]">Shipping Address</h6>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {Object.keys(shippingAddress).map((key) => {
@@ -680,7 +721,7 @@ useEffect(() => {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
                 <h5 className="font-bold mb-4">Your Order</h5>
                 <div className="space-y-2 mb-4">
                   {cart.map((item, idx) => (
@@ -732,10 +773,10 @@ useEffect(() => {
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
+              <div className="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
                 <h5 className="font-bold mb-4">Payment Method</h5>
                 
-                <div className="p-4 bg-gray-50 rounded-lg mb-4">
+                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg mb-4">
                   {clientSecret && (
                     <Elements
                       stripe={stripePromise}
