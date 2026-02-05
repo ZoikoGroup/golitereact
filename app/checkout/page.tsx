@@ -90,7 +90,7 @@ export default function CheckoutPage() {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [showTermsPopup, setShowTermsPopup] = useState(false);
   const [selectedShippingOption, setSelectedShippingOption] = useState<ShippingOption>(shippingOptions[0]);
-
+  const [loginReason, setLoginReason] = useState("");
   const [errors, setErrors] = useState<Errors>({});
 
   const billingFieldMeta: Record<string, { label: string; placeholder: string; disabled?: boolean }> = {
@@ -178,14 +178,35 @@ export default function CheckoutPage() {
 
   // ✅ Check login status and close popup when user logs in
   useEffect(() => {
-    const token = localStorage.getItem("golite_token") || localStorage.getItem("golite_accessToken");
-    const wasLoggedIn = isLoggedIn;
-    setIsLoggedIn(!!token);
+    // const token = localStorage.getItem("golite_token") || localStorage.getItem("golite_accessToken");
+    // const wasLoggedIn = isLoggedIn;
+    // setIsLoggedIn(!!token);
 
-    // If user just logged in and popup was open, close it
-    if (token && !wasLoggedIn && showLoginPopup) {
-      setShowLoginPopup(false);
-    }
+    // // If user just logged in and popup was open, close it
+    // if (token && !wasLoggedIn && showLoginPopup) {
+    //   setShowLoginPopup(false);
+    // }
+
+    const checkLogin = () => {
+      const token =  localStorage.getItem("golite_token") ||  localStorage.getItem("golite_accessToken");
+      setIsLoggedIn(!!token);
+
+      if (token) {
+        setShowLoginPopup(false);
+      }
+    };
+
+    checkLogin();
+
+    window.addEventListener("storage", checkLogin);
+
+    return () => {
+      window.removeEventListener("storage", checkLogin);
+    };
+
+
+
+
   }, [showLoginPopup]);
 
   const hasDeviceItem = cart.some((item) => item.type === "device");
@@ -216,6 +237,13 @@ export default function CheckoutPage() {
 
 
   const handleApplyCoupon = async () => {
+    // 🔥 Require login
+    if (!isLoggedIn) {
+      setLoginReason("You need to login to apply coupon code.");
+      setShowLoginPopup(true);
+      return;
+    }
+
     if (!coupon) {
       setCouponMessage("Please enter a coupon code");
       return;
@@ -223,7 +251,7 @@ export default function CheckoutPage() {
 
     setLoading(true);
     setCouponMessage("");
-    
+
     setTimeout(() => {
       setDiscountData({ type: "percentage", discount: "10" });
       setCouponMessage("Coupon applied! Discount: 10%");
@@ -289,10 +317,16 @@ export default function CheckoutPage() {
   };
 
   const handlePlaceOrder = async () => {
-  if (!agreeTerms) {
-    setShowTermsPopup(true);
-    return;
-  }
+    // 🔥 Require login before checkout
+    if (!isLoggedIn) {
+      setLoginReason("Please login to complete checkout.");
+      setShowLoginPopup(true);
+      return;
+    }
+    if (!agreeTerms) {
+      setShowTermsPopup(true);
+      return;
+    }
 
   if (!validateFields()) {
     alert("Please fill all required fields correctly");
@@ -770,7 +804,7 @@ useEffect(() => {
       {/* Body */}
       <div className="px-6 py-5 text-center">
         <p className="text-gray-600">
-          You need to login to apply your coupon code.
+          {loginReason || "You need to login."}
         </p>
 
         <a
