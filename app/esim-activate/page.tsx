@@ -14,6 +14,11 @@ type ExistingPlanOption = {
 };
 
 export default function SimActivationForm() {
+    const [showDeviceCheck, setShowDeviceCheck] = useState(true);
+const [deviceImei, setDeviceImei] = useState("");
+const [deviceChecking, setDeviceChecking] = useState(false);
+
+
   const [step, setStep] = useState<"fetchCustomer" | "fetchLine">("fetchCustomer");
   const [email, setEmail] = useState("");
   const [imei, setImei] = useState("");
@@ -32,6 +37,51 @@ export default function SimActivationForm() {
   const [zipCode, setZipCode] = useState("");
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const checkDeviceCompatibility = async () => {
+    if (!deviceImei) {
+        setPopup({ message: "IMEI is required", type: "error" });
+        return;
+    }
+
+    try {
+        setDeviceChecking(true);
+
+        const res = await fetch("/api/vcare/check-device", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imei: deviceImei }),
+        });
+
+        const result = await res.json();
+
+        // 👉 Adjust condition based on API response
+        if (!result?.status && !result?.data) {
+        setPopup({
+            message: "Device is not compatible",
+            type: "error",
+        });
+        return;
+        }
+
+        // ✅ Device OK
+        setImei(deviceImei); // autofill IMEI input
+        setShowDeviceCheck(false);
+
+        setPopup({
+        message: "Device is compatible ✅",
+        type: "success",
+        });
+
+    } catch (err) {
+        setPopup({
+        message: "Device compatibility check failed",
+        type: "error",
+        });
+    } finally {
+        setDeviceChecking(false);
+    }
+    };
 
   const fetchCustomerInfo = async () => {
     setLoading(true);
@@ -193,7 +243,8 @@ const activateSim = async () => {
     <>
       <Header />
 
-      <div className="min-h-screen flex items-center justify-center px-4">
+      {!showDeviceCheck && (
+        <div className="min-h-screen flex items-center justify-center px-4">
         <div className="w-full max-w-3xl p-8">
           <h1 className="text-3xl font-semibold text-center mb-8">
             SIM Activation Form
@@ -362,6 +413,7 @@ const activateSim = async () => {
           </form>
         </div>
       </div>
+      )}
       {popup && (
         <Popup
           message={popup.message}
@@ -369,6 +421,34 @@ const activateSim = async () => {
           onClose={() => setPopup(null)}
         />
       )}
+    {showDeviceCheck && (
+        <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="inset-0 z-[1100] flex items-center justify-center bg-black/50">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-[90%] max-w-md shadow-lg">
+
+            <h2 className="text-xl font-semibold mb-4 text-center">
+                Device Compatibility Check
+            </h2>
+
+            <input
+                value={deviceImei}
+                onChange={(e) => setDeviceImei(e.target.value)}
+                placeholder="Enter IMEI Number"
+                className="w-full border rounded-md px-4 py-2 mb-4"
+            />
+
+            <button
+                onClick={checkDeviceCompatibility}
+                disabled={deviceChecking}
+                className="w-full bg-orange-500 text-white py-2 rounded-md"
+            >
+                {deviceChecking ? "Checking..." : "Check Device"}
+            </button>
+
+            </div>
+        </div>
+        </div>
+        )}
       <Footer />
     </>
   );

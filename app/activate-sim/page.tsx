@@ -8,21 +8,24 @@ export default function SimComparison() {
     };
 
     const handleESimClick = () => {
-        window.location.href = '/esim-compatible';
+        window.location.href = '/esim-activate';
     };
   return (
     <>
     <Header />
-    <div  className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center p-8">
+    <div className="min-h-screen 
+bg-gradient-to-br from-orange-50 to-red-50 
+dark:bg-gradient-to-br dark:from-gray-900 dark:to-[#1f0a02]
+flex items-center justify-center p-8">
       <div className="max-w-4xl w-full">
         
-        <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
+        <h1 className="text-4xl font-bold text-center mb-12 dark:text-gray-200">
           SIM Card Types
         </h1>
         
         <div className="grid md:grid-cols-2 gap-8">
           {/* pSIM Card */}
-          <div onClick={handlePSimClick} className="cursor-pointer bg-white rounded-3xl border-4 border-orange-500 p-8 flex flex-col items-center justify-center hover:shadow-2xl transition-shadow duration-300">
+          <div onClick={handlePSimClick} className="cursor-pointer bg-white rounded-3xl border-4 border-orange-500 p-8 flex flex-col items-center justify-center hover:shadow-2xl transition-shadow duration-300 dark:bg-gray-800">
             <div className="mb-6">
               <svg className="w-32 h-32 text-orange-500" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="15" y="10" width="70" height="80" rx="8" stroke="currentColor" strokeWidth="3" fill="none"/>
@@ -37,7 +40,7 @@ export default function SimComparison() {
           </div>
 
           {/* eSIM Card */}
-          <div onClick={handleESimClick} className="cursor-pointer bg-white rounded-3xl border-4 border-orange-500 p-8 flex flex-col items-center justify-center hover:shadow-2xl transition-shadow duration-300">
+          <div onClick={handleESimClick} className="cursor-pointer  dark:bg-gray-800 bg-white rounded-3xl border-4 border-orange-500 p-8 flex flex-col items-center justify-center hover:shadow-2xl transition-shadow duration-300">
             <div className="mb-6">
               <svg className="w-32 h-32 text-orange-500" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="20" y="25" width="60" height="50" rx="6" stroke="currentColor" strokeWidth="3" fill="none"/>

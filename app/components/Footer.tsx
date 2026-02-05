@@ -71,10 +71,10 @@ export default function Footer() {
               <h3 className="font-semibold text-white mb-4">Resources</h3>
               <ul className="space-y-2 text-sm">
                 <li><a href="/blog" className="block">Blog</a></li>
+                <li><a href="/activate-sim" className="block">Activate SIM</a></li>
                 <li>Help Center</li>
                 <li>Community Forum</li>
                 <li>Network Status</li>
-                <li>Developer API</li>
               </ul>
             </div>
 
