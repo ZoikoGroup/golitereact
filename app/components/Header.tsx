@@ -137,7 +137,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full border-b bg-white">
+    <nav className="w-full border-b bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
         {/* Logo */}
@@ -146,7 +146,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 text-gray-600">
+        <div className="hidden md:flex items-center gap-8 text-gray-600 dark:text-gray-300">
           <a href="/prepaid" className="hover:text-black">Prepaid Plans</a>
           <a href="/postpaid" className="hover:text-black">Postpaid Plans</a>
           <a href="/family-plans" className="hover:text-black">Family Plans</a>
@@ -157,21 +157,21 @@ export default function Navbar() {
           <a href="/about-us" className="hover:text-black">About</a>
         </div>
         {isLoggedIn && (
-          <p className="text-sm text-gray-500 block lg:hidden  xl:hidden  md:hidden">
+          <p className="text-sm text-gray-500 dark:text-gray-300 block lg:hidden  xl:hidden  md:hidden">
             Hi, <span className="font-medium">{user?.first_name || (typeof user?.username === 'string' ? user.username : 'User')}</span>
           </p>
         )}
         {/* Right Actions */}
         <div className="flex items-center gap-5">
 
-          <Search className="w-5 h-5 cursor-pointer text-gray-700" />
+          <Search className="w-5 h-5 cursor-pointer text-gray-700 dark:text-gray-300" />
 
           {/* Cart */}
           <div
             className="relative cursor-pointer"
             onClick={() => router.push("/checkout")}
           >
-            <ShoppingCart className="w-6 h-6 text-gray-800" />
+            <ShoppingCart className="w-6 h-6 text-gray-800 dark:text-gray-300" />
             {cartCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                 {cartCount}
@@ -192,16 +192,16 @@ export default function Navbar() {
               </button>
 
               {accountOpen && (
-                <div className="absolute right-0 mt-3 w-44 bg-white border rounded-lg shadow-lg z-50">
+                <div className="absolute right-0 mt-3 w-44 bg-white dark:bg-gray-900 border rounded-lg shadow-lg z-50">
                   <button
                     onClick={() => router.push("/my-account")}
-                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100  dark:hover:bg-gray-800"
                   >
                     Dashboard
                   </button>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-800"
                   >
                     Logout
                   </button>
