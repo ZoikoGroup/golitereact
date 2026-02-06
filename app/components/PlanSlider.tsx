@@ -251,9 +251,8 @@ export default function PricingPlans() {
                         {plan.title}
                       </h3>
 
-                      <p className="text-3xl font-bold text-center">
-                        {plan.price}
-                      </p>
+                      <p className="text-3xl font-bold mb-1 text-center">${plan.final_price}/mo</p>
+                      <p className="text-gray-500 mb-4 text-center text-sm">(taxes and fees included)</p>
 
                       <button
                         onClick={() => handleBuyPlan(plan)}
