@@ -10,35 +10,74 @@ export default function StreamingPlans() {
 
   const faqs = [
   {
-    question: "What is international long distance calling?",
-    answer: "International long distance calling allows you to make phone calls from the United States to people in other countries."
+    question: "What is GoLite Mobile?",
+    answer:
+      "GoLite Mobile is a premium MVNO (Mobile Virtual Network Operator) offering high-quality prepaid and postpaid mobile plans with nationwide coverage. We focus on providing high-speed data, affordable pricing, and eco-conscious initiatives."
+  },
+
+  {
+    question: "Does GoLite Mobile support 5G?",
+    answer:
+      "Yes, all our plans include 5G access at no extra cost, provided your device supports 5G."
+  },
+
+  {
+    question: "What network does GoLite Mobile use?",
+    answer:
+      "GoLite Mobile operates on one of the largest and most reliable nationwide networks, ensuring high-speed connectivity and coverage across the U.S."
+  },
+
+  {
+    question: "Do your plans include mobile hotspot data?",
+    answer:
+      "Yes! All our plans include mobile hotspot data. The amount of hotspot data varies by plan, with up to 15 GB available on the Go-Unlimited Plan."
+  },
+
+  {
+    question: "What is Data Rollover, and how does it work?",
+    answer:
+      "Data Rollover allows you to carry over unused data into the next billing cycle. The Go-Prime Plan rolls over all unused data, while the Go-Value Plan allows up to 1 GB of data to roll over."
+  },
+
+  {
+    question: "Are there restrictions on unlimited data plans?",
+    answer:
+      "While our Go-Unlimited Plan provides unlimited high-speed data, customers who use excessive amounts of data may experience deprioritization during peak network times."
   },
   {
-    question: "Are international calls included in Zoiko Mobile plans?",
-    answer: "Yes, all Zoiko Mobile plans include free international calling minutes to over 246 countries. The allowance varies depending on the destination country and whether you are calling a landline or mobile number."
+    question: "How does billing work for GoLite Mobile plans?",
+    answer:
+      "Our service operates on a simple monthly billing cycle with no contracts. You pay upfront for prepaid plans, and postpaid plans are billed at the end of the cycle."
   },
+
   {
-    question: "What happens if I exceed my data limit?",
-    answer: "Zoiko Mobile offers free international calling minutes to over 246 countries as part of every plan, with no additional activation or hidden fees. Most other carriers charge extra for similar services or cover fewer countries, making Zoiko Mobile a more affordable and comprehensive choice."
+    question: "Are there any hidden fees or activation charges?",
+    answer:
+      "No! GoLite Mobile is transparent - what you see is what you pay. There are no activation fees or hidden charges."
   },
+
   {
-    question: "Do I need to activate international calling on my Zoiko Mobile plan?",
-    answer: "No activation is required. International calling is automatically included in all Zoiko Mobile plans."
+    question: "Can I switch between plans?",
+    answer:
+      "Yes, you can switch between plans anytime through your GoLite Mobile account. Changes take effect at the start of your next billing cycle."
   },
+
   {
-    question: "Can I use Zoiko Mobile's international calling feature on any device?",
-    answer: "Yes, you can use Zoiko Mobile's international calling feature on any device compatible with our network, including smartphones and tablets."
+    question: "Can I bring my own phone to GoLite Mobile?",
+    answer:
+      "Absolutely! GoLite Mobile supports most unlocked GSM-compatible devices, including iPhones, Samsung, Google Pixel, and more."
   },
+
   {
-    question: "How do I make an international call with Zoiko Mobile?",
-    answer: (
-      <ol className="list-decimal pl-5 break-words">
-        <li>Dial "+" or "011" (the international dialing code).</li>
-        <li>Enter the country code of the destination you are calling.</li>
-        <li>Dial the phone number, including the area code if required.</li>
-        <li>Press the call button to connect.</li>
-      </ol>
-    )
+    question: "How do I activate my GoLite Mobile SIM card?",
+    answer:
+      "Simply insert the SIM card into your device and follow the activation instructions included in your package or visit our website for step-by-step guidance."
+  },
+
+  {
+    question: "Does GoLite Mobile offer international roaming?",
+    answer:
+      "Yes! Our postpaid plans offer free roaming in Canada & Mexico. For other international destinations, we have affordable add-on packages."
   }
 ];
   // Split into two columns
