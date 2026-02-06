@@ -32,42 +32,51 @@ function LoginPageContent() {
      EMAIL / PASSWORD LOGIN (DJANGO API)
      ========================= */
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
+  e.preventDefault();
+  setError(null);
+  setLoading(true);
 
+  try {
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/login/`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.trim(),
+        password,
+      }),
+    });
+
+    // ✅ SAFELY read response
+    const text = await response.text();
+
+    let data: any;
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/login/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Frontend-Origin": window.location.origin,
-          },
-          body: JSON.stringify({
-            email: email.trim(),
-            password,
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Incorrect email or password");
-      }
-
-      localStorage.setItem("golite_token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-
-      router.replace(redirect || "/my-account");
-    } catch (err: any) {
-      setError(err.message || "Invalid credentials");
-    } finally {
-      setLoading(false);
+      data = JSON.parse(text);
+    } catch {
+      console.error("Server returned non-JSON:", text);
+      throw new Error("Server error. Check API URL or CORS.");
     }
-  };
+
+    if (!response.ok) {
+      throw new Error(data?.message || "Incorrect email or password");
+    }
+
+    // ✅ save
+    localStorage.setItem("golite_token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    router.replace(redirect || "/my-account");
+
+  } catch (err: any) {
+    setError(err.message || "Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -149,7 +158,7 @@ function LoginPageContent() {
             </div>
 
             {/* ===== GOOGLE LOGIN ===== */}
-            {/* <div className="mt-4">
+            <div className="mt-4">
               {(status === "authenticated" || (typeof window !== 'undefined' && !!localStorage.getItem('golite_token'))) ? (
                 <button
                   type="button"
@@ -169,7 +178,7 @@ function LoginPageContent() {
                   Sign in with Google
                 </button>
               )}
-            </div> */}
+            </div>
 
             {/* ===== FACEBOOK LOGIN ===== */}
             <div className="mt-3">
