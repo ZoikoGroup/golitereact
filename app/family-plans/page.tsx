@@ -158,87 +158,125 @@ const getStarted = [
     }
   ];
 
+
+
 const faqs = [
   {
     question: "What is a GoLite Mobile Family & Multi-Line Plan?",
-    answer: "A Family & Multi-Line Plan lets you combine multiple GoLite Mobile Personal Plans - prepaid, postpaid, or both - into one account. Enjoy shared data, unlimited talk and text, discounts on additional lines, and a single dashboard to manage it all."
+    answer:
+      "A Family & Multi-Line Plan lets you combine multiple GoLite Mobile personal plans — prepaid, postpaid, or both — into one account. You get shared data, unlimited talk and text, discounts on additional lines, and one dashboard to manage everything."
   },
   {
     question: "Can I mix prepaid and postpaid plans in the same family account?",
-    answer: "Yes! You can mix and match prepaid and postpaid plans however you like. This flexibility lets each family member choose the plan that best fits their needs."
+    answer:
+      "Yes! You can mix and match prepaid and postpaid plans however you like, so each family member can choose what fits their needs best."
   },
   {
     question: "How many lines can I add to one account?",
-    answer: "You can add up to 10 lines to your Family & Multi-Line Plan. And the more lines you add, the more you save."
+    answer:
+      "You can add up to 10 lines to your Family & Multi-Line Plan. The more lines you add, the more you save."
   },
   {
     question: "Is data really shared across all lines?",
-    answer: "Yes. Your group shares one pool of high-speed data, which means no more wasted data on underused lines. Everyone gets what they need, when they need it."
+    answer:
+      "Yes. Your group shares one pool of high-speed data, so no data goes to waste and everyone gets what they need."
   },
   {
     question: "What’s the difference between Go-Steady and Go-Flex plans?",
-    answer: (<ul><li><strong>Go-Steady</strong> is a postpaid plan that costs $37/month per line. It includes 9GB of high-speed data, 900MB of hotspot access, and comes with optional 12- or 24-month contracts. It’s ideal for families that need consistent, reliable connectivity.</li><li><strong>Go-Flex</strong> is a prepaid plan at $18/month per line. It includes 3GB of high-speed data, 500MB of hotspot access, and has no contracts. Perfect for those who want budget-friendly flexibility with no long-term commitment.</li></ul>)
+    answer: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>
+          <strong>Go-Steady</strong> (Postpaid) – $37/month per line, 9GB high-speed data, 900MB hotspot, optional 12- or 24-month contracts. Ideal for consistent usage.
+        </li>
+        <li>
+          <strong>Go-Flex</strong> (Prepaid) – $18/month per line, 3GB high-speed data, 500MB hotspot, no contracts. Perfect for budget-friendly flexibility.
+        </li>
+      </ul>
+    )
   },
   {
     question: "Do I have to sign a contract?",
     answer: (
-      <><p>Not necessarily.</p><ul><li><strong>Go-Flex</strong> (prepaid) is contract-free with simple 30-day plans.</li><li><strong>Go-Steady</strong> (postpaid) offers optional 12- or 24-month contracts if you prefer long-term stability and benefits.</li></ul></>
+      <ul className="list-disc pl-5 space-y-1">
+        <li><strong>Go-Flex</strong> (prepaid) is contract-free with 30-day plans.</li>
+        <li><strong>Go-Steady</strong> (postpaid) offers optional 12- or 24-month contracts.</li>
+      </ul>
     )
   },
   {
     question: "What happens if I use up all my high-speed data?",
-    answer: "Your service will continue at reduced speeds (128kbps), or you can easily purchase additional high-speed data anytime through your dashboard."
+    answer:
+      "Your service continues at reduced speeds (128kbps), or you can purchase more high-speed data anytime from your dashboard."
   },
   {
     question: "Can I make international calls?",
-    answer: "Yes! Every GoLite Mobile plan includes unlimited free international calling to over 220 countries - no extra charges or hidden fees."
+    answer:
+      "Yes! Every GoLite Mobile plan includes unlimited free international calling to over 220 countries."
   },
   {
     question: "Can I use my phone while traveling?",
-    answer: (<ul><li><strong>Domestic roaming</strong> is included for free.</li><li><strong>International roaming</strong> is available on select plans for an additional fee. You can enable it through your dashboard.</li></ul>)
+    answer: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li><strong>Domestic roaming</strong> is included for free.</li>
+        <li><strong>International roaming</strong> is available on select plans for an additional fee.</li>
+      </ul>
+    )
   },
   {
     question: "How do I start a Family Plan?",
-    answer: (<>
-    <p>It’s easy:</p>
-    <ol><li>Choose your plans - prepaid, postpaid, or both</li><li>Add up to 10 lines</li><li>Activate your SIMs or eSIMs at <a href="https://golitemobile.com/activate-sim/">Activate</a></li><li>Manage everything using the <strong>My GoLite Mobile</strong> app or website</li></ol>
-    
-    </>)
+    answer: (
+      <ol className="list-decimal pl-5 space-y-1">
+        <li>Choose your plans (prepaid, postpaid, or both)</li>
+        <li>Add up to 10 lines</li>
+        <li>Activate your SIMs or eSIMs</li>
+        <li>Manage everything in the My GoLite Mobile app or website</li>
+      </ol>
+    )
   },
   {
     question: "Can I keep my current phone number?",
-    answer: "Yes, you can switch between plans anytime through your GoLite Mobile account. Changes take effect at the start of your next billing cycle."
+    answer:
+      "Yes! You can keep your number and also switch between plans anytime. Changes take effect at the next billing cycle."
   },
   {
     question: "Can I bring my own phone?",
-    answer: "Absolutely. Most unlocked devices - including eSIM-capable phones - are compatible with GoLite Mobile. Check compatibility during activation."
+    answer:
+      "Absolutely. Most unlocked devices, including eSIM-capable phones, work with GoLite Mobile."
   },
   {
     question: "How do I manage all the lines on my account?",
-    answer: (<>
-    <p>Use <strong>My GoLite Mobile</strong>, your all-in-one dashboard where you can:</p>
-    <ul><li>View usage per line</li><li>Pay your bill</li><li>Add or remove lines</li><li>Set data limits or alerts</li><li>Access parental controls</li></ul>
-    </>)
+    answer: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>View usage per line</li>
+        <li>Pay your bill</li>
+        <li>Add or remove lines</li>
+        <li>Set data limits & alerts</li>
+        <li>Access parental controls</li>
+      </ul>
+    )
   },
   {
     question: "Are there parental controls?",
-    answer: "Yes! You can set screen time limits, filter content, and control data usage for each line - ideal for families with kids."
+    answer:
+      "Yes! You can set screen time limits, filter content, and control data usage for each line."
   },
   {
     question: "What kind of support does GoLite Mobile offer?",
-    answer: (<>
-    <p>We're available 24/7 to help you out:</p>
-    <ul><li><strong>Call us</strong> at 800-801-9385</li><li><strong>Live Chat</strong> at <a href="https://golitemobile.com/help-and-support/">Support</a></li></ul>
-    <p><strong>Help Center</strong> online with FAQs and setup guides</p>
-    </>)
+    answer: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>24/7 Phone Support: 800-801-9385</li>
+        <li>Live Chat via Help & Support page</li>
+        <li>Online Help Center with guides & FAQs</li>
+      </ul>
+    )
   },
   {
     question: "Is GoLite Mobile eco-friendly?",
-    answer: "Yes! Every GoLite Mobile plan supports global ocean conservation efforts. When you join us, you’re helping protect the planet."
-  },
- 
-  
+    answer:
+      "Yes! Every GoLite Mobile plan supports global ocean conservation efforts."
+  }
 ];
+
   // Split into two columns
   const mid = Math.ceil(faqs.length / 2);
   const leftColumn = faqs.slice(0, mid);

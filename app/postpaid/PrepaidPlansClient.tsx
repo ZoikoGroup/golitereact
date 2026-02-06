@@ -217,39 +217,152 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
     },
   ];
   
+
+
 const faqs = [
   {
-    question: "What is international long distance calling?",
-    answer: "International long distance calling allows you to make phone calls from the United States to people in other countries."
+    question: "What are GoLite Mobile Postpaid Plans?",
+    answer:
+      "GoLite Mobile Postpaid Plans offer premium unlimited wireless service with flexible 12 or 24-month contracts, world-class 5G coverage, and free international calling to 200+ countries. Unlike prepaid, you pay at the end of each billing cycle instead of upfront."
   },
   {
-    question: "Are international calls included in Zoiko Mobile plans?",
-    answer: "Yes, all Zoiko Mobile plans include free international calling minutes to over 246 countries. The allowance varies depending on the destination country and whether you are calling a landline or mobile number."
-  },
-  {
-    question: "What happens if I exceed my data limit?",
-    answer: "Zoiko Mobile offers free international calling minutes to over 246 countries as part of every plan, with no additional activation or hidden fees. Most other carriers charge extra for similar services or cover fewer countries, making Zoiko Mobile a more affordable and comprehensive choice."
-  },
-  {
-    question: "Do I need to activate international calling on my Zoiko Mobile plan?",
-    answer: "No activation is required. International calling is automatically included in all Zoiko Mobile plans."
-  },
-  {
-    question: "Can I use Zoiko Mobile's international calling feature on any device?",
-    answer: "Yes, you can use Zoiko Mobile's international calling feature on any device compatible with our network, including smartphones and tablets."
-  },
-  {
-    question: "How do I make an international call with Zoiko Mobile?",
+    question: "What makes GoLite Mobile Postpaid Plans different?",
     answer: (
-      <ol className="list-decimal pl-5 break-words">
-        <li>Dial "+" or "011" (the international dialing code).</li>
-        <li>Enter the country code of the destination you are calling.</li>
-        <li>Dial the phone number, including the area code if required.</li>
-        <li>Press the call button to connect.</li>
+      <ul className="list-disc pl-5 space-y-1">
+        <li>Same premium network as AT&T – Nationwide 5G & 4G LTE</li>
+        <li>Truly unlimited data – No overages or slowdowns</li>
+        <li>Flexible contract terms – Choose 12 or 24 months</li>
+        <li>Device financing & upgrade programs</li>
+        <li>Exclusive multi-line & business discounts</li>
+        <li>A mission-driven approach that supports marine conservation</li>
+      </ul>
+    )
+  },
+  {
+    question: "What do all GoLite Mobile Postpaid Plans include?",
+    answer: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>Unlimited calls & texts across the USA</li>
+        <li>Unlimited high-speed 5G & 4G LTE data</li>
+        <li>1,250 free international calling minutes per month</li>
+        <li>Mobile hotspot capabilities</li>
+        <li>Wi-Fi calling & VoLTE support</li>
+        <li>24/7 premium customer support</li>
+      </ul>
+    )
+  },
+  {
+    question: "What are the contract options?",
+    answer: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>12-month contract – More flexibility, upgrade sooner</li>
+        <li>24-month contract – Best value with lower monthly payments</li>
+      </ul>
+    )
+  },
+  {
+    question: "What happens if I use all 1,250 international minutes?",
+    answer:
+      "You can purchase additional international calling minutes via our website or mobile app."
+  },
+  {
+    question: "Can I use my phone internationally?",
+    answer:
+      "Yes! International roaming is available in over 100 countries. You can add an international data pass to stay connected while traveling."
+  },
+  {
+    question: "Can I add multiple lines to a postpaid plan?",
+    answer:
+      "Yes! Family & Business Plans allow multiple lines with discounted pricing."
+  },
+  {
+    question: "Can I finance a smartphone with GoLite Mobile?",
+    answer:
+      "Yes! We offer affordable device financing options, so you can get the latest iPhone, Samsung, or Google Pixel with low monthly payments."
+  },
+  {
+    question: "When can I upgrade my phone?",
+    answer:
+      "You can upgrade after 12 months if you have a 24-month contract, or after 6 months with select early upgrade programs."
+  },
+  {
+    question: "What if I want to cancel my contract early?",
+    answer: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>Pay an early termination fee (ETF)</li>
+        <li>Settle any remaining device payments</li>
+        <li>Some users may qualify for contract buyout options</li>
+      </ul>
+    )
+  },
+  {
+    question: "Does GoLite Mobile offer business postpaid plans?",
+    answer: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>Multi-line discounts for teams</li>
+        <li>Priority network access</li>
+        <li>Dedicated account managers</li>
+        <li>Business roaming packages</li>
+      </ul>
+    )
+  },
+  {
+    question: "How many lines can I add to a business plan?",
+    answer:
+      "You can add up to 50 lines with customized pricing based on your team’s needs."
+  },
+  {
+    question: "What network does GoLite Mobile use?",
+    answer:
+      "GoLite Mobile operates on AT&T’s premium network, providing nationwide 5G & 4G LTE coverage with best-in-class reliability."
+  },
+  {
+    question: "Does GoLite Mobile Postpaid include 5G access?",
+    answer:
+      "Yes! 5G access is included at no extra cost with all postpaid plans."
+  },
+  {
+    question: "Will my service work in rural or coastal areas?",
+    answer:
+      "Yes! GoLite Mobile provides extensive coverage in cities, rural areas, and coastal regions."
+  },
+  {
+    question: "How does billing work?",
+    answer:
+      "Postpaid plans are billed at the end of each month. You’ll receive an invoice with all your charges."
+  },
+  {
+    question: "What payment methods are accepted?",
+    answer: (
+      <ul className="list-disc pl-5 space-y-1">
+        <li>Credit / Debit Cards</li>
+        <li>PayPal</li>
+        <li>AutoPay (recommended for discounts)</li>
+      </ul>
+    )
+  },
+  {
+    question: "Are there any hidden fees?",
+    answer:
+      "No! GoLite Mobile is transparent with no hidden fees or surprise charges."
+  },
+  {
+    question: "How do I activate my GoLite Mobile Postpaid service?",
+    answer: (
+      <ol className="list-decimal pl-5 space-y-1">
+        <li>Choose your plan & select contract length</li>
+        <li>Get your SIM or eSIM</li>
+        <li>Follow activation steps on our website or mobile app</li>
       </ol>
     )
+  },
+  {
+    question: "Can I keep my current phone number?",
+    answer:
+      "Yes! Number porting is free and easy."
   }
 ];
+
   // Split into two columns
   const mid = Math.ceil(faqs.length / 2);
   const leftColumn = faqs.slice(0, mid);

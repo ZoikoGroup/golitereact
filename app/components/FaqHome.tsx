@@ -1,39 +1,36 @@
 "use client"
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 
+
+
 const faqs = [
   {
-    question: "What is international long distance calling?",
-    answer: "International long distance calling allows you to make phone calls from the United States to people in other countries."
+    question: "What is GoLite Mobile?",
+    answer:
+      "GoLite Mobile is a wireless service provider offering affordable prepaid and postpaid plans with nationwide coverage. We combine great value with eco-friendly initiatives, donating a portion of every plan to ocean conservation efforts."
   },
   {
-    question: "Are international calls included in Zoiko Mobile plans?",
-    answer: "Yes, all Zoiko Mobile plans include free international calling minutes to over 246 countries. The allowance varies depending on the destination country and whether you are calling a landline or mobile number."
+    question: "What makes GoLite Mobile eco-friendly?",
+    answer:
+      "We’re committed to protecting the planet through initiatives like beach and ocean cleanups, e-waste recycling, plastic-free packaging, and working towards carbon neutrality. By choosing GoLite, you’re helping us make a difference for our oceans."
   },
   {
-    question: "What happens if I exceed my data limit?",
-    answer: "Zoiko Mobile offers free international calling minutes to over 246 countries as part of every plan, with no additional activation or hidden fees. Most other carriers charge extra for similar services or cover fewer countries, making Zoiko Mobile a more affordable and comprehensive choice."
+    question: "Is GoLite Mobile available nationwide?",
+    answer:
+      "Yes, GoLite Mobile offers reliable nationwide coverage across the U.S. with no hidden fees or surprises."
   },
   {
-    question: "Do I need to activate international calling on my Zoiko Mobile plan?",
-    answer: "No activation is required. International calling is automatically included in all Zoiko Mobile plans."
+    question: "How do I sign up for GoLite Mobile?",
+    answer:
+      "Signing up is easy! Visit our website, choose a plan, and follow the instructions. You can also bring your own device or purchase a new one from us."
   },
   {
-    question: "Can I use Zoiko Mobile's international calling feature on any device?",
-    answer: "Yes, you can use Zoiko Mobile's international calling feature on any device compatible with our network, including smartphones and tablets."
-  },
-  {
-    question: "How do I make an international call with Zoiko Mobile?",
-    answer: (
-      <ol className="list-decimal pl-5 break-words">
-        <li>Dial "+" or "011" (the international dialing code).</li>
-        <li>Enter the country code of the destination you are calling.</li>
-        <li>Dial the phone number, including the area code if required.</li>
-        <li>Press the call button to connect.</li>
-      </ol>
-    )
+    question: "What is Data Rollover?",
+    answer:
+      "Data Rollover lets you keep unused high-speed data for the next month (limits apply depending on your plan). It’s our way of making sure you get the most out of your plan."
   }
 ];
+
 
 function IntlFaqs() {
   // Split into two columns
