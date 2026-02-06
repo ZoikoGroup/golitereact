@@ -214,37 +214,117 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
   
 const faqs = [
   {
-    question: "What is international long distance calling?",
-    answer: "International long distance calling allows you to make phone calls from the United States to people in other countries."
+    question: "What are GoLite Mobile Prepaid Plans?",
+    answer:
+      "GoLite Mobile Prepaid Plans provide unlimited wireless service with no contracts or credit checks. Unlike postpaid, you pay upfront each month instead of receiving a bill later."
   },
   {
-    question: "Are international calls included in Zoiko Mobile plans?",
-    answer: "Yes, all Zoiko Mobile plans include free international calling minutes to over 246 countries. The allowance varies depending on the destination country and whether you are calling a landline or mobile number."
+    question: "What makes GoLite Mobile Prepaid Plans different?",
+    answer:
+      "✔ Same premium network as AT&T – Nationwide 5G & 4G LTE. ✔ Truly unlimited data – No overages or slowdowns. ✔ No contracts, no commitments. ✔ Free international calling (1,250 minutes per month). ✔ Multi-line & family discounts. ✔ Supports marine conservation efforts."
   },
   {
-    question: "What happens if I exceed my data limit?",
-    answer: "Zoiko Mobile offers free international calling minutes to over 246 countries as part of every plan, with no additional activation or hidden fees. Most other carriers charge extra for similar services or cover fewer countries, making Zoiko Mobile a more affordable and comprehensive choice."
+    question: "How do GoLite Mobile Prepaid Plans compare to Verizon, T-Mobile, and AT&T?",
+    answer:
+      "We offer the same premium network experience while providing: ✔ No contracts or credit checks – Unlike postpaid plans. ✔ More flexibility – Choose your plan and change anytime. ✔ Better international perks – Free calls to 200+ countries."
   },
   {
-    question: "Do I need to activate international calling on my Zoiko Mobile plan?",
-    answer: "No activation is required. International calling is automatically included in all Zoiko Mobile plans."
+    question: "What do all GoLite Mobile Prepaid Plans include?",
+    answer:
+      "✔ Unlimited talk & text within the USA. ✔ Unlimited high-speed 5G & 4G LTE data. ✔ Free international calling (up to 1,250 minutes per month). ✔ Mobile hotspot capabilities. ✔ Wi-Fi calling & VoLTE support."
   },
   {
-    question: "Can I use Zoiko Mobile's international calling feature on any device?",
-    answer: "Yes, you can use Zoiko Mobile's international calling feature on any device compatible with our network, including smartphones and tablets."
+    question: "Are there different prepaid plan options?",
+    answer:
+      "Yes! We offer multiple prepaid plans including single-line plans, family & multi-line plans, and pay-as-you-go options."
   },
   {
-    question: "How do I make an international call with Zoiko Mobile?",
-    answer: (
-      <ol className="list-decimal pl-5 break-words">
-        <li>Dial "+" or "011" (the international dialing code).</li>
-        <li>Enter the country code of the destination you are calling.</li>
-        <li>Dial the phone number, including the area code if required.</li>
-        <li>Press the call button to connect.</li>
-      </ol>
-    )
+    question: "Does GoLite Mobile support eSIM?",
+    answer:
+      "Yes! eSIM activation is available, allowing you to set up service instantly without a physical SIM card."
+  },
+  {
+    question: "Can I purchase a phone from GoLite Mobile?",
+    answer:
+      "Currently, GoLite Mobile is BYOD (Bring Your Own Device), but we may introduce phone sales in the future."
+  },
+  {
+    question: "What network does GoLite Mobile use?",
+    answer:
+      "GoLite Mobile operates on AT&T’s premium network, providing nationwide 5G & 4G LTE coverage."
+  },
+  {
+    question: "Does GoLite Mobile Prepaid include 5G access?",
+    answer:
+      "Yes! 5G access is included at no extra cost with all prepaid plans."
+  },
+  {
+    question: "Will my service work in rural or coastal areas?",
+    answer:
+      "Yes! GoLite Mobile provides extensive coverage in cities, rural areas, and coastal regions."
+  },
+  {
+    question: "How does billing work for GoLite Mobile Prepaid Plans?",
+    answer:
+      "With prepaid service, you pay upfront each month to continue your service."
+  },
+  {
+    question: "Can I add multiple lines to a prepaid plan?",
+    answer:
+      "Yes! Multi-line discounts are available for families and groups."
+  },
+  {
+    question: "Are there any data limits or speed restrictions?",
+    answer:
+      "No! All GoLite Mobile prepaid plans include truly unlimited high-speed data. In rare cases of network congestion, speeds may be temporarily optimized."
+  },
+  {
+    question: "Can I make international calls for free?",
+    answer:
+      "Yes! Every prepaid plan includes up to 1,250 free minutes per month to over 200 countries worldwide."
+  },
+  {
+    question: "Do GoLite Mobile Prepaid Plans support international roaming?",
+    answer:
+      "Yes! We offer affordable international roaming options in select countries."
+  },
+  {
+    question: "Can I use my phone as a mobile hotspot?",
+    answer:
+      "Yes! All prepaid plans include mobile hotspot usage at no extra cost."
+  },
+  {
+    question: "Can I bring my own phone to GoLite Mobile?",
+    answer:
+      "Yes! GoLite Mobile supports most unlocked GSM phones including iPhones, Samsung, Google Pixel, and more."
+  },
+  {
+    question: "What payment methods are accepted?",
+    answer:
+      "✔ Credit/Debit Cards. ✔ PayPal. ✔ AutoPay (Recommended) – Get exclusive discounts."
+  },
+  {
+    question: "Does GoLite Mobile offer AutoPay discounts?",
+    answer:
+      "Yes! Enroll in AutoPay for savings and uninterrupted service."
+  },
+  {
+    question: "Are there any hidden fees?",
+    answer:
+      "No! GoLite Mobile is transparent with no hidden fees or surprise charges."
+  },
+  {
+    question: "How do I activate my GoLite Mobile Prepaid service?",
+    answer:
+      "1. Choose your plan. 2. Get your SIM or eSIM. 3. Follow activation steps via website or mobile app."
+  },
+  {
+    question: "Can I keep my current phone number?",
+    answer:
+      "Yes! Number porting is free and easy. You can transfer your existing number during activation."
   }
 ];
+
   // Split into two columns
   const mid = Math.ceil(faqs.length / 2);
   const leftColumn = faqs.slice(0, mid);
