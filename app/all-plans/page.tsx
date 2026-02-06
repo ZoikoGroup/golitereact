@@ -159,36 +159,37 @@ const cards = [
       desc: "Special discounts for students with edu email verification",
       badge: "NEW",
       gradient: "from-[#667EEA] to-[#764BA2]",
-      href: "#",
+      href: "/all-plans",
     },
     {
       title: "Senior Saver",
       desc: "Simplified plans with dedicated support for seniors 60+",
       gradient: "from-[#F093FB] to-[#F5576C]",
+      href: "/all-plans",
     },
     {
       title: "Work-Life Unlimited",
       desc: "Business features with personal benefits in one plan",
       gradient: "from-[#4FACFE] to-[#00F2FE]",
-       href: "#",
+       href: "/all-plans",
     },
     {
       title: "Family Bundle",
       desc: "Connect up to 5 lines with shared data and savings",
       gradient: "from-[#43E97B] to-[#38F9D7]",
-       href: "#",
+       href: "/all-plans",
     },
     {
       title: "Gamer's Paradise",
       desc: "Low latency 5G with priority bandwidth for gaming",
       gradient: "from-[#FA709A] to-[#FEE140]",
-       href: "#",
+       href: "/all-plans",
     },
     {
       title: "Traveler's Choice",
       desc: "International roaming in 200+ countries included",
       gradient: "from-[#30CFD0] to-[#330867]",
-       href: "#",
+       href: "/all-plans",
     },
   ];
   const filteredPlans = plans.filter((p) => p.category === activeCategory && p.simType === activeSimType);
@@ -255,7 +256,7 @@ const cards = [
             <p className="mt-3 text-sm opacity-90">{c.desc}</p>
 
             <a
-              href="{c.href}"
+              href={c.href}
               className="mt-6 inline-block text-sm font-medium underline-offset-2 hover:underline"
             >
               View Plans →
