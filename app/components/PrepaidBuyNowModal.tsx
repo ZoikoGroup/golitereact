@@ -93,13 +93,13 @@ export default function PrepaidBuyNowModal({
   /* ---------------- UI ---------------- */
 
   return (
-    <div className="fixed inset-0 bg-black/60 z-[999] flex items-center justify-center">
+    <div className="fixed inset-0 dark:bg-gray-900 bg-black/60 z-[999] flex items-center justify-center">
 
-      <div className="bg-white w-[95%] max-w-lg rounded-xl shadow-xl animate-scaleIn">
+      <div className=" dark:bg-gray-800 bg-white w-[95%] max-w-lg rounded-xl shadow-xl animate-scaleIn">
 
         {/* HEADER */}
         <div className="p-6 border-b text-center relative">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-2xl font-bold dark:text-white">
             {simType === "pSim"
               ? "You've Selected Physical SIM"
               : "Great! You've Selected Your eSIM — Instant Setup, No Waiting."}
@@ -119,7 +119,7 @@ export default function PrepaidBuyNowModal({
           {/* pSim */}
           {simType === "pSim" && (
             <>
-              <p className="text-gray-600">
+              <p className="dark:text-gray-300 text-gray-600">
                 Simple, reliable, yours to keep.
               </p>
 
@@ -167,7 +167,7 @@ export default function PrepaidBuyNowModal({
               )}
 
               {status === "error" && (
-                <div className="bg-red-50 text-red-600 p-3 rounded">
+                <div className=" dark:bg-red-900/10 bg-red-50 text-red-600 p-3 rounded">
                   {message}
                 </div>
               )}

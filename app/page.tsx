@@ -147,41 +147,41 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="w-full bg-[#11A683] text-white  relative overflow-hidden">
+    <section className="w-full dark:bg-[#01241b] bg-[#11A683] text-white  relative overflow-hidden">
 
       {/* Content */}
       <div className="container mx-auto text-center relative z-10">
 
         {/* Title */}
-        <h2 className="lg:text-3xl md:text-[3vw] text-[4vw] font-bold pt-[4vw] px-[3vw]">
+        <h2 className="lg:text-3xl md:text-[3vw] text-[4vw] font-bold pt-[4vw] px-[3vw] dark:text-gray-400">
           Stay Connected Anywhere with Affordable Prepaid Travel Plans!
         </h2>
 
         {/* Feature List */}
         <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-8 text-white text-sm md:text-lg px-4 md:px-64">
 
-          <p className="flex items-center gap-2 whitespace-nowrap">
-            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+          <p className="flex items-center gap-2 whitespace-nowrap dark:text-gray-400">
+            <span className="dark:bg-gray-700 w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
             Free Talk &amp; Text
           </p>
 
-          <p className="flex items-center gap-2 whitespace-nowrap">
-            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+          <p className="flex items-center gap-2 whitespace-nowrap dark:text-gray-400">
+            <span className="dark:bg-gray-700 w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
             Mobile Hotspot Access
           </p>
 
-          <p className="flex items-center gap-2 whitespace-nowrap">
-            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+          <p className="flex items-center gap-2 whitespace-nowrap dark:text-gray-400">
+            <span className="dark:bg-gray-700 w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
             Unlimited 5G Data
           </p>
 
-          <p className="flex items-center gap-2 whitespace-nowrap">
-            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+          <p className="flex items-center gap-2 whitespace-nowrap dark:text-gray-400">
+            <span className="dark:bg-gray-700 w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
             24 x 7 Customer Support
           </p>
 
-          <p className="flex items-center gap-2 whitespace-nowrap">
-            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-white text-green-600 text-sm font-bold">✓</span>
+          <p className="flex items-center gap-2 whitespace-nowrap dark:text-gray-400">
+            <span className=" w-5 h-5 flex items-center justify-center rounded-full dark:bg-gray-700 bg-white text-green-600 text-sm font-bold">✓</span>
             FREE Roaming Canada &amp; Mexico
           </p>
         </div>
@@ -196,17 +196,17 @@ export default function Home() {
         <img
           src="/img/travelplansection.png"
           alt="World Landmarks"
-          className="w-full object-cover pointer-events-none select-none"
+          className="w-full object-cover pointer-events-none select-none dark:opacity-20"
         />
       </div>
     </section>
 
     <PlanSlider/>
 
-    <section className="w-full py-14 bg-white">
+    <section className="w-full py-14 bg-white dark:bg-gray-900">
       {/* Heading */}
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold text-gray-900">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-200">
           Premium Mobile Brands at <br /> Affordable Prices
         </h2>
         <p className="text-gray-500 mt-2">
@@ -216,7 +216,7 @@ export default function Home() {
 
       {/* Image Box */}
       <div className="w-full flex justify-center">
-        <div className=" bg-[#F8F9FA]  shadow-[0_0_0_0_#000000,5px_5px_20px_5px_var(--tw-shadow-color,#0000001a)] rounded-3xl p-6 max-w-5xl w-full">
+        <div className=" bg-[#F8F9FA] dark:bg-gray-800 shadow-[0_0_0_0_#000000,5px_5px_20px_5px_var(--tw-shadow-color,#0000001a)] rounded-3xl p-6 max-w-5xl w-full">
           <div className="rounded-xl flex justify-center items-center p-4">
             <img
               src="/img/mobilesHome.png" 
@@ -245,10 +245,10 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="w-full py-16 bg-white">
+    <section className="w-full py-16 bg-white dark:bg-gray-800">
       {/* Heading */}
       <div className="text-center mb-4">
-        <h2 className="text-3xl font-bold text-gray-900">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-200">
           Plans for Your Lifestyle
         </h2>
         <p className="text-gray-500 mt-2">
@@ -286,7 +286,7 @@ export default function Home() {
     <TestimonialSlider/>
     <BlogSection/>
     <FaqHome/>
-    <section className="w-full bg-[#FD4C0E] py-16 text-center text-white">
+    <section className="w-full bg-[#FD4C0E] dark:bg-[#3d1001] py-16 text-center text-white">
       <div className="container mx-auto px-6">
 
         {/* Heading */}
@@ -304,12 +304,12 @@ export default function Home() {
         <div className="flex justify-center gap-4 mt-8">
 
           {/* Filled Button */}
-          <button onClick={allplans} className="bg-white text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition cursor-pointer">
+          <button onClick={allplans} className="bg-white dark:border-white dark:bg-gray-900 text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition cursor-pointer">
             View Plans
           </button>
 
           {/* Outline Button */}
-          <button className="border border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition cursor-pointer">
+          <button className="border dark:border-white border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition cursor-pointer">
             Talk to Sales
           </button>
         </div>

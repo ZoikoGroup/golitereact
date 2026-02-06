@@ -24,10 +24,10 @@ export default function BlogSection() {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold text-gray-900">Our Blogs</h2>
-        <p className="text-gray-600 mt-2">
+        <h2 className="text-3xl font-bold dark:text-white text-gray-900">Our Blogs</h2>
+        <p className="dark:text-gray-400 text-gray-600 mt-2">
           Stay updated with the latest news and tips
         </p>
 
@@ -35,7 +35,7 @@ export default function BlogSection() {
           {blogs.map((b, i) => (
             <div
               key={i}
-              className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition overflow-hidden"
             >
               {/* Image */}
               <img
@@ -51,11 +51,11 @@ export default function BlogSection() {
                   <span className="text-gray-400 ml-2">{b.date}</span>
                 </div>
 
-                <h3 className="font-semibold text-lg text-gray-900 mb-2 leading-tight">
+                <h3 className="font-semibold text-lg dark:text-gray-200 mb-2 leading-tight">
                   {b.title}
                 </h3>
 
-                <p className="text-gray-600 text-sm mb-4">{b.desc}</p>
+                <p className="text-gray-600 text-sm mb-4 dark:text-gray-400">{b.desc}</p>
 
                 <a className="text-orange-500 font-semibold text-sm flex items-center gap-1 cursor-pointer">
                   Read More →

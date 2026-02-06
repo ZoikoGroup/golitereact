@@ -165,10 +165,10 @@ export default function PricingPlans() {
 
   return (
     <>
-      <div className="w-full bg-white py-10">
+      <div className="w-full bg-white dark:bg-gray-900 py-10">
         <style>{customStyles}</style>
 
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-gray-200">
           Shop Sustainable Plans
         </h2>
 
@@ -181,8 +181,8 @@ export default function PricingPlans() {
                 onClick={() => setActiveCategory(tab)}
                 className={`flex-1 px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold rounded-full capitalize transition-all ${
                   activeCategory === tab
-                    ? "bg-white text-[#FD4C0E]"
-                    : "text-white"
+                    ? "bg-white text-[#FD4C0E] dark:bg-gray-900 dark:text-gray-100"
+                    : "text-white dark:text-gray-100"
                 }`}
               >
                 <span className="hidden sm:inline">{tab} Plans</span>
@@ -202,7 +202,7 @@ export default function PricingPlans() {
                 className={`px-8 py-2 text-sm font-semibold transition-all ${
                   activeSimType === sim
                     ? "text-[#FD4C0E] underline"
-                    : "text-gray-600"
+                    : "text-gray-600 dark:text-gray-300"
                 }`}
               >
                 {sim}
@@ -238,7 +238,7 @@ export default function PricingPlans() {
               <Slider ref={sliderRef} {...sliderSettings}>
                 {filteredPlans.map((plan) => (
                   <div key={plan.id} className="px-12">
-                    <div className="relative border p-6 rounded-2xl shadow-sm bg-white min-h-[40vw]">
+                    <div className="relative border p-6 rounded-2xl shadow-sm bg-white dark:bg-gray-800 min-h-[40vw]">
                       {plan.tag && (
                         <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden">
                           <span className="absolute top-7 -right-8 rotate-45 bg-green-600 text-white text-xs px-8 py-1">
@@ -263,14 +263,14 @@ export default function PricingPlans() {
                         Buy Plan
                       </button>
 
-                      <p className="text-gray-500 text-sm mt-6">
+                      <p className="dark:text-gray-300 text-gray-500 text-sm mt-6">
                         {plan.desc}
                       </p>
 
-                      <ul className="mt-4 space-y-2 text-sm text-gray-700">
+                      <ul className="mt-4 space-y-2 text-sm text-gray-700 dark:text-gray-300">
                         {plan.features.map((f: string, i: number) => (
                           <li key={i} className="flex gap-2">
-                            <span className="text-green-600">✔</span>
+                            <span className="text-green-600 dark:text-green-400">✔</span>
                             {f}
                           </li>
                         ))}

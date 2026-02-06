@@ -42,15 +42,15 @@ function IntlFaqs() {
   const rightColumn = faqs.slice(mid);
 
   return (
-    <div className="bg-gray-50 py-10">
+    <div className="bg-gray-50 py-10 dark:bg-gray-700">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
         {/* Left Column */}
         <div className="flex-1 flex flex-col gap-4">
           {leftColumn.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
-                <div className="border border-gray-200 rounded-md bg-white shadow-sm">
-                  <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
+                <div className="border border-gray-200 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+                  <DisclosureButton className="w-full dark:text-gray-200 text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
                     <span>{item.question}</span>
                     <svg
                       className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
@@ -83,8 +83,8 @@ function IntlFaqs() {
           {rightColumn.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
-                <div className="border border-gray-200 rounded-md bg-white shadow-sm">
-                  <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
+                <div className="border border-gray-200 rounded-md dark:bg-gray-800 bg-white shadow-sm">
+                  <DisclosureButton className="w-full dark:text-gray-200 text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
                     <span>{item.question}</span>
                     <svg
                       className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${

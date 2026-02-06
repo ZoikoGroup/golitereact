@@ -24,10 +24,10 @@ export default function CustomerFeedback() {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-50 dark:bg-gray-700">
       <div className="max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold text-gray-900">Our Customer Feedback</h2>
-        <p className="text-gray-600 mt-2">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Our Customer Feedback</h2>
+        <p className="text-gray-600 dark:text-gray-300 mt-2">
           Join thousands of satisfied GoLite users
         </p>
 
@@ -35,7 +35,7 @@ export default function CustomerFeedback() {
           {testimonials.map((t, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition"
+              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-lg transition"
             >
               {/* Stars */}
               <div className="flex gap-1 mb-3">
@@ -45,7 +45,7 @@ export default function CustomerFeedback() {
               </div>
 
               {/* Feedback */}
-              <p className="text-gray-700 text-sm leading-relaxed mb-6 text-left">
+              <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-6 text-left">
                 {t.text}
               </p>
 
@@ -55,8 +55,8 @@ export default function CustomerFeedback() {
                   {t.initial}
                 </div>
                 <div className="text-left">
-                  <p className="font-semibold text-gray-900">{t.name}</p>
-                  <p className="text-gray-500 text-sm">{t.location}</p>
+                  <p className="font-semibold text-gray-900 dark:text-gray-100">{t.name}</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">{t.location}</p>
                 </div>
               </div>
             </div>

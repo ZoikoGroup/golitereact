@@ -253,10 +253,10 @@ const faqs = [
     <>
     <Header />
     {/* Banner Section */}
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-900 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white text-center mb-12">
           Shop Prepaid Plans
         </h1>
 
@@ -288,7 +288,7 @@ const faqs = [
     {/* END Banner Section */}
     
 {/* SIM Type Tabs */}
-      <div className="flex justify-center">
+      <div className="flex justify-center dark:bg-gray-900 bg-gray-50 ">
   <div className="inline-flex bg-[#FD4C0E] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
     
     {["pSim", "eSim"].map((simType, idx) => (
@@ -301,7 +301,7 @@ const faqs = [
           text-sm font-semibold transition-all
           rounded-full
           ${activeSimType === simType 
-            ? "bg-white text-[#FD4C0E]" 
+            ? "bg-white text-[#FD4C0E] dark:bg-gray-800 dark:text-white" 
             : "text-white"}
         `}
       >
@@ -313,11 +313,11 @@ const faqs = [
 </div>
 
       {/* Slider with Navigation */}
-      <div className="px-4 md:px-40 mt-10 relative">
+      <div className="px-4 md:px-40  relative dark:bg-gray-900 bg-gray-50 py-12">
         {/* Custom Arrow Buttons */}
         <button
           onClick={() => sliderRef.current?.slickPrev()}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
           aria-label="Previous slide"
         >
           <ChevronLeft className="w-6 h-6 text-[#FD4C0E]" />
@@ -325,7 +325,7 @@ const faqs = [
 
         <button
           onClick={() => sliderRef.current?.slickNext()}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
           aria-label="Next slide"
         >
           <ChevronRight className="w-6 h-6 text-[#FD4C0E]" />
@@ -336,7 +336,7 @@ const faqs = [
             <div key={idx} className="px-8">
               <div
                 className={`relative border p-6 rounded-2xl shadow-sm min-h-[40vw] overflow-hidden ${
-                  plan.tag ? "bg-blue-50" : "bg-white"
+                  plan.tag ? "bg-blue-50 dark:bg-blue-900" : "bg-white dark:bg-gray-800"
                 }`}
               >
                 {/* Diagonal Ribbon Tag */}
@@ -349,11 +349,11 @@ const faqs = [
                 )}
 
                 {/* Plan Title */}
-                <h3 className="text-xl lg:text-[1.2vw] font-semibold mb-2 text-center mt-8">{plan.title}</h3>
+                <h3 className="text-xl lg:text-[1.2vw] font-semibold mb-2 text-center mt-8 dark:text-white">{plan.title}</h3>
 
                 {/* Price */}
-                <p className="text-3xl font-bold mb-1 text-center">{plan.price}</p>
-                <p className="text-gray-500 mb-4 text-center text-sm">(taxes and fees included)</p>
+                <p className="text-3xl font-bold mb-1 text-center dark:text-white">{plan.price}</p>
+                <p className="text-gray-500 mb-4 text-center text-sm dark:text-gray-400">(taxes and fees included)</p>
 
                 {/* Button */}
 
@@ -366,10 +366,10 @@ const faqs = [
 
 
                 {/* Description */}
-                <p className="text-gray-500 mb-4 text-left pt-6 text-sm">{plan.desc}</p>
+                <p className="dark:text-gray-400 text-gray-500 mb-4 text-left pt-6 text-sm">{plan.desc}</p>
 
                 {/* Features */}
-                <ul className="mt-4 space-y-2 text-gray-700 text-sm lg:h-[20vw] md:h-[20vw]">
+                <ul className="mt-4 space-y-2 dark:text-gray-400 text-gray-700 text-sm lg:h-[20vw] md:h-[20vw]">
                   {plan.features.map((f, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <svg 
@@ -396,10 +396,10 @@ const faqs = [
         </Slider>
         </div>
 
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="dark:bg-gray-900 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <h1 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-gray-900 text-center mb-12 px-4">
+        <h1 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold dark:text-white text-gray-900 text-center mb-12 px-4">
           Best Postpaid Mobile Plans With Many Exciting Benefits
         </h1>
 
@@ -408,7 +408,7 @@ const faqs = [
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="dark:bg-gray-800 bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
             >
               {/* Icon */}
               <div className={`w-[5rem] h-[5rem]   flex items-center justify-center mb-6`}>
@@ -416,12 +416,12 @@ const faqs = [
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 mb-4 leading-snug">
+              <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-4 leading-snug">
                 {benefit.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 leading-relaxed">
+              <p className="dark:text-gray-400 text-gray-600 leading-relaxed">
                 {benefit.description}
               </p>
             </div>
@@ -431,10 +431,10 @@ const faqs = [
     </div>
 
 
-<section className="w-full py-16 bg-white">
+<section className="w-full py-16 dark:bg-gray-900 bg-white">
       {/* Heading */}
       <div className="text-center mb-4">
-        <h2 className="text-3xl font-bold text-gray-900">
+        <h2 className="text-3xl font-bold dark:text-white text-gray-900">
           Plans for Your Lifestyle
         </h2>
         <p className="text-gray-500 mt-2">
@@ -470,15 +470,15 @@ const faqs = [
         ))}
       </div>
     </section>
- <div className="bg-gray-50 py-10">
+ <div className="dark:bg-gray-900 bg-gray-50 py-10">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
         {/* Left Column */}
         <div className="flex-1 flex flex-col gap-4">
           {leftColumn.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
-                <div className="border border-gray-200 rounded-md bg-white shadow-sm">
-                  <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
+                <div className="border border-gray-200 rounded-md dark:bg-gray-800 bg-white shadow-sm">
+                  <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium dark:text-white text-gray-800 focus:outline-none">
                     <span>{item.question}</span>
                     <svg
                       className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
@@ -497,7 +497,7 @@ const faqs = [
                       />
                     </svg>
                   </DisclosureButton>
-                  <DisclosurePanel className="px-4 py-3 text-gray-700 break-words">
+                  <DisclosurePanel className="px-4 py-3 text-gray-700 break-words dark:text-gray-400">
                     {item.answer}
                   </DisclosurePanel>
                 </div>
@@ -511,8 +511,8 @@ const faqs = [
           {rightColumn.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
-                <div className="border border-gray-200 rounded-md bg-white shadow-sm">
-                  <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
+                <div className="border border-gray-200 rounded-md dark:bg-gray-800 bg-white shadow-sm">
+                  <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium dark:text-white text-gray-800 focus:outline-none">
                     <span>{item.question}</span>
                     <svg
                       className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
@@ -531,7 +531,7 @@ const faqs = [
                       />
                     </svg>
                   </DisclosureButton>
-                  <DisclosurePanel className="px-4 py-3 text-gray-700 break-words">
+                  <DisclosurePanel className="px-4 py-3 text-gray-700 break-words dark:text-gray-400">
                     {item.answer}
                   </DisclosurePanel>
                 </div>
