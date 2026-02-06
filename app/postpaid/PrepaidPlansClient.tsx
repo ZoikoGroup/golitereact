@@ -217,37 +217,107 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
   
 const faqs = [
   {
-    question: "What is international long distance calling?",
-    answer: "International long distance calling allows you to make phone calls from the United States to people in other countries."
+    question: "What are GoLite Mobile Postpaid Plans?",
+    answer:
+      "GoLite Mobile Postpaid Plans offer premium unlimited wireless service with flexible 12 or 24-month contracts, world-class 5G coverage, and free international calling to 200+ countries. Unlike prepaid, you pay at the end of each billing cycle."
   },
   {
-    question: "Are international calls included in Zoiko Mobile plans?",
-    answer: "Yes, all Zoiko Mobile plans include free international calling minutes to over 246 countries. The allowance varies depending on the destination country and whether you are calling a landline or mobile number."
+    question: "What makes GoLite Mobile Postpaid Plans different?",
+    answer:
+      "✔ Same premium network as AT&T – Nationwide 5G & 4G LTE. ✔ Truly unlimited data – No overages or slowdowns. ✔ Flexible contract terms – Choose 12 or 24 months. ✔ Device financing & upgrade programs. ✔ Exclusive multi-line & business discounts. ✔ Supports marine conservation."
   },
   {
-    question: "What happens if I exceed my data limit?",
-    answer: "Zoiko Mobile offers free international calling minutes to over 246 countries as part of every plan, with no additional activation or hidden fees. Most other carriers charge extra for similar services or cover fewer countries, making Zoiko Mobile a more affordable and comprehensive choice."
+    question: "What do all GoLite Mobile Postpaid Plans include?",
+    answer:
+      "✔ Unlimited calls & texts across the USA. ✔ Unlimited high-speed 5G & 4G LTE data. ✔ 1,250 free international calling minutes per month. ✔ Mobile hotspot capabilities. ✔ Wi-Fi calling & VoLTE support. ✔ 24/7 premium customer support."
   },
   {
-    question: "Do I need to activate international calling on my Zoiko Mobile plan?",
-    answer: "No activation is required. International calling is automatically included in all Zoiko Mobile plans."
+    question: "What are the contract options?",
+    answer:
+      "✔ 12-month contract – More flexibility and earlier upgrade eligibility. ✔ 24-month contract – Best value with lower monthly payments."
   },
   {
-    question: "Can I use Zoiko Mobile's international calling feature on any device?",
-    answer: "Yes, you can use Zoiko Mobile's international calling feature on any device compatible with our network, including smartphones and tablets."
+    question: "What happens if I use all 1,250 international minutes?",
+    answer:
+      "You can purchase additional international calling minutes through the website or mobile app."
   },
   {
-    question: "How do I make an international call with Zoiko Mobile?",
-    answer: (
-      <ol className="list-decimal pl-5 break-words">
-        <li>Dial "+" or "011" (the international dialing code).</li>
-        <li>Enter the country code of the destination you are calling.</li>
-        <li>Dial the phone number, including the area code if required.</li>
-        <li>Press the call button to connect.</li>
-      </ol>
-    )
+    question: "Can I use my phone internationally?",
+    answer:
+      "Yes! International roaming is available in 100+ countries with optional international data passes."
+  },
+  {
+    question: "Can I add multiple lines to a postpaid plan?",
+    answer:
+      "Yes! Family and Business plans allow multiple lines with discounted pricing."
+  },
+  {
+    question: "Can I finance a smartphone with GoLite Mobile?",
+    answer:
+      "Yes! Device financing is available for smartphones like iPhone, Samsung, and Google Pixel with affordable monthly payments."
+  },
+  {
+    question: "When can I upgrade my phone?",
+    answer:
+      "You can upgrade after 12 months on a 24-month contract or after 6 months through select early upgrade programs."
+  },
+  {
+    question: "What if I want to cancel my contract early?",
+    answer:
+      "Early cancellation may require paying an early termination fee (ETF) and settling any remaining device payments. Some customers may qualify for contract buyout programs."
+  },
+  {
+    question: "Does GoLite Mobile offer business postpaid plans?",
+    answer:
+      "Yes! Business plans include multi-line team discounts, priority network access, dedicated account managers, and business roaming packages."
+  },
+  {
+    question: "How many lines can I add to a business plan?",
+    answer:
+      "You can add up to 50 lines with customized pricing based on business requirements."
+  },
+  {
+    question: "What network does GoLite Mobile use?",
+    answer:
+      "GoLite Mobile operates on AT&T’s premium nationwide 5G & 4G LTE network."
+  },
+  {
+    question: "Does GoLite Mobile Postpaid include 5G access?",
+    answer:
+      "Yes! 5G access is included at no additional cost."
+  },
+  {
+    question: "Will my service work in rural or coastal areas?",
+    answer:
+      "Yes! Coverage is available across cities, rural regions, and coastal areas."
+  },
+  {
+    question: "How does billing work?",
+    answer:
+      "Postpaid plans are billed at the end of each monthly billing cycle, and you will receive an invoice with all charges."
+  },
+  {
+    question: "What payment methods are accepted?",
+    answer:
+      "✔ Credit/Debit Cards. ✔ PayPal. ✔ AutoPay (recommended) – Includes discount benefits."
+  },
+  {
+    question: "Are there any hidden fees?",
+    answer:
+      "No. GoLite Mobile maintains transparent pricing with no hidden charges."
+  },
+  {
+    question: "How do I activate my GoLite Mobile Postpaid service?",
+    answer:
+      "1. Choose your plan and contract length. 2. Get your SIM or eSIM. 3. Complete activation through the website or mobile app."
+  },
+  {
+    question: "Can I keep my current phone number?",
+    answer:
+      "Yes! Number porting is free and easy."
   }
 ];
+
   // Split into two columns
   const mid = Math.ceil(faqs.length / 2);
   const leftColumn = faqs.slice(0, mid);
