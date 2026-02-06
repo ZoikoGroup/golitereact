@@ -250,11 +250,11 @@ const faqs = [
 
 
       {/* Banner Section */}
-    <div className="bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-900 bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         {/* <h1 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-12"> */}
-          <h2 className="text-3xl font-bold text-center p-4">
+          <h2 className="text-3xl font-bold text-center p-4 dark:text-gray-100">
           Shop Prepaid Family & Multi-Line Plans
           </h2>
         {/* </h1> */}
@@ -295,7 +295,7 @@ const faqs = [
 
         {/* LEFT CONTENT */}
         <div>
-          <h2 className="text-[32px] font-bold text-gray-900 mb-10 leading-tight">
+          <h2 className="text-[32px] font-bold dark:text-gray-100 text-gray-900 mb-10 leading-tight">
             Why Choose a GoLite Mobile<br />Family Plan?
           </h2>
 
@@ -310,10 +310,10 @@ const faqs = [
 
                 {/* TEXT */}
                 <div>
-                  <h3 className="text-base font-semibold text-gray-900 text-lg">
+                  <h3 className="text-base font-semibold dark:text-gray-100 text-gray-900 text-lg">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-gray-600 mt-1 leading-relaxed max-w-md text-[1rem]">
+                  <p className="text-sm dark:text-gray-300 text-gray-600 mt-1 leading-relaxed max-w-md text-[1rem]">
                     {item.desc}
                   </p>
                 </div>
@@ -339,19 +339,19 @@ const faqs = [
     {/* Benefits Section */}
 
 
-<div className="py-16 px-4 sm:px-6 lg:px-8 bg-[#F9FAFB]">
+<div className="py-16 px-4 sm:px-6 lg:px-8 dark:bg-gray-900 bg-[#F9FAFB]">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <h2 className="text-4xl md:text-3xl font-bold text-center text-gray-900 mb-4">
+        <h2 className="text-4xl md:text-3xl font-bold text-center dark:text-gray-100 text-gray-900 mb-4">
           How to Get Started
         </h2>
-        <p className="text-gray-600 text-center mb-12">Setting up your family plan is quick and easy</p>
+        <p className="dark:text-gray-300 text-gray-600 text-center mb-12">Setting up your family plan is quick and easy</p>
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {getStarted.map((feature, index) => (
             <div 
               key={index}
-              className="bg-white border-2 border-[#e8e7e7] rounded-xl rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 flex flex-col items-center text-center"
+              className="dark:bg-gray-800 bg-white border-2 border-[#e8e7e7] rounded-xl rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 flex flex-col items-center text-center"
             >
               {/* Icon Circle */}
               <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center text-white mb-6">
@@ -359,12 +359,12 @@ const faqs = [
               </div>
               
               {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-bold dark:text-gray-100 text-gray-900 mb-4">
                 {feature.title}
               </h3>
               
               {/* Description */}
-              <p className="text-gray-600 leading-relaxed">
+              <p className="dark:text-gray-300 text-gray-600 leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -375,8 +375,8 @@ const faqs = [
 
 
 
-    <div className="bg-gray-50 pb-12">
-      <h2 className="text-4xl md:text-3xl font-bold text-center text-gray-900 mb-10">
+    <div className="dark:bg-gray-900 bg-gray-50 pb-12">
+      <h2 className="text-4xl md:text-3xl font-bold text-center dark:text-gray-100 text-gray-900 mb-10">
           Frequently Asked Questions
         </h2>
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
@@ -385,9 +385,9 @@ const faqs = [
           {leftColumn.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
-                <div className="border border-gray-200 rounded-md bg-white shadow-sm py-4">
+                <div className="border border-gray-200 rounded-md bg-white shadow-sm py-4 dark:bg-gray-800">
                   <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
-                    <span>{item.question}</span>
+                    <span className="dark:text-gray-100">{item.question}</span>
                     <svg
                       className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
                         open ? "rotate-180" : ""
@@ -405,7 +405,7 @@ const faqs = [
                       />
                     </svg>
                   </DisclosureButton>
-                  <DisclosurePanel className="px-4 py-3 text-gray-700 break-words">
+                  <DisclosurePanel className="px-4 py-3 dark:text-gray-300 text-gray-700 break-words">
                     {item.answer}
                   </DisclosurePanel>
                 </div>
@@ -419,9 +419,9 @@ const faqs = [
           {rightColumn.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
-                <div className="border border-gray-200 rounded-md bg-white shadow-sm py-4">
+                <div className="border border-gray-200 rounded-md dark:bg-gray-800 bg-white shadow-sm py-4">
                   <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
-                    <span>{item.question}</span>
+                    <span className="dark:text-gray-100">{item.question}</span>
                     <svg
                       className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
                         open ? "rotate-180" : ""
@@ -439,7 +439,7 @@ const faqs = [
                       />
                     </svg>
                   </DisclosureButton>
-                  <DisclosurePanel className="px-4 py-3 text-gray-700 break-words">
+                  <DisclosurePanel className="px-4 py-3 dark:text-gray-300 text-gray-700 break-words">
                     {item.answer}
                   </DisclosurePanel>
                 </div>

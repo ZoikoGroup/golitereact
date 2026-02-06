@@ -109,8 +109,8 @@ export default function MilitaryDiscountEnrollment() {
   return (
     <>
       <Header />
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid lg:grid-cols-2 gap-12">
+      <section className="dark:bg-gray-900 mx-auto px-4 py-16">
+        <div className="max-w-7xl grid lg:grid-cols-2 gap-12">
           {/* IMAGE */}
           <div className="flex justify-center">
             <img
@@ -122,11 +122,11 @@ export default function MilitaryDiscountEnrollment() {
 
           {/* FORM */}
           <div>
-            <h1 className="text-3xl font-semibold text-gray-900 mb-3">
+            <h1 className="text-3xl font-semibold dark:text-white text-gray-900 mb-3">
               Military Discount Eligibility Form
             </h1>
 
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 mb-8 dark:text-gray-300">
               Verify your military status to receive exclusive discounts on your mobile plan.
               Please provide valid proof of service to qualify. <b>This is applicable for active Army Personnel & Army Veterans.</b>
             </p>
@@ -149,7 +149,7 @@ export default function MilitaryDiscountEnrollment() {
                       name="full_name"
                       type="text"
                       placeholder="Enter your Full Name"
-                      className="w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                      className="dark:bg-gray-800 w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
                     />
                     {errors.full_name && (
                       <p className="text-red-500 text-sm mt-1">{errors.full_name}</p>
@@ -164,7 +164,7 @@ export default function MilitaryDiscountEnrollment() {
                       name="email"
                       type="email"
                       placeholder="Enter Your Email Address"
-                      className="w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                      className="dark:bg-gray-800 w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
                     />
                     {errors.email && (
                       <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -178,7 +178,7 @@ export default function MilitaryDiscountEnrollment() {
                     <input
                       name="dob"
                       type="date"
-                      className="w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                      className="dark:bg-gray-800 w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
                     />
                     {errors.dob && (
                       <p className="text-red-500 text-sm mt-1">{errors.dob}</p>
@@ -198,7 +198,7 @@ export default function MilitaryDiscountEnrollment() {
                     </label>
                     <select
                       name="id_type"
-                      className="w-full rounded-xl border px-4 py-3 bg-white focus:ring-2 focus:ring-orange-500"
+                      className="dark:bg-gray-800 w-full rounded-xl border px-4 py-3 bg-white focus:ring-2 focus:ring-orange-500"
                     >
                       <option value="">Select ID Type</option>
                       <option>DD Form 214 (Certificate of Release or Discharge from Active Duty)</option>

@@ -5,11 +5,11 @@ import Footer from "../components/Footer";
 
 export default function ExistingSimPortPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#f6f7f9]">
+    <div className="flex flex-col min-h-screen dark:bg-gray-900 bg-[#f6f7f9]">
       <Header />
 
       <main className="flex-grow py-14">
-        <div className="max-w-xl mx-auto bg-white p-8 rounded-xl shadow">
+        <div className="max-w-xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-xl shadow">
 
           <h2 className="text-xl font-semibold mb-6 text-center">
             SIM Activation Form

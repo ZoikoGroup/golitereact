@@ -21,7 +21,7 @@ export default function SuccessModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 relative animate-scaleIn">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-8 relative animate-scaleIn">
         {/* Close */}
         <button
           onClick={onClose}
@@ -49,7 +49,7 @@ export default function SuccessModal({
         </h3>
 
         {/* Message */}
-        <p className="mt-3 text-center text-gray-600 leading-relaxed">
+        <p className="dark:text-gray-300 mt-3 text-center text-gray-600 leading-relaxed">
           {message}
         </p>
 

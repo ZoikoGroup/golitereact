@@ -226,10 +226,10 @@ const cards = [
 
 <CustomFamilyPlansComponent />
 
-<section className="w-full py-16 bg-white">
+<section className="w-full py-16 dark:bg-gray-900 bg-white">
       {/* Heading */}
       <div className="text-center mb-4">
-        <h2 className="text-3xl font-bold text-gray-900">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
           Plans for Your Lifestyle
         </h2>
         <p className="text-gray-500 mt-2">

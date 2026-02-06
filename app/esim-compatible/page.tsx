@@ -71,14 +71,14 @@ export default function EsimCompatiblePage() {
     <>
       <Header />
 
-      <section className="py-20 bg-[#f6faf4]">
-        <div className="max-w-xl mx-auto bg-white p-10 rounded-xl shadow text-center">
+      <section className="py-20 dark:bg-gray-900 bg-[#f6faf4]">
+        <div className="max-w-xl mx-auto bg-white dark:bg-gray-800 p-10 rounded-xl shadow text-center">
 
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
             Check eSIM Compatibility
           </h1>
 
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-gray-600 dark:text-gray-300">
             Enter your IMEI number to see if your device supports eSIM.
           </p>
 

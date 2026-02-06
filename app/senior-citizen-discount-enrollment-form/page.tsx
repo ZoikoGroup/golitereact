@@ -99,8 +99,8 @@ export default function SeniorCitizenDiscountEnrollment() {
     <>
     <Header />
     
-    <section className="max-w-7xl mx-auto px-4 py-16">
-      <div className="grid lg:grid-cols-2 gap-12">
+    <section className="dark:bg-gray-900  mx-auto px-4 py-16">
+      <div className="max-w-7xl grid lg:grid-cols-2 gap-12">
         {/* IMAGE */}
         <div className="flex justify-center">
           <img
@@ -112,11 +112,11 @@ export default function SeniorCitizenDiscountEnrollment() {
 
         {/* FORM */}
         <div>
-          <h1 className="text-3xl font-semibold text-gray-900 mb-3">
+          <h1 className="text-3xl font-semibold dark:text-white text-gray-900 mb-3">
             Senior Citizen Discount Enrollment
           </h1>
 
-          <p className="text-gray-600 mb-8">
+          <p className="text-gray-600 mb-8 dark:text-gray-300">
             If you’re 65 or older, complete this form to verify your eligibility.
           </p>
 
@@ -138,7 +138,7 @@ export default function SeniorCitizenDiscountEnrollment() {
                     name="full_name"
                     type="text"
                     placeholder="Enter your Full Name"
-                    className="w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                    className="dark:bg-gray-800 w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
                   />
                   {errors.full_name && (
                     <p className="text-red-500 text-sm mt-1">
@@ -155,7 +155,7 @@ export default function SeniorCitizenDiscountEnrollment() {
                     name="email"
                     type="email"
                     placeholder="Enter Your Email Address"
-                    className="w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                    className="dark:bg-gray-800 w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
                   />
                   {errors.email && (
                     <p className="text-red-500 text-sm mt-1">
@@ -171,7 +171,7 @@ export default function SeniorCitizenDiscountEnrollment() {
                   <input
                     name="dob"
                     type="date"
-                    className="w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                    className="dark:bg-gray-800 w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
                   />
                   {errors.dob && (
                     <p className="text-red-500 text-sm mt-1">
@@ -193,7 +193,7 @@ export default function SeniorCitizenDiscountEnrollment() {
                   </label>
                   <select
                     name="id_type"
-                    className="w-full rounded-xl border px-4 py-3 bg-white focus:ring-2 focus:ring-orange-500"
+                    className="w-full rounded-xl border px-4 py-3 dark:bg-gray-800 bg-white focus:ring-2 focus:ring-orange-500"
                   >
                     <option value="">Select ID Type</option>
                     <option>State ID</option>

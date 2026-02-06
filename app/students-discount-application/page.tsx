@@ -93,8 +93,8 @@ export default function StudentDiscountApplication() {
     <>
       <Header />
 
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid lg:grid-cols-2 gap-12">
+      <section className=" mx-auto px-4 py-16 dark:bg-gray-900">
+        <div className="max-w-7xl grid lg:grid-cols-2 gap-12">
 
           {/* IMAGE */}
           <div className="flex justify-center">
@@ -107,11 +107,11 @@ export default function StudentDiscountApplication() {
 
           {/* FORM */}
           <div>
-            <h1 className="text-3xl font-semibold text-gray-900 mb-3">
+            <h1 className="text-3xl font-semibold dark:text-gray-100 text-gray-900 mb-3">
               Student Discount Application
             </h1>
 
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 mb-8 dark:text-gray-300">
               Students deserve seamless connectivity at an affordable price.
               Apply now for our exclusive student discount and enjoy great
               savings on your mobile plan.

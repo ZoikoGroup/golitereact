@@ -25,6 +25,9 @@ export default function FirstResponderDiscountApplication() {
   const [fileName, setFileName] = useState("");
   const [errors, setErrors] = useState<Errors>({});
 
+  
+
+
   // ✅ ENV BASE URL
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -108,8 +111,8 @@ export default function FirstResponderDiscountApplication() {
     <>
       <Header />
 
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid lg:grid-cols-2 gap-12">
+      <section className="mx-auto px-4 py-16 dark:bg-gray-900">
+        <div className="max-w-7xl  grid lg:grid-cols-2 gap-12">
 
           {/* IMAGE */}
           <div className="flex justify-center">
@@ -125,7 +128,7 @@ export default function FirstResponderDiscountApplication() {
               First Responder Discount Application
             </h1>
 
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 mb-8 dark:text-gray-300">
               Verify your first responder status to unlock special discounts.
             </p>
 
@@ -152,6 +155,7 @@ export default function FirstResponderDiscountApplication() {
                 />
 
                 <SelectField
+                  className="dark:bg-gray-800"
                   label="Employment Status"
                   name="employment_status"
                   options={["Active", "Retired"]}
@@ -243,7 +247,7 @@ const InputField = ({ label, name, type = "text", error }: any) => (
     <input
       name={name}
       type={type}
-      className="w-full border rounded-xl px-4 py-3"
+      className="w-full border rounded-xl px-4 py-3 dark:bg-gray-800"
     />
     {error && <p className="text-red-500 text-sm">{error}</p>}
   </div>
@@ -270,7 +274,7 @@ const SelectField = ({ label, name, options, error }: any) => (
     </label>
     <select
       name={name}
-      className="w-full border rounded-xl px-4 py-3 bg-white"
+      className="w-full border rounded-xl px-4 py-3 bg-white dark:bg-gray-800"
     >
       <option value="">Select</option>
       {options.map((opt: string) => (

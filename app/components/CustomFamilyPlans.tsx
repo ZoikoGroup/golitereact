@@ -277,7 +277,7 @@ const handleCheckout = () => {
   ---------------------------------- */
 
   return (
-    <div className="w-full py-8 px-4">
+    <div className="dark:bg-gray-900 w-full py-8 px-4">
 
       {loading && (
         <p className="text-center text-gray-500 py-10">
@@ -297,10 +297,10 @@ const handleCheckout = () => {
             </p>
           </div>
 
-          <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8 dark:bg-gray-900">
 
             {/* LEFT */}
-            <div className="lg:col-span-2 bg-gray-100 p-6 rounded-xl">
+            <div className="lg:col-span-2 bg-gray-100 p-6 rounded-xl dark:bg-gray-800">
 
               <h3 className="text-xl font-bold mb-4">
                 Select Primary Plan
@@ -320,7 +320,7 @@ const handleCheckout = () => {
                         ${
                           primaryKey === key
                             ? "border-orange-500 bg-orange-500 text-white"
-                            : "border-gray-200 bg-white hover:border-orange-500"
+                            : "border-gray-200 dark:bg-gray-700 bg-white hover:border-orange-500"
                         }`}
                     >
                       {primaryKey === key && (
@@ -353,7 +353,7 @@ const handleCheckout = () => {
                   onChange={(e) =>
                     setAdditionalLines(Number(e.target.value))
                   }
-                  className="w-full p-3 border rounded-lg"
+                  className="w-full p-3 border rounded-lg dark:bg-gray-700 bg-white"
                 >
                   <option value={0}>
                     Choose Additional Lines
@@ -377,7 +377,7 @@ const handleCheckout = () => {
                         copy[i] = e.target.value;
                         setLinePlans(copy);
                       }}
-                      className="w-full p-3 border rounded-lg"
+                      className="w-full p-3 border rounded-lg dark:bg-gray-700 bg-white"
                     >
                       <option value="">Select Plan</option>
                       {familyPlans.map((p) => {
@@ -396,9 +396,11 @@ const handleCheckout = () => {
             </div>
 
             {/* RIGHT */}
-            <div className="bg-white p-6 rounded-xl border">
+            <div className="lg:col-span-1">
+            
+            <div className="bg-white p-6 rounded-xl sticky top-6  border-[3px] border-[#d3cbcb] rounded-[12px] dark:bg-gray-800">
 
-              <h3 className="text-xl font-bold mb-4 text-center">
+              <h3 className="text-xl font-bold mb-4 text-center dark:text-gray-100">
                 Your Plan Summary
               </h3>
 
@@ -444,6 +446,7 @@ const handleCheckout = () => {
                 Continue to Checkout
               </button>
 
+            </div>
             </div>
 
           </div>
