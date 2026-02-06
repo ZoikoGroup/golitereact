@@ -165,10 +165,10 @@ export default function PricingPlans() {
 
   return (
     <>
-      <div className="w-full bg-white py-10">
+      <div className="w-full dark:bg-gray-900 bg-white py-10">
         <style>{customStyles}</style>
 
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-3xl font-bold text-center mb-8 dark:text-gray-100">
         Shop Streaming Enthusiasts Plans
         </h2>
 
@@ -181,7 +181,7 @@ export default function PricingPlans() {
                 onClick={() => setActiveCategory(tab)}
                 className={`flex-1 px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold rounded-full capitalize transition-all ${
                   activeCategory === tab
-                    ? "bg-white text-[#FD4C0E]"
+                    ? "bg-white text-[#FD4C0E] dark:bg-gray-900"
                     : "text-white"
                 }`}
               >
@@ -223,14 +223,14 @@ export default function PricingPlans() {
             <>
               <button
                 onClick={() => sliderRef.current?.slickPrev()}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-900 bg-white rounded-full p-3 shadow-lg"
               >
                 <ChevronLeft className="w-6 h-6 text-[#FD4C0E]" />
               </button>
 
               <button
                 onClick={() => sliderRef.current?.slickNext()}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-900 bg-white rounded-full p-3 shadow-lg"
               >
                 <ChevronRight className="w-6 h-6 text-[#FD4C0E]" />
               </button>
@@ -238,7 +238,7 @@ export default function PricingPlans() {
               <Slider ref={sliderRef} {...sliderSettings}>
                 {filteredPlans.map((plan) => (
                   <div key={plan.id} className="px-12">
-                    <div className="relative border p-6 rounded-2xl shadow-sm bg-white min-h-[40vw]">
+                    <div className="relative border p-6 rounded-2xl shadow-sm dark:bg-gray-900 bg-white min-h-[40vw]">
                       {plan.tag && (
                         <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden">
                           <span className="absolute top-7 -right-8 rotate-45 bg-green-600 text-white text-xs px-8 py-1">
@@ -263,13 +263,13 @@ export default function PricingPlans() {
                         Buy Plan
                       </button>
 
-                      <p className="text-gray-500 text-sm mt-6">
+                      <p className="dark:text-gray-400 text-gray-500 text-sm mt-6">
                         {plan.desc}
                       </p>
 
                       <ul className="mt-4 space-y-2 text-sm text-gray-700">
                         {plan.features.map((f: string, i: number) => (
-                          <li key={i} className="flex gap-2">
+                          <li key={i} className="flex gap-2 dark:text-gray-300 text-gray-600">
                             <span className="text-green-600">✔</span>
                             {f}
                           </li>

@@ -68,7 +68,11 @@ export default function AboutUs() {
   return (
     <>
         <Header />
-    <div className="min-h-screen bg-gradient-to-b from-[#FF6B35] via-[#FF6B35] via-[30%] to-white flex items-center justify-center p-8">
+    <div className="min-h-screen 
+bg-gradient-to-b 
+from-[#FF6B35] via-[#FF6B35] via-[30%] to-white
+dark:from-[#2B1A14] dark:via-[#1F1410] dark:via-[30%] dark:to-gray-900
+flex items-center justify-center p-8">
       <div className="max-w-6xl w-full">
         {/* Heading */}
         <h1 className="text-white text-5xl md:text-6xl font-bold text-center mb-8 tracking-wide">
@@ -95,10 +99,10 @@ export default function AboutUs() {
       </div>
     </div>
 
-    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-900 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold text-center dark:text-white text-gray-900 mb-16">
           WHY CHOOSE GOLITE?
         </h2>
         
@@ -107,7 +111,7 @@ export default function AboutUs() {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="bg-white border-2 border-[#e8e7e7] rounded-xl rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 flex flex-col items-center text-center"
+              className="dark:bg-gray-800 bg-white border-2 border-[#e8e7e7] rounded-xl rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 flex flex-col items-center text-center"
             >
               {/* Icon Circle */}
               <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center text-white mb-6">
@@ -115,12 +119,12 @@ export default function AboutUs() {
               </div>
               
               {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="dark:text-white text-xl font-bold text-gray-900 mb-4">
                 {feature.title}
               </h3>
               
               {/* Description */}
-              <p className="text-gray-600 leading-relaxed">
+              <p className="dark:text-gray-300 text-gray-600 leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -129,10 +133,10 @@ export default function AboutUs() {
       </div>
     </div>
 
-    <div className="bg-white py-24 px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-900 bg-white py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-center text-gray-900 mb-16 px-4">
+        <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-center dark:text-white text-gray-900 mb-16 px-4">
           MEET THE VISIONARIES DRIVING GOLITE MOBILE FORWARD
         </h2>
         
@@ -141,7 +145,7 @@ export default function AboutUs() {
           {team.map((member, index) => (
             <div 
               key={index}
-              className="bg-gray-50 rounded-lg p-8 flex flex-col items-center"
+              className="dark:bg-gray-800 bg-gray-50 rounded-lg p-8 flex flex-col items-center"
             >
               {/* Profile Image Placeholder with Decorative Line */}
               <div className="relative w-full mb-8">
@@ -157,12 +161,12 @@ export default function AboutUs() {
               </div>
               
               {/* Name */}
-              <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">
+              <h3 className="dark:text-white text-xl font-bold text-gray-900 mb-2 text-center">
                 {member.name}
               </h3>
               
               {/* Role */}
-              <p className="text-gray-600 text-center">
+              <p className="dark:text-gray-300 text-gray-600 text-center">
                 {member.role}
               </p>
             </div>
@@ -171,7 +175,7 @@ export default function AboutUs() {
       </div>
     </div>
 
-    <div className="min-h-screen bg-white px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-900 min-h-screen bg-white px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -182,12 +186,12 @@ export default function AboutUs() {
             </div>
             
             {/* Main Heading */}
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+            <h2 className="dark:text-white text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
               More Than a Network, A Mission
             </h2>
             
             {/* Description */}
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="dark:text-gray-300 text-gray-600 text-lg leading-relaxed">
               GoLite Mobile was created to fill a void for honest and people-first service in the telecommunications industry.
             </p>
             
@@ -198,7 +202,7 @@ export default function AboutUs() {
                   <div className="flex-shrink-0 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center mt-1">
                     <Check className="w-4 h-4 text-white stroke-[3]" />
                   </div>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="dark:text-gray-300 text-gray-700 leading-relaxed">
                     {mission}
                   </p>
                 </div>
@@ -206,7 +210,7 @@ export default function AboutUs() {
             </div>
             
             {/* Bottom Text */}
-            <p className="text-gray-600 leading-relaxed pt-4">
+            <p className="dark:text-gray-300 text-gray-600 leading-relaxed pt-4">
               We are proud to donate a portion of our revenue into the common as a symbol of our commitment to making the world more ethical and sustainable.
             </p>
           </div>

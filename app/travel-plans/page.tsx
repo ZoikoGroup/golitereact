@@ -190,7 +190,7 @@ const faqs = [
       <Header />
       <style>{customStyles}</style>
 
-      <div className="min-h-screen bg-gray-50 py-12 px-4">
+      <div className="min-h-screen dark:bg-gray-900 bg-gray-50 py-12 px-4">
         <h1 className="text-4xl font-bold text-center mb-12">
           Shop Prepaid Travel Plans
         </h1>
@@ -207,14 +207,14 @@ const faqs = [
             <>
               <button
                 onClick={() => sliderRef.current?.slickPrev()}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white rounded-full p-3 shadow-lg"
               >
                 <ChevronLeft className="w-6 h-6 text-[#FD4C0E]" />
               </button>
 
               <button
                 onClick={() => sliderRef.current?.slickNext()}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white rounded-full p-3 shadow-lg"
               >
                 <ChevronRight className="w-6 h-6 text-[#FD4C0E]" />
               </button>
@@ -224,7 +224,7 @@ const faqs = [
                 {filteredPlans.map((plan) => (
                   <div key={plan.id} className="px-8">
 
-                    <div className="relative border p-6 rounded-2xl shadow-sm bg-white min-h-[40vw]">
+                    <div className="relative border p-6 rounded-2xl shadow-sm dark:bg-gray-800 bg-white min-h-[40vw]">
 
                       {plan.tag && (
                         <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden">
@@ -249,13 +249,13 @@ const faqs = [
                         Buy Plan
                       </button>
 
-                      <p className="text-gray-500 text-sm mt-6">
+                      <p className="dark:text-gray-300 text-gray-500 text-sm mt-6">
                         {plan.desc}
                       </p>
 
                       <ul className="mt-4 space-y-2 text-sm text-gray-700">
                         {plan.features.map((f: string, i: number) => (
-                          <li key={i} className="flex gap-2">
+                          <li key={i} className="flex gap-2 dark:text-gray-300 text-gray-700">
                             <span className="text-green-600">✔</span>
                             {f}
                           </li>
@@ -284,7 +284,7 @@ const faqs = [
                     {specialPlans.map((item, i) => (
                       <div
                         key={i}
-                        className={`relative rounded-2xl border border-gray-200 p-6 text-center ${item.bg}`}
+                        className={`dark:bg-gray-800 relative rounded-2xl border border-gray-200 p-6 text-center ${item.bg}`}
                       >
                         {item.offer && (
                           <span className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-md">
@@ -301,7 +301,7 @@ const faqs = [
               />
             </div>
             
-                        <h3 className="text-lg font-semibold text-blue-900 flex items-center justify-center gap-1 pt-8">
+                        <h3 className="dark:text-blue-300 text-lg font-semibold text-blue-900 flex items-center justify-center gap-1 pt-8">
                           <a
                           href={item.link}
                           className="flex items-center gap-1 hover:underline"
@@ -315,15 +315,15 @@ const faqs = [
                   </div>
             </section>
 
-            <div className="bg-gray-50 py-10">
+            <div className="bg-gray-50 py-10 dark:bg-gray-900">
                   <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
                     {/* Left Column */}
                     <div className="flex-1 flex flex-col gap-4">
                       {leftColumn.map((item, index) => (
                         <Disclosure key={index}>
                           {({ open }) => (
-                            <div className="border border-gray-200 rounded-md bg-white shadow-sm">
-                              <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
+                            <div className="border border-gray-200 rounded-md bg-white shadow-sm dark:bg-gray-800">
+                              <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none dark:text-gray-300">
                                 <span>{item.question}</span>
                                 <svg
                                   className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
@@ -342,7 +342,7 @@ const faqs = [
                                   />
                                 </svg>
                               </DisclosureButton>
-                              <DisclosurePanel className="px-4 py-3 text-gray-700 break-words">
+                              <DisclosurePanel className="px-4 py-3 dark:text-gray-300 text-gray-700 break-words">
                                 {item.answer}
                               </DisclosurePanel>
                             </div>
@@ -356,8 +356,8 @@ const faqs = [
                       {rightColumn.map((item, index) => (
                         <Disclosure key={index}>
                           {({ open }) => (
-                            <div className="border border-gray-200 rounded-md bg-white shadow-sm">
-                              <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
+                            <div className="border border-gray-200 rounded-md bg-white shadow-sm dark:bg-gray-800">
+                              <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none dark:text-gray-300">
                                 <span>{item.question}</span>
                                 <svg
                                   className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
@@ -376,7 +376,7 @@ const faqs = [
                                   />
                                 </svg>
                               </DisclosureButton>
-                              <DisclosurePanel className="px-4 py-3 text-gray-700 break-words">
+                              <DisclosurePanel className="px-4 py-3 dark:text-gray-300 text-gray-700 break-words">
                                 {item.answer}
                               </DisclosurePanel>
                             </div>

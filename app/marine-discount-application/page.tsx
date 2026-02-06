@@ -98,8 +98,8 @@ export default function MarineDiscountEnrollment() {
     <>
       <Header />
 
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid lg:grid-cols-2 gap-12">
+      <section className="dark:bg-gray-900 mx-auto px-4 py-16">
+        <div className="max-w-7xl grid lg:grid-cols-2 gap-12">
 
           {/* IMAGE */}
           <div className="flex justify-center">
@@ -112,11 +112,11 @@ export default function MarineDiscountEnrollment() {
 
           {/* FORM */}
           <div>
-            <h1 className="text-3xl font-semibold text-gray-900 mb-3">
+            <h1 className="text-3xl font-semibold dark:text-white text-gray-900 mb-3">
               Discount for Marine Conservation Heroes
             </h1>
 
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 mb-8 dark:text-gray-300">
               As a thank-you for your dedication to protecting marine life,
               we offer exclusive discounts on our plans.
             </p>
@@ -141,7 +141,7 @@ export default function MarineDiscountEnrollment() {
                     <input
                       name="full_name"
                       type="text"
-                      className="w-full rounded-xl border px-4 py-3"
+                      className="w-full rounded-xl border px-4 py-3 dark:bg-gray-800 focus:ring-2 focus:ring-orange-500"
                       placeholder="Enter your full name"
                     />
                     {errors.full_name && (
@@ -158,7 +158,7 @@ export default function MarineDiscountEnrollment() {
                     <input
                       name="ngo_name"
                       type="text"
-                      className="w-full rounded-xl border px-4 py-3"
+                      className="w-full rounded-xl border px-4 py-3 dark:bg-gray-800 focus:ring-2 focus:ring-orange-500"
                       placeholder="Enter NGO name"
                     />
                     {errors.ngo_name && (
@@ -175,7 +175,7 @@ export default function MarineDiscountEnrollment() {
                     <input
                       name="email"
                       type="email"
-                      className="w-full rounded-xl border px-4 py-3"
+                      className="w-full rounded-xl border px-4 py-3 dark:bg-gray-800 focus:ring-2 focus:ring-orange-500"
                       placeholder="Enter email address"
                     />
                     {errors.email && (
@@ -192,7 +192,7 @@ export default function MarineDiscountEnrollment() {
                     <input
                       name="dob"
                       type="date"
-                      className="w-full rounded-xl border px-4 py-3"
+                      className="w-full rounded-xl border px-4 py-3 dark:bg-gray-800 focus:ring-2 focus:ring-orange-500"
                     />
                     {errors.dob && (
                       <p className="text-red-500 text-sm mt-1">
@@ -216,7 +216,7 @@ export default function MarineDiscountEnrollment() {
                     </label>
                     <select
                       name="id_type"
-                      className="w-full rounded-xl border px-4 py-3"
+                      className="w-full rounded-xl border px-4 py-3 dark:bg-gray-800 bg-white focus:ring-2 focus:ring-orange-500"
                     >
                       <option value="">Select Document</option>
                       <option>Membership Certificate / ID Card</option>

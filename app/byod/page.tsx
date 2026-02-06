@@ -158,18 +158,18 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
 `}</style>
       <Header />
 
-      <div className="w-full bg-white">
+      <div className="w-full dark:bg-gray-900 bg-white">
         {/* ================= HERO ================= */}
-        <section className="bg-[#f6faf4] py-16">
+        <section className="dark:bg-gray-800 bg-[#f6faf4] py-16">
           <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900">
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
                 Bring Your Own Device <br />
                 <span className="text-orange-500">(BYOD)</span> to{" "}
                 <span className="text-orange-600">GoLite Mobile</span>
               </h1>
 
-              <p className="mt-4 text-gray-600 leading-relaxed">
+              <p className="mt-4 dark:text-gray-300 text-gray-600 leading-relaxed">
                 Ready to experience seamless connectivity on GoLite Mobile's
                 nationwide network? Bringing your own device is easy!
               </p>
@@ -198,7 +198,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
         <section className="py-14">
           <div className="max-w-5xl mx-auto px-6">
             <div className="border-2 border-green-400 rounded-xl p-8 text-center">
-              <h2 className="text-3xl font-bold text-gray-900">
+              <h2 className="text-3xl font-bold dark:text-white text-gray-900">
                 Use Our Compatibility Checker
               </h2>
 
@@ -249,13 +249,13 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
             </div>
           </div>
         </section>
-        <section className="py-4 bg-white">
+        <section className="py-4 dark:bg-gray-900 bg-white">
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Heading */}
-        <h2 className="text-3xl font-bold text-gray-900">
+        <h2 className="text-3xl font-bold dark:text-white text-gray-900">
           Activating Your Device
         </h2>
-        <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
+        <p className="mt-2 dark:text-gray-300 text-gray-600 max-w-2xl mx-auto">
           Once you have your GoLite Mobile SIM card and have chosen a plan,
           follow these simple steps to activate your device:
         </p>
@@ -281,7 +281,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
                 )}
 
                 {/* Text */}
-                <p className="mt-4 font-semibold text-gray-700 whitespace-pre-line">
+                <p className="mt-4 font-semibold dark:text-gray-300 text-gray-700 whitespace-pre-line">
                   {step.title}
                 </p>
               </div>
@@ -291,7 +291,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
 
         {/* CTA */}
         <a
-          href="#"
+          href="activate-sim"
           className="inline-block mt-8 text-green-600 font-semibold underline hover:text-green-700"
         >
           Click here
@@ -299,10 +299,10 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
       </div>
     </section>
 
-<section className="bg-[#fff5f2] py-20">
+<section className="dark:bg-gray-800 bg-[#fff5f2] py-20">
       <div className="max-w-6xl mx-auto px-6">
         {/* Title */}
-        <h2 className="text-4xl font-extrabold text-center text-gray-900">
+        <h2 className="text-4xl font-extrabold text-center dark:text-white text-gray-900">
           Frequently Asked Questions
         </h2>
 
@@ -334,7 +334,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
             return (
               <div
                 key={index}
-                className="bg-white rounded-xl shadow-sm border"
+                className="dark:bg-gray-700 bg-white rounded-xl shadow-sm border"
               >
                 <button
                   onClick={() =>
@@ -342,7 +342,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
                   }
                   className="w-full flex justify-between items-center px-6 py-5 text-left"
                 >
-                  <span className="font-semibold text-gray-800">
+                  <span className="font-semibold dark:text-gray-200 text-gray-800">
                     {faq.q}
                   </span>
 
@@ -352,7 +352,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                  <div className="dark:text-gray-300 px-6 pb-5 text-gray-600 leading-relaxed">
                     {faq.a}
                   </div>
                 )}

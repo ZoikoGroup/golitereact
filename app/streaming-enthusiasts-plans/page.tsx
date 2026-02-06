@@ -87,7 +87,7 @@ export default function StreamingPlans() {
   return (
     <>
     <Header />
-    <div className="w-full">
+    <div className="w-full dark:bg-gray-900">
       {/* Hero Banner */}
       <section className="max-w-7xl mx-auto px-4 pt-10">
         <div className="flex flex-col md:flex-row items-center justify-between bg-[#FF6A3D] rounded-2xl overflow-hidden">
@@ -126,8 +126,8 @@ export default function StreamingPlans() {
       {/* <StreamingSlider /> */}
 
       {/* FAQ */}
-      <section className="mx-auto px-4 pt-20 pb-20  bg-[#FFF7F7] w-full">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
+      <section className="mx-auto px-4 pt-20 pb-20 dark:bg-gray-900 bg-[#FFF7F7] w-full">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-10 dark:text-gray-100">
           Frequently Asked Questions
         </h2>
 
@@ -138,8 +138,8 @@ export default function StreamingPlans() {
               {leftColumn.map((item, index) => (
                 <Disclosure key={index}>
                   {({ open }) => (
-                    <div className="border border-gray-200 rounded-md bg-white shadow-sm">
-                      <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
+                    <div className="border border-gray-200 rounded-md dark:bg-gray-800 bg-white shadow-sm">
+                      <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium dark:text-gray-100 text-gray-800 focus:outline-none">
                         <span>{item.question}</span>
                         <svg
                           className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
@@ -158,7 +158,7 @@ export default function StreamingPlans() {
                           />
                         </svg>
                       </DisclosureButton>
-                      <DisclosurePanel className="px-4 py-3 text-gray-700 break-words">
+                      <DisclosurePanel className="px-4 py-3 text-gray-700 break-words dark:text-gray-300">
                         {item.answer}
                       </DisclosurePanel>
                     </div>
@@ -172,8 +172,8 @@ export default function StreamingPlans() {
               {rightColumn.map((item, index) => (
                 <Disclosure key={index}>
                   {({ open }) => (
-                    <div className="border border-gray-200 rounded-md bg-white shadow-sm">
-                      <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium text-gray-800 focus:outline-none">
+                    <div className="border border-gray-200 rounded-md dark:bg-gray-800 bg-white shadow-sm">
+                      <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium dark:text-gray-100 text-gray-800 focus:outline-none">
                         <span>{item.question}</span>
                         <svg
                           className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
@@ -192,7 +192,7 @@ export default function StreamingPlans() {
                           />
                         </svg>
                       </DisclosureButton>
-                      <DisclosurePanel className="px-4 py-3 text-gray-700 break-words">
+                      <DisclosurePanel className="px-4 py-3 text-gray-700 break-words dark:text-gray-300">
                         {item.answer}
                       </DisclosurePanel>
                     </div>

@@ -120,12 +120,12 @@ const BlogPage: React.FC = () => {
 
       {/* SUB BANNER SECTION */}
       <div className="container mx-auto my-12">
-        <section className="subbanner row align-items-center max-w-3xl mx-auto">
+        <section className="subbanner bg-[#e8f2e1] dark:bg-gray-800 row align-items-center max-w-3xl mx-auto">
           
           {/* LEFT CONTENT */}
-          <div className="subbanner-left col-12 col-md-6">
+          <div className=" subbanner-left col-12 col-md-6">
             <h2>Get our best content in your inbox</h2>
-            <p>
+            <p className='dark:text-gray-400'>
               All the tips, stories, and resources you could ever need or want straight to your email.
             </p>
           </div>
@@ -136,13 +136,13 @@ const BlogPage: React.FC = () => {
             <div className="form-row">
               <input
                 type="email"
-                className="sub-input"
+                className="sub-input dark:bg-gray-700"
                 placeholder="Email address"
               />
               <button className="sub-btn">Subscribe</button>
             </div>
             {/* PRIVACY TEXT */}
-            <p className="privacy-text">
+            <p className=" dark:text-gray-100">
               Your privacy matters! Smaile only uses this info to send content
               and updates. You may unsubscribe anytime. View our privacy policy
               for more.
