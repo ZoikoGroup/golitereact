@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-12-15.clover",
+  apiVersion: "2026-01-28.clover",
 });
 
 

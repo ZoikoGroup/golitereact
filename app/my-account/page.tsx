@@ -142,13 +142,11 @@ const user: LocalUser | null =
       <main className="content-wrap">
 
         {/* ================= USER BAR ================= */}
-
         <div className="user-bar">
 
           <div className="user-left">
             <div className="avatar">
               {user?.first_name?.charAt(0) || user?.name ?.charAt(0) || user?.email?.charAt(0) || "U"}
-
             </div>
 
             <div>
@@ -157,17 +155,14 @@ const user: LocalUser | null =
                   user?.first_name || user?.name || "User"
                 }
               </h2>
-
-
               <p>{user?.email}</p>
             </div>
           </div>
 
-          <div className="user-actions">
+          <div className="float-end flex flex-row gap-2">
             <a href="/my-account/update-profile" className="btn-outline">
               Update Profile
             </a>
-
             <button onClick={handleLogout} className="btn-primary">
               Logout
             </button>
@@ -180,7 +175,6 @@ const user: LocalUser | null =
         <div className="grid">
 
           {/* LEFT */}
-
           <div>
             <p className="section-title">CUSTOMERS</p>
 
@@ -206,7 +200,6 @@ const user: LocalUser | null =
           </div>
 
           {/* RIGHT */}
-
           <div>
 
             {!ordersLoading && Object.keys(orders).length === 0 && (
@@ -246,34 +239,31 @@ const user: LocalUser | null =
                       ) : (
                         <div className="stats">
 
-  <div className="stat-box green">
-    <div className="stat-value">
-      {lineData?.DATA_BALANCE ?? 0} GB
-    </div>
-    <div className="stat-sub">used of 1.5 GB</div>
-    <div className="stat-label">HIGH SPEED 5G DATA</div>
-  </div>
+                          <div className="stat-box green">
+                            <div className="stat-value">
+                              {lineData?.DATA_BALANCE ?? 0} GB
+                            </div>
+                            <div className="stat-sub">used of 1.5 GB</div>
+                            <div className="stat-label">HIGH SPEED 5G DATA</div>
+                          </div>
 
-  <div className="stat-box purple">
-    <div className="stat-value">
-      {lineData?.TALK_BALANCE ?? 0} Min
-    </div>
-    <div className="stat-sub">used of 8000 min</div>
-    <div className="stat-label">CALLING MINUTES</div>
-  </div>
+                          <div className="stat-box purple">
+                            <div className="stat-value">
+                              {lineData?.TALK_BALANCE ?? 0} Min
+                            </div>
+                            <div className="stat-sub">used of 8000 min</div>
+                            <div className="stat-label">CALLING MINUTES</div>
+                          </div>
 
-  <div className="stat-box pink">
-    <div className="stat-value">
-      {lineData?.SMS_BALANCE ?? 0} SMS
-    </div>
-    <div className="stat-sub">used of 4000 SMS</div>
-    <div className="stat-label">SMS</div>
-  </div>
-
-</div>
-
+                          <div className="stat-box pink">
+                            <div className="stat-value">
+                              {lineData?.SMS_BALANCE ?? 0} SMS
+                            </div>
+                            <div className="stat-sub">used of 4000 SMS</div>
+                            <div className="stat-label">SMS</div>
+                          </div>
+                        </div>
                       )}
-
                     </div>
 
                     {order.plans.map((plan: any) => (
