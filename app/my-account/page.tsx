@@ -142,7 +142,7 @@ const user: LocalUser | null =
       <main className="content-wrap">
 
         {/* ================= USER BAR ================= */}
-        <div className="user-bar">
+        <div className="w-full bg-[linear-gradient(135deg,#ff5a1f,#ff8a65)] rounded-2xl p-6 mb-8 text-white flex items-center justify-between">
 
           <div className="user-left">
             <div className="avatar">
@@ -160,10 +160,10 @@ const user: LocalUser | null =
           </div>
 
           <div className="float-end flex flex-row gap-2">
-            <a href="/my-account/update-profile" className="btn-outline">
+            <button onClick={() => router.push("/my-account/update-profile")} className="bg-transparent border border-white text-white outline-offset-2 outline-sky-500 focus:outline-2 px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-orange-500 transition">
               Update Profile
-            </a>
-            <button onClick={handleLogout} className="btn-primary">
+            </button>
+            <button onClick={handleLogout} className="bg-[#ff5a1f] text-white outline-offset-2 outline-sky-500 focus:outline-2 px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-orange-500 transition">
               Logout
             </button>
           </div>
@@ -207,7 +207,7 @@ const user: LocalUser | null =
                 <img src="/img/plan-placeholder.png" width="240" />
                 <h3>GET STARTED BY CHOOSING A PLAN</h3>
                 <p>Purchase a plan to manage your services.</p>
-                <button className="btn-primary">Buy Plan</button>
+                <button onClick={() => router.push("/all-plans")} className="bg-[#ff5a1f] text-white outline-offset-2 outline-sky-500 focus:outline-2 px-4 py-2 my-4 rounded-md font-semibold">Buy Plan</button>
               </div>
             )}
 
