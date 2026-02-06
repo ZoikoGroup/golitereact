@@ -253,8 +253,8 @@ export default function CheckoutPage() {
     setCouponMessage("");
 
     setTimeout(() => {
-      setDiscountData({ type: "percentage", discount: "10" });
-      setCouponMessage("Coupon applied! Discount: 10%");
+      // setDiscountData({ type: "percentage", discount: "10" });
+      setCouponMessage("Wrong coupon code. Please try again.");
       setLoading(false);
     }, 1000);
   };

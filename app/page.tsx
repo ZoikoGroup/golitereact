@@ -56,15 +56,15 @@ export default function Home() {
     <>
     <Header />
     <HomeBanner />
-    <section className="w-full bg-gray-50 py-16">
+    <section className="w-full bg-gray-50 dark:bg-gray-900 py-16">
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-[4vw]  lg:text-[2vw] font-bold text-gray-900">
+          <h2 className="text-[4vw]  lg:text-[2vw] font-bold text-gray-900 dark:text-gray-200">
             Manage Your Mobile Needs with Ease
           </h2>
-          <p className="text-gray-500 mt-2 text-[3vw] lg:text-[1.2vw]">
+          <p className="text-gray-500 mt-2 text-[3vw] lg:text-[1.2vw] dark:text-gray-400">
             Everything you need in one powerful platform
           </p>
         </div>
@@ -73,25 +73,25 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-12">
 
           {/* Card 1 */}
-          <div className="bg-white border rounded-2xl shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">  
+          <div className="bg-white dark:bg-gray-800 border rounded-2xl shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">  
             {/* IMAGE LEFT */}
             <div className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center">
               <img src="/img/payRecharge.png" alt="Recharge & Bill Pay" />
             </div>
 
             {/* TEXT LEFT */}
-            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900">
+            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900 dark:text-gray-200">
               Recharge &amp; Bill Pay
             </h3>
 
-            <p className="text-gray-500 mt-2 text-[3vw] lg:text-[1vw] md:text-[1vw]">
+            <p className="text-gray-500 mt-2 text-[3vw] lg:text-[1vw] md:text-[1vw] dark:text-gray-400">
               Quick and secure payments with instant confirmation
             </p>
 
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
+          <div className="bg-white dark:bg-gray-800 border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
   
             {/* IMAGE LEFT */}
             <div className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center">
@@ -99,17 +99,17 @@ export default function Home() {
             </div>
 
             {/* TEXT LEFT */}
-            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900 ">
+            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900 dark:text-gray-200">
               Switch To GoLite
             </h3>
 
-            <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw]">
+            <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw] dark:text-gray-400">
               Make the smart move today and switch from any network to GoLite
             </p>
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
+          <div className="bg-white dark:bg-gray-800 border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
   
             {/* IMAGE LEFT */}
             <div className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center">
@@ -117,17 +117,17 @@ export default function Home() {
             </div>
 
             {/* TEXT LEFT */}
-            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900">
+            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900 dark:text-gray-200">
               SIM Activation
             </h3>
 
-            <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw]">
+            <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw] dark:text-gray-400">
               Activate GoLite SIM instantly and step into seamless connectivity
             </p>
           </div>
 
           {/* Card 4 */}
-          <div className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
+          <div className="bg-white dark:bg-gray-800 border rounded-2xl p-6 shadow-sm hover:shadow-md transition px-4 py-4 lg:px-12 lg:py-12">
   
             {/* IMAGE LEFT */}
             <div className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center">
@@ -135,11 +135,11 @@ export default function Home() {
             </div>
 
             {/* TEXT LEFT */}
-            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900">
+            <h3 className="font-semibold text-[4vw] lg:text-[1vw] md:text-[2vw] text-gray-900 dark:text-gray-200">
               Shop Mobile
             </h3>
 
-            <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw]">
+            <p className="text-gray-500 mt-2 text-sm text-[3vw] lg:text-[1vw] md:text-[1vw] dark:text-gray-400">
               Find your perfect mobile device and enhance connectivity with GoLite.
             </p>
           </div>
