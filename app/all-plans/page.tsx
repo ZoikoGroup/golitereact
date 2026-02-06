@@ -254,8 +254,6 @@ const cards = [
             </div>
 
             <p className="mt-3 text-sm opacity-90">{c.desc}</p>
-
-
             <a
               href={c.href}
               className="mt-6 inline-block text-sm font-medium underline-offset-2 hover:underline"
