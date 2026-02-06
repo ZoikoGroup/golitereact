@@ -27,16 +27,17 @@ export default function HomeBanner() {
 
   return (
     
-<section className="w-full bg-gradient-to-r from-[#6C63FF] to-[#4A90E2] text-white overflow-hidden">
+<section className="w-full bg-gradient-to-r from-[#6C63FF] to-[#4A90E2] dark:from-[#1E1E2F] dark:to-[#121212] text-white overflow-hidden">
+
       <div className="max-w-full grid md:grid-cols-2 gap-0 items-center">
 
         {/* LEFT CONTENT */}
         <div className="px-6  md:px-16 md:py-0">
-          <span className="inline-block bg-white/20 text-white text-xs mt-4 font-semibold px-4 py-1 rounded-full mb-4 md:text-[1vw]">
+          <span className="inline-block bg-white/20 dark:text-gray-300 text-white text-xs mt-4 font-semibold px-4 py-1 rounded-full mb-4 md:text-[1vw]">
             5G NETWORK NOW LIVE
           </span>
 
-          <h1 className="text-3xl md:text-5xl font-bold leading-tight md:text-[3vw]">
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight md:text-[3vw] dark:text-gray-400">
             Experience 5G in {country}
           </h1>
 
