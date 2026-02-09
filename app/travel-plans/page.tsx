@@ -143,41 +143,79 @@ const specialPlans = [
   { title: "Military & Veterans", bg: "bg-green-50", img: "/img/specialMilitary.png", offer: true, link: "/military-discount-eligibility-form" },
 ];
       
-   
-  
-const faqs = [
+ const faqs = [
   {
-    question: "What is international long distance calling?",
-    answer: "International long distance calling allows you to make phone calls from the United States to people in other countries."
-  },
-  {
-    question: "Are international calls included in Zoiko Mobile plans?",
-    answer: "Yes, all Zoiko Mobile plans include free international calling minutes to over 246 countries. The allowance varies depending on the destination country and whether you are calling a landline or mobile number."
-  },
-  {
-    question: "What happens if I exceed my data limit?",
-    answer: "Zoiko Mobile offers free international calling minutes to over 246 countries as part of every plan, with no additional activation or hidden fees. Most other carriers charge extra for similar services or cover fewer countries, making Zoiko Mobile a more affordable and comprehensive choice."
-  },
-  {
-    question: "Do I need to activate international calling on my Zoiko Mobile plan?",
-    answer: "No activation is required. International calling is automatically included in all Zoiko Mobile plans."
-  },
-  {
-    question: "Can I use Zoiko Mobile's international calling feature on any device?",
-    answer: "Yes, you can use Zoiko Mobile's international calling feature on any device compatible with our network, including smartphones and tablets."
-  },
-  {
-    question: "How do I make an international call with Zoiko Mobile?",
+    question: "What are GoLite Mobile’s international travel plans?",
     answer: (
-      <ol className="list-decimal pl-5 break-words">
-        <li>Dial "+" or "011" (the international dialing code).</li>
-        <li>Enter the country code of the destination you are calling.</li>
-        <li>Dial the phone number, including the area code if required.</li>
-        <li>Press the call button to connect.</li>
-      </ol>
+      <>
+        <p><strong>Go North America</strong></p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li><strong>Coverage:</strong> U.S., Canada, and Mexico</li>
+          <li><strong>Duration:</strong> 30 days</li>
+          <li><strong>Ideal For:</strong> Travelers visiting North America for business or leisure</li>
+          <li><strong>Key Features:</strong>
+            <ul className="list-disc pl-5 mt-1">
+              <li>Unlimited data, calls, and texts within the U.S., Canada, and Mexico</li>
+              <li>Perfect for cross-border travel and short stays</li>
+              <li>Easy activation and management</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p className="mt-3"><strong>Go-Travel Global</strong></p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li><strong>Coverage:</strong> 200+ countries worldwide</li>
+          <li><strong>Duration:</strong> 30 days</li>
+          <li><strong>Ideal For:</strong> Travelers visiting multiple countries</li>
+          <li><strong>Key Features:</strong>
+            <ul className="list-disc pl-5 mt-1">
+              <li>High-speed data, calls, and texts worldwide</li>
+              <li>Reliable global roaming</li>
+              <li>No hidden fees</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p className="mt-3"><strong>Go-Travel Premium</strong></p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li><strong>Coverage:</strong> Premium global coverage</li>
+          <li><strong>Duration:</strong> 30 days</li>
+          <li><strong>Ideal For:</strong> Frequent travelers needing premium service</li>
+          <li><strong>Key Features:</strong>
+            <ul className="list-disc pl-5 mt-1">
+              <li>Priority service with enhanced data speeds</li>
+              <li>Unlimited high-quality calls & texts in 200+ countries</li>
+              <li>Premium customer support</li>
+            </ul>
+          </li>
+        </ul>
+      </>
     )
+  },
+  {
+    question: "Are these plans available for both prepaid and postpaid customers?",
+    answer:
+      "Yes. GoLite Global Connect and Ultra Global plans are available for both prepaid and postpaid customers."
+  },
+  {
+    question: "Can I use my regular GoLite Mobile plan internationally?",
+    answer:
+      "No. Domestic plans do not automatically include international roaming. You must purchase a GoLite Global Connect or Ultra Global plan to use service abroad."
+  },
+  {
+    question: "How do these plans compare to other carriers like AT&T, Verizon, and T-Mobile?",
+    answer:
+      "GoLite Mobile travel plans offer affordable, flexible prepaid options with no daily roaming fees or hidden charges, unlike many traditional carriers."
+  },
+  {
+    question: "Do I need to activate an international plan before traveling?",
+    answer:
+      "Yes. We recommend purchasing and activating your international plan before leaving the U.S. to ensure uninterrupted service upon arrival."
   }
 ];
+  
+  
+
 
   // Split into two columns
   const mid = Math.ceil(faqs.length / 2);

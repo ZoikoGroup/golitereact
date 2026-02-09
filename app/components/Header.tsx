@@ -235,7 +235,7 @@ export default function Navbar() {
           <a href="/family-plans" className="block">Family Plans</a>
           <a href="/special-plans" className="block">Special Plans</a>
           {/* <a href="/devices" className="block">Devices</a> */}
-          <a href="https://www.att.com/idpmaps/reseller" className="block">Coverage</a>
+          <a href="https://www.att.com/idpmaps/reseller" target="_blank" className="block">Coverage</a>
           {/* <a href="/support" className="block">Support</a> */}
 
           {isLoggedIn ? (

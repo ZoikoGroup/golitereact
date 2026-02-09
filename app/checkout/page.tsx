@@ -488,29 +488,33 @@ export default function CheckoutPage() {
     },
   };
 
-  useEffect(() => {
-    if (cart.length === 0) return;
-    const createIntent = async () => {
-      const res = await fetch("/api/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          cart,
-          billingAddress,
-          shippingAddress: showShipping ? shippingAddress : billingAddress,
-          subtotal,
-          shippingFee,
-          discountAmount,
-          totalFamilyBundleDiscount,
-          total,
-        }),
-      });
-      const data = await res.json();
-      setClientSecret(data.clientSecret);
-    };
-    createIntent();
-  }, [cart, billingAddress, shippingAddress, subtotal, shippingFee, discountAmount, totalFamilyBundleDiscount, total]);
+useEffect(() => {
+  if (cart.length === 0) return;
 
+  const createIntent = async () => {
+    const res = await fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        cart,
+        billingAddress,
+        shippingAddress: showShipping ? shippingAddress : billingAddress,
+        subtotal,
+        shippingFee,
+        discountAmount,
+        total,
+      }),
+    });
+
+    const data = await res.json();
+    setClientSecret(data.clientSecret);
+  };
+
+  createIntent();
+}, [cart, billingAddress, shippingAddress, subtotal, shippingFee, discountAmount, total]);
+
+
+  
   return (
     <>
       <Header />
