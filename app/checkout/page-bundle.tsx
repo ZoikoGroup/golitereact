@@ -181,14 +181,11 @@ export default function CheckoutPage() {
     });
 
     const grouped: GroupedBundle[] = Object.keys(bundles).map((bundleId) => {
-      // Bundle discount is the one with type "bundle" and line "all"
       const bundleDiscount = discounts.find(
         (d) => d.bundleId === bundleId && d.type === "bundle" && d.line === "all"
       );
-      
-      // Family discounts are individual line discounts (excluding the primary line "all")
       const familyDiscountsForBundle = discounts.filter(
-        (d) => d.bundleId === bundleId && d.type === "family" && d.line !== "all"
+        (d) => d.bundleId === bundleId && d.type === "family"
       );
 
       return {
@@ -316,7 +313,6 @@ export default function CheckoutPage() {
       setCouponMessage("Please enter a coupon code");
       return;
     }
-    
     setLoading(true);
     setCouponMessage("");
     setTimeout(() => {
@@ -488,33 +484,29 @@ export default function CheckoutPage() {
     },
   };
 
-useEffect(() => {
-  if (cart.length === 0) return;
+  useEffect(() => {
+    if (cart.length === 0) return;
+    const createIntent = async () => {
+      const res = await fetch("/api/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cart,
+          billingAddress,
+          shippingAddress: showShipping ? shippingAddress : billingAddress,
+          subtotal,
+          shippingFee,
+          discountAmount,
+          totalFamilyBundleDiscount,
+          total,
+        }),
+      });
+      const data = await res.json();
+      setClientSecret(data.clientSecret);
+    };
+    createIntent();
+  }, [cart, billingAddress, shippingAddress, subtotal, shippingFee, discountAmount, totalFamilyBundleDiscount, total]);
 
-  const createIntent = async () => {
-    const res = await fetch("/api/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        cart,
-        billingAddress,
-        shippingAddress: showShipping ? shippingAddress : billingAddress,
-        subtotal,
-        shippingFee,
-        discountAmount,
-        total,
-      }),
-    });
-
-    const data = await res.json();
-    setClientSecret(data.clientSecret);
-  };
-
-  createIntent();
-}, [cart, billingAddress, shippingAddress, subtotal, shippingFee, discountAmount, total]);
-
-
-  
   return (
     <>
       <Header />
@@ -600,21 +592,17 @@ useEffect(() => {
                       {/* Bundle Items */}
                       <div className="p-4 space-y-3">
                         {bundle.items.map((item, itemIdx) => {
-                          // First item is the primary line (line: all) - no discount
-                          const isPrimaryLine = itemIdx === 0;
-                          
-                          // For secondary lines, find their discount (line1, line2, etc.)
-                          const lineDiscount = !isPrimaryLine 
-                            ? bundle.familyDiscounts.find((d) => d.line === `line${itemIdx}`)
-                            : null;
+                          const lineDiscount = bundle.familyDiscounts.find(
+                            (d) => d.line === `line${itemIdx + 1}`
+                          );
                           
                           return (
                             <div key={itemIdx} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
                               <div className="flex justify-between items-start mb-3">
                                 <div className="flex-1">
                                   <div className="flex items-center gap-2 mb-1">
-                                    <span className={`${isPrimaryLine ? 'bg-[#FD4C0E]' : 'bg-blue-500'} text-white text-xs font-semibold px-2 py-1 rounded`}>
-                                      {isPrimaryLine ? 'Primary Line' : `Line ${itemIdx + 1}`}
+                                    <span className="bg-[#FD4C0E] text-white text-xs font-semibold px-2 py-1 rounded">
+                                      Line {itemIdx + 1}
                                     </span>
                                     {lineDiscount && (
                                       <span className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded flex items-center gap-1">
@@ -859,84 +847,19 @@ useEffect(() => {
                   <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                     <h5 className="font-bold mb-4 text-gray-900 dark:text-white">Your Order</h5>
                     
-                    {/* Grouped Family Bundles */}
-                    {groupedBundles.map((bundle, bundleIdx) => (
-                      <div key={bundleIdx} className="mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Users className="w-4 h-4 text-[#FD4C0E]" />
-                          <h6 className="font-bold text-sm text-[#FD4C0E]">Family Bundle {bundleIdx + 1}</h6>
+                    {/* Individual Items */}
+                    <div className="space-y-2 mb-4">
+                      {cart.map((item, idx) => (
+                        <div key={idx} className="flex justify-between text-sm text-gray-700 dark:text-gray-300">
+                          <span className="flex-1">
+                            {item.planTitle} ({item.simType}) × {item.formData?.priceQty || 1}
+                          </span>
+                          <span className="font-semibold">
+                            ${(item.planPrice * (item.formData?.priceQty || 1)).toFixed(2)}
+                          </span>
                         </div>
-                        
-                        {/* Bundle Items */}
-                        <div className="space-y-2 ml-6">
-                          {bundle.items.map((item, itemIdx) => {
-                            const isPrimaryLine = itemIdx === 0;
-                            const lineDiscount = !isPrimaryLine 
-                              ? bundle.familyDiscounts.find((d) => d.line === `line${itemIdx}`)
-                              : null;
-                            
-                            const itemTotal = item.planPrice * (item.formData?.priceQty || 1);
-                            const discountedPrice = lineDiscount 
-                              ? itemTotal - (lineDiscount.amount * (item.formData?.priceQty || 1))
-                              : itemTotal;
-                            
-                            return (
-                              <div key={itemIdx} className="space-y-1">
-                                <div className="flex justify-between text-sm text-gray-700 dark:text-gray-300">
-                                  <span className="flex items-center gap-2">
-                                    <span className={`${isPrimaryLine ? 'text-[#FD4C0E]' : 'text-blue-500'} font-semibold text-xs`}>
-                                      {isPrimaryLine ? '●' : '○'}
-                                    </span>
-                                    {item.planTitle} ({item.simType}) × {item.formData?.priceQty || 1}
-                                  </span>
-                                  <span className={lineDiscount ? 'line-through text-gray-400' : 'font-semibold'}>
-                                    ${itemTotal.toFixed(2)}
-                                  </span>
-                                </div>
-                                {lineDiscount && (
-                                  <div className="flex justify-between text-xs text-green-600 dark:text-green-400 ml-4">
-                                    <span className="flex items-center gap-1">
-                                      <Tag className="w-3 h-3" />
-                                      Line discount (-${lineDiscount.amount.toFixed(2)} each)
-                                    </span>
-                                    <span className="font-semibold">${discountedPrice.toFixed(2)}</span>
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                        
-                        {/* Bundle Discount */}
-                        {bundle.bundleDiscount > 0 && (
-                          <div className="mt-3 pt-3 border-t border-green-200 dark:border-green-700">
-                            <div className="flex justify-between text-sm font-semibold text-green-600 dark:text-green-400">
-                              <span className="flex items-center gap-1">
-                                <Tag className="w-4 h-4" />
-                                Bundle Discount
-                              </span>
-                              <span>-${bundle.bundleDiscount.toFixed(2)}</span>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-
-                    {/* Regular Items */}
-                    {regularItems.length > 0 && (
-                      <div className="space-y-2 mb-4">
-                        {regularItems.map((item, idx) => (
-                          <div key={idx} className="flex justify-between text-sm text-gray-700 dark:text-gray-300">
-                            <span className="flex-1">
-                              {item.planTitle} ({item.simType}) × {item.formData?.priceQty || 1}
-                            </span>
-                            <span className="font-semibold">
-                              ${(item.planPrice * (item.formData?.priceQty || 1)).toFixed(2)}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                      ))}
+                    </div>
 
                     {/* Subtotal */}
                     <div className="border-t border-gray-200 dark:border-gray-700 pt-3 mb-3">
@@ -946,14 +869,20 @@ useEffect(() => {
                       </div>
                     </div>
 
-                    {/* Total Family Bundle Discount Summary */}
-                    {totalFamilyBundleDiscount > 0 && (
-                      <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 mb-3">
-                        <div className="flex justify-between text-sm font-bold text-green-600 dark:text-green-400">
-                          <span className="flex items-center gap-1">
-                            <Users className="w-4 h-4" />
-                            Total Family Savings
-                          </span>
+                    {/* Family Bundle Discounts */}
+                    {groupedBundles.length > 0 && (
+                      <div className="space-y-2 mb-3">
+                        {groupedBundles.map((bundle, idx) => (
+                          <div key={idx} className="flex justify-between text-sm text-green-600 dark:text-green-400">
+                            <span className="flex items-center gap-1">
+                              <Tag className="w-3 h-3" />
+                              Family Bundle {idx + 1} Discount
+                            </span>
+                            <span className="font-semibold">-${bundle.bundleDiscount.toFixed(2)}</span>
+                          </div>
+                        ))}
+                        <div className="flex justify-between text-sm font-bold text-green-600 dark:text-green-400 pt-2 border-t border-green-200 dark:border-green-700">
+                          <span>Total Family Savings</span>
                           <span>-${totalFamilyBundleDiscount.toFixed(2)}</span>
                         </div>
                       </div>
@@ -1002,7 +931,7 @@ useEffect(() => {
                       </div>
                       {totalFamilyBundleDiscount > 0 && (
                         <p className="text-xs text-green-600 dark:text-green-400 mt-2 text-right">
-                          🎉 You saved ${totalFamilyBundleDiscount.toFixed(2)} with family bundles!
+                          You saved ${totalFamilyBundleDiscount.toFixed(2)} with family bundles!
                         </p>
                       )}
                     </div>

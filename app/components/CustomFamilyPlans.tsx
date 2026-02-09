@@ -34,6 +34,11 @@ const discountTable: Record<number, Record<Plan["name"], number>> = {
   10:{ "Go-Flex-Family": 4, "Go-Value-Family": 12, "Go-Prime-Family": 20 },
 };
 
+const allowedFamilyPlans = new Set(
+  Object.values(discountTable).flatMap((plans) =>
+    Object.keys(plans)
+  )
+);
 /* ----------------------------------
    COMPONENT
 ---------------------------------- */
@@ -62,15 +67,17 @@ export default function CustomFamilyPlansComponent() {
         
         const data = await res.json();
 
-        const normalized: Plan[] = data.map((item: any) => ({
-          id: item.id,
-          vcPlanID: item.vcPlanID,
-          slug: item.slug,
-          name: item.name,
-          duration: `${item.duration_days} Days`,
-          simType: item.sim_type === "esim" ? "eSIM" : "pSIM",
-          price: Number(item.final_price),
-        }));
+        const normalized: Plan[] = data
+          .map((item: any) => ({
+            id: item.id,
+            vcPlanID: item.vcPlanID,
+            slug: item.slug,
+            name: item.name,
+            duration: `${item.duration_days} Days`,
+            simType: item.sim_type === "esim" ? "eSIM" : "pSIM",
+            price: Number(item.final_price),
+          }))
+          .filter((plan: Plan) => allowedFamilyPlans.has(plan.name))
 
         setFamilyPlans(normalized);
       } catch (err) {
@@ -113,6 +120,7 @@ const calculateSummary = () => {
       name: string;
       simType: string;
       price: number;
+      discount: number;
     }[] = [];
 
     const planCounts: Record<Plan["name"], number> = {
@@ -124,28 +132,32 @@ const calculateSummary = () => {
     let additionalSubtotal = 0;
 
     linePlans.forEach((key) => {
-      if (!key) return;
-      const plan = getPlanByKey(key);
-      if (!plan) return;
+  if (!key) return;
 
-      additionalSubtotal += plan.price;
-      planCounts[plan.name]++;
+  const plan = getPlanByKey(key);
+  if (!plan) return;
 
-      additionalLinesDetails.push({
-        name: plan.name,
-        simType: plan.simType,
-        price: plan.price,
-      });
+  const currentCount = planCounts[plan.name] + 1;
+
+  const lineDiscount =
+    discountTable[currentCount]?.[plan.name] || 0;
+
+    planCounts[plan.name]++;
+
+    additionalSubtotal += plan.price;
+
+    additionalLinesDetails.push({
+      name: plan.name,
+      simType: plan.simType,
+      price: plan.price,
+      discount: lineDiscount,
     });
+  });
 
-    let totalDiscount = 0;
-    (Object.entries(planCounts) as [Plan["name"], number][]).forEach(
-      ([planName, count]) => {
-        for (let i = 1; i <= count; i++) {
-          totalDiscount += discountTable[i][planName];
-        }
-      }
-    );
+    const totalDiscount = additionalLinesDetails.reduce(
+  (sum, l) => sum + l.discount,
+  0
+);
 
     const primaryPrice = primaryPlan?.price || 0;
 
@@ -167,13 +179,13 @@ const handleCheckout = () => {
     JSON.parse(localStorage.getItem("cart") || "[]");
 
   const existingDiscounts =
-    JSON.parse(localStorage.getItem("discounts") || "[]");
+    JSON.parse(localStorage.getItem("family-discounts") || "[]");
 
   const newCartItems: any[] = [];
   const newDiscounts: any[] = [];
 
   // 🔑 Unique bundle id
-  const bundleId = `bundle_${Date.now()}`;
+  const bundleId = `family_bundle_${Date.now()}`;
 
   /* ============================
       PRIMARY PLAN
@@ -262,7 +274,7 @@ const handleCheckout = () => {
   );
 
   localStorage.setItem(
-    "discounts",
+    "family-discounts",
     JSON.stringify([...existingDiscounts, ...newDiscounts])
   );
 
@@ -417,8 +429,18 @@ const handleCheckout = () => {
 
               {summary.additionalLinesDetails.map((l, i) => (
                 <div key={i} className="flex justify-between text-sm">
-                  <span>{l.name}</span>
-                  <span>${l.price.toFixed(2)}</span>
+                  <span>
+                    {l.name}
+                    {l.discount > 0 && (
+                      <span className="text-green-500 ml-2">
+                        (-${l.discount})
+                      </span>
+                    )}
+                  </span>
+
+                  <span>
+                    ${(l.price - l.discount).toFixed(2)}
+                  </span>
                 </div>
               ))}
 
