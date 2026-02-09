@@ -1,6 +1,8 @@
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
+export const runtime = "nodejs";
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
@@ -17,37 +19,48 @@ export async function POST(req: Request) {
       total,
     } = body;
 
-    // 🔥 HARD GUARD (prevents 500)
-    if (!total || isNaN(Number(total))) {
-      console.error("❌ Invalid total:", body);
+    /* ------------------------------
+       VALIDATION
+    ------------------------------ */
+    const amount = Number(total);
+
+    if (!amount || isNaN(amount) || amount <= 0) {
       return NextResponse.json(
         { error: "Invalid total amount" },
         { status: 400 }
       );
     }
 
+    /* ------------------------------
+       CREATE PAYMENT INTENT
+    ------------------------------ */
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(Number(total) * 100),
+      amount: Math.round(amount * 100),
       currency: "usd",
 
+      automatic_payment_methods: {
+        enabled: true,
+      },
+
       metadata: {
-        cart: JSON.stringify(cart),
-        billing: JSON.stringify(billingAddress),
-        shipping: JSON.stringify(shippingAddress),
+        items: cart.length.toString(),
         subtotal: String(subtotal),
-        shippingFee: String(shippingFee),
+        shipping: String(shippingFee),
         discount: String(discountAmount),
       },
     });
 
+    /* ------------------------------
+       RESPONSE (SAFE)
+    ------------------------------ */
     return NextResponse.json({
       clientSecret: paymentIntent.client_secret,
-      paymentIntentResponse: paymentIntent,
     });
   } catch (err: any) {
-    console.error("❌ Stripe PI Error:", err.message);
+    console.error("❌ Stripe PI Error:", err);
+
     return NextResponse.json(
-      { error: err.message },
+      { error: "Payment initialization failed" },
       { status: 500 }
     );
   }
