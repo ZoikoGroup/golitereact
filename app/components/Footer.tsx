@@ -81,7 +81,7 @@ export default function Footer() {
             <div>
               <h3 className="font-semibold text-white mb-4">Company</h3>
               <ul className="space-y-2 text-sm">
-                <li>Careers</li>
+                <li><a href="/career" className="block">Careers</a></li>
                 <li>Press Kit</li>
                 <li>Partners</li>
                 <li>Sustainability</li>
