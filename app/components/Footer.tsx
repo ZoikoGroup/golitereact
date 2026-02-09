@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Footer() {
   const curyear = new Date().getFullYear();
   
@@ -58,19 +59,19 @@ export default function Footer() {
             <div>
               <h3 className="font-semibold text-white mb-4">Quick Links</h3>
               <ul className="space-y-2 text-sm">
-                <li>Plans &amp; Pricing</li>
+                <li><Link href="/all-plans" className="block">Plans &amp; Pricing</Link></li>
                 <li>Shop Devices</li>
-                <li>Coverage Map</li>
+                <li><Link href="https://www.att.com/idpmaps/reseller" target="_blank" className="block">Coverage Map</Link></li>
                 <li>Support Center</li>
-                <li>About Us</li>
+                <li><Link href="/about-us" className="block">About Us</Link></li>
               </ul>
             </div>
 
             <div>
               <h3 className="font-semibold text-white mb-4">Resources</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="/blog" className="block">Blog</a></li>
-                <li><a href="/activate-sim" className="block">Activate SIM</a></li>
+                <li><Link href="/blog" className="block">Blog</Link></li>
+                <li><Link href="/activate-sim" className="block">Activate SIM</Link></li>
                 <li>Help Center</li>
                 <li>Community Forum</li>
                 <li>Network Status</li>
@@ -80,11 +81,11 @@ export default function Footer() {
             <div>
               <h3 className="font-semibold text-white mb-4">Company</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="/career" className="block">Careers</a></li>
+                <li><Link href="/career" className="block">Careers</Link></li>
                 <li>Press Kit</li>
                 <li>Partners</li>
                 <li>Sustainability</li>
-                <li>Contact Us</li>
+                <li><Link href="/contact-us" className="block">Contact Us</Link></li>
               </ul>
             </div>
 
