@@ -147,7 +147,7 @@ export default function ShopSpecialPlans() {
     {/* RIGHT IMAGE */}
     <div className="relative overflow-hidden">
       <Image
-        src="/img/specialPlanFooterBanner.jpg"
+        src="/img/resize/specialPlanFooterBanner.jpeg"
         alt="Ocean support"
         fill
         className="object-cover scale-[1.4]"
