@@ -64,7 +64,7 @@ export default function HomeBanner() {
         {/* RIGHT IMAGE */}
         <div className="flex justify-end h-full">
           <img 
-            src="/img/homebanner.jpeg" 
+            src="/img/homebanner.png" 
             alt="People using mobile" 
             className="w-full h-full object-cover object-left"
           />

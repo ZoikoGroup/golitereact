@@ -90,7 +90,7 @@ flex items-center justify-center p-8">
             
             {/* If you have the actual image, uncomment and use this: */}
             <img 
-              src="img/about-banne.jpeg" 
+              src="img/about-banner.png" 
               alt="Diverse group of people using mobile phones"
               className="w-full h-full object-cover"
             />
