@@ -205,7 +205,7 @@ export default function PricingPlans() {
                     : "text-gray-600 dark:text-gray-300"
                 }`}
               >
-                {sim}
+                {sim  === "pSim" ? "pSIM" : "eSIM"}
               </button>
             ))}
           </div>
