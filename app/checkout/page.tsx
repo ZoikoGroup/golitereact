@@ -338,6 +338,24 @@ export default function CheckoutPage() {
     return acc + price * qty;
   }, 0);
 
+   // Calculate activation fees (13.99 per prepaid line)
+  const ACTIVATION_FEE_PER_LINE = 13.99;
+  const totalActivationFees = cart.reduce((acc, item) => {
+    if (item.lineType?.toLowerCase() === 'prepaid') {
+      const qty = Number(item.formData?.priceQty ?? 1);
+      return acc + (ACTIVATION_FEE_PER_LINE * qty);
+    }
+    return acc;
+  }, 0);
+
+   // Count prepaid lines for display
+  const prepaidLineCount = cart.reduce((acc, item) => {
+    if (item.lineType?.toLowerCase() === 'prepaid') {
+      return acc + Number(item.formData?.priceQty ?? 1);
+    }
+    return acc;
+  }, 0);
+
   // Calculate total family bundle discounts
   const totalFamilyBundleDiscount = groupedBundles.reduce((acc, bundle) => {
     return acc + bundle.bundleDiscount;
@@ -358,7 +376,7 @@ export default function CheckoutPage() {
     }
   }, [selectedShippingOption, hasDeviceItem]);
 
-  const total = Math.max(subtotal + shippingFee - discountAmount - totalFamilyBundleDiscount, 0);
+  const total = Math.max(subtotal + totalActivationFees + shippingFee - discountAmount - totalFamilyBundleDiscount, 0);
 
   const validateFields = () => {
     const newErrors: Errors = {};
@@ -426,6 +444,7 @@ export default function CheckoutPage() {
         billingAddress,
         shippingAddress: showShipping ? shippingAddress : billingAddress,
         subtotal,
+        totalActivationFees,
         shippingFee,
         discountAmount,
         totalFamilyBundleDiscount,
@@ -502,6 +521,7 @@ useEffect(() => {
         billingAddress,
         shippingAddress: showShipping ? shippingAddress : billingAddress,
         subtotal,
+        totalActivationFees,
         shippingFee,
         discountAmount,
         total,
@@ -513,7 +533,7 @@ useEffect(() => {
   };
 
   createIntent();
-}, [cart, billingAddress, shippingAddress, subtotal, shippingFee, discountAmount, total]);
+}, [cart, billingAddress, shippingAddress, subtotal, totalActivationFees, shippingFee, discountAmount, total]);
 
 
   
@@ -634,7 +654,7 @@ useEffect(() => {
                                   <h6 className="font-bold text-gray-900 dark:text-white">{item.planTitle}</h6>
                                   <p className="text-sm text-gray-600 dark:text-gray-300">
                                     {/* {item.lineType} | {item.simType === 'pSim' ? 'pSIM' : 'eSIM'} */}
-                                     Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType === 'pSim' ? 'pSIM' : 'eSIM'}
+                                     Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType === 'pSIM' ? 'pSIM' : 'eSIM'}
                                   </p>
                                 </div>
                               </div>
@@ -653,11 +673,11 @@ useEffect(() => {
                                   >
                                     <Minus className="w-4 h-4" />
                                   </button>
-                                  <span className="font-semibold min-w-[20px] text-center">
+                                  <span className="font-semibold min-w-[20px] text-center disabled:cursor-not-allowed">
                                     {item.formData?.priceQty ?? 1}
                                   </span>
                                   <button
-                                    className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-500 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-00 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
                                     onClick={() => handleQuantity(bundle.bundleId, cart.indexOf(item), 1)}
                                     disabled
                                   >
@@ -954,6 +974,25 @@ useEffect(() => {
                         <span className="font-semibold text-gray-900 dark:text-white">${subtotal.toFixed(2)}</span>
                       </div>
                     </div>
+                  {/* Activation Fees */}
+                    {totalActivationFees > 0 && (
+                      <div className="mb-4 rounded-lg bg-orange-50 p-3 dark:bg-orange-900/20">
+                        <div className="flex items-center justify-between text-sm">
+                          <div>
+                            <span className="font-medium text-orange-800 dark:text-orange-300">
+                              Activation Fees
+                            </span>
+                            <p className="text-xs text-orange-600 dark:text-orange-400">
+                              {prepaidLineCount} prepaid line{prepaidLineCount > 1 ? 's' : ''} × ${ACTIVATION_FEE_PER_LINE.toFixed(2)}
+                            </p>
+                          </div>
+                          <span className="font-bold text-orange-800 dark:text-orange-300">
+                            ${totalActivationFees.toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
 
                     {/* Total Family Bundle Discount Summary */}
                     {totalFamilyBundleDiscount > 0 && (
