@@ -631,7 +631,8 @@ useEffect(() => {
                                   </div>
                                   <h6 className="font-bold text-gray-900 dark:text-white">{item.planTitle}</h6>
                                   <p className="text-sm text-gray-600 dark:text-gray-300">
-                                    {item.lineType} | {item.simType}
+                                    {/* {item.lineType} | {item.simType === 'pSim' ? 'pSIM' : 'eSIM'} */}
+                                     Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType === 'pSim' ? 'pSIM' : 'eSIM'}
                                   </p>
                                 </div>
                               </div>
@@ -644,9 +645,9 @@ useEffect(() => {
                                 </div>
                                 <div className="flex items-center gap-3">
                                   <button
-                                    className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-500 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition"
+                                    className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-500 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
                                     onClick={() => handleQuantity(bundle.bundleId, cart.indexOf(item), -1)}
-                                    disabled={loading}
+                                    disabled
                                   >
                                     <Minus className="w-4 h-4" />
                                   </button>
@@ -654,9 +655,9 @@ useEffect(() => {
                                     {item.formData?.priceQty ?? 1}
                                   </span>
                                   <button
-                                    className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-500 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition"
+                                    className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-500 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
                                     onClick={() => handleQuantity(bundle.bundleId, cart.indexOf(item), 1)}
-                                    disabled={loading}
+                                    disabled
                                   >
                                     <Plus className="w-4 h-4" />
                                   </button>
@@ -688,7 +689,7 @@ useEffect(() => {
                         <div>
                           <h5 className="text-lg font-bold text-[#FD4C0E]">{item.planTitle}</h5>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
-                            Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType || "N/A"}
+                            Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType === 'pSim' ? 'pSIM' : 'eSIM'}
                           </p>
                         </div>
                         <button
@@ -934,7 +935,7 @@ useEffect(() => {
                         {regularItems.map((item, idx) => (
                           <div key={idx} className="flex justify-between text-sm text-gray-700 dark:text-gray-300">
                             <span className="flex-1">
-                              {item.planTitle} ({item.simType}) × {item.formData?.priceQty || 1}
+                              {item.planTitle} ({item.simType === 'pSim' ? 'pSIM' : 'eSIM'}) × {item.formData?.priceQty || 1}
                             </span>
                             <span className="font-semibold">
                               ${(item.planPrice * (item.formData?.priceQty || 1)).toFixed(2)}
