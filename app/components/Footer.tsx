@@ -62,7 +62,7 @@ export default function Footer() {
                 <li><Link href="/all-plans" className="block">Plans &amp; Pricing</Link></li>
                 <li>Shop Devices</li>
                 <li><Link href="https://www.att.com/idpmaps/reseller" target="_blank" className="block">Coverage Map</Link></li>
-                <li>Support Center</li>
+                <li><Link href="/help-and-support" className="block">Support Center</Link></li>
                 <li><Link href="/about-us" className="block">About Us</Link></li>
               </ul>
             </div>
@@ -72,7 +72,7 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 <li><Link href="/blog" className="block">Blog</Link></li>
                 <li><Link href="/activate-sim" className="block">Activate SIM</Link></li>
-                <li>Help Center</li>
+                <li><Link href="/help-and-support" className="block">Help Center</Link></li>
                 <li>Community Forum</li>
                 <li>Network Status</li>
               </ul>
