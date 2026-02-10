@@ -488,6 +488,8 @@ export default function CheckoutPage() {
     },
   };
 
+
+
 useEffect(() => {
   if (cart.length === 0) return;
 
