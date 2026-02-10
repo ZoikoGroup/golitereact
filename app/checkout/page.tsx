@@ -562,7 +562,7 @@ useEffect(() => {
                   <Smartphone className="w-5 h-5" />
                   Postpaid plans
                 </a>
-                <a href="/business-deals" className="flex items-center justify-center gap-2 bg-[#FD4C0E] hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                <a href="/business" className="flex items-center justify-center gap-2 bg-[#FD4C0E] hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                   <Vibrate className="w-5 h-5" />
                   Business Deals
                 </a>
