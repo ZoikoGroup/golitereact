@@ -1,9 +1,67 @@
 "use client"
+import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
 export default function ContactUs() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch('/api/contact-us', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: data.message || 'Your message has been sent successfully!'
+        });
+        // Reset form
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || 'Failed to send message. Please try again.'
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'An error occurred. Please try again later.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -31,51 +89,71 @@ export default function ContactUs() {
                     </div>
 
                     <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
-                        <form>
+                        {submitStatus.type && (
+                          <div className={`mb-4 p-4 rounded-md ${
+                            submitStatus.type === 'success' 
+                              ? 'bg-green-100 text-green-800 border border-green-300' 
+                              : 'bg-red-100 text-red-800 border border-red-300'
+                          }`}>
+                            {submitStatus.message}
+                          </div>
+                        )}
+                        
+                        <form onSubmit={handleSubmit}>
                             <div className="mb-4">
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">
                                     Name
                                 </label>
                                 <input
                                     type="text"
                                     id="name"
                                     name="name"
-                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-800 dark:text-white dark:border-gray-600"
                                     required
+                                    disabled={isSubmitting}
                                 />
                             </div>
 
                             <div className="mb-4">
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">
                                     Email
                                 </label>
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
-                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-800 dark:text-white dark:border-gray-600"
                                     required
+                                    disabled={isSubmitting}
                                 />
                             </div>
 
                             <div className="mb-4">
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">
                                     Message
                                 </label>
                                 <textarea
                                     id="message"
                                     name="message"
                                     rows={4}
-                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400 dark:bg-gray-800 dark:text-white dark:border-gray-600"
                                     required
+                                    disabled={isSubmitting}
                                 ></textarea>
                             </div>
 
                             <button
                                 type="submit"
-                                className="bg-orange-500 text-white px-6 py-3 rounded-md hover:bg-orange-600 transition"
+                                disabled={isSubmitting}
+                                className="bg-orange-500 text-white px-6 py-3 rounded-md hover:bg-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Send Message
+                                {isSubmitting ? 'Sending...' : 'Send Message'}
                             </button>
                         </form>
                     </div>
