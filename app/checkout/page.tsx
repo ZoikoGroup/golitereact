@@ -568,7 +568,13 @@ useEffect(() => {
                   Clear Cart
                 </button>
               </div>
-
+              
+              <pre style={{ whiteSpace: "pre-wrap" }}>
+          {JSON.stringify(cart, null, 2)}
+        </pre>
+        <pre style={{ whiteSpace: "pre-wrap" }}>
+          {JSON.stringify(cart, null, 2)}
+        </pre>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 space-y-6">
                   {/* Family Bundle Groups */}
