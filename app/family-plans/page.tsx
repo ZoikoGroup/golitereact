@@ -277,7 +277,7 @@ const faqs = [
             {/* Right Image Section */}
             <div className="relative h-64 md:h-auto">
               <img
-                src="./img/family-banner.jpg"
+                src="./img/resize/family-banner.jpeg"
                 alt="Three friends looking at a smartphone together"
                 className="w-full h-full object-cover"
               />
@@ -328,7 +328,7 @@ const faqs = [
         {/* RIGHT IMAGE */}
         <div className="relative w-full h-full rounded-2xl overflow-hidden flex items-center justify-center">
           <Image
-            src="/img/familyFeatures.png"
+            src="/img/resize/familyFeatures.jpeg"
             alt="GoLite family plan"
             fill
             className="object-contain"

@@ -229,9 +229,12 @@ const user: LocalUser | null =
                         <div className="icon">👤</div>
 
                         <div>
-                          <strong>{lineData?.LINE_INQ?.MDN || "Customer"}</strong>
+                          <strong>
+                            {lineData?.LINE_INQ?.CARRIER_RESPONSE?.wholeSaleApi?.session?.userName || "Customer"}
+                          </strong>
                           <p>ESN: {lineData?.ESN || "N/A"}</p>
                         </div>
+
                       </div>
 
                       {lineLoading ? (

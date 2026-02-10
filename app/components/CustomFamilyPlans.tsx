@@ -68,17 +68,24 @@ export default function CustomFamilyPlansComponent() {
         const data = await res.json();
 
         const normalized: Plan[] = data
-          .map((item: any) => ({
-            id: item.id,
-            vcPlanID: item.vcPlanID,
-            slug: item.slug,
-            name: item.name,
-            duration: `${item.duration_days} Days`,
-            simType: item.sim_type === "esim" ? "eSIM" : "pSIM",
-            price: Number(item.final_price),
-          }))
-          .filter((plan: Plan) => allowedFamilyPlans.has(plan.name))
+  .filter((item: any) => allowedFamilyPlans.has(item.name))
+  .flatMap((item: any) => {
+    const basePlan = {
+      id: item.id,
+      vcPlanID: item.vcPlanID,
+      slug: item.slug,
+      name: item.name,
+      duration: `${item.duration_days} Days`,
+      price: Number(item.final_price),
+    };
 
+    return [
+      { ...basePlan, simType: "eSIM" },
+      { ...basePlan, simType: "pSIM" },
+    ];
+  });
+
+          
         setFamilyPlans(normalized);
       } catch (err) {
         console.error("API error", err);
