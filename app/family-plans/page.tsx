@@ -328,7 +328,7 @@ const faqs = [
         {/* RIGHT IMAGE */}
         <div className="relative w-full h-full rounded-2xl overflow-hidden flex items-center justify-center">
           <Image
-            src="/img/familyFeatures.png"
+            src="/img/familyFeatures.jpeg"
             alt="GoLite family plan"
             fill
             className="object-contain"
