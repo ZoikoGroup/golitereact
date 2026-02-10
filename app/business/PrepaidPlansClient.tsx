@@ -179,24 +179,25 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
       desc: "Special discounts for students with edu email verification",
       badge: "NEW",
       gradient: "from-[#667EEA] to-[#764BA2]",
-      href: "#",
+      href: "/students-discount-application",
     },
     {
       title: "Senior Saver",
       desc: "Simplified plans with dedicated support for seniors 60+",
       gradient: "from-[#F093FB] to-[#F5576C]",
+      href: "/senior-citizen-discount-enrollment-form",
     },
     {
       title: "Work-Life Unlimited",
       desc: "Business features with personal benefits in one plan",
       gradient: "from-[#4FACFE] to-[#00F2FE]",
-       href: "#",
+       href: "/business",
     },
     {
       title: "Family Bundle",
       desc: "Connect up to 5 lines with shared data and savings",
       gradient: "from-[#43E97B] to-[#38F9D7]",
-       href: "#",
+       href: "/family-plans",
     },
     {
       title: "Gamer's Paradise",
@@ -208,7 +209,7 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
       title: "Traveler's Choice",
       desc: "International roaming in 200+ countries included",
       gradient: "from-[#30CFD0] to-[#330867]",
-       href: "#",
+       href: "/travel-plans",
     },
   ];
   
@@ -254,7 +255,7 @@ const faqs = [
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white text-center mb-12">
-          Shop Prepaid Plans
+          Shop business Plans
         </h1>
 
         {/* Hero Card */}
@@ -263,10 +264,10 @@ const faqs = [
             {/* Left Content Section */}
             <div className="bg-orange-600 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
               <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-white mb-6 leading-tight">
-                Smarter Prepaid Faster 5G Unmatched Value.
+                Smarter Business Faster 5G Unmatched Value.
               </h2>
               <p className="text-white text-lg md:text-[1.2rem] leading-relaxed">
-                Why sit in lines for prepaid, when mobile recharge is online and instant? Get ultimate freedom with GoLite's eco-friendly 5G prepaid plans, starting from just $7.99/mo with unlimited talk & text!
+                Why sit in lines for business plans, when mobile recharge is online and instant? Get ultimate freedom with GoLite's eco-friendly 5G business plans, starting from just $7.99/mo with unlimited talk & text!
               </p>
             </div>
 
@@ -397,7 +398,7 @@ const faqs = [
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <h1 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold dark:text-white text-gray-900 text-center mb-12 px-4">
-          Best Postpaid Mobile Plans With Many Exciting Benefits
+          Best Business Mobile Plans With Many Exciting Benefits
         </h1>
 
         {/* Benefits Grid */}
@@ -458,7 +459,7 @@ const faqs = [
             <p className="mt-3 text-sm opacity-90">{c.desc}</p>
 
             <a
-              href="{c.href}"
+              href={c.href}
               className="mt-6 inline-block text-sm font-medium underline-offset-2 hover:underline"
             >
               View Plans →
