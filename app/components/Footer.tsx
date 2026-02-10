@@ -84,7 +84,7 @@ export default function Footer() {
                 <li><Link href="/career" className="block">Careers</Link></li>
                 <li>Press Kit</li>
                 <li>Partners</li>
-                <li>Sustainability</li>
+                <li><Link href="/sustainability" className="block">Sustainability</Link></li>
                 <li><Link href="/contact-us" className="block">Contact Us</Link></li>
               </ul>
             </div>
@@ -92,9 +92,9 @@ export default function Footer() {
             <div>
               <h3 className="font-semibold text-white mb-4">Legal</h3>
               <ul className="space-y-2 text-sm">
-                <li>Privacy Policy</li>
-                <li>Terms of Service</li>
-                <li>Cookie Policy</li>
+                <li><Link href="/privacy-policy" className="block">Privacy Policy</Link></li>
+                <li><Link href="/terms-conditions" className="block">Terms of Service</Link></li>
+                <li><Link href="/cookies-policy" className="block">Cookie Policy</Link></li>
                 <li>Compliance</li>
                 <li>Accessibility</li>
               </ul>

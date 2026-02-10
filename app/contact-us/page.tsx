@@ -29,7 +29,7 @@ export default function ContactUs() {
     setSubmitStatus({ type: null, message: "" });
 
     try {
-      const response = await fetch('/api/contact-us', {
+      const response = await fetch('/api/contact/contact-us', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
