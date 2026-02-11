@@ -39,7 +39,7 @@ export default function BuyNowModal({
       : Number(plan.price_24);
 
   /* ---------------- ADD TO CART ---------------- */
-  const annualSavings = duration === 24 && plan.price_24 ? (Number(plan.final_price) - Number(plan.price_24)) * 12 : 0;
+  const annualSavings =  (Number(plan.final_price) - Number(plan.price_24)) * 12 ;
   const addToCartAndCheckout = () => {
     const cartItem = {
       planId: plan.id,
