@@ -1,138 +1,105 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { notFound } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { isLoggedIn } from "../../utils/auth";
 
-export default function UpdateProfilePage() {
-  const [user, setUser] = useState<any>(null);
-  const [username, setUsername] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+interface Props {
+  params: { slug: string } | Promise<{ slug: string }>;
+}
 
-  // 🔐 Require login
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (!isLoggedIn() || !storedUser) {
-      window.location.href = "/login";
-      return;
-    }
-    const u = JSON.parse(storedUser);
-    setUser(u);
-    setUsername(u.username || "");
-    setFirstName(u.first_name || "");
-    setLastName(u.last_name || "");
-    setEmail(u.email || "");
-  }, []);
+interface BlogPost {
+  id: number;
+  title: string;
+  slug: string;
+  author: string;
+  content: string;
+  featured_image: string;
+  created_at: string;
+}
 
-  const handleUpdate = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(null);
-    setLoading(true);
+export default async function BlogPostPage({ params }: Props) {
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
 
-    try {
-      const token = localStorage.getItem("golite_token");
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/update-profile/`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${token}`,
-          },
-          body: JSON.stringify({
-            username: username.trim(),
-            first_name: firstName.trim(),
-            last_name: lastName.trim(),
-            email: email.trim(),
-          }),
-        }
-      );
+  if (!slug) return notFound();
 
-      const data = await response.json();
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-      if (!response.ok) {
-        if (typeof data === "object") {
-          const messages = Object.values(data).flat().join(" | ");
-          throw new Error(messages || "Update failed");
-        } else {
-          throw new Error(data.message || "Update failed");
-        }
-      }
+  if (!BASE_URL) {
+    console.error("NEXT_PUBLIC_API_BASE_URL not defined");
+    return notFound();
+  }
 
-      // Update localStorage
-      const updatedUser = { ...user, username, first_name: firstName, last_name: lastName, email };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+  try {
+    const res = await fetch(
+      `${BASE_URL}/api/blog/posts/${slug}/`,
+      { cache: "no-store" }
+    );
 
-      setSuccess("Profile updated successfully!");
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    if (!res.ok) return notFound();
 
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-grow flex items-center justify-center bg-gray-100 py-12 px-4">
-        <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold mb-6 text-center">
-            Update Profile
-          </h2>
+    const post: BlogPost = await res.json();
 
-          <form onSubmit={handleUpdate} className="space-y-4">
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              className="w-full px-3 py-2 border rounded-md"
-            />
-            <input
-              type="text"
-              placeholder="First Name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              className="w-full px-3 py-2 border rounded-md"
-            />
-            <input
-              type="text"
-              placeholder="Last Name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              className="w-full px-3 py-2 border rounded-md"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-3 py-2 border rounded-md"
+    // ✅ Fix relative image paths inside blog content
+    const fixedContent = post.content.replace(
+      /src="\/media/g,
+      `src="${BASE_URL}/media`
+    );
+
+    return (
+      <>
+        <Header />
+
+        {/* 🔥 Increased Width */}
+        <div className="container mx-auto py-16 px-6">
+          <div className="max-w-5xl mx-auto">
+
+            {/* Featured Image */}
+            {post.featured_image && (
+              <img
+                src={
+                  post.featured_image.startsWith("http")
+                    ? post.featured_image
+                    : `${BASE_URL}${post.featured_image}`
+                }
+                alt={post.title}
+                className="w-full h-[420px] object-cover rounded-xl mb-8"
+              />
+            )}
+
+            {/* Title */}
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              {post.title}
+            </h1>
+
+            {/* Date */}
+            <p className="text-gray-500 mb-10 text-sm">
+              {new Date(post.created_at).toDateString()}
+            </p>
+
+            {/* Blog Content */}
+            <div
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{ __html: fixedContent }}
             />
 
-            {error && <p className="text-red-600 text-sm">{error}</p>}
-            {success && <p className="text-green-600 text-sm">{success}</p>}
+            {/* Back Button */}
+            <div className="mt-12">
+              <a
+                href="/blog"
+                className="text-[#DF1E5A] font-semibold hover:underline"
+              >
+                ← Back to Blogs
+              </a>
+            </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-2 px-4 rounded-md text-white bg-orange-500 hover:bg-orange-600 disabled:opacity-60"
-            >
-              {loading ? "Updating..." : "Update Profile"}
-            </button>
-          </form>
+          </div>
         </div>
-      </main>
-      <Footer />
-    </div>
-  );
+
+        <Footer />
+      </>
+    );
+  } catch (error) {
+    console.error("Blog fetch error:", error);
+    return notFound();
+  }
 }
