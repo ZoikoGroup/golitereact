@@ -4,7 +4,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Popup from "../components/Popup";
-
+import { Info } from "lucide-react";
 type ExistingPlanOption = {
   enrollmentId: string;
   esnNumber: string | null;
@@ -422,32 +422,76 @@ const activateSim = async () => {
         />
       )}
     {showDeviceCheck && (
-        <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="inset-0 z-[1100] flex items-center justify-center bg-black/50">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-[90%] max-w-md shadow-lg">
+        
 
-            <h2 className="text-xl font-semibold mb-4 text-center">
-                Device Compatibility Check
-            </h2>
+        <div className="w-full flex justify-center py-10 bg-gray-100">
+      <div className="max-w-4xl w-full bg-green-50 border border-green-300 rounded-xl p-8 text-center">
 
-            <input
-                value={deviceImei}
-                onChange={(e) => setDeviceImei(e.target.value)}
-                placeholder="Enter IMEI Number"
-                className="w-full border rounded-md px-4 py-2 mb-4"
-            />
+        {/* Title */}
+        <h2 className="text-3xl font-bold flex justify-center items-center gap-2">
+          Check if device is compatible with eSIM
+          <span className="text-gray-400 text-4xl">📟</span>
+        </h2>
 
-            <button
+        {/* Description */}
+        <p className="mt-4 text-gray-600">
+          eSIM is the future of mobile connectivity – faster, easier, and more eco-friendly.
+          Before activating your GoLite Mobile plan, let’s confirm your device is ready for eSIM.
+        </p>
+
+        <p className="text-gray-600 mt-2">
+          Simply enter your device’s IMEI number below, and we’ll tell you right away whether it’s compatible.
+        </p>
+
+        {/* IMEI Input */}
+        <div className="mt-8 text-left">
+  <label className="block font-semibold mb-2">
+    Device IMEI
+  </label>
+
+  <div className="relative">
+    <input
+      value={deviceImei}
+      onChange={(e) => setDeviceImei(e.target.value)}
+      placeholder="Enter IMEI Number"
+      className="w-full border rounded-md px-4 py-2 mb-4"
+    />
+
+    {/* Info Icon + Tooltip */}
+    <div className="absolute right-3 top-1/2 -translate-y-1/2 group">
+      <Info
+        size={20}
+        className="text-black cursor-pointer"
+      />
+
+      {/* Tooltip */}
+      <div className="absolute right-0 bottom-7 w-64 bg-black text-white text-xs rounded-md px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg">
+        Find this by dialing *#06# or in your phone's settings under "About".
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        {/* Button */}
+        <div className="mt-8">
+          <button
                 onClick={checkDeviceCompatibility}
                 disabled={deviceChecking}
                 className="w-full bg-orange-500 text-white py-2 rounded-md"
             >
                 {deviceChecking ? "Checking..." : "Check Device"}
             </button>
+        </div>
+      </div>
+    </div>
 
-            </div>
-        </div>
-        </div>
+
+            
+
+            
+
+         
         )}
       <Footer />
     </>
