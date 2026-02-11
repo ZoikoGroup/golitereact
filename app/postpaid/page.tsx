@@ -1,4 +1,4 @@
-import PrepaidPlansClient from "./PrepaidPlansClient";
+import PrepaidPlansClient from "./PostpaidPlansClient";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 

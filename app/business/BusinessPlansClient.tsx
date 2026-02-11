@@ -8,7 +8,69 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
-import PrepaidBuyNowModal from "../components/PrepaidBuyNowModal";
+import BusinessBuyNowModal from "../components/BusinessBuyNowModal";
+import { BarChart3, FileText, Smartphone, Users, Lock } from 'lucide-react';
+import TestimonialSlider from "../components/TestimonialSlider";
+
+interface Feature {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+const features: Feature[] = [
+    {
+      icon: <BarChart3 className="w-6 h-6" />,
+      title: 'Analytics',
+      description: 'Get real-time insights into your business performance with advanced analytics tools.',
+    },
+    {
+      icon: <FileText className="w-6 h-6" />,
+      title: 'Easy Billing',
+      description: 'Streamline your payment processes with integrated billing solutions.',
+    },
+    {
+      icon: <Smartphone className="w-6 h-6" />,
+      title: 'Mobile First',
+      description: 'Access your business tools anywhere, anytime with our mobile-optimized platform.',
+    },
+    {
+      icon: <Users className="w-6 h-6" />,
+      title: 'Team Management',
+      description: 'Collaborate effectively with built-in team management features.',
+    },
+    {
+      icon: <Lock className="w-6 h-6" />,
+      title: 'Secure',
+      description: 'Bank-level security to keep your business data safe and protected.',
+    },
+  ];
+
+interface Stat {
+  value: string;
+  label: string;
+}
+
+  const stats: Stat[] = [
+    {
+      value: '24/7',
+      label: 'Customer Support',
+    },
+    {
+      value: '99%',
+      label: 'Customer Satisfaction',
+    },
+    {
+      value: '99.9%',
+      label: 'Uptime Guarantee',
+    },
+    {
+      value: '2000+',
+      label: 'Active Businesses',
+    },
+  ];
+
+  
+
 
 /* ---------- Types ---------- */
 type Plan = {
@@ -18,6 +80,7 @@ type Plan = {
   slug: string;
   short_description: string;
   final_price: number;
+  price_24: number | null;
   duration_days: number;
   is_popular: boolean;
   sim_type: "esim" | "psim";
@@ -71,19 +134,7 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
     return () => window.removeEventListener("resize", resize);
   }, []);
 
-  /* ---------- Normalize API data ---------- */
-//   const normalizedPlans = plans
-//     .filter(p =>
-//       activeSimType === "eSim" ? p.sim_type === "esim" : p.sim_type === "psim"
-//     )
-//     .map(p => ({
-//       id: p.id,
-//       title: p.name,
-//       desc: p.short_description,
-//       price: `$${p.final_price}/mo`,
-//       tag: p.is_popular ? "Most Popular" : null,
-//       features: p.features.map(f => f.title),
-//     }));
+
 
     const normalizedPlans = plans.map(p => ({
   id: p.id,
@@ -93,6 +144,7 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
   desc: p.short_description,
   price: `$${p.final_price}/mo`,
   final_price: p.final_price,
+  price_24: p.price_24,
   duration_days: p.duration_days,
   simType: p.sim_type === "esim" ? "eSim" : "pSim",
   tag: p.is_popular ? "Most Popular" : null,
@@ -119,20 +171,7 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
         return () => window.removeEventListener('resize', handleResize);
       }, []);
     
-      const plans2 = [
-        // POSTPAID - eSIM
-        { category: "prepaid", simType: "eSim", title: "Go-Lite postpaid", desc:"Budget-conscious users, occasional data users, and those who primarily use Wi-Fi.", price: "$18.00/mo", features: ["3 GB Data","Unlimited talk & text","500 MB Hotspot","12-Month Contract","Free calls to 200+ countries"] },
-        { category: "prepaid", simType: "eSim", title: "Go-Steady postpaid", desc:"Everyday users, families, and those who need constant connectivity.",  price: "$37.00/mo", features: ["9 GB Data","Unlimited talk & text","900 MB Hotspot","12-24 Month Contract","Unlimited International calls"] },
-        { category: "prepaid", simType: "eSim", title: "Go-Unlimited postpaid", desc:"Heavy users, streamers, and those who demand consistent high-speed data", price: "$58.00/mo", tag: "Most Popular", features: ["Unlimited data","Unlimited talk & text","4.5 GB Hotspot","Roaming CA+MX","24-Month Contract"] },
-        { category: "prepaid", simType: "eSim", title: "Go-Unlimited1 postpaid", desc:"Heavy users, streamers, and those who demand consistent high-speed data1", price: "$54.00/mo", features: ["Unlimited data","Unlimited talk & text","4.5 GB Hotspot","Roaming","24-Month Contract"] },
-    
-        // POSTPAID - pSIM
-        { category: "prepaid", simType: "pSim", title: "Go-Lite postpaid", desc:"Budget-conscious users, occasional data users, and those who primarily use Wi-Fi.", price: "$20.00/mo", features: ["3 GB Data","Unlimited talk & text","500 MB Hotspot","Physical SIM included","12-Month Contract"] },
-        { category: "prepaid", simType: "pSim", title: "Go-Steady postpaid", desc:"Everyday users, families, and those who need constant connectivity.",  price: "$39.00/mo", features: ["9 GB Data","Unlimited talk & text","900 MB Hotspot","Physical SIM included","12-24 Month Contract"] },
-        { category: "prepaid", simType: "pSim", title: "Go-Unlimited postpaid", desc:"Heavy users, streamers, and those who demand consistent high-speed data", price: "$60.00/mo", tag: "Most Popular", features: ["Unlimited data","Unlimited talk & text","4.5 GB Hotspot","Physical SIM included","24-Month Contract"] },
-    
-      ];
-    
+          
       //const filteredPlans = plans.filter((p) =>  p.simType === activeSimType);
     
       const sliderSettings = {
@@ -173,45 +212,7 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
         bgColor: "bg-blue-50"
         }
     ];
-  const cards = [
-    {
-      title: "Student Connect+",
-      desc: "Special discounts for students with edu email verification",
-      badge: "NEW",
-      gradient: "from-[#667EEA] to-[#764BA2]",
-      href: "/students-discount-application",
-    },
-    {
-      title: "Senior Saver",
-      desc: "Simplified plans with dedicated support for seniors 60+",
-      gradient: "from-[#F093FB] to-[#F5576C]",
-      href: "/senior-citizen-discount-enrollment-form",
-    },
-    {
-      title: "Work-Life Unlimited",
-      desc: "Business features with personal benefits in one plan",
-      gradient: "from-[#4FACFE] to-[#00F2FE]",
-       href: "/business",
-    },
-    {
-      title: "Family Bundle",
-      desc: "Connect up to 5 lines with shared data and savings",
-      gradient: "from-[#43E97B] to-[#38F9D7]",
-       href: "/family-plans",
-    },
-    {
-      title: "Gamer's Paradise",
-      desc: "Low latency 5G with priority bandwidth for gaming",
-      gradient: "from-[#FA709A] to-[#FEE140]",
-       href: "#",
-    },
-    {
-      title: "Traveler's Choice",
-      desc: "International roaming in 200+ countries included",
-      gradient: "from-[#30CFD0] to-[#330867]",
-       href: "/travel-plans",
-    },
-  ];
+  
   
 
 const faqs = [
@@ -243,51 +244,110 @@ const faqs = [
 ];
 
 
-  // Split into two columns
-  const mid = Math.ceil(faqs.length / 2);
-  const leftColumn = faqs.slice(0, mid);
-  const rightColumn = faqs.slice(mid);
+
   return (
     <>
     <Header />
     {/* Banner Section */}
-    <div className="dark:bg-gray-900 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white text-center mb-12">
-          Shop business Plans
+    <section className="relative bg-gradient-to-br from-green-50 via-green-100/80 to-green-200 py-10 px-6 overflow-hidden">
+  <div className="max-w-7xl mx-auto">
+    <div className="grid md:grid-cols-3 gap-12 items-center">
+      
+      {/* Left Content - Takes 2 columns */}
+      <div className="space-y-6 md:col-span-2">
+        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+          Empower Your Business<br />
+          with <span className="text-[#00B56F]">GoLite Mobile</span>
         </h1>
-
-        {/* Hero Card */}
-        <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-          <div className="grid md:grid-cols-2 gap-0">
-            {/* Left Content Section */}
-            <div className="bg-orange-600 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-white mb-6 leading-tight">
-                Smarter Business Faster 5G Unmatched Value.
-              </h2>
-              <p className="text-white text-lg md:text-[1.2rem] leading-relaxed">
-                Why sit in lines for business plans, when mobile recharge is online and instant? Get ultimate freedom with GoLite's eco-friendly 5G business plans, starting from just $7.99/mo with unlimited talk & text!
-              </p>
-            </div>
-
-            {/* Right Image Section */}
-            <div className="relative h-64 md:h-auto">
-              <img
-                src="./img/prepaidBanner.png"
-                alt="Three friends looking at a smartphone together"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
+        
+        <p className="text-gray-600 text-lg max-w-2xl">
+          Streamline operations, boost productivity, and grow your business with our comprehensive mobile solutions.
+        </p>
+        
+        <div className="flex flex-wrap gap-4">
+          <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold transition shadow-md hover:shadow-lg">
+            Explore Business Plans
+          </button>
+          
+          <button className="bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-50 px-8 py-3 rounded-lg font-semibold transition">
+            Conatct Sales
+          </button>
         </div>
       </div>
+
+      {/* Right Image - Takes 1 column */}
+      <div className="relative flex justify-center items-center md:col-span-1">
+        <Image
+          src="/businessBanner.png"
+          alt="Business Growth Illustration"
+          width={600}
+          height={400}
+          className="w-full h-auto object-contain"
+          priority
+        />
+      </div>
     </div>
+  </div>
+</section>
     {/* END Banner Section */}
     
+    <section className="py-16 px-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Title */}
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12">
+          Manage Your Business Needs with Ease
+        </h2>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
+              {/* Icon */}
+              <div className="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center text-white mb-6">
+                {feature.icon}
+              </div>
+
+              {/* Title */}
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                {feature.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-gray-600 leading-relaxed pr-24">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+ <section className="bg-gradient-to-r from-[#00D084] to-[#00B56F] py-12 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+          {stats.map((stat, index) => (
+            <div key={index} className="text-center">
+              {/* Value */}
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2">
+                {stat.value}
+              </h3>
+              
+              {/* Label */}
+              <p className="text-white/90 text-sm md:text-base font-light">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
 {/* SIM Type Tabs */}
       <div className="flex justify-center dark:bg-gray-900 bg-gray-50 ">
-  <div className="inline-flex bg-[#FD4C0E] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
+  <div className="inline-flex bg-[#00B56F] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
     
     {["pSim", "eSim"].map((simType, idx) => (
       <button
@@ -299,7 +359,7 @@ const faqs = [
           text-sm font-semibold transition-all
           rounded-full
           ${activeSimType === simType 
-            ? "bg-white text-[#FD4C0E] dark:bg-gray-800 dark:text-white" 
+            ? "bg-white text-[#00B56F] dark:bg-gray-800 dark:text-white" 
             : "text-white"}
         `}
       >
@@ -318,7 +378,7 @@ const faqs = [
           className="absolute left-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="w-6 h-6 text-[#FD4C0E]" />
+          <ChevronLeft className="w-6 h-6 text-[#00B56F]" />
         </button>
 
         <button
@@ -326,7 +386,7 @@ const faqs = [
           className="absolute right-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
           aria-label="Next slide"
         >
-          <ChevronRight className="w-6 h-6 text-[#FD4C0E]" />
+          <ChevronRight className="w-6 h-6 text-[#00B56F]" />
         </button>
 
         <Slider key={slidesToShow} ref={sliderRef} {...sliderSettings} className="my-4">
@@ -357,7 +417,7 @@ const faqs = [
 
                 <button
                   onClick={() => handleBuyPlan(plan)}
-                  className="w-full border-2 border-orange-500 text-orange-500 font-semibold py-2 rounded-lg hover:bg-orange-500 hover:text-white transition-all"
+                  className="w-full border-2 border-[#00B56F] text-[#00B56F] font-semibold py-2 rounded-lg hover:bg-[#00B56F] hover:text-white transition-all"
                 >
                   Buy Plan
                 </button>
@@ -393,86 +453,16 @@ const faqs = [
           ))}
         </Slider>
         </div>
-
-        <div className="dark:bg-gray-900 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <h1 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold dark:text-white text-gray-900 text-center mb-12 px-4">
-          Best Business Mobile Plans With Many Exciting Benefits
-        </h1>
-
-        {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((benefit, index) => (
-            <div
-              key={index}
-              className="dark:bg-gray-800 bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
-            >
-              {/* Icon */}
-              <div className={`w-[5rem] h-[5rem]   flex items-center justify-center mb-6`}>
-                {benefit.icon}
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-4 leading-snug">
-                {benefit.title}
-              </h3>
-
-              {/* Description */}
-              <p className="dark:text-gray-400 text-gray-600 leading-relaxed">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+<TestimonialSlider/>
+        
 
 
-<section className="w-full py-16 dark:bg-gray-900 bg-white">
-      {/* Heading */}
-      <div className="text-center mb-4">
-        <h2 className="text-3xl font-bold dark:text-white text-gray-900">
-          Plans for Your Lifestyle
-        </h2>
-        <p className="text-gray-500 mt-2">
-          Tailored solutions for every need
-        </p>
-      </div>
-
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 lg:px-50">
-        {cards.map((c, i) => (
-          <div
-            key={i}
-            className={`rounded-2xl p-12 text-white shadow-lg bg-gradient-to-br ${c.gradient}`}
-          >
-            <div className="flex justify-between items-start">
-              <h3 className="text-xl font-semibold">{c.title}</h3>
-              {c.badge && (
-                <span className="text-xs font-semibold bg-white/30 backdrop-blur px-3 py-1 rounded-full">
-                  {c.badge}
-                </span>
-              )}
-            </div>
-
-            <p className="mt-3 text-sm opacity-90">{c.desc}</p>
-
-            <a
-              href={c.href}
-              className="mt-6 inline-block text-sm font-medium underline-offset-2 hover:underline"
-            >
-              View Plans →
-            </a>
-          </div>
-        ))}
-      </div>
-    </section>
  <div className="dark:bg-gray-900 bg-gray-50 py-10">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
         {/* Left Column */}
+        
         <div className="flex-1 flex flex-col gap-4">
-          {leftColumn.map((item, index) => (
+          {faqs.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
                 <div className="border border-gray-200 rounded-md dark:bg-gray-800 bg-white shadow-sm">
@@ -504,43 +494,11 @@ const faqs = [
           ))}
         </div>
 
-        {/* Right Column */}
-        <div className="flex-1 flex flex-col gap-4">
-          {rightColumn.map((item, index) => (
-            <Disclosure key={index}>
-              {({ open }) => (
-                <div className="border border-gray-200 rounded-md dark:bg-gray-800 bg-white shadow-sm">
-                  <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium dark:text-white text-gray-800 focus:outline-none">
-                    <span>{item.question}</span>
-                    <svg
-                      className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
-                        open ? "rotate-180" : ""
-                      }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </DisclosureButton>
-                  <DisclosurePanel className="px-4 py-3 text-gray-700 break-words dark:text-gray-400">
-                    {item.answer}
-                  </DisclosurePanel>
-                </div>
-              )}
-            </Disclosure>
-          ))}
-        </div>
+ 
       </div>
     </div>
 
-    <PrepaidBuyNowModal
+    <BusinessBuyNowModal
       open={openBuyModal}
       onClose={() => setOpenBuyModal(false)}
       plan={selectedPlan}
