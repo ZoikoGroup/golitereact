@@ -66,7 +66,7 @@ export default function BuyNowModal({
   };
 
   /* ---------------- CONTINUE ---------------- */
-
+ const simTypeText = simType === "eSim" ? "eSIM" : "Physical SIM";
   const handleContinue = () => {
     if (simType === "eSim") {
       setStep("imei");
@@ -134,13 +134,13 @@ export default function BuyNowModal({
         <div className="relative p-6 border-b text-center">
           <h2 className="text-2xl font-bold">
             {step === "contract"
-              ? "Choose Your Contract Length"
+              ? `You Choose Your ${simTypeText} - Reliable, Flexible & Familiar`
               : "Great! You've Selected Your eSIM — Instant Setup, No Waiting."}
           </h2>
 
           <p className="text-gray-500 mt-2">
             {step === "contract"
-              ? "Select 12 or 24 month plan"
+              ? "Now choose your ideal 12 or 24 month plan and enjoy premium savings"
               : "Enter your device IMEI for eSIM activation"}
           </p>
 
