@@ -5,6 +5,8 @@ import BlogCard from '../components/BlogCard';
 import { fetchAllBlogs } from '../services/BlogServices';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import NewsletterSubscribe from "../components/NewsletterSubscribe";
+
 
 const BlogPage: React.FC = () => {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
@@ -133,14 +135,7 @@ const BlogPage: React.FC = () => {
           {/* RIGHT CONTENT */}
           <div className="subbanner-right col-12 col-md-6">
             {/* FORM ROW */}
-            <div className="form-row">
-              <input
-                type="email"
-                className="sub-input dark:bg-gray-700"
-                placeholder="Email address"
-              />
-              <button className="sub-btn">Subscribe</button>
-            </div>
+            <NewsletterSubscribe />
             {/* PRIVACY TEXT */}
             <p className=" dark:text-gray-100">
               Your privacy matters! Smaile only uses this info to send content
