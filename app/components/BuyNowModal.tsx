@@ -4,7 +4,7 @@ import { useState } from "react";
 import { X, CheckCircle, AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { checkDeviceCompatibility } from "../utils/vcareapi";
-
+import { Check, Star } from "lucide-react";
 interface BuyNowModalProps {
   open: boolean;
   onClose: () => void;
@@ -36,10 +36,10 @@ export default function BuyNowModal({
   const price =
     duration === 12
       ? Number(plan.final_price)
-      : Math.ceil(Number(plan.final_price) * 0.9);
+      : Number(plan.price_24);
 
   /* ---------------- ADD TO CART ---------------- */
-
+  const annualSavings = duration === 24 && plan.price_24 ? (Number(plan.final_price) - Number(plan.price_24)) * 12 : 0;
   const addToCartAndCheckout = () => {
     const cartItem = {
       planId: plan.id,
@@ -128,7 +128,7 @@ export default function BuyNowModal({
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60">
 
-      <div className="bg-white w-[95%] max-w-xl rounded-2xl shadow-xl animate-scaleIn">
+      <div className="bg-white w-[50%]  rounded-2xl shadow-xl animate-scaleIn">
 
         {/* HEADER */}
         <div className="relative p-6 border-b text-center">
@@ -158,48 +158,115 @@ export default function BuyNowModal({
           {/* CONTRACT STEP */}
           {step === "contract" && (
             <>
-              {/* 12 MONTH */}
-              <div
-                onClick={() => setDuration(12)}
-                className={`flex justify-between items-center p-5 rounded-xl border cursor-pointer
-                ${
-                  duration === 12
-                    ? "border-orange-500"
-                    : "border-gray-300"
-                }`}
-              >
-                <p className="font-semibold">12 Month Contract</p>
+            {/* CONTRACT OPTIONS */}
+              <div className="space-y-5">
 
-                <p className="text-2xl font-bold">
-                  ${Number(plan.final_price).toFixed(2)}
-                  <span className="text-sm">/mo</span>
-                </p>
+                {/* 12 MONTH */}
+                <div
+                  onClick={() => setDuration(12)}
+                  className={`p-6 rounded-2xl border-2 cursor-pointer transition relative
+                  ${duration === 12 ? "border-orange-500 shadow-lg" : "border-gray-300"}
+                  `}
+                >
+                  <div className="">
+                    <div className="flex justify-between items-start">
+                      <p className="text-2xl font-bold">
+                        12 Month <span className="text-gray-400 text-sm font-normal">Contract</span>
+                      </p>
+                      <div className="text-right">
+                        <p className="text-4xl font-bold">
+                          ${Number(plan.final_price).toFixed(2)}
+                          <span className="text-lg font-normal text-gray-500">/mo</span>
+                        </p>
+                      </div>
+                      </div>
+                      <div>
+                      <hr className="my-3 border-gray-300" />
+                      <div>
+                        <div className="flex items-center gap-2 text-gray-600 text-sm mt-3">
+                          <Check size={16} className="text-green-500" />
+                          Standard plan benefits
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                  </div>
+                </div>
+
+                {/* 24 MONTH */}
+                <div
+                  onClick={() => setDuration(24)}
+                  className={`p-6 rounded-2xl border-2 cursor-pointer transition relative
+                  ${
+                    duration === 24
+                      ? "border-orange-500 shadow-lg"
+                      : "border-gray-300"
+                  }
+                  `}
+                >
+                  {/* Savings Badge */}
+                  <div className={`absolute -top-3 text-xs font-semibold left-1/2 -translate-x-1/2  text-white px-4 py-1.5 rounded-full flex items-center gap-1 shadow-md whitespace-nowrap 
+                    ${
+                    duration === 24
+                      ? "border-orange-500 shadow-lg bg-orange-500"
+                      : "border-gray-300 bg-gray-500"
+                  }
+                    
+                    `}>
+                    <Star size={14} fill="white" />
+                    SAVE ${annualSavings.toFixed(2)}(ANNUALLY) vs 12-month
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-start mt-2">
+                      <p className="text-2xl font-bold">
+                        24 Month <span className="text-gray-400 font-normal text-sm">Contract</span>
+                      </p>
+                      <div className="text-right">
+                        <p className="text-4xl font-bold">
+                          ${Number(plan.price_24 ?? plan.final_price).toFixed(2)}
+                          <span className="text-lg font-normal text-gray-500">/mo</span>
+                        </p>
+                      </div>
+                    </div>
+                    <hr className="my-3 border-gray-300" />
+                    <div>
+                      <div className="flex flex-wrap gap-x-6 gap-y-2 text-gray-600 text-sm mt-3">
+
+                        <div className="flex items-center gap-2">
+                          <Check size={16} className="text-green-500" />
+                          All standard plan benefits
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <Check size={16} className="text-green-500" />
+                          Taxes and fees included
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <Check size={16} className="text-green-500" />
+                          Priority customer support
+                        </div>
+
+                      </div>
+                      
+                    </div>
+
+                    
+                  </div>
+                </div>
+
+                {/* CONTINUE BUTTON */}
+                <button
+                  onClick={handleContinue}
+                  className="w-full bg-orange-500 hover:bg-orange-600 transition text-white py-4 rounded-xl font-semibold text-lg flex justify-center items-center gap-2"
+                >
+                  Continue with {duration} Month Plan →
+                </button>
+
               </div>
 
-              {/* 24 MONTH */}
-              <div
-                onClick={() => setDuration(24)}
-                className={`flex justify-between items-center p-5 rounded-xl border cursor-pointer
-                ${
-                  duration === 24
-                    ? "border-orange-500"
-                    : "border-gray-300"
-                }`}
-              >
-                <p className="font-semibold">24 Month Contract</p>
-
-                <p className="text-2xl font-bold">
-                  ${Math.ceil(Number(plan.final_price) * 0.9)}.00
-                  <span className="text-sm">/mo</span>
-                </p>
-              </div>
-
-              <button
-                onClick={handleContinue}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold text-lg"
-              >
-                Continue
-              </button>
             </>
           )}
 
