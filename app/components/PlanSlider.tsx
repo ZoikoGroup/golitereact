@@ -56,7 +56,7 @@ export default function PricingPlans() {
     prepaid: "/prepaid",
     postpaid: "/postpaid",
     travel: "/travel-plans",
-    business: "/business",
+    // business: "/business",
   };
 
   /* Responsive Slider */
