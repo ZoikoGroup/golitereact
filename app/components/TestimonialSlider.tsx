@@ -1,4 +1,7 @@
-export default function CustomerFeedback() {
+type TestimonialSliderProps = {
+  bg?: string;
+};
+export default function CustomerFeedback({ bg }: TestimonialSliderProps) {
   const testimonials = [
     {
       rating: 3,
@@ -24,7 +27,7 @@ export default function CustomerFeedback() {
   ];
 
   return (
-    <section className="py-16 bg-gray-50 dark:bg-gray-700">
+    <section className={`py-16 ${bg || "bg-gray-50 dark:bg-gray-700"}`}>
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Our Customer Feedback</h2>
         <p className="text-gray-600 dark:text-gray-300 mt-2">
