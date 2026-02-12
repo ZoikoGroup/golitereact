@@ -79,8 +79,10 @@ interface ShippingOption {
 }
 
 interface DiscountData {
+  code?: string;
   type: string;
   discount: string;
+  name?: string;
 }
 
 interface Errors {
@@ -160,8 +162,13 @@ export default function CheckoutPage() {
   /* ================= CART SYNC ================= */
   const syncCart = (updatedCart: CartItem[]) => {
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    window.dispatchEvent(new Event("storage"));
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+  // 🔥 Remove coupon when cart changes
+  localStorage.removeItem("applied-coupon");
+  setDiscountData(null);
+
+  window.dispatchEvent(new Event("storage"));
   };
 
   /* ================= GROUP FAMILY BUNDLES ================= */
@@ -240,6 +247,20 @@ export default function CheckoutPage() {
     }
   }, []);
 
+useEffect(() => {
+  if (typeof window === "undefined") return;
+
+  const storedCoupon = localStorage.getItem("applied-coupon");
+
+  if (storedCoupon) {
+    try {
+      setDiscountData(JSON.parse(storedCoupon));
+    } catch {
+      localStorage.removeItem("applied-coupon");
+    }
+  }
+}, []);
+
   useEffect(() => {
     const checkLogin = () => {
       const token = localStorage.getItem("golite_token") || localStorage.getItem("golite_accessToken");
@@ -306,30 +327,72 @@ export default function CheckoutPage() {
     setRegularItems([]);
   };
 
-  const handleApplyCoupon = async () => {
-    if (!isLoggedIn) {
-      setLoginReason("You need to login to apply coupon code.");
-      setShowLoginPopup(true);
-      return;
-    }
-    if (!coupon) {
-      setCouponMessage("Please enter a coupon code");
-      return;
-    }
-    
+ const handleApplyCoupon = async () => {
+  if (!isLoggedIn) {
+    setLoginReason("You need to login to apply coupon code.");
+    setShowLoginPopup(true);
+    return;
+  }
+
+  if (!coupon) {
+    setCouponMessage("Please enter a coupon code");
+    return;
+  }
+
+  try {
     setLoading(true);
     setCouponMessage("");
-    setTimeout(() => {
-      setCouponMessage("Wrong coupon code. Please try again.");
-      setLoading(false);
-    }, 1000);
-  };
 
-  const handleCancelCoupon = () => {
-    setCoupon("");
+    const userData = JSON.parse(localStorage.getItem("user") || "{}");
+    const userEmail = userData?.email || "";
+
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const cartIds = cart.map((item: any) => item.planId).join(",");
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/preview-coupon/`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code: coupon,
+          logged_user_email: userEmail,
+          cart_items_id: cartIds,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok || !data?.valid) {
+      throw new Error("Invalid or expired coupon");
+    }
+
+// ✅ Store coupon data
+const couponData = {
+  code: coupon,
+  type: data.coupon.type,
+  discount: String(data.coupon.discount),
+  name: data.coupon.name,
+};
+setDiscountData(couponData);
+localStorage.setItem("applied-coupon", JSON.stringify(couponData));
+setCouponMessage("Coupon applied successfully!");
+setCoupon(couponData.code);
+  } catch (err: any) {
     setDiscountData(null);
-    setCouponMessage("Coupon cancelled.");
-  };
+    setCouponMessage(err.message || "Wrong coupon code");
+  } finally {
+    setLoading(false);
+  }
+};
+
+ const handleCancelCoupon = () => {
+  setCoupon("");
+  setDiscountData(null);
+  localStorage.removeItem("applied-coupon");
+  setCouponMessage("Coupon cancelled.");
+};
 
   // Calculate subtotal
   const subtotal = cart.reduce((acc, item) => {
@@ -451,6 +514,7 @@ export default function CheckoutPage() {
         total,
         logged_user: user ? user?.email : null,
         order_shipping_email: shippingAddress?.email || billingAddress?.email || null,
+        applied_coupon: JSON.parse(localStorage.getItem("applied-coupon") || "null"),
       }),
     });
     
@@ -751,22 +815,41 @@ useEffect(() => {
                   <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                     <h5 className="font-bold mb-4 text-gray-900 dark:text-white">Have a Coupon?</h5>
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                      <input
-                        type="text"
-                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
-                        placeholder="Enter coupon code"
-                        value={coupon}
-                        onChange={(e) => setCoupon(e.target.value)}
-                        disabled={loading}
-                      />
-                      <button
-                        className="w-full sm:w-auto bg-[#FD4C0E] hover:bg-red-700 text-white px-6 py-2 rounded-lg transition disabled:opacity-50"
-                        onClick={handleApplyCoupon}
-                        disabled={loading}
-                      >
-                        Apply
-                      </button>
-                    </div>
+  {!discountData ? (
+    <>
+      <input
+        type="text"
+        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
+        placeholder="Enter coupon code"
+        value={coupon}
+        onChange={(e) => setCoupon(e.target.value)}
+        disabled={loading}
+      />
+
+      <button
+        className="w-full sm:w-auto bg-[#FD4C0E] hover:bg-red-700 text-white px-6 py-2 rounded-lg transition disabled:opacity-50"
+        onClick={handleApplyCoupon}
+        disabled={loading}
+      >
+        Apply
+      </button>
+    </>
+  ) : (
+    <div className="flex items-center justify-between w-full bg-green-50 dark:bg-green-900/20 px-4 py-2 rounded-lg border border-green-300 dark:border-green-700">
+      <span className="text-green-700 dark:text-green-400 font-semibold text-sm">
+        Coupon "{discountData.name || coupon}" Applied
+      </span>
+
+      <button
+        onClick={handleCancelCoupon}
+        className="text-red-500 hover:text-red-700 transition"
+        title="Remove Coupon"
+      >
+        <X className="w-5 h-5" />
+      </button>
+    </div>
+  )}
+</div>
                     {couponMessage && (
                       <p className={`mt-2 text-sm ${discountData ? "text-green-600" : "text-[#FD4C0E]"}`}>
                         {couponMessage}
@@ -974,6 +1057,17 @@ useEffect(() => {
                         <span className="font-semibold text-gray-900 dark:text-white">${subtotal.toFixed(2)}</span>
                       </div>
                     </div>
+                    {/* Coupon Discount */}
+                    {discountData && (
+                      <div className="flex justify-between text-sm text-green-600 dark:text-green-400 mb-2">
+                        <span>
+                          Coupon Discount {discountData.name ? `${discountData.name}` : ""} ({discountData.type === "percentage" 
+                            ? formatDiscount(discountData.discount) + "%" 
+                            : "$" + formatDiscount(discountData.discount)})
+                        </span>
+                        <span className="font-semibold">-${discountAmount.toFixed(2)}</span>
+                      </div>
+                    )}
                   {/* Activation Fees */}
                     {totalActivationFees > 0 && (
                       <div className="mb-4 rounded-lg bg-orange-50 p-3 dark:bg-orange-900/20">
@@ -1030,17 +1124,7 @@ useEffect(() => {
                       </div>
                     )}
 
-                    {/* Coupon Discount */}
-                    {discountData && (
-                      <div className="flex justify-between text-sm text-green-600 dark:text-green-400 mb-2">
-                        <span>
-                          Coupon Discount ({discountData.type === "percentage" 
-                            ? formatDiscount(discountData.discount) + "%" 
-                            : "$" + formatDiscount(discountData.discount)})
-                        </span>
-                        <span className="font-semibold">-${discountAmount.toFixed(2)}</span>
-                      </div>
-                    )}
+                    
 
                     {/* Total */}
                     <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
