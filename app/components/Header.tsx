@@ -149,10 +149,11 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-gray-600 dark:text-gray-300">
-          <a href="/prepaid" className="hover:text-black">Prepaid Plans</a>
-          <a href="/postpaid" className="hover:text-black">Postpaid Plans</a>
-          <a href="/family-plans" className="hover:text-black">Family Plans</a>
-          <a href="/special-plans" className="hover:text-black">Special Plans</a>
+          <a href="/prepaid" className="hover:text-black dark:hover:text-white">Prepaid Plans</a>
+          <a href="/postpaid" className="hover:text-black dark:hover:text-white">Postpaid Plans</a>
+          <a href="/family-plans" className="hover:text-black dark:hover:text-white">Family Plans</a>
+          <a href="/business" className="hover:text-black dark:hover:text-white">Business Plans</a>
+          <a href="/special-plans" className="hover:text-black dark:hover:text-white">Special Plans</a>
           {/* <a href="/devices" className="hover:text-black">Devices</a> */}
           <a href="https://www.att.com/idpmaps/reseller" className="hover:text-black">Coverage</a>
           {/* <a href="/support" className="hover:text-black">Support</a> */}
@@ -238,6 +239,7 @@ export default function Navbar() {
           <a href="/prepaid" className="block">Prepaid Plans</a>
           <a href="/postpaid" className="block">Postpaid Plans</a>
           <a href="/family-plans" className="block">Family Plans</a>
+          <a href="/business" className="block">Business Plans</a>
           <a href="/special-plans" className="block">Special Plans</a>
           {/* <a href="/devices" className="block">Devices</a> */}
           <a href="https://www.att.com/idpmaps/reseller" target="_blank" className="block">Coverage</a>
