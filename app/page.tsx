@@ -7,7 +7,6 @@ import TestimonialSlider from "./components/TestimonialSlider";
 import BlogSection from "./components/BlogSection";
 import FaqHome from "./components/FaqHome";
 import Footer from "./components/Footer";
-import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
@@ -306,20 +305,14 @@ export default function Home() {
         <div className="flex justify-center gap-4 mt-8">
 
           {/* Filled Button */}
-          <Link href="/all-plans">
-            <button
-              onClick={allplans}
-              className="bg-white dark:border-white dark:bg-gray-900 text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition cursor-pointer"
-            >
-              View Plans
-            </button>
-          </Link>
+          <button onClick={allplans} className="bg-white dark:border-white dark:bg-gray-900 text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition cursor-pointer">
+            View Plans
+          </button>
 
           {/* Outline Button */}
           <button className="border dark:border-white border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition cursor-pointer">
             Talk to Sales
           </button>
-
         </div>
       </div>
     </section>

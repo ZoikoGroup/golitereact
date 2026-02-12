@@ -5,15 +5,20 @@ import Link from "next/link";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL!;
 
-export default function BlogSection() {
-  const [blogs, setBlogs] = useState([]);
+async function getBlogs() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/blog/posts/`, {
+      next: { revalidate: 60 }, // caching (important)
+    });
 
-  useEffect(() => {
-    async function fetchBlogs() {
-      const res = await fetch(`${BASE_URL}/api/blog/posts/`);
-      const data = await res.json();
-      setBlogs(data);
-    }
+    if (!res.ok) throw new Error("Blog fetch failed");
+
+    return res.json();
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+}
 
     fetchBlogs();
   }, []);

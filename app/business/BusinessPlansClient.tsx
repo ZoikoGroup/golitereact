@@ -12,6 +12,11 @@ import BusinessBuyNowModal from "../components/BusinessBuyNowModal";
 import { BarChart3, FileText, Smartphone, Users, Lock } from 'lucide-react';
 import TestimonialSlider from "../components/TestimonialSlider";
 
+
+type Testimonial = {
+  bg: string;
+};
+
 interface Feature {
   icon: React.ReactNode;
   title: string;
@@ -142,7 +147,7 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
   vcPlanID: p.vcPlanID,
   slug: p.slug,
   desc: p.short_description,
-  price: `$${p.final_price}/mo`,
+  price: p.final_price,
   final_price: p.final_price,
   price_24: p.price_24,
   duration_days: p.duration_days,
@@ -160,9 +165,9 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
           if (width <= 640) {
             setSlidesToShow(1);
           } else if (width <= 1024) {
-            setSlidesToShow(2);
-          } else {
             setSlidesToShow(3);
+          } else {
+            setSlidesToShow(4);
           }
         };
     
@@ -244,7 +249,23 @@ const faqs = [
 ];
 
 
-
+function CheckIcon() {
+  return (
+    <svg
+      className="h-4 w-4 flex-shrink-0 text-emerald-400"
+      viewBox="0 0 16 16"
+      fill="none"
+    >
+      <path
+        d="M3 8.5L6.5 12L13 5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
   return (
     <>
     <Header />
@@ -345,119 +366,105 @@ const faqs = [
       </div>
     </section>
 
-{/* SIM Type Tabs */}
+      {/* SIM Type Tabs */}
+      <div className="w-full bg-gray-50 py-8">
+        <h1 className="text-center text-[28px] md:text-[2.5rem] font-bold text-[#1d1d1f]">
+          Shop Postpaid Business Plans
+        </h1>
+      </div>
       <div className="flex justify-center dark:bg-gray-900 bg-gray-50 ">
-  <div className="inline-flex bg-[#00B56F] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
-    
-    {["pSim", "eSim"].map((simType, idx) => (
-      <button
-        key={simType}
-        onClick={() => setActiveSimType(simType)}
-        className={`
-          flex-1 m-[.2rem]
-          flex items-center justify-center
-          text-sm font-semibold transition-all
-          rounded-full
-          ${activeSimType === simType 
-            ? "bg-white text-[#00B56F] dark:bg-gray-800 dark:text-white" 
-            : "text-white"}
-        `}
-      >
-        {simType === "pSim" ? "Physical Sim" : "eSim"}
-      </button>
-    ))}
+        <div className="inline-flex bg-[#00B56F] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
 
-  </div>
-</div>
+          {["pSim", "eSim"].map((simType, idx) => (
+            <button
+              key={simType}
+              onClick={() => setActiveSimType(simType)}
+              className={`
+              flex-1 m-[.2rem]
+              flex items-center justify-center
+              text-sm font-semibold transition-all
+              rounded-full
+              ${activeSimType === simType 
+              ? "bg-white text-[#00B56F] dark:bg-gray-800 dark:text-white" 
+              : "text-white"}
+              `}
+            >
+            {simType === "pSim" ? "Physical Sim" : "eSim"}
+            </button>
+          ))}
+
+        </div>
+      </div>
 
       {/* Slider with Navigation */}
-      <div className="px-4 md:px-40  relative dark:bg-gray-900 bg-gray-50 py-12">
-        {/* Custom Arrow Buttons */}
-        <button
-          onClick={() => sliderRef.current?.slickPrev()}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="w-6 h-6 text-[#00B56F]" />
-        </button>
-
-        <button
-          onClick={() => sliderRef.current?.slickNext()}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white hover:bg-gray-100 rounded-full p-3 shadow-lg transition-all"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-6 h-6 text-[#00B56F]" />
-        </button>
+      <div className="px-4 md:px-6  relative dark:bg-gray-900 bg-gray-50 py-12">
+        
 
         <Slider key={slidesToShow} ref={sliderRef} {...sliderSettings} className="my-4">
           {normalizedPlans.map((plan, idx) => (
-            <div key={idx} className="px-8">
-              <div
-                className={`relative border p-6 rounded-2xl shadow-sm min-h-[40vw] overflow-hidden ${
-                  plan.tag ? "bg-blue-50 dark:bg-blue-900" : "bg-white dark:bg-gray-800"
-                }`}
+            <div key={idx} className="px-8 py-4 ">
+              <div className={`relative flex flex-col w-full rounded-3xl min-h-[43rem] bg-white px-6 pb-6 shadow-sm transition-shadow ${plan.tag ? "border-2 border-emerald-400" : "border border-gray-200" }`}
               >
                 {/* Diagonal Ribbon Tag */}
                 {plan.tag && (
-                  <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden">
-                    <span className="absolute top-7 -right-8 rotate-45 bg-green-600 text-white text-xs font-semibold px-8 py-1 shadow-md tracking-wide">
-                      {plan.tag}
-                    </span>
-                  </div>
+                  
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="inline-block rounded-full bg-emerald-400 px-5 py-1.5 text-sm font-semibold text-white whitespace-nowrap">
+                    {plan.tag}
+                  </span>
+                </div>
                 )}
 
                 {/* Plan Title */}
                 <h3 className="text-xl lg:text-[1.2vw] font-semibold mb-2 text-center mt-8 dark:text-white">{plan.title}</h3>
 
-                {/* Price */}
-                <p className="text-3xl font-bold mb-1 text-center dark:text-white">{plan.price}</p>
-                <p className="text-gray-500 mb-4 text-center text-sm dark:text-gray-400">(taxes and fees included)</p>
+                <div className="mt-4 flex items-baseline gap-1">
+                  <span className="text-4xl font-bold text-emerald-400">
+                    ${plan.price}.00
+                  </span>
+                  <span className="text-sm font-medium text-gray-500">/month</span>
+                </div>
 
-                {/* Button */}
-
-                <button
-                  onClick={() => handleBuyPlan(plan)}
-                  className="w-full border-2 border-[#00B56F] text-[#00B56F] font-semibold py-2 rounded-lg hover:bg-[#00B56F] hover:text-white transition-all"
-                >
-                  Buy Plan
-                </button>
-
+                {/* Divider */}
+                <hr className="my-2 border-gray-100" />
 
                 {/* Description */}
                 <p className="dark:text-gray-400 text-gray-500 mb-4 text-left pt-6 text-sm">{plan.desc}</p>
 
                 {/* Features */}
-                <ul className="mt-4 space-y-2 dark:text-gray-400 text-gray-700 text-sm lg:h-[20vw] md:h-[20vw]">
+                <ul className="flex flex-col divide-y divide-gray-100 flex-1">
                   {plan.features.map((f, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        strokeWidth="2" 
-                        stroke="currentColor" 
-                        className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
-                      >
-                        <path 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          d="m4.5 12.75 6 6 9-13.5" 
-                        />
-                      </svg>
-                      <span>{f}</span>
+
+                    <li key={f} className="flex items-center gap-3 py-3">
+                      <CheckIcon />
+                      <span className="text-sm font-medium text-gray-700">{f}</span>
                     </li>
                   ))}
                 </ul>
+                  {/* Button */}
+
+                <button
+                  onClick={() => handleBuyPlan(plan)}
+                  className="mt-6 w-full rounded-xl bg-emerald-400 py-2 text-base font-bold text-white transition-colors hover:bg-emerald-500 active:bg-emerald-600"
+                >
+                  Select Plan
+                </button>
               </div>
             </div>
           ))}
         </Slider>
         </div>
-<TestimonialSlider/>
+        
+          <TestimonialSlider bg="bg-gradient-to-br from-[#F8F9FA] to-[#E3F2FD]" />
+        
         
 
 
- <div className="dark:bg-gray-900 bg-gray-50 py-10">
+ <div className="dark:bg-gray-900 bg-gray-50 py-6">
+  <h1 className="text-center text-[2rem] md:text-[2rem] font-bold text-[#1d1d1f] py-4">
+          Frequently Asked Questions
+        </h1>
+  
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
         {/* Left Column */}
         
@@ -465,7 +472,7 @@ const faqs = [
           {faqs.map((item, index) => (
             <Disclosure key={index}>
               {({ open }) => (
-                <div className="border border-gray-200 rounded-md dark:bg-gray-800 bg-white shadow-sm">
+                <div className="border border-gray-200 rounded-xl py-2 dark:bg-gray-800 bg-white shadow-xl">
                   <DisclosureButton className="w-full text-left px-4 py-3 flex justify-between items-center font-medium dark:text-white text-gray-800 focus:outline-none">
                     <span>{item.question}</span>
                     <svg
