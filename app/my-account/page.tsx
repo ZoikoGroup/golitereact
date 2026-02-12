@@ -115,14 +115,14 @@ const user: LocalUser | null =
 
   /* ================= LOGOUT ================= */
 
-  const handleLogout = async () => {
-    if (session) {
-      await signOut({ callbackUrl: "/login" });
-    } else {
-      logout();
-      router.replace("/login");
-    }
-  };
+  // const handleLogout = async () => {
+  //   if (session) {
+  //     await signOut({ callbackUrl: "/login" });
+  //   } else {
+  //     logout();
+  //     router.replace("/login");
+  //   }
+  // };
 
   /* ================= LOADER ================= */
 
@@ -163,9 +163,9 @@ const user: LocalUser | null =
             <button onClick={() => router.push("/my-account/update-profile")} className="bg-transparent border border-white text-white outline-offset-2 outline-sky-500 focus:outline-2 px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-orange-500 transition">
               Update Profile
             </button>
-            <button onClick={handleLogout} className="bg-[#ff5a1f] text-white outline-offset-2 outline-sky-500 focus:outline-2 px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-orange-500 transition">
+            {/* <button onClick={handleLogout} className="bg-[#ff5a1f] text-white outline-offset-2 outline-sky-500 focus:outline-2 px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-orange-500 transition">
               Logout
-            </button>
+            </button> */}
           </div>
 
         </div>
