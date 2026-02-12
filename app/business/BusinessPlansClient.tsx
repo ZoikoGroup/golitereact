@@ -270,7 +270,7 @@ function CheckIcon() {
     <>
     <Header />
     {/* Banner Section */}
-    <section className="relative bg-gradient-to-br from-green-50 via-green-100/80 to-green-200 py-10 px-6 overflow-hidden">
+    <section className="relative dark:bg-gradient-to-br dark:from-[#0F172A] dark:to-[#1E293B] bg-gradient-to-br from-green-50 via-green-100/80 to-green-200 py-10 px-6 overflow-hidden">
   <div className="max-w-7xl mx-auto">
     <div className="grid md:grid-cols-3 gap-12 items-center">
       
@@ -312,10 +312,10 @@ function CheckIcon() {
 </section>
     {/* END Banner Section */}
     
-    <section className="py-16 px-16 bg-gray-50">
+    <section className="py-16 px-16 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-center dark:text-white text-gray-900 mb-12">
           Manage Your Business Needs with Ease
         </h2>
 
@@ -324,7 +324,7 @@ function CheckIcon() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
             >
               {/* Icon */}
               <div className="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center text-white mb-6">
@@ -332,12 +332,12 @@ function CheckIcon() {
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-3">
                 {feature.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 leading-relaxed pr-24">
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed pr-24">
                 {feature.description}
               </p>
             </div>
@@ -367,8 +367,8 @@ function CheckIcon() {
     </section>
 
       {/* SIM Type Tabs */}
-      <div className="w-full bg-gray-50 py-8">
-        <h1 className="text-center text-[28px] md:text-[2.5rem] font-bold text-[#1d1d1f]">
+      <div className="w-full dark:bg-gray-900 bg-gray-50 py-8">
+        <h1 className="text-center text-[28px] md:text-[2.5rem] font-bold text-[#1d1d1f] dark:text-white">
           Shop Postpaid Business Plans
         </h1>
       </div>
@@ -403,7 +403,7 @@ function CheckIcon() {
         <Slider key={slidesToShow} ref={sliderRef} {...sliderSettings} className="my-4">
           {normalizedPlans.map((plan, idx) => (
             <div key={idx} className="px-8 py-4 ">
-              <div className={`relative flex flex-col w-full rounded-3xl min-h-[43rem] bg-white px-6 pb-6 shadow-sm transition-shadow ${plan.tag ? "border-2 border-emerald-400" : "border border-gray-200" }`}
+              <div className={`relative flex flex-col w-full rounded-3xl min-h-[43rem] bg-white dark:bg-gray-800 px-6 pb-6 shadow-sm transition-shadow ${plan.tag ? "border-2 border-emerald-400" : "border border-gray-200" }`}
               >
                 {/* Diagonal Ribbon Tag */}
                 {plan.tag && (
@@ -422,14 +422,14 @@ function CheckIcon() {
                   <span className="text-4xl font-bold text-emerald-400">
                     ${plan.price}.00
                   </span>
-                  <span className="text-sm font-medium text-gray-500">/month</span>
+                  <span className="text-sm font-medium dark:text-gray-400 text-gray-500">/month</span>
                 </div>
 
                 {/* Divider */}
                 <hr className="my-2 border-gray-100" />
 
                 {/* Description */}
-                <p className="dark:text-gray-400 text-gray-500 mb-4 text-left pt-6 text-sm">{plan.desc}</p>
+                <p className="dark:text-gray-300 text-gray-500 mb-4 text-left pt-6 text-sm">{plan.desc}</p>
 
                 {/* Features */}
                 <ul className="flex flex-col divide-y divide-gray-100 flex-1">
@@ -437,7 +437,7 @@ function CheckIcon() {
 
                     <li key={f} className="flex items-center gap-3 py-3">
                       <CheckIcon />
-                      <span className="text-sm font-medium text-gray-700">{f}</span>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -455,13 +455,13 @@ function CheckIcon() {
         </Slider>
         </div>
         
-          <TestimonialSlider bg="bg-gradient-to-br from-[#F8F9FA] to-[#E3F2FD]" />
+          <TestimonialSlider bg="dark:bg-gradient-to-br dark:from-[#0F172A] dark:to-[#1E293B] bg-gradient-to-br from-[#F8F9FA] to-[#E3F2FD]" />
         
         
 
 
  <div className="dark:bg-gray-900 bg-gray-50 py-6">
-  <h1 className="text-center text-[2rem] md:text-[2rem] font-bold text-[#1d1d1f] py-4">
+  <h1 className="text-center text-[2rem] md:text-[2rem] font-bold dark:text-white text-[#1d1d1f] py-4">
           Frequently Asked Questions
         </h1>
   

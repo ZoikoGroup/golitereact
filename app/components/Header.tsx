@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import {
   ShoppingCart,
   Search,
@@ -18,8 +18,10 @@ interface UserData {
 }
 
 export default function Navbar() {
+ // ✅ Hooks must be here
   const router = useRouter();
-
+  const pathname = usePathname();
+  const isBusiness = pathname.startsWith("/business");
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -173,7 +175,10 @@ export default function Navbar() {
           >
             <ShoppingCart className="w-6 h-6 text-gray-800 dark:text-gray-300" />
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+              <span className={`absolute -top-2 -right-2  text-white text-xs w-5 h-5 rounded-full flex items-center justify-center
+              
+              ${isBusiness ? 'bg-green-500' : 'bg-red-500'}
+              `}>
                 {cartCount}
               </span>
             )}
@@ -211,7 +216,7 @@ export default function Navbar() {
           ) : (
             <button
               onClick={() => router.push("/login")}
-              className="hidden md:block bg-orange-500 text-white px-5 py-2 rounded-lg hover:bg-orange-600"
+              className={`hidden md:block  text-white px-5 py-2 rounded-lg  ${isBusiness ? 'bg-green-500 hover:bg-green-600' : 'bg-orange-500 hover:bg-orange-600'}`}
             >
               Login
             </button>
