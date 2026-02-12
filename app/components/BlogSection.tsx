@@ -3,15 +3,18 @@ import Link from "next/link";
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL!;
 
 async function getBlogs() {
-  const res = await fetch(`${BASE_URL}/api/blog/posts/`, {
-    cache: "no-store",
-  });
+  try {
+    const res = await fetch(`${BASE_URL}/api/blog/posts/`, {
+      next: { revalidate: 60 }, // caching (important)
+    });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch blogs");
+    if (!res.ok) throw new Error("Blog fetch failed");
+
+    return res.json();
+  } catch (err) {
+    console.error(err);
+    return [];
   }
-
-  return res.json();
 }
 
 export default async function BlogSection() {
