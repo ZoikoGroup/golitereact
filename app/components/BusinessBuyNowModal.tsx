@@ -125,7 +125,7 @@ export default function PrepaidBuyNowModal({
 
               <button
                 onClick={goCheckout}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold"
+                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold"
               >
                 Continue to Checkout
               </button>
@@ -135,6 +135,7 @@ export default function PrepaidBuyNowModal({
           {/* eSim */}
           {simType === "eSim" && (
             <>
+            {status === "idle" && (
               <input
                 value={imei}
                 onChange={(e) =>
@@ -144,15 +145,16 @@ export default function PrepaidBuyNowModal({
                 placeholder="Enter your IMEI"
                 className="w-full border p-3 rounded-lg"
               />
-
+            )}
+               {status === "idle" && (
               <button
                 onClick={handleCheck}
                 disabled={loading}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold"
+                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold"
               >
                 {loading ? "Checking..." : "Check Compatibility"}
               </button>
-
+               )}
               {status === "success" && (
                 <div className="bg-green-50 text-green-600 p-3 rounded">
                   {message}
