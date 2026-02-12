@@ -176,7 +176,7 @@ export default function PricingPlans() {
         {/* Category Tabs */}
         <div className="flex justify-center mb-4 px-4">
           <div className="inline-flex bg-[#FD4C0E] rounded-full p-1 w-full max-w-4xl">
-            {["prepaid", "postpaid", "travel", "business"].map((tab) => (
+            {["prepaid", "postpaid", "travel"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveCategory(tab)}
