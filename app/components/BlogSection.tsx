@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL!;
@@ -17,8 +20,8 @@ async function getBlogs() {
   }
 }
 
-export default async function BlogSection() {
-  const blogs = await getBlogs();
+    fetchBlogs();
+  }, []);
 
   return (
     <section className="py-16 bg-white dark:bg-gray-900">
@@ -26,9 +29,6 @@ export default async function BlogSection() {
         <h2 className="text-3xl font-bold dark:text-white text-gray-900">
           Our Blogs
         </h2>
-        <p className="dark:text-gray-400 text-gray-600 mt-2">
-          Stay updated with the latest news and tips
-        </p>
 
         <div className="mt-12 grid md:grid-cols-3 gap-8">
           {blogs.slice(0, 3).map((b: any) => (
@@ -76,7 +76,9 @@ export default async function BlogSection() {
             View All Articles
           </button>
         </Link>
+
       </div>
     </section>
   );
 }
+
