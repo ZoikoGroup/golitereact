@@ -14,7 +14,7 @@ export default function Home() {
   const allplans = () => {
     router.push('/all-plans');
   };
-  const cards = [
+    const cards = [
     {
       title: "Student Connect+",
       desc: "Special discounts for students with edu email verification",
@@ -44,7 +44,7 @@ export default function Home() {
       title: "Gamer's Paradise",
       desc: "Low latency 5G with priority bandwidth for gaming",
       gradient: "from-[#FA709A] to-[#FEE140]",
-       href: "#",
+       href: "/streaming-enthusiasts-plans",
     },
     {
       title: "Traveler's Choice",
