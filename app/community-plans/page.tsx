@@ -27,7 +27,7 @@ export default function ShopSpecialPlans() {
 
       {/* Heading */}
       <h2 className="text-3xl font-bold text-center mb-12 dark:text-gray-100">
-        Shop Special Plans
+        Shop Community Plans
       </h2>
 
       {/* Cards Grid */}
