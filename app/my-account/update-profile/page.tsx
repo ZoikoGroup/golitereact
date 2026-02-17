@@ -57,66 +57,62 @@ export default function UpdateProfilePage() {
 
 
   // ✅ Submit update
+
   const handleSubmit = async (e:any) => {
 
-    e.preventDefault();
+  e.preventDefault();
 
-    setLoading(true);
-    setMessage("");
-    setError("");
+  setLoading(true);
+  setMessage("");
+  setError("");
 
-    try {
+  try {
 
-      const token = localStorage.getItem("golite_token");
+    const token = localStorage.getItem("golite_token");
 
-      const res = await fetch(
-        `${API_BASE}/api/accounts/update-profile/`,
-        {
-          method: "PUT",
-
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Token ${token}`,
-          },
-
-          body: JSON.stringify(form),
-
-        }
-      );
-
-
-      const data = await res.json();
-
-
-      if (!res.ok) {
-
-        throw new Error(data.message || "Update failed");
-
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/update-profile/`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${token}`,
+        },
+        body: JSON.stringify(form),
       }
+    );
 
 
-      // ✅ update localStorage
-      localStorage.setItem("user", JSON.stringify(data));
+    const data = await res.json();
 
 
-      setMessage("Profile updated successfully");
+    if (!res.ok) {
 
-
-    }
-
-    catch (err:any) {
-
-      setError(err.message);
+      throw new Error(data.message || "Profile update failed");
 
     }
 
-    finally {
 
-      setLoading(false);
+    // ✅ DO NOT update localStorage
 
-    }
+    setMessage("Profile updated successfully");
 
-  };
+
+  }
+
+  catch (err:any) {
+
+    setError(err.message);
+
+  }
+
+  finally {
+
+    setLoading(false);
+
+  }
+
+};
 
 
 
