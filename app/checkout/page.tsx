@@ -327,7 +327,7 @@ useEffect(() => {
     setRegularItems([]);
   };
 
- const handleApplyCoupon = async () => {
+ const handleApplyCoupon_old = async () => {
   if (!isLoggedIn) {
     setLoginReason("You need to login to apply coupon code.");
     setShowLoginPopup(true);
@@ -385,6 +385,302 @@ setCoupon(couponData.code);
   } finally {
     setLoading(false);
   }
+};
+
+const handleApplyCouponnw = async () => {
+
+  if (!isLoggedIn) {
+    setLoginReason("You need to login to apply coupon code.");
+    setShowLoginPopup(true);
+    return;
+  }
+
+  if (!coupon.trim()) {
+    setCouponMessage("Please enter a coupon code");
+    return;
+  }
+
+  try {
+
+    setLoading(true);
+    setCouponMessage("");
+
+    // ✅ Call new API (only code required)
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/preview-coupon/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          code: coupon,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok || !data.valid) {
+      throw new Error("Invalid or expired coupon");
+    }
+
+    const couponInfo = data.coupon;
+
+
+    // ✅ Get user id
+    const userData = JSON.parse(localStorage.getItem("user") || "{}");
+    const userId = Number(userData?.id);
+
+
+    // ✅ Check user restriction
+    if (
+      couponInfo.has_user_restriction &&
+      !couponInfo.allowed_user_ids.includes(userId)
+    ) {
+
+      throw new Error("This coupon is not valid for your account");
+
+    }
+
+
+
+    // ✅ Get cart planIds ONLY
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    const cartPlanIds = cart
+      .map((item: any) => Number(item.planId))
+      .filter((id: number) => !!id);
+
+
+
+    // ✅ Check plan restriction
+    if (couponInfo.has_plan_restriction) {
+
+      const matched = cartPlanIds.filter((planId: number) =>
+        couponInfo.allowed_plan_ids.includes(planId)
+      );
+
+      if (matched.length === 0) {
+
+        throw new Error(
+          "Coupon not valid for selected plan"
+        );
+
+      }
+
+    }
+
+
+
+    // ✅ Save coupon
+    const couponData = {
+
+      code: couponInfo.code,
+      type: couponInfo.type,
+      discount: String(couponInfo.discount),
+      name: couponInfo.name,
+
+    };
+
+
+
+    setDiscountData(couponData);
+
+    localStorage.setItem(
+      "applied-coupon",
+      JSON.stringify(couponData)
+    );
+
+
+    setCouponMessage("Coupon applied successfully!");
+
+    setCoupon(couponInfo.code);
+
+
+  }
+  catch (err: any) {
+
+    setDiscountData(null);
+
+    localStorage.removeItem("applied-coupon");
+
+    setCouponMessage(
+      err.message || "Wrong coupon code"
+    );
+
+  }
+  finally {
+
+    setLoading(false);
+
+  }
+
+};
+
+const handleApplyCoupon = async () => {
+
+  if (!isLoggedIn) {
+    setLoginReason("You need to login to apply coupon code.");
+    setShowLoginPopup(true);
+    return;
+  }
+
+  if (!coupon.trim()) {
+    setCouponMessage("Please enter a coupon code");
+    return;
+  }
+
+  try {
+
+    setLoading(true);
+    setCouponMessage("");
+
+    // ✅ Call API
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/preview-coupon/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          code: coupon,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok || !data?.valid) {
+      throw new Error("Invalid or expired coupon");
+    }
+
+    const couponInfo = data.coupon;
+
+
+
+    // ✅ SAFE allowed_user_ids
+    const allowedUserIds = Array.isArray(couponInfo?.allowed_user_ids)
+      ? couponInfo.allowed_user_ids.map(Number)
+      : [];
+
+
+
+    // ✅ Get user id
+    const userData = JSON.parse(localStorage.getItem("user") || "{}");
+
+    const userId = Number(userData?.id || 0);
+
+
+
+    // ✅ Check user restriction safely
+    if (
+      couponInfo?.has_user_restriction &&
+      allowedUserIds.length > 0 &&
+      !allowedUserIds.includes(userId)
+    ) {
+
+      throw new Error("This coupon is not valid for your account");
+
+    }
+
+
+
+    // ✅ Get cart plan ids safely
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    const cartPlanIds = cart
+      .map((item: any) => Number(item?.planId || 0))
+      .filter((id: number) => id > 0);
+
+
+
+    // ✅ SAFE allowed_plan_ids
+    const allowedPlanIds = Array.isArray(couponInfo?.allowed_plan_ids)
+      ? couponInfo.allowed_plan_ids.map(Number)
+      : [];
+
+
+
+    // ✅ Check plan restriction safely
+    if (couponInfo?.has_plan_restriction) {
+
+      if (allowedPlanIds.length === 0) {
+
+        throw new Error("Coupon not valid for selected plan");
+
+      }
+
+      const matchedPlans = cartPlanIds.filter((planId: number) =>
+        allowedPlanIds.includes(planId)
+      );
+
+      if (matchedPlans.length === 0) {
+
+        throw new Error("Coupon not valid for selected plan");
+
+      }
+
+    }
+
+
+
+    // ✅ Save coupon with allowed_plan_ids (IMPORTANT)
+    const couponData = {
+
+      code: couponInfo.code,
+
+      type: couponInfo.type,
+
+      discount: String(couponInfo.discount),
+
+      name: couponInfo.name,
+
+      allowed_plan_ids: allowedPlanIds,
+
+    };
+
+
+
+    setDiscountData(couponData);
+
+
+
+    localStorage.setItem(
+      "applied-coupon",
+      JSON.stringify(couponData)
+    );
+
+
+
+    setCouponMessage("Coupon applied successfully!");
+
+
+
+    setCoupon(couponInfo.code);
+
+
+  }
+  catch (err: any) {
+
+    setDiscountData(null);
+
+    localStorage.removeItem("applied-coupon");
+
+    setCouponMessage(
+      err?.message || "Wrong coupon code"
+    );
+
+  }
+  finally {
+
+    setLoading(false);
+
+  }
+
 };
 
  const handleCancelCoupon = () => {
