@@ -124,7 +124,13 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
         setSelectedPlan(plan);
         setOpenBuyModal(true);
       };
-
+      const [isMobile, setIsMobile] = useState(false);
+      useEffect(() => {
+        const checkScreen = () => setIsMobile(window.innerWidth < 768);
+        checkScreen();
+        window.addEventListener("resize", checkScreen);
+        return () => window.removeEventListener("resize", checkScreen);
+      }, []);
 
 
 /* ---------- Responsive slider ---------- */
@@ -270,40 +276,37 @@ function CheckIcon() {
     <>
     <Header />
     {/* Banner Section */}
-    <section className="relative dark:bg-gradient-to-br dark:from-[#0F172A] dark:to-[#1E293B] bg-gradient-to-br from-green-50 via-green-100/80 to-green-200 py-10 px-6 overflow-hidden">
+   <section className="relative dark:bg-gradient-to-br dark:from-[#0F172A] dark:to-[#1E293B] bg-gradient-to-br from-green-50 via-green-100/80 to-green-200 py-10 px-6 overflow-hidden">
   <div className="max-w-7xl mx-auto">
-    <div className="grid md:grid-cols-3 gap-12 items-center">
-      
-      {/* Left Content - Takes 2 columns */}
-      <div className="space-y-6 md:col-span-2">
-        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-          Empower Your Business<br />
-          with <span className="text-[#00B56F]">GoLite Mobile</span>
+    <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+
+      {/* Left Content */}
+      <div className="flex-1 space-y-6 text-center md:text-left">
+        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+          Empower Your Business with{" "}
+          <span className="text-[#00B56F]">GoLite Mobile</span>
         </h1>
-        
-        <p className="text-gray-600 text-lg max-w-2xl">
+        <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto md:mx-0">
           Streamline operations, boost productivity, and grow your business with our comprehensive mobile solutions.
         </p>
-        
-        <div className="flex flex-wrap gap-4">
-          <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold transition shadow-md hover:shadow-lg">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center md:items-start">
+          <button className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold transition shadow-md hover:shadow-lg">
             Explore Business Plans
           </button>
-          
-          <button className="bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-50 px-8 py-3 rounded-lg font-semibold transition">
-            Conatct Sales
+          <button className="w-full sm:w-auto bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-50 px-8 py-3 rounded-lg font-semibold transition">
+            Contact Sales
           </button>
         </div>
       </div>
 
-      {/* Right Image - Takes 1 column */}
-      <div className="relative flex justify-center items-center md:col-span-1">
+      {/* Right Image */}
+      <div className="w-full md:w-auto flex justify-center">
         <Image
           src="/businessBanner.png"
           alt="Business Growth Illustration"
           width={600}
           height={400}
-          className="w-full h-auto object-contain"
+          className="w-64 md:w-72 lg:w-96 h-auto object-contain"
           priority
         />
       </div>
@@ -312,39 +315,33 @@ function CheckIcon() {
 </section>
     {/* END Banner Section */}
     
-    <section className="py-16 px-16 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
-        <h2 className="text-4xl md:text-5xl font-bold text-center dark:text-white text-gray-900 mb-12">
-          Manage Your Business Needs with Ease
-        </h2>
+    {/* Features section */}
+<section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50 dark:bg-gray-900">
+  <div className="max-w-7xl mx-auto">
+    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center md:text-left dark:text-white text-gray-900 mb-12">
+      Manage Your Business Needs with Ease
+    </h2>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
-            >
-              {/* Icon */}
-              <div className="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center text-white mb-6">
-                {feature.icon}
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-3">
-                {feature.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed pr-24">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-12">
+  {features.map((feature, index) => (
+    <div
+      key={index}
+      className="bg-white dark:bg-gray-700 rounded-2xl p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center text-center"
+    >
+      <div className="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center text-white mb-6">
+        {feature.icon}
       </div>
-    </section>
+      <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-3">
+        {feature.title}
+      </h3>
+      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+        {feature.description}
+      </p>
+    </div>
+  ))}
+</div>
+  </div>
+</section>
 
  <section className="bg-gradient-to-r from-[#00D084] to-[#00B56F] py-12 px-6">
       <div className="max-w-7xl mx-auto">
@@ -372,7 +369,7 @@ function CheckIcon() {
           Shop Postpaid Business Plans
         </h1>
       </div>
-      <div className="flex justify-center dark:bg-gray-900 bg-gray-50 ">
+      <div className="flex justify-center px-2 dark:bg-gray-900 bg-gray-50 ">
         <div className="inline-flex bg-[#00B56F] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
 
           {["pSim", "eSim"].map((simType, idx) => (
@@ -398,8 +395,26 @@ function CheckIcon() {
 
       {/* Slider with Navigation */}
       <div className="px-4 md:px-6  relative dark:bg-gray-900 bg-gray-50 py-12">
-        
+        {isMobile && (
+          <>
+            {/* Custom Arrow Buttons */}
+            <button
+            onClick={() => sliderRef.current?.slickPrev()}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-all"
+            aria-label="Previous slide"
+            >
+            <ChevronLeft className="w-6 h-6 text-[#00b56f]" />
+            </button>
 
+            <button
+            onClick={() => sliderRef.current?.slickNext()}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-800 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-all"
+            aria-label="Next slide"
+            >
+            <ChevronRight className="w-6 h-6 text-[#00b56f]" />
+            </button>
+          </>
+        )}
         <Slider key={slidesToShow} ref={sliderRef} {...sliderSettings} className="my-4">
           {normalizedPlans.map((plan, idx) => (
             <div key={idx} className="px-8 py-4 ">
