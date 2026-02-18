@@ -14,6 +14,9 @@ export default function Home() {
   const allplans = () => {
     router.push('/all-plans');
   };
+  const saleLink = () => {
+    router.push('/contact-us');
+  }
   const cards = [
     {
       title: "Student Connect+",
@@ -310,7 +313,7 @@ export default function Home() {
           </button>
 
           {/* Outline Button */}
-          <button className="border dark:border-white border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition cursor-pointer">
+          <button onClick={saleLink} className="border dark:border-white border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#FD4C0E] transition cursor-pointer">
             Talk to Sales
           </button>
         </div>
