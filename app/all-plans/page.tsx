@@ -153,43 +153,43 @@ const tabs = [
   { key: "business", label: "Business Plans", icon: FaBriefcase },
 ];
 
-const cards = [
+  const cards = [
     {
       title: "Student Connect+",
       desc: "Special discounts for students with edu email verification",
       badge: "NEW",
       gradient: "from-[#667EEA] to-[#764BA2]",
-      href: "/all-plans",
+      href: "/students-discount-application",
     },
     {
       title: "Senior Saver",
       desc: "Simplified plans with dedicated support for seniors 60+",
       gradient: "from-[#F093FB] to-[#F5576C]",
-      href: "/all-plans",
+      href: "/senior-citizen-discount-enrollment-form",
     },
     {
       title: "Work-Life Unlimited",
       desc: "Business features with personal benefits in one plan",
       gradient: "from-[#4FACFE] to-[#00F2FE]",
-       href: "/all-plans",
+       href: "/business",
     },
     {
       title: "Family Bundle",
       desc: "Connect up to 5 lines with shared data and savings",
       gradient: "from-[#43E97B] to-[#38F9D7]",
-       href: "/all-plans",
+       href: "/family-plans",
     },
     {
       title: "Gamer's Paradise",
       desc: "Low latency 5G with priority bandwidth for gaming",
       gradient: "from-[#FA709A] to-[#FEE140]",
-       href: "/all-plans",
+       href: "/streaming-enthusiasts-plans",
     },
     {
       title: "Traveler's Choice",
       desc: "International roaming in 200+ countries included",
       gradient: "from-[#30CFD0] to-[#330867]",
-       href: "/all-plans",
+       href: "/travel-plans",
     },
   ];
   const filteredPlans = plans.filter((p) => p.category === activeCategory && p.simType === activeSimType);

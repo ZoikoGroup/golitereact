@@ -191,7 +191,7 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
       title: "Gamer's Paradise",
       desc: "Low latency 5G with priority bandwidth for gaming",
       gradient: "from-[#FA709A] to-[#FEE140]",
-       href: "#",
+       href: "/streaming-enthusiasts-plans",
     },
     {
       title: "Traveler's Choice",

@@ -1,105 +1,230 @@
-import { notFound } from "next/navigation";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+"use client";
 
-interface Props {
-  params: { slug: string } | Promise<{ slug: string }>;
-}
+import { useEffect, useState } from "react";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
 
-interface BlogPost {
-  id: number;
-  title: string;
-  slug: string;
-  author: string;
-  content: string;
-  featured_image: string;
-  created_at: string;
-}
+export default function UpdateProfilePage() {
 
-export default async function BlogPostPage({ params }: Props) {
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+  const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  if (!slug) return notFound();
+  const [form, setForm] = useState({
+    username: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    vc_enrollment_id: "",
+  });
 
-  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
-  if (!BASE_URL) {
-    console.error("NEXT_PUBLIC_API_BASE_URL not defined");
-    return notFound();
-  }
+
+  // ✅ Load user from localStorage
+  useEffect(() => {
+
+    const user = localStorage.getItem("user");
+
+    if (user) {
+
+      const u = JSON.parse(user);
+
+      setForm({
+        username: u.username || "",
+        first_name: u.first_name || "",
+        last_name: u.last_name || "",
+        email: u.email || "",
+        vc_enrollment_id: u.vc_enrollment_id || "",
+      });
+
+    }
+
+  }, []);
+
+
+
+  // ✅ handle change
+  const handleChange = (e:any) => {
+
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+
+  };
+
+
+
+  // ✅ Submit update
+
+  const handleSubmit = async (e:any) => {
+
+  e.preventDefault();
+
+  setLoading(true);
+  setMessage("");
+  setError("");
 
   try {
+
+    const token = localStorage.getItem("golite_token");
+
     const res = await fetch(
-      `${BASE_URL}/api/blog/posts/${slug}/`,
-      { cache: "no-store" }
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/accounts/update-profile/`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Token ${token}`,
+        },
+        body: JSON.stringify(form),
+      }
     );
 
-    if (!res.ok) return notFound();
 
-    const post: BlogPost = await res.json();
+    const data = await res.json();
 
-    // ✅ Fix relative image paths inside blog content
-    const fixedContent = post.content.replace(
-      /src="\/media/g,
-      `src="${BASE_URL}/media`
-    );
 
-    return (
-      <>
-        <Header />
+    if (!res.ok) {
 
-        {/* 🔥 Increased Width */}
-        <div className="container mx-auto py-16 px-6">
-          <div className="max-w-5xl mx-auto">
+      throw new Error(data.message || "Profile update failed");
 
-            {/* Featured Image */}
-            {post.featured_image && (
-              <img
-                src={
-                  post.featured_image.startsWith("http")
-                    ? post.featured_image
-                    : `${BASE_URL}${post.featured_image}`
-                }
-                alt={post.title}
-                className="w-full h-[420px] object-cover rounded-xl mb-8"
-              />
-            )}
+    }
 
-            {/* Title */}
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              {post.title}
-            </h1>
 
-            {/* Date */}
-            <p className="text-gray-500 mb-10 text-sm">
-              {new Date(post.created_at).toDateString()}
-            </p>
+    // ✅ DO NOT update localStorage
 
-            {/* Blog Content */}
-            <div
-              className="prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: fixedContent }}
+    setMessage("Profile updated successfully");
+
+
+  }
+
+  catch (err:any) {
+
+    setError(err.message);
+
+  }
+
+  finally {
+
+    setLoading(false);
+
+  }
+
+};
+
+
+
+  return (
+
+    <>
+      <Header />
+
+
+      <div className="min-h-screen bg-gray-100 py-12">
+
+        <div className="max-w-xl mx-auto bg-white shadow-lg rounded-xl p-8">
+
+
+          <h2 className="text-2xl font-bold mb-6 text-center">
+
+            Update Profile
+
+          </h2>
+
+
+          {message && (
+            <div className="bg-green-100 text-green-700 p-3 mb-4 rounded">
+              {message}
+            </div>
+          )}
+
+          {error && (
+            <div className="bg-red-100 text-red-700 p-3 mb-4 rounded">
+              {error}
+            </div>
+          )}
+
+
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+
+
+            <input
+              name="username"
+              value={form.username}
+              onChange={handleChange}
+              placeholder="Username"
+              className="w-full border p-3 rounded"
+              required
             />
 
-            {/* Back Button */}
-            <div className="mt-12">
-              <a
-                href="/blog"
-                className="text-[#DF1E5A] font-semibold hover:underline"
-              >
-                ← Back to Blogs
-              </a>
-            </div>
 
-          </div>
+            <input
+              name="first_name"
+              value={form.first_name}
+              onChange={handleChange}
+              placeholder="First Name"
+              className="w-full border p-3 rounded"
+              required
+            />
+
+
+            <input
+              name="last_name"
+              value={form.last_name}
+              onChange={handleChange}
+              placeholder="Last Name"
+              className="w-full border p-3 rounded"
+              required
+            />
+
+
+            <input
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Email"
+              type="email"
+              className="w-full border p-3 rounded"
+              required
+            />
+
+
+            <input
+              name="vc_enrollment_id"
+              value={form.vc_enrollment_id}
+              onChange={handleChange}
+              placeholder="Enrollment ID"
+              className="w-full border p-3 rounded"
+            />
+
+
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-orange-500 text-white p-3 rounded hover:bg-orange-600"
+            >
+
+              {loading ? "Updating..." : "Update Profile"}
+
+            </button>
+
+
+          </form>
+
+
         </div>
 
-        <Footer />
-      </>
-    );
-  } catch (error) {
-    console.error("Blog fetch error:", error);
-    return notFound();
-  }
+      </div>
+
+
+      <Footer />
+
+    </>
+
+  );
+
 }
