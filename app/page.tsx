@@ -16,7 +16,7 @@ export default function Home() {
   };
   const saleLink = () => {
     router.push('/contact-us');
-  }
+  };
   const cards = [
     {
       title: "Student Connect+",
