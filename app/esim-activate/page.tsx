@@ -424,8 +424,8 @@ const activateSim = async () => {
     {showDeviceCheck && (
         
 
-        <div className="w-full flex justify-center py-10 bg-gray-100">
-      <div className="max-w-4xl w-full bg-green-50 border border-green-300 rounded-xl p-8 text-center">
+        <div className="w-full flex justify-center py-10 bg-gray-100 dark:bg-gray-900">
+      <div className="max-w-4xl w-full bg-green-50 dark:bg-gray-800 border border-green-300 rounded-xl p-8 text-center">
 
         {/* Title */}
         <h2 className="text-3xl font-bold flex justify-center items-center gap-2">
@@ -434,12 +434,12 @@ const activateSim = async () => {
         </h2>
 
         {/* Description */}
-        <p className="mt-4 text-gray-600">
+        <p className="mt-4 text-gray-600 dark:text-gray-400">
           eSIM is the future of mobile connectivity – faster, easier, and more eco-friendly.
           Before activating your GoLite Mobile plan, let’s confirm your device is ready for eSIM.
         </p>
 
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-600 mt-2 dark:text-gray-400">
           Simply enter your device’s IMEI number below, and we’ll tell you right away whether it’s compatible.
         </p>
 
@@ -458,7 +458,7 @@ const activateSim = async () => {
     />
 
     {/* Info Icon + Tooltip */}
-    <div className="absolute right-3 top-1/2 -translate-y-1/2 group">
+    <div className="absolute right-3 top-[40%] -translate-y-1/2 group">
       <Info
         size={20}
         className="text-black cursor-pointer"
