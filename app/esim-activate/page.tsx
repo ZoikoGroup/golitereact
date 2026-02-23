@@ -458,7 +458,7 @@ const activateSim = async () => {
     />
 
     {/* Info Icon + Tooltip */}
-    <div className="absolute right-3 top-1/2 -translate-y-1/2 group">
+    <div className="absolute right-3 top-[40%] -translate-y-1/2 group">
       <Info
         size={20}
         className="text-black cursor-pointer"
