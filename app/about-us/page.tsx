@@ -76,7 +76,7 @@ flex items-center justify-center p-8">
       <div className="max-w-6xl w-full">
         {/* Heading */}
         <h1 className="text-white text-5xl md:text-6xl font-bold text-center mb-8 tracking-wide">
-          Know ABOUT US
+          ABOUT US
         </h1>
         
         {/* Description Text */}
