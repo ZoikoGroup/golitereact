@@ -125,7 +125,7 @@ export default function CheckoutPage() {
     state: { label: "State", placeholder: "Enter your state" },
     city: { label: "City", placeholder: "Enter your city" },
     street: { label: "Street Address", placeholder: "Enter your street address" },
-    houseNumber: { label: "Apartment, suite, unit, etc. (optional)", placeholder: "Apartment or suite" },
+    houseNumber: { label: "Apartment, suite, unit, etc.", placeholder: "Apartment or suite" },
     zip: { label: "ZIP Code", placeholder: "Enter your ZIP code" },
     phone: { label: "Phone Number", placeholder: "Enter your phone number" },
     email: { label: "Email Address", placeholder: "Enter your email address" },
