@@ -58,7 +58,7 @@ body {
 /* HERO SECTION */
 /* ========================= */
 .hero-bg {
-  background-color: #FF0055;
+  background-color: #ff0055;
   height: 300px;
   width: 100%;
   margin-top: 104px;
@@ -151,8 +151,6 @@ body {
   margin-bottom: 12px;
 }
 
-
-
 .subbanner-right {
   display: flex;
   flex-direction: column;
@@ -221,4 +219,76 @@ body {
     width: 100%;
     border-radius: 20px;
   }
+}
+
+/* ─── Dual Range Slider ──────────────────────────────────── */
+.price-range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+}
+
+.price-range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: all;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.price-range-input::-moz-range-thumb {
+  pointer-events: all;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0;
+  border: none;
+  background: transparent;
+}
+
+.price-range-input::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
+.price-range-input::-moz-range-track {
+  background: transparent;
+}
+
+/* ─── Accent color for all other range inputs ────────────── */
+input[type="range"].accent-orange-500 {
+  accent-color: #f97316;
+}
+
+/* ─── Scrollbar (sidebar filter lists) ──────────────────── */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 9999px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
+
+/* ─── Checkbox accent ────────────────────────────────────── */
+input[type="checkbox"] {
+  accent-color: #f97316;
+  cursor: pointer;
+}
+
+/* ─── Focus ring for inputs ──────────────────────────────── */
+input[type="text"]:focus,
+input[type="search"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #fed7aa;
 }

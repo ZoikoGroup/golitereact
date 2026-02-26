@@ -3,7 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 
 const handler = NextAuth({
-
   providers: [
     // =========================
     // GOOGLE
@@ -13,7 +12,7 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
 
       // ensure full name comes correctly
-      profile(profile) {
+      profile(profile: any) {
         return {
           id: profile.sub,
           name: profile.name,
@@ -43,7 +42,7 @@ const handler = NextAuth({
   // CALLBACKS
   // =========================
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user: any }) {
       // Runs on login
       if (user) {
         token.id = user.id;
@@ -54,7 +53,7 @@ const handler = NextAuth({
       return token;
     },
 
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: any }) {
       // Makes data available in useSession()
       if (session.user) {
         (session.user as any).id = token.id as string;

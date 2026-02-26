@@ -1,0 +1,10 @@
+declare module "next-auth";
+declare module "next-auth/react";
+declare module "next-auth/providers/google";
+declare module "next-auth/providers/facebook";
+declare module "next-auth/providers/credentials";
+declare module "@headlessui/react";
+declare module "react-slick";
+declare module "slick-carousel";
+declare module "slick-carousel/slick/slick.css";
+declare module "slick-carousel/slick/slick-theme.css";
