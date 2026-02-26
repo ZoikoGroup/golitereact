@@ -66,7 +66,7 @@ export default function Home() {
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="text-[4vw]  lg:text-[2vw] font-bold text-gray-900 dark:text-gray-200">
-            Manage Your Mobile Needs with Ease
+            Manage Your Mobile Needs with Easy
           </h2>
           <p className="text-gray-500 mt-2 text-[3vw] lg:text-[1.2vw] dark:text-gray-400">
             Everything you need in one powerful platform
