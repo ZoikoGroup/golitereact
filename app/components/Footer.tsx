@@ -70,7 +70,7 @@ export default function Footer() {
             <div>
               <h3 className="font-semibold text-white mb-4">Resources</h3>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/blog" className="block">Blog</Link></li>
+                <li><Link href="/blogs" className="block">Blogs</Link></li>
                 <li><Link href="/activate-sim" className="block">Activate SIM</Link></li>
                 <li><Link href="/help-and-support" className="block">Help Center</Link></li>
                 <li>Community Forum</li>
