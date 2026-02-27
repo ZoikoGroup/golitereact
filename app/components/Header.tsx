@@ -35,7 +35,7 @@ export default function Navbar() {
   const [cartCount, setCartCount] = useState(0);
 
 
-  /* ================= SEARCH STATE hhh ================= */
+  /* ================= SEARCH STATE hhh kkk ================= */
 
   const [searchOpen, setSearchOpen] = useState(false);
 
