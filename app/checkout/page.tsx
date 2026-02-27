@@ -914,11 +914,11 @@ useEffect(() => {
               <p className="text-gray-500 mb-8">Looks like you have not added anything to your cart yet.</p>
               
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-4xl">
-                <a href="/prepaid" className="flex items-center justify-center gap-2 bg-[#FD4C0E] hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                <a href="/prepaid-plans" className="flex items-center justify-center gap-2 bg-[#FD4C0E] hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                   <Phone className="w-5 h-5" />
                   Prepaid plans
                 </a>
-                <a href="/postpaid" className="flex items-center justify-center gap-2 bg-[#FD4C0E] hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                <a href="/postpaid-plans" className="flex items-center justify-center gap-2 bg-[#FD4C0E] hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                   <Smartphone className="w-5 h-5" />
                   Postpaid plans
                 </a>
