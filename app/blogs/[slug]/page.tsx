@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: Props) {
             />
 
             <div className="mt-8">
-              <a href="/blog" className="text-[#DF1E5A] font-medium">
+              <a href="/blogs" className="text-[#DF1E5A] font-medium">
                 ← Back to Blogs
               </a>
             </div>
