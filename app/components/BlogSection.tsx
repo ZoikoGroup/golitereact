@@ -71,7 +71,7 @@ export default function BlogSection() {
                   </p>
 
                   <Link
-                    href={`/blog/${b.slug}`}
+                    href={`/blogs/${b.slug}`}
                     className="text-orange-500 font-semibold text-sm"
                   >
                     Read More →
@@ -82,7 +82,7 @@ export default function BlogSection() {
           </div>
         )}
 
-        <Link href="/blog">
+        <Link href="/blogs">
           <button className="mt-10 bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition">
             View All Articles
           </button>
