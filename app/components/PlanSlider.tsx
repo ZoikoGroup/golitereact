@@ -59,6 +59,26 @@ export default function PricingPlans() {
     business: "/business",
   };
 
+  const getViewAllUrl = () => {
+  switch (activeCategory) {
+    case "prepaid":
+      return `/prepaid-plans`;
+
+    case "postpaid":
+      return `/postpaid-plans`;
+
+    case "travel":
+      return `/travel-plans`;
+
+    case "business":
+      return `/business`;
+
+    default:
+      return "/";
+  }
+};
+
+
   /* Responsive Slider */
   useEffect(() => {
     const handleResize = () => {
@@ -291,7 +311,7 @@ export default function PricingPlans() {
           {/* ✅ VIEW ALL BUTTON */}
           <div className="flex justify-center mt-6">
             <button
-              onClick={() => router.push(categoryRouteMap[activeCategory])}
+             onClick={() => router.push(getViewAllUrl())}
               className="bg-[#FD4C0E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#E63D00]"
             >
               View All
