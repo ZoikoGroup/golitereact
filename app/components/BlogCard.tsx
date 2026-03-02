@@ -8,7 +8,7 @@ type Props = { data: BlogPost };
 export default function BlogCard({ data }: Props) {
   return (
     <Link
-      href={`/blog/${encodeURIComponent(data.slug)}`}
+      href={`/blogs/${encodeURIComponent(data.slug)}`}
       className="block cursor-pointer p-4 hover:shadow-md rounded"
       aria-label={`Read ${data.title}`}
     >
