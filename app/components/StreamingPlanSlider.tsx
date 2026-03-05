@@ -53,8 +53,8 @@ export default function PricingPlans() {
 
   /* ✅ CATEGORY → ROUTE MAP */
   const categoryRouteMap: Record<string, string> = {
-    prepaid: "/prepaid",
-    postpaid: "/postpaid",
+    prepaid: "/prepaid-plans",
+    postpaid: "/postpaid-plans",
     travel: "/travel-plans",
     business: "/business",
   };
