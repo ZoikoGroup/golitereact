@@ -31,3 +31,8 @@ export default async function PrepaidPage() {
 
   return <PrepaidPlansClient plans={plans} />;
 }
+
+export const metadata = {
+  title: "Affordable Postpaid Mobile Plans | GoLite Mobile",
+  description: "Shop GoLite Mobile postpaid mobile plans for unlimited data, high-speed 5G, hotspot access, and international calls included—plans for every lifestyle."
+};
