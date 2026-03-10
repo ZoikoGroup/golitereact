@@ -31,3 +31,7 @@ export default async function PrepaidPage() {
 
   return <PrepaidPlansClient plans={plans} />;
 }
+export const metadata = {
+  title: "Best Prepaid Mobile Plans USA | GoLite Mobile",
+  description: "Discover the best prepaid mobile plans USA at GoLite Mobile with reliable nationwide 5G coverage, transparent pricing, and flexible no-contract options."
+};

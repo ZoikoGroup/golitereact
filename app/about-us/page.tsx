@@ -1,9 +1,15 @@
-"use client";
+
+import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Clock, Layers, PlusCircle , FileText, User,Check  } from 'lucide-react';
+import { Clock, Layers, PlusCircle, FileText, User, Check } from "lucide-react";
+import { encodeIds, encodeString } from "../utils/helper";
 
-import { encodeIds,encodeString } from "../utils/helper";
+export const metadata: Metadata = {
+  title: "About Golite Mobile | Sustainable Wireless Provider",
+  description:
+    "Learn about GoLite Mobile's mission to deliver affordable, transparent wireless service with nationwide coverage.",
+};
 
 const encodedIds = encodeString(["test_1","test"]);
 
