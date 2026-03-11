@@ -1,6 +1,14 @@
-"use client"
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GoLite Mobile’s Cookie Policy | Your Privacy Matters",
+  description:
+    "Discover how GoLite Mobile uses cookies for personalization, ads, and analytics. Read our Cookies Policy to learn how to manage your privacy preferences.",
+};
 
 export default function CookiesPolicy() {
   return (

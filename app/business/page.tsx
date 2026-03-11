@@ -31,3 +31,8 @@ export default async function BusinessPage() {
 
   return <BusinessPlansClient plans={plans} />;
 }
+
+export const metadata = {
+  title: "Affordable Business Mobile Phone Plans | GoLite Mobile",
+  description: "GoLite Mobile business mobile phone plans keep your team connected with flexible lines, shared data, unlimited talk & text, and affordable pricing for work."
+};
