@@ -1,6 +1,13 @@
-"use client"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GoLite Mobile Terms & Conditions | Full Legal Agreement",
+  description:
+    "GoLite Mobile’s Terms & Conditions outline the legal agreements, service usage & payment guidelines for users. Read them carefully before using our services.",
+};
 
 export default function TermsConditions() {
   return (

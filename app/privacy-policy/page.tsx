@@ -1,6 +1,13 @@
-"use client"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GoLite Mobile Privacy Policy | Your Data Protection Rights",
+  description:
+    "Discover how GoLite Mobile protects your personal data with our comprehensive privacy policy. Learn more about how we protect and use your information here.",
+};
 
 export default function PrivacyPolicy() {
   return (
