@@ -1,6 +1,13 @@
-"use client"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GoLite Mobile Sustainability | Our Green Commitment",
+  description:
+    "GoLite Mobile is committed to sustainability with eco-friendly initiatives, green policies, and actions to reduce environmental impact and protect the planet.",
+};
 
 export default function Sustainability() {
   return (
