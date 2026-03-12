@@ -189,7 +189,7 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
       title: "Family Bundle",
       desc: "Connect up to 5 lines with shared data and savings",
       gradient: "from-[#43E97B] to-[#38F9D7]",
-       href: "/family-plans",
+       href: "/shop-family-multi-line-plans",
     },
     {
       title: "Gamer's Paradise",
