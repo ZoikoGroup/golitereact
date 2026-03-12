@@ -39,7 +39,7 @@ interface CartItem {
   lineType: string;
   simType: string;
   type?: string;
-  bundleId?: string; // Added for family bundles
+  bundleId?: string;
   formData: FormData;
   _raw?: any;
 }
@@ -162,13 +162,13 @@ export default function CheckoutPage() {
   /* ================= CART SYNC ================= */
   const syncCart = (updatedCart: CartItem[]) => {
     setCart(updatedCart);
-  localStorage.setItem("cart", JSON.stringify(updatedCart));
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
 
-  // 🔥 Remove coupon when cart changes
-  localStorage.removeItem("applied-coupon");
-  setDiscountData(null);
+    // Remove coupon when cart changes
+    localStorage.removeItem("applied-coupon");
+    setDiscountData(null);
 
-  window.dispatchEvent(new Event("storage"));
+    window.dispatchEvent(new Event("storage"));
   };
 
   /* ================= GROUP FAMILY BUNDLES ================= */
@@ -188,12 +188,10 @@ export default function CheckoutPage() {
     });
 
     const grouped: GroupedBundle[] = Object.keys(bundles).map((bundleId) => {
-      // Bundle discount is the one with type "bundle" and line "all"
       const bundleDiscount = discounts.find(
         (d) => d.bundleId === bundleId && d.type === "bundle" && d.line === "all"
       );
       
-      // Family discounts are individual line discounts (excluding the primary line "all")
       const familyDiscountsForBundle = discounts.filter(
         (d) => d.bundleId === bundleId && d.type === "family" && d.line !== "all"
       );
@@ -247,19 +245,19 @@ export default function CheckoutPage() {
     }
   }, []);
 
-useEffect(() => {
-  if (typeof window === "undefined") return;
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-  const storedCoupon = localStorage.getItem("applied-coupon");
+    const storedCoupon = localStorage.getItem("applied-coupon");
 
-  if (storedCoupon) {
-    try {
-      setDiscountData(JSON.parse(storedCoupon));
-    } catch {
-      localStorage.removeItem("applied-coupon");
+    if (storedCoupon) {
+      try {
+        setDiscountData(JSON.parse(storedCoupon));
+      } catch {
+        localStorage.removeItem("applied-coupon");
+      }
     }
-  }
-}, []);
+  }, []);
 
   useEffect(() => {
     const checkLogin = () => {
@@ -276,14 +274,21 @@ useEffect(() => {
     };
   }, [showLoginPopup]);
 
-  const hasDeviceItem = cart.some((item) => item.type === "device");
+  // ─── Shipping needed when: any pSIM prepaid/travel, any pSIM postpaid/business, or device ───
+  const needsShipping = cart.some((item) => {
+    const lt = item.lineType?.toLowerCase();
+    const st = item.simType?.toLowerCase();
+    if (item.type === "device") return true;
+    if ((lt === "prepaid" || lt === "travel") && st === "psim") return true;
+    if ((lt === "postpaid" || lt === "business") && st === "psim") return true;
+    return false;
+  });
 
   const handleQuantity = (bundleId: string | null, index: number, delta: number) => {
     const updated = [...cart];
     let targetIndex = index;
 
     if (bundleId) {
-      // Find the actual index in the cart for bundled items
       targetIndex = cart.findIndex((item, idx) => 
         item.bundleId === bundleId && 
         idx === index
@@ -300,17 +305,14 @@ useEffect(() => {
 
   const handleRemove = (bundleId: string | null, index: number) => {
     if (bundleId) {
-      // Remove entire bundle
       const updated = cart.filter((item) => item.bundleId !== bundleId);
       syncCart(updated);
       
-      // Remove bundle discounts from family-discounts
       const updatedDiscounts = familyDiscounts.filter((d) => d.bundleId !== bundleId);
       localStorage.setItem("family-discounts", JSON.stringify(updatedDiscounts));
       setFamilyDiscounts(updatedDiscounts);
       groupFamilyBundles(updated, updatedDiscounts);
     } else {
-      // Remove individual item
       syncCart(cart.filter((_, i) => i !== index));
       groupFamilyBundles(cart.filter((_, i) => i !== index), familyDiscounts);
     }
@@ -327,413 +329,157 @@ useEffect(() => {
     setRegularItems([]);
   };
 
- const handleApplyCoupon_old = async () => {
-  if (!isLoggedIn) {
-    setLoginReason("You need to login to apply coupon code.");
-    setShowLoginPopup(true);
-    return;
-  }
-
-  if (!coupon) {
-    setCouponMessage("Please enter a coupon code");
-    return;
-  }
-
-  try {
-    setLoading(true);
-    setCouponMessage("");
-
-    const userData = JSON.parse(localStorage.getItem("user") || "{}");
-    const userEmail = userData?.email || "";
-
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const cartIds = cart.map((item: any) => item.planId).join(",");
-
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/preview-coupon/`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          code: coupon,
-          logged_user_email: userEmail,
-          cart_items_id: cartIds,
-        }),
-      }
-    );
-
-    const data = await res.json();
-
-    if (!res.ok || !data?.valid) {
-      throw new Error("Invalid or expired coupon");
+  const handleApplyCoupon = async () => {
+    if (!isLoggedIn) {
+      setLoginReason("You need to login to apply coupon code.");
+      setShowLoginPopup(true);
+      return;
     }
 
-// ✅ Store coupon data
-const couponData = {
-  code: coupon,
-  type: data.coupon.type,
-  discount: String(data.coupon.discount),
-  name: data.coupon.name,
-};
-setDiscountData(couponData);
-localStorage.setItem("applied-coupon", JSON.stringify(couponData));
-setCouponMessage("Coupon applied successfully!");
-setCoupon(couponData.code);
-  } catch (err: any) {
-    setDiscountData(null);
-    setCouponMessage(err.message || "Wrong coupon code");
-  } finally {
-    setLoading(false);
-  }
-};
-
-const handleApplyCouponnw = async () => {
-
-  if (!isLoggedIn) {
-    setLoginReason("You need to login to apply coupon code.");
-    setShowLoginPopup(true);
-    return;
-  }
-
-  if (!coupon.trim()) {
-    setCouponMessage("Please enter a coupon code");
-    return;
-  }
-
-  try {
-
-    setLoading(true);
-    setCouponMessage("");
-
-    // ✅ Call new API (only code required)
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/preview-coupon/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({
-          code: coupon,
-        }),
-      }
-    );
-
-    const data = await res.json();
-
-    if (!res.ok || !data.valid) {
-      throw new Error("Invalid or expired coupon");
+    if (!coupon.trim()) {
+      setCouponMessage("Please enter a coupon code");
+      return;
     }
 
-    const couponInfo = data.coupon;
+    try {
+      setLoading(true);
+      setCouponMessage("");
 
-
-    // ✅ Get user id
-    const userData = JSON.parse(localStorage.getItem("user") || "{}");
-    const userId = Number(userData?.id);
-
-
-    // ✅ Check user restriction
-    if (
-      couponInfo.has_user_restriction &&
-      !couponInfo.allowed_user_ids.includes(userId)
-    ) {
-
-      throw new Error("This coupon is not valid for your account");
-
-    }
-
-
-
-    // ✅ Get cart planIds ONLY
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-
-    const cartPlanIds = cart
-      .map((item: any) => Number(item.planId))
-      .filter((id: number) => !!id);
-
-
-
-    // ✅ Check plan restriction
-    if (couponInfo.has_plan_restriction) {
-
-      const matched = cartPlanIds.filter((planId: number) =>
-        couponInfo.allowed_plan_ids.includes(planId)
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/preview-coupon/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+          body: JSON.stringify({
+            code: coupon,
+          }),
+        }
       );
 
-      if (matched.length === 0) {
+      const data = await res.json();
 
-        throw new Error(
-          "Coupon not valid for selected plan"
+      if (!res.ok || !data?.valid) {
+        throw new Error("Invalid or expired coupon");
+      }
+
+      const couponInfo = data.coupon;
+
+      const allowedUserIds = Array.isArray(couponInfo?.allowed_user_ids)
+        ? couponInfo.allowed_user_ids.map(Number)
+        : [];
+
+      const userData = JSON.parse(localStorage.getItem("user") || "{}");
+      const userId = Number(userData?.id || 0);
+
+      if (
+        couponInfo?.has_user_restriction &&
+        allowedUserIds.length > 0 &&
+        !allowedUserIds.includes(userId)
+      ) {
+        throw new Error("This coupon is not valid for your account");
+      }
+
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const cartPlanIds = cart
+        .map((item: any) => Number(item?.planId || 0))
+        .filter((id: number) => id > 0);
+
+      const allowedPlanIds = Array.isArray(couponInfo?.allowed_plan_ids)
+        ? couponInfo.allowed_plan_ids.map(Number)
+        : [];
+
+      if (couponInfo?.has_plan_restriction) {
+        if (allowedPlanIds.length === 0) {
+          throw new Error("Coupon not valid for selected plan");
+        }
+
+        const matchedPlans = cartPlanIds.filter((planId: number) =>
+          allowedPlanIds.includes(planId)
         );
 
+        if (matchedPlans.length === 0) {
+          throw new Error("Coupon not valid for selected plan");
+        }
       }
 
+      const couponData = {
+        code: couponInfo.code,
+        type: couponInfo.type,
+        discount: String(couponInfo.discount),
+        name: couponInfo.name,
+        allowed_plan_ids: allowedPlanIds,
+      };
+
+      setDiscountData(couponData);
+      localStorage.setItem("applied-coupon", JSON.stringify(couponData));
+      setCouponMessage("Coupon applied successfully!");
+      setCoupon(couponInfo.code);
+    } catch (err: any) {
+      setDiscountData(null);
+      localStorage.removeItem("applied-coupon");
+      setCouponMessage(err?.message || "Wrong coupon code");
+    } finally {
+      setLoading(false);
     }
+  };
 
-
-
-    // ✅ Save coupon
-    const couponData = {
-
-      code: couponInfo.code,
-      type: couponInfo.type,
-      discount: String(couponInfo.discount),
-      name: couponInfo.name,
-
-    };
-
-
-
-    setDiscountData(couponData);
-
-    localStorage.setItem(
-      "applied-coupon",
-      JSON.stringify(couponData)
-    );
-
-
-    setCouponMessage("Coupon applied successfully!");
-
-    setCoupon(couponInfo.code);
-
-
-  }
-  catch (err: any) {
-
+  const handleCancelCoupon = () => {
+    setCoupon("");
     setDiscountData(null);
-
     localStorage.removeItem("applied-coupon");
+    setCouponMessage("Coupon cancelled.");
+  };
 
-    setCouponMessage(
-      err.message || "Wrong coupon code"
-    );
-
-  }
-  finally {
-
-    setLoading(false);
-
-  }
-
-};
-
-const handleApplyCoupon = async () => {
-
-  if (!isLoggedIn) {
-    setLoginReason("You need to login to apply coupon code.");
-    setShowLoginPopup(true);
-    return;
-  }
-
-  if (!coupon.trim()) {
-    setCouponMessage("Please enter a coupon code");
-    return;
-  }
-
-  try {
-
-    setLoading(true);
-    setCouponMessage("");
-
-    // ✅ Call API
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/preview-coupon/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({
-          code: coupon,
-        }),
-      }
-    );
-
-    const data = await res.json();
-
-    if (!res.ok || !data?.valid) {
-      throw new Error("Invalid or expired coupon");
-    }
-
-    const couponInfo = data.coupon;
-
-
-
-    // ✅ SAFE allowed_user_ids
-    const allowedUserIds = Array.isArray(couponInfo?.allowed_user_ids)
-      ? couponInfo.allowed_user_ids.map(Number)
-      : [];
-
-
-
-    // ✅ Get user id
-    const userData = JSON.parse(localStorage.getItem("user") || "{}");
-
-    const userId = Number(userData?.id || 0);
-
-
-
-    // ✅ Check user restriction safely
-    if (
-      couponInfo?.has_user_restriction &&
-      allowedUserIds.length > 0 &&
-      !allowedUserIds.includes(userId)
-    ) {
-
-      throw new Error("This coupon is not valid for your account");
-
-    }
-
-
-
-    // ✅ Get cart plan ids safely
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-
-    const cartPlanIds = cart
-      .map((item: any) => Number(item?.planId || 0))
-      .filter((id: number) => id > 0);
-
-
-
-    // ✅ SAFE allowed_plan_ids
-    const allowedPlanIds = Array.isArray(couponInfo?.allowed_plan_ids)
-      ? couponInfo.allowed_plan_ids.map(Number)
-      : [];
-
-
-
-    // ✅ Check plan restriction safely
-    if (couponInfo?.has_plan_restriction) {
-
-      if (allowedPlanIds.length === 0) {
-
-        throw new Error("Coupon not valid for selected plan");
-
-      }
-
-      const matchedPlans = cartPlanIds.filter((planId: number) =>
-        allowedPlanIds.includes(planId)
-      );
-
-      if (matchedPlans.length === 0) {
-
-        throw new Error("Coupon not valid for selected plan");
-
-      }
-
-    }
-
-
-
-    // ✅ Save coupon with allowed_plan_ids (IMPORTANT)
-    const couponData = {
-
-      code: couponInfo.code,
-
-      type: couponInfo.type,
-
-      discount: String(couponInfo.discount),
-
-      name: couponInfo.name,
-
-      allowed_plan_ids: allowedPlanIds,
-
-    };
-
-
-
-    setDiscountData(couponData);
-
-
-
-    localStorage.setItem(
-      "applied-coupon",
-      JSON.stringify(couponData)
-    );
-
-
-
-    setCouponMessage("Coupon applied successfully!");
-
-
-
-    setCoupon(couponInfo.code);
-
-
-  }
-  catch (err: any) {
-
-    setDiscountData(null);
-
-    localStorage.removeItem("applied-coupon");
-
-    setCouponMessage(
-      err?.message || "Wrong coupon code"
-    );
-
-  }
-  finally {
-
-    setLoading(false);
-
-  }
-
-};
-
- const handleCancelCoupon = () => {
-  setCoupon("");
-  setDiscountData(null);
-  localStorage.removeItem("applied-coupon");
-  setCouponMessage("Coupon cancelled.");
-};
-
-  // Calculate subtotal
+  // ─── Subtotal ───
   const subtotal = cart.reduce((acc, item) => {
     const price = Number(item.planPrice ?? item.formData?.price ?? 0);
     const qty = Number(item.formData?.priceQty ?? 1);
     return acc + price * qty;
   }, 0);
 
-   // Calculate activation fees (13.99 per prepaid line)
+  // ─── Activation Fees: prepaid OR travel lines (both eSIM and pSIM) ───
   const ACTIVATION_FEE_PER_LINE = 13.99;
+
   const totalActivationFees = cart.reduce((acc, item) => {
-    if (item.lineType?.toLowerCase() === 'prepaid') {
-      const qty = Number(item.formData?.priceQty ?? 1);
-      return acc + (ACTIVATION_FEE_PER_LINE * qty);
+    const lt = item.lineType?.toLowerCase();
+    if (lt === "prepaid" || lt === "travel") {
+      return acc + ACTIVATION_FEE_PER_LINE * Number(item.formData?.priceQty ?? 1);
     }
     return acc;
   }, 0);
 
-   // Count prepaid lines for display
+  // ─── Count prepaid/travel lines for display ───
   const prepaidLineCount = cart.reduce((acc, item) => {
-    if (item.lineType?.toLowerCase() === 'prepaid') {
+    const lt = item.lineType?.toLowerCase();
+    if (lt === "prepaid" || lt === "travel") {
       return acc + Number(item.formData?.priceQty ?? 1);
     }
     return acc;
   }, 0);
 
-  // Calculate total family bundle discounts
+  // ─── Family bundle discounts ───
   const totalFamilyBundleDiscount = groupedBundles.reduce((acc, bundle) => {
     return acc + bundle.bundleDiscount;
   }, 0);
 
-  // Manual coupon discount
+  // ─── Manual coupon discount ───
   const discountAmount = discountData
     ? discountData.type === "percentage"
       ? (subtotal * Number(discountData.discount)) / 100
       : Number(discountData.discount)
     : 0;
 
+  // ─── Shipping fee: only when needsShipping ───
   useEffect(() => {
-    if (hasDeviceItem && selectedShippingOption) {
+    if (needsShipping && selectedShippingOption) {
       setShippingFee(selectedShippingOption.value);
     } else {
       setShippingFee(0);
     }
-  }, [selectedShippingOption, hasDeviceItem]);
+  }, [selectedShippingOption, needsShipping]);
 
   const total = Math.max(subtotal + totalActivationFees + shippingFee - discountAmount - totalFamilyBundleDiscount, 0);
 
@@ -867,34 +613,31 @@ const handleApplyCoupon = async () => {
     },
   };
 
+  useEffect(() => {
+    if (cart.length === 0) return;
 
+    const createIntent = async () => {
+      const res = await fetch("/api/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cart,
+          billingAddress,
+          shippingAddress: showShipping ? shippingAddress : billingAddress,
+          subtotal,
+          totalActivationFees,
+          shippingFee,
+          discountAmount,
+          total,
+        }),
+      });
 
-useEffect(() => {
-  if (cart.length === 0) return;
+      const data = await res.json();
+      setClientSecret(data.clientSecret);
+    };
 
-  const createIntent = async () => {
-    const res = await fetch("/api/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        cart,
-        billingAddress,
-        shippingAddress: showShipping ? shippingAddress : billingAddress,
-        subtotal,
-        totalActivationFees,
-        shippingFee,
-        discountAmount,
-        total,
-      }),
-    });
-
-    const data = await res.json();
-    setClientSecret(data.clientSecret);
-  };
-
-  createIntent();
-}, [cart, billingAddress, shippingAddress, subtotal, totalActivationFees, shippingFee, discountAmount, total]);
-
+    createIntent();
+  }, [cart, billingAddress, shippingAddress, subtotal, totalActivationFees, shippingFee, discountAmount, total]);
 
   
   return (
@@ -951,12 +694,6 @@ useEffect(() => {
                 </button>
               </div>
               
-              {/* <pre style={{ whiteSpace: "pre-wrap" }}>
-          {JSON.stringify(cart, null, 2)}
-        </pre>
-        <pre style={{ whiteSpace: "pre-wrap" }}>
-          {JSON.stringify(cart, null, 2)}
-        </pre> */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 space-y-6">
                   {/* Family Bundle Groups */}
@@ -988,10 +725,7 @@ useEffect(() => {
                       {/* Bundle Items */}
                       <div className="p-4 space-y-3">
                         {bundle.items.map((item, itemIdx) => {
-                          // First item is the primary line (line: all) - no discount
                           const isPrimaryLine = itemIdx === 0;
-                          
-                          // For secondary lines, find their discount (line1, line2, etc.)
                           const lineDiscount = !isPrimaryLine 
                             ? bundle.familyDiscounts.find((d) => d.line === `line${itemIdx}`)
                             : null;
@@ -1013,8 +747,7 @@ useEffect(() => {
                                   </div>
                                   <h6 className="font-bold text-gray-900 dark:text-white">{item.planTitle}</h6>
                                   <p className="text-sm text-gray-600 dark:text-gray-300">
-                                    {/* {item.lineType} | {item.simType === 'pSim' ? 'pSIM' : 'eSIM'} */}
-                                     Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType === 'pSIM' ? 'pSIM' : 'eSIM'}
+                                    Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType === 'pSIM' ? 'pSIM' : 'eSIM'}
                                   </p>
                                 </div>
                               </div>
@@ -1033,11 +766,11 @@ useEffect(() => {
                                   >
                                     <Minus className="w-4 h-4" />
                                   </button>
-                                  <span className="font-semibold min-w-[20px] text-center disabled:cursor-not-allowed">
+                                  <span className="font-semibold min-w-[20px] text-center">
                                     {item.formData?.priceQty ?? 1}
                                   </span>
                                   <button
-                                    className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-00 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-500 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
                                     onClick={() => handleQuantity(bundle.bundleId, cart.indexOf(item), 1)}
                                     disabled
                                   >
@@ -1071,7 +804,7 @@ useEffect(() => {
                         <div>
                           <h5 className="text-lg font-bold text-[#FD4C0E]">{item.planTitle}</h5>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
-                            Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType === 'pSim' ? 'pSIM' : 'eSIM'}
+                            Line Type: {item.lineType || "N/A"} | SIM Type: {item.simType?.toLowerCase() === 'psim' ? 'pSIM' : 'eSIM'}
                           </p>
                         </div>
                         <button
@@ -1111,41 +844,39 @@ useEffect(() => {
                   <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                     <h5 className="font-bold mb-4 text-gray-900 dark:text-white">Have a Coupon?</h5>
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-  {!discountData ? (
-    <>
-      <input
-        type="text"
-        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
-        placeholder="Enter coupon code"
-        value={coupon}
-        onChange={(e) => setCoupon(e.target.value)}
-        disabled={loading}
-      />
-
-      <button
-        className="w-full sm:w-auto bg-[#FD4C0E] hover:bg-red-700 text-white px-6 py-2 rounded-lg transition disabled:opacity-50"
-        onClick={handleApplyCoupon}
-        disabled={loading}
-      >
-        Apply
-      </button>
-    </>
-  ) : (
-    <div className="flex items-center justify-between w-full bg-green-50 dark:bg-green-900/20 px-4 py-2 rounded-lg border border-green-300 dark:border-green-700">
-      <span className="text-green-700 dark:text-green-400 font-semibold text-sm">
-        Coupon "{discountData.name || coupon}" Applied
-      </span>
-
-      <button
-        onClick={handleCancelCoupon}
-        className="text-red-500 hover:text-red-700 transition"
-        title="Remove Coupon"
-      >
-        <X className="w-5 h-5" />
-      </button>
-    </div>
-  )}
-</div>
+                      {!discountData ? (
+                        <>
+                          <input
+                            type="text"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FD4C0E]"
+                            placeholder="Enter coupon code"
+                            value={coupon}
+                            onChange={(e) => setCoupon(e.target.value)}
+                            disabled={loading}
+                          />
+                          <button
+                            className="w-full sm:w-auto bg-[#FD4C0E] hover:bg-red-700 text-white px-6 py-2 rounded-lg transition disabled:opacity-50"
+                            onClick={handleApplyCoupon}
+                            disabled={loading}
+                          >
+                            Apply
+                          </button>
+                        </>
+                      ) : (
+                        <div className="flex items-center justify-between w-full bg-green-50 dark:bg-green-900/20 px-4 py-2 rounded-lg border border-green-300 dark:border-green-700">
+                          <span className="text-green-700 dark:text-green-400 font-semibold text-sm">
+                            Coupon "{discountData.name || coupon}" Applied
+                          </span>
+                          <button
+                            onClick={handleCancelCoupon}
+                            className="text-red-500 hover:text-red-700 transition"
+                            title="Remove Coupon"
+                          >
+                            <X className="w-5 h-5" />
+                          </button>
+                        </div>
+                      )}
+                    </div>
                     {couponMessage && (
                       <p className={`mt-2 text-sm ${discountData ? "text-green-600" : "text-[#FD4C0E]"}`}>
                         {couponMessage}
@@ -1177,7 +908,6 @@ useEffect(() => {
                                 onChange={(e) => setBillingAddress({ ...billingAddress, state: e.target.value })}
                                 disabled={loading}
                               >
-                                {/* <option value="">Select state</option> */}
                                 {usStates.map((s) => (
                                   <option key={s.code} value={s.code}>{s.name}</option>
                                 ))}
@@ -1275,7 +1005,6 @@ useEffect(() => {
                           <h6 className="font-bold text-sm text-[#FD4C0E]">Family Bundle {bundleIdx + 1}</h6>
                         </div>
                         
-                        {/* Bundle Items */}
                         <div className="space-y-2 ml-6">
                           {bundle.items.map((item, itemIdx) => {
                             const isPrimaryLine = itemIdx === 0;
@@ -1315,7 +1044,6 @@ useEffect(() => {
                           })}
                         </div>
                         
-                        {/* Bundle Discount */}
                         {bundle.bundleDiscount > 0 && (
                           <div className="mt-3 pt-3 border-t border-green-200 dark:border-green-700">
                             <div className="flex justify-between text-sm font-semibold text-green-600 dark:text-green-400">
@@ -1336,7 +1064,7 @@ useEffect(() => {
                         {regularItems.map((item, idx) => (
                           <div key={idx} className="flex justify-between text-sm text-gray-700 dark:text-gray-300">
                             <span className="flex-1">
-                              {item.planTitle} ({item.simType === 'pSim' ? 'pSIM' : 'eSIM'}) × {item.formData?.priceQty || 1}
+                              {item.planTitle} ({item.simType?.toLowerCase() === 'psim' ? 'pSIM' : 'eSIM'}) × {item.formData?.priceQty || 1}
                             </span>
                             <span className="font-semibold">
                               ${(item.planPrice * (item.formData?.priceQty || 1)).toFixed(2)}
@@ -1353,6 +1081,7 @@ useEffect(() => {
                         <span className="font-semibold text-gray-900 dark:text-white">${subtotal.toFixed(2)}</span>
                       </div>
                     </div>
+
                     {/* Coupon Discount */}
                     {discountData && (
                       <div className="flex justify-between text-sm text-green-600 dark:text-green-400 mb-2">
@@ -1364,7 +1093,8 @@ useEffect(() => {
                         <span className="font-semibold">-${discountAmount.toFixed(2)}</span>
                       </div>
                     )}
-                  {/* Activation Fees */}
+
+                    {/* Activation Fees */}
                     {totalActivationFees > 0 && (
                       <div className="mb-4 rounded-lg bg-orange-50 p-3 dark:bg-orange-900/20">
                         <div className="flex items-center justify-between text-sm">
@@ -1373,7 +1103,7 @@ useEffect(() => {
                               Activation Fees
                             </span>
                             <p className="text-xs text-orange-600 dark:text-orange-400">
-                              {prepaidLineCount} prepaid line{prepaidLineCount > 1 ? 's' : ''} × ${ACTIVATION_FEE_PER_LINE.toFixed(2)}
+                              {prepaidLineCount} prepaid/travel line{prepaidLineCount > 1 ? 's' : ''} × ${ACTIVATION_FEE_PER_LINE.toFixed(2)}
                             </p>
                           </div>
                           <span className="font-bold text-orange-800 dark:text-orange-300">
@@ -1382,7 +1112,6 @@ useEffect(() => {
                         </div>
                       </div>
                     )}
-
 
                     {/* Total Family Bundle Discount Summary */}
                     {totalFamilyBundleDiscount > 0 && (
@@ -1397,8 +1126,8 @@ useEffect(() => {
                       </div>
                     )}
 
-                    {/* Shipping */}
-                    {hasDeviceItem && (
+                    {/* Shipping — shown when needsShipping */}
+                    {needsShipping && (
                       <div className="border-t border-b border-gray-200 dark:border-gray-700 py-4 my-4">
                         <label className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">Shipping Options</label>
                         <select
@@ -1419,8 +1148,6 @@ useEffect(() => {
                         </div>
                       </div>
                     )}
-
-                    
 
                     {/* Total */}
                     <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
