@@ -41,7 +41,7 @@ const pageMeta: Record<string, Metadata> = {
       "Shop GoLite Mobile postpaid mobile plans for unlimited data, high-speed 5G, hotspot access, and international calls included—plans for every lifestyle.",
   },
 
-  "/family-plans": {
+  "/shop-family-multi-line-plans": {
     title: "Eco-Friendly Family Phone Plans | GoLite Mobile",
     description:
       "Save on eco-friendly GoLite Mobile family phone plans with shared data, unlimited talk & text, flexible lines, and budget-friendly pricing for families.",

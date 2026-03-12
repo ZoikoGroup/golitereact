@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import AllPlans from "./AllPlans";
 
 export const metadata: Metadata = {
-  title: "Best Value Mobile Plans & Pricing | GoLite Mobile",
+  title: "GoLite Mobile SIM Activation | Fast Mobile Connectivity",
   description:
-    "Looking for the best value mobile plans? GoLite Mobile offers affordable, flexible plans with fast nationwide coverage. Compare all plans and save now.",
+    "Activate your GoLite Mobile SIM card easily online. Enjoy seamless mobile service and start using your number without delays with our step-by-step guide.",
 };
 
 export default function Page() {
