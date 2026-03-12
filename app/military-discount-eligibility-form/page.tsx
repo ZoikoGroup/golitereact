@@ -147,7 +147,7 @@ export default function MilitaryDiscountEligibilityForm() {
     <>
       <Header />
 
-      <section className="bg-white py-16">
+      <section className="bg-white dark:bg-gray-800 py-16">
 
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-start">
 
@@ -180,7 +180,7 @@ export default function MilitaryDiscountEligibilityForm() {
             </h2>
 
 
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 dark:text-gray-400 mb-8">
 
               Verify your military status to receive exclusive discounts on your mobile plan.
 
