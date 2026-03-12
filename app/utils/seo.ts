@@ -25,7 +25,7 @@ const metaData: Record<string, Metadata> = {
       "Shop GoLite Mobile postpaid plans with unlimited data, hotspot access, and international calling.",
   },
 
-  "family-plans": {
+  "shop-family-multi-line-plans": {
     title: "Eco-Friendly Family Phone Plans | GoLite Mobile",
     description:
       "Save with GoLite Mobile family plans offering shared data and unlimited talk & text.",
