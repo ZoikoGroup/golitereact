@@ -397,14 +397,20 @@ export default function Navbar() {
                     setSearchOpen(false);
 
                     if (item.type === "plan") {
+                      let slug = item.category_slug;
 
-                      router.push(`/plans/${item.category_slug}/${item.slug}`);
+                      if (slug === "family-plans") {
+                        slug = "shop-family-multi-line-plans";
+                      } else if (slug === "business-plans") {
+                        slug = "business";
+                      }
 
+                      router.push(`/${slug}`);
                     }
 
                     if (item.type === "blog") {
 
-                      router.push(`/blog/${item.slug}`);
+                      router.push(`/blogs/${item.slug}`);
 
                     }
 
