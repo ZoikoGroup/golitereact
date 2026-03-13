@@ -357,87 +357,75 @@ export default function Navbar() {
 
       {/* SEARCH BOX */}
 
-      {searchOpen && (
+{searchOpen && (
+  <div className="absolute left-0 top-20 w-full flex justify-center z-50">
+    
+    <div className="w-[500px] bg-white shadow-2xl rounded-xl border p-4">
 
-        <div className="border-t p-4">
+      {/* INPUT */}
+      <input
+        value={searchKey}
+        onChange={(e) => {
+          setSearchKey(e.target.value);
+          handleSearch(e.target.value);
+        }}
+        placeholder="Search plans, blogs..."
+        className="w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
 
-          <div className="max-w-3xl mx-auto">
+      {/* RESULTS */}
+      <div className="mt-3 max-h-72 overflow-y-auto">
 
-            <input
-              value={searchKey}
-              onChange={(e) => {
+        {searchLoading && (
+          <p className="text-sm text-gray-500 p-2">Searching...</p>
+        )}
 
-                setSearchKey(e.target.value);
-                handleSearch(e.target.value);
+        {!searchLoading && searchResults.length === 0 && searchKey && (
+          <p className="text-sm text-gray-500 p-2">No results found</p>
+        )}
 
-              }}
-              placeholder="Search plans, blog..."
-              className="w-full border px-4 py-2 rounded"
-            />
+        {searchResults.map((item, index) => (
+          <div
+            key={index}
+            onClick={() => {
+              setSearchOpen(false);
 
+              if (item.type === "plan") {
+                let slug = item.category_slug;
 
+                if (slug === "family-plans") {
+                  slug = "shop-family-multi-line-plans";
+                } else if (slug === "business-plans") {
+                  slug = "business";
+                }
 
-            <div className="mt-2">
+                router.push(`/${slug}`);
+              }
 
+              if (item.type === "blog") {
+                router.push(`/blogs/${item.slug}`);
+              }
+            }}
+            className="flex justify-between items-center px-3 py-2 rounded hover:bg-gray-100 cursor-pointer"
+          >
+            <span className="text-sm">{item.title}</span>
 
-              {searchLoading && (
-
-                <p>Searching...</p>
-
-              )}
-
-
-
-              {searchResults.map((item, index) => (
-
-                <div
-                  key={index}
-                  onClick={() => {
-
-                    setSearchOpen(false);
-
-                    if (item.type === "plan") {
-                      let slug = item.category_slug;
-
-                      if (slug === "family-plans") {
-                        slug = "shop-family-multi-line-plans";
-                      } else if (slug === "business-plans") {
-                        slug = "business";
-                      }
-
-                      router.push(`/${slug}`);
-                    }
-
-                    if (item.type === "blog") {
-
-                      router.push(`/blogs/${item.slug}`);
-
-                    }
-
-                  }}
-                  className="p-2 border-b cursor-pointer hover:bg-gray-100"
-                >
-
-                  <p>{item.title}</p>
-
-                  <p className="text-xs text-gray-500">
-
-                    {item.type}
-
-                  </p>
-
-                </div>
-
-              ))}
-
-
-            </div>
-
+            <span
+              className={`text-xs px-2 py-1 rounded-full ${
+                item.type === "plan"
+                  ? "bg-blue-100 text-blue-600"
+                  : "bg-green-100 text-green-600"
+              }`}
+            >
+              {item.type}
+            </span>
           </div>
+        ))}
+      </div>
+    </div>
 
-        </div>
-
-      )}
+  </div>
+)}
 
 
 
