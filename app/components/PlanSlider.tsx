@@ -6,88 +6,47 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { checkDeviceCompatibility } from "../utils/vcareapi";
-import SuccessModalForBuy from "../components/SuccessModalForBuy";
-
 import BuyNowModal from "../components/BuyNowModal";
 import PrepaidBuyNowModal from "../components/PrepaidBuyNowModal";
 
-/* Custom Dots Style */
 const customStyles = `
 .slick-dots li button:before {
-  font-size: 10px;
-  color: #d1d1d1;
-  opacity: 1;
+  font-size: 10px; color: #d1d1d1; opacity: 1;
 }
-.slick-dots li.slick-active button:before {
-  color: #ff6600 !important;
-}
-.slick-dots li.slick-active .dots {
-  background: #fd4c0e;
-  width: 1.3vw;
-}
+.slick-dots li.slick-active button:before { color: #ff6600 !important; }
+.slick-dots li.slick-active .dots { background: #fd4c0e; width: 1.3vw; }
 `;
 
 export default function PricingPlans() {
-  const router = useRouter();
+  const router    = useRouter();
   const sliderRef = useRef<any>(null);
 
-  /* UI States */
   const [activeCategory, setActiveCategory] = useState("prepaid");
-  const [activeSimType, setActiveSimType] = useState("pSim");
-  const [slidesToShow, setSlidesToShow] = useState(3);
-
-  /* Data States */
-  const [plans, setPlans] = useState<any[]>([]);
-  const [plansLoading, setPlansLoading] = useState(true);
+  const [slidesToShow,   setSlidesToShow]   = useState(3);
+  const [plans,          setPlans]          = useState<any[]>([]);
+  const [plansLoading,   setPlansLoading]   = useState(true);
 
   const [showPostpaidModal, setShowPostpaidModal] = useState(false);
-  const [showPrepaidModal, setShowPrepaidModal] = useState(false);
-
-  /* Modal States */
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<"success" | "error">("success");
-  const [modalMessage, setModalMessage] = useState("");
-
-  const [selectedPlan, setSelectedPlan] = useState<any>(null);
-
-  /* ✅ CATEGORY → ROUTE MAP */
-  const categoryRouteMap: Record<string, string> = {
-    prepaid: "/prepaid",
-    postpaid: "/postpaid",
-    travel: "/travel-plans",
-    business: "/business",
-  };
+  const [showPrepaidModal,  setShowPrepaidModal]  = useState(false);
+  const [selectedPlan,      setSelectedPlan]      = useState<any>(null);
 
   const getViewAllUrl = () => {
-  switch (activeCategory) {
-    case "prepaid":
-      return `/prepaid-plans`;
+    switch (activeCategory) {
+      case "prepaid":  return "/prepaid-plans";
+      case "postpaid": return "/postpaid-plans";
+      case "travel":   return "/travel-plans";
+      case "business": return "/business";
+      default:         return "/";
+    }
+  };
 
-    case "postpaid":
-      return `/postpaid-plans`;
-
-    case "travel":
-      return `/travel-plans`;
-
-    case "business":
-      return `/business`;
-
-    default:
-      return "/";
-  }
-};
-
-
-  /* Responsive Slider */
   useEffect(() => {
     const handleResize = () => {
-      const width = window.innerWidth;
-      if (width <= 640) setSlidesToShow(1);
-      else if (width <= 1024) setSlidesToShow(2);
+      const w = window.innerWidth;
+      if (w <= 640) setSlidesToShow(1);
+      else if (w <= 1024) setSlidesToShow(2);
       else setSlidesToShow(3);
     };
-
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -95,92 +54,48 @@ export default function PricingPlans() {
 
   const handleBuyPlan = (plan: any) => {
     setSelectedPlan(plan);
-
-    if (activeCategory === "postpaid") {
-      setShowPostpaidModal(true);
-      return;
-    }
-
-    if (activeCategory === "prepaid") {
-      setShowPrepaidModal(true);
-      return;
-    }
-
-    // travel / business → direct checkout
-    const item = {
-      planId: plan.id,
-      vcPlanID: plan.vcPlanID || null,
-      planSlug: plan.slug || "",
-      planTitle: plan.title,
-      planPrice: Number(plan.final_price),
-      planDuration: plan.duration_days || "",
-      simType: activeSimType,
-      imei: null,
-      lineType: activeCategory,
-      quantity: 1,
-    };
-
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]") || [];
-    localStorage.setItem("cart", JSON.stringify([...cart, item]));
-    router.push("/checkout");
+    if (activeCategory === "postpaid") { setShowPostpaidModal(true); return; }
+    if (activeCategory === "prepaid")  { setShowPrepaidModal(true);  return; }
+    // travel / business — use same multi-step modal
+    setShowPostpaidModal(true);
   };
 
-  /* Fetch Plans */
   useEffect(() => {
     const fetchPlans = async () => {
       try {
         setPlansLoading(true);
-
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/plans/v1/`,
-          { headers: { Accept: "application/json" } }
-        );
-
+        const res  = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/plans/v1/`, {
+          headers: { Accept: "application/json" },
+        });
         const data = await res.json();
-
-        const normalized = data.map((item: any) => ({
-          id: item.id,
-          slug: item.slug,
-          vcPlanID: item.vcPlanID,
-          title: item.name,
-          desc: item.short_description,
-          final_price: item.final_price,
+        setPlans(data.map((item: any) => ({
+          id:           item.id,
+          slug:         item.slug,
+          vcPlanID:     item.vcPlanID,
+          title:        item.name,
+          desc:         item.short_description,
+          final_price:  item.final_price,
+          price_24:     item.price_24,
           duration_days: item.duration_days || "",
-          category: item.category.slug
-            .replace("-plans", "")
-            .replace("-", ""),
-          simType: item.sim_type === "esim" ? "eSim" : "pSim",
-          tag: item.is_popular ? "Most Popular" : null,
-          features: item.features.map((f: any) => f.title),
-        }));
-
-        setPlans(normalized);
+          category:     item.category.slug.replace("-plans", "").replace("-", ""),
+          tag:          item.is_popular ? "Most Popular" : null,
+          features:     item.features.map((f: any) => f.title),
+        })));
       } catch (err) {
         console.error("Failed to fetch plans", err);
       } finally {
         setPlansLoading(false);
       }
     };
-
     fetchPlans();
   }, []);
 
-  /* Filter Plans */
-  const filteredPlans = plans.filter(
-    (p) => p.category === activeCategory
-  );
+  const filteredPlans = plans.filter((p) => p.category === activeCategory);
 
-  /* Slider Settings */
   const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow,
-    slidesToScroll: 1,
-    arrows: false,
-    customPaging: () => (
-      <div className="h-2 w-2 bg-gray-300 rounded-full mx-1 mt-2 dots"></div>
-    ),
+    dots: true, infinite: true, speed: 500,
+    slidesToShow, slidesToScroll: 1, arrows: false,
+    customPaging: () => <div className="h-2 w-2 bg-gray-300 rounded-full mx-1 mt-2 dots" />,
     dotsClass: "slick-dots flex justify-center",
   };
 
@@ -213,31 +128,11 @@ export default function PricingPlans() {
           </div>
         </div>
 
-        {/* SIM Type Tabs */}
-        <div className="flex justify-center">
-          <div className="inline-flex p-1">
-            {["pSim", "eSim"].map((sim) => (
-              <button
-                key={sim}
-                onClick={() => setActiveSimType(sim)}
-                className={`px-8 py-2 text-sm font-semibold transition-all ${
-                  activeSimType === sim
-                    ? "text-[#FD4C0E] underline"
-                    : "text-gray-600"
-                }`}
-              >
-                {sim  === "pSim" ? "pSIM" : "eSIM"}
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* eSIM/pSIM tabs removed — handled inside BuyNowModal */}
 
-        {/* Slider */}
         <div className="px-4 md:px-40 mt-10 relative">
           {plansLoading && (
-            <p className="text-center text-gray-500 py-10">
-              Loading plans...
-            </p>
+            <p className="text-center text-gray-500 py-10">Loading plans...</p>
           )}
 
           {!plansLoading && filteredPlans.length > 0 && (
@@ -248,7 +143,6 @@ export default function PricingPlans() {
               >
                 <ChevronLeft className="w-6 h-6 text-[#FD4C0E]" />
               </button>
-
               <button
                 onClick={() => sliderRef.current?.slickNext()}
                 className="absolute right-0 top-1/2 -translate-y-1/2 z-10 dark:bg-gray-900 bg-white rounded-full p-3 shadow-lg"
@@ -267,17 +161,9 @@ export default function PricingPlans() {
                           </span>
                         </div>
                       )}
-
-                      <h3 className="text-xl font-semibold text-center mt-8">
-                        {plan.title}
-                      </h3>
-
-                      <p className="text-3xl font-bold mb-1 text-center">
-                        ${plan.final_price}/mo
-                      </p>
-                      <p className="text-gray-500 mb-4 text-center text-sm">
-                        (taxes and fees included)
-                      </p>
+                      <h3 className="text-xl font-semibold text-center mt-8">{plan.title}</h3>
+                      <p className="text-3xl font-bold mb-1 text-center">${plan.final_price}/mo</p>
+                      <p className="text-gray-500 mb-4 text-center text-sm">(taxes and fees included)</p>
 
                       <button
                         onClick={() => handleBuyPlan(plan)}
@@ -286,18 +172,11 @@ export default function PricingPlans() {
                         Buy Plan
                       </button>
 
-                      <p className="dark:text-gray-400 text-gray-500 text-sm mt-6">
-                        {plan.desc}
-                      </p>
-
-                      <ul className="mt-4 space-y-2 text-sm text-gray-700">
+                      <p className="dark:text-gray-400 text-gray-500 text-sm mt-6">{plan.desc}</p>
+                      <ul className="mt-4 space-y-2 text-sm">
                         {plan.features.map((f: string, i: number) => (
-                          <li
-                            key={i}
-                            className="flex gap-2 dark:text-gray-300 text-gray-600"
-                          >
-                            <span className="text-green-600">✔</span>
-                            {f}
+                          <li key={i} className="flex gap-2 dark:text-gray-300 text-gray-600">
+                            <span className="text-green-600">✔</span> {f}
                           </li>
                         ))}
                       </ul>
@@ -308,10 +187,9 @@ export default function PricingPlans() {
             </>
           )}
 
-          {/* ✅ VIEW ALL BUTTON */}
           <div className="flex justify-center mt-6">
             <button
-             onClick={() => router.push(getViewAllUrl())}
+              onClick={() => router.push(getViewAllUrl())}
               className="bg-[#FD4C0E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#E63D00]"
             >
               View All
@@ -320,23 +198,20 @@ export default function PricingPlans() {
         </div>
       </div>
 
-      {/* POSTPAID MODAL */}
+      {/* BuyNowModal handles all steps internally (sim pick → compat/contract → checkout) */}
       {showPostpaidModal && selectedPlan && (
         <BuyNowModal
           open={showPostpaidModal}
           onClose={() => setShowPostpaidModal(false)}
           plan={selectedPlan}
-          simType={activeSimType as "eSim" | "pSim"}
         />
       )}
 
-      {/* PREPAID MODAL */}
       {showPrepaidModal && selectedPlan && (
         <PrepaidBuyNowModal
           open={showPrepaidModal}
           onClose={() => setShowPrepaidModal(false)}
           plan={selectedPlan}
-          simType={activeSimType}
         />
       )}
     </>

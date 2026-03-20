@@ -352,10 +352,10 @@ const faqs = [
     {/* END Banner Section */}
     
 {/* SIM Type Tabs */}
-      <div className=" dark:bg-gray-900 flex justify-center">
-  <div className="inline-flex bg-[#FD4C0E] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
+      {/* <div className=" dark:bg-gray-900 flex justify-center">
+  <div className="inline-flex bg-[#FD4C0E] rounded-full mt-6 p-1 w-[35rem] h-[4rem]"> */}
     
-    {["pSim", "eSim"].map((simType, idx) => (
+    {/* {["pSim", "eSim"].map((simType, idx) => (
       <button
         key={simType}
         onClick={() => setActiveSimType(simType)}
@@ -371,10 +371,10 @@ const faqs = [
       >
         {simType === "pSim" ? "pSIM" : "eSIM"}
       </button>
-    ))}
+    ))} */}
 
-  </div>
-</div>
+  {/* </div>
+</div> */}
 
       {/* Slider with Navigation */}
       <div className="px-4 md:px-40  relative dark:bg-gray-900 bg-gray-50 py-12">
