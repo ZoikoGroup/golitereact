@@ -9,7 +9,7 @@ interface BuyNowModalProps {
   open: boolean;
   onClose: () => void;
   plan: any;
-  simType:any;
+  simType?:any;
 }
 
 const PROTECTION_PRICES = { smartphone: 8.99, tablet: 8.99, smartwatch: 5.99 };
