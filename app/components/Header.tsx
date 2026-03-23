@@ -353,7 +353,71 @@ export default function Navbar() {
 
       </div>
 
+{/* Mobile Menu — Full Screen Overlay */}
+{menuOpen && (
+  <div className="md:hidden fixed inset-0 z-50 bg-white dark:bg-gray-900 flex flex-col">
 
+    {/* Header row with logo + close button */}
+    <div className="flex items-center justify-between px-6 py-4 border-b">
+      <a href="/" onClick={() => setMenuOpen(false)}>
+        <img src="/img/logo.png" className="h-10" />
+      </a>
+      <button onClick={() => setMenuOpen(false)}>
+        <X className="w-6 h-6" />
+      </button>
+    </div>
+
+    {/* Nav links */}
+    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+      <a href="/prepaid-plans" onClick={() => setMenuOpen(false)} className="block text-lg font-medium text-gray-800 dark:text-white border-b pb-4">
+        Prepaid Plans
+      </a>
+      <a href="/postpaid-plans" onClick={() => setMenuOpen(false)} className="block text-lg font-medium text-gray-800 dark:text-white border-b pb-4">
+        Postpaid Plans
+      </a>
+      <a href="/shop-family-multi-line-plans" onClick={() => setMenuOpen(false)} className="block text-lg font-medium text-gray-800 dark:text-white border-b pb-4">
+        Family Plans
+      </a>
+      <a href="/business" onClick={() => setMenuOpen(false)} className="block text-lg font-medium text-gray-800 dark:text-white border-b pb-4">
+        Business Plans
+      </a>
+      <a href="/special-plans" onClick={() => setMenuOpen(false)} className="block text-lg font-medium text-gray-800 dark:text-white border-b pb-4">
+        Community Plans
+      </a>
+      <a href="https://www.att.com/idpmaps/reseller" target="_blank" onClick={() => setMenuOpen(false)} className="block text-lg font-medium text-gray-800 dark:text-white border-b pb-4">
+        Coverage
+      </a>
+      <a href="/about-us" onClick={() => setMenuOpen(false)} className="block text-lg font-medium text-gray-800 dark:text-white border-b pb-4">
+        About
+      </a>
+
+      {isLoggedIn ? (
+        <>
+          <button
+            onClick={() => { router.push("/my-account"); setMenuOpen(false); }}
+            className="block w-full text-left text-lg font-medium text-gray-800 dark:text-white border-b pb-4"
+          >
+            My Account
+          </button>
+          <button
+            onClick={handleLogout}
+            className="block w-full text-left text-lg font-medium text-red-600 border-b pb-4"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <button
+          onClick={() => { router.push("/login"); setMenuOpen(false); }}
+          className="w-full bg-orange-500 text-white py-3 rounded-lg text-lg font-semibold"
+        >
+          Login
+        </button>
+      )}
+    </div>
+
+  </div>
+)}
 
       {/* SEARCH BOX */}
 
