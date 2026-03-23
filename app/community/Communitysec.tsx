@@ -121,7 +121,7 @@ const posts = [
 
 export default function Communitysec() {
   return (
-    <div>
+    <>
     <div className="w-full bg-gray-50 text-gray-800">
 
       {/* HERO */}
@@ -386,7 +386,7 @@ export default function Communitysec() {
 
 
 
-</div>
+</>
 
   );
 }
