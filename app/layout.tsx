@@ -20,6 +20,8 @@ export const metadata: Metadata = {
 
 import SessionProviderClient from "./providers/SessionProviderClient";
 import SessionSync from "./providers/SessionSync";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export default function RootLayout({
   children,
@@ -33,7 +35,16 @@ export default function RootLayout({
       >
         <SessionProviderClient>
           <SessionSync />
-          {children}
+
+          {/* ✅ HEADER */}
+          <Header />
+
+          {/* ✅ PAGE CONTENT */}
+          <main>{children}</main>
+
+          {/* ✅ FOOTER */}
+          <Footer />
+
         </SessionProviderClient>
 
         {/* Tawk.to Live Chat */}
@@ -51,7 +62,6 @@ export default function RootLayout({
             })();
           `}
         </Script>
-
       </body>
     </html>
   );
