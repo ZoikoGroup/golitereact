@@ -50,8 +50,8 @@ export default function SeniorCitizenDiscountEnrollment() {
 
     if (!dob) {
       newErrors.dob = "Date of Birth is required";
-    } else if (calculateAge(dob) < 65) {
-      newErrors.dob = "You must be 65 years or older to qualify";
+    } else if (calculateAge(dob) < 55) {
+      newErrors.dob = "You must be 55 years or older to qualify";
     }
 
     if (!idType) newErrors.id_type = "Select a government-issued ID";
@@ -117,7 +117,7 @@ export default function SeniorCitizenDiscountEnrollment() {
           </h1>
 
           <p className="text-gray-600 mb-8 dark:text-gray-300">
-            If you’re 65 or older, complete this form to verify your eligibility.
+            If you’re 55 or older, complete this form to verify your eligibility.
           </p>
 
           <form
@@ -155,7 +155,7 @@ export default function SeniorCitizenDiscountEnrollment() {
                     name="email"
                     type="email"
                     placeholder="Enter Your Email Address"
-                    className="dark:bg-gray-800 w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-orange-500"
+                    className="dark:bg-gray-800 w-full rounded-xl border px-4 py-3  focus:ring-2 focus:ring-orange-500"
                   />
                   {errors.email && (
                     <p className="text-red-500 text-sm mt-1">
