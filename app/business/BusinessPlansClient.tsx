@@ -11,7 +11,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react
 import BusinessBuyNowModal from "../components/BusinessBuyNowModal";
 import { BarChart3, FileText, Smartphone, Users, Lock } from "lucide-react";
 import TestimonialSlider from "../components/TestimonialSlider";
-
+import Link from "next/link";
 interface Feature {
   icon: React.ReactNode;
   title: string;
@@ -84,6 +84,14 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
     setOpenBuyModal(true);
   };
 
+  const plansRef = useRef<HTMLDivElement | null>(null);
+const scrollToPlans = () => {
+  plansRef.current?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+};
+
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const checkScreen = () => setIsMobile(window.innerWidth < 768);
@@ -152,12 +160,14 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
                 Streamline operations, boost productivity, and grow your business with our comprehensive mobile solutions.
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center md:items-start">
-                <button className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold transition shadow-md hover:shadow-lg">
+                <button className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold transition shadow-md hover:shadow-lg" onClick={scrollToPlans}>
                   Explore Business Plans
                 </button>
+                <Link href="/business-contact-sales">
                 <button className="w-full sm:w-auto bg-transparent border-2 border-green-500 text-green-500 hover:bg-green-50 px-8 py-3 rounded-lg font-semibold transition">
                   Contact Sales
                 </button>
+                </Link>
               </div>
             </div>
             <div className="w-full md:w-auto flex justify-center">
@@ -201,7 +211,7 @@ export default function PostpaidPlansHero({ plans }: { plans: Plan[] }) {
 
       {/* Plans heading — eSIM/pSIM tabs removed */}
       <div className="w-full dark:bg-gray-900 bg-gray-50 py-8">
-        <h1 className="text-center text-[28px] md:text-[2.5rem] font-bold text-[#1d1d1f] dark:text-white">
+        <h1 ref={plansRef} className="text-center text-[28px] md:text-[2.5rem] font-bold text-[#1d1d1f] dark:text-white">
           Shop Postpaid Business Plans
         </h1>
         <p className="text-center text-gray-500 dark:text-gray-400 mt-2 text-sm">
