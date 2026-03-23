@@ -121,7 +121,7 @@ const posts = [
 
 export default function Communitysec() {
   return (
-    <>
+    <div>
     <div className="w-full bg-gray-50 text-gray-800">
 
       {/* HERO */}
@@ -184,7 +184,7 @@ export default function Communitysec() {
       {/* CATEGORIES */}
       <section className="py-12 px-4 max-w-6xl mx-auto">
         <h2 className="text-3xl font-semibold text-center mb-6">
-          What Can We Help You With?
+             What Can We Help You With?
         </h2>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -386,7 +386,7 @@ export default function Communitysec() {
 
 
 
-</>
+</div>
 
   );
 }
