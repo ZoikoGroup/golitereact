@@ -83,7 +83,7 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 <li><Link href="/career" className="block">Careers</Link></li>
                 <li>Press Kit</li>
-                <li>Partners</li>
+                <li><Link href="/partner" className="block">partner</Link></li>
                 <li><Link href="/sustainability" className="block">Sustainability</Link></li>
                  <li><Link href="/community" className="block">Community</Link></li>
                 <li><Link href="/contact-us" className="block">Contact Us</Link></li>
