@@ -96,7 +96,7 @@ export default function Footer() {
                 <li><Link href="/privacy-policy" className="block">Privacy Policy</Link></li>
                 <li><Link href="/terms-conditions" className="block">Terms of Service</Link></li>
                 <li><Link href="/cookies-policy" className="block">Cookie Policy</Link></li>
-                <li>Compliance</li>
+                     <li><Link href="/compliance" className="block">Compliance</Link></li>
                 <li> <Link href="/Accessibility" className="block">Accessibility</Link> </li>
               </ul>
             </div>
