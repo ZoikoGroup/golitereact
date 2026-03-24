@@ -58,7 +58,7 @@ export default function Home() {
   ];
   return (
     <>
-    <Header />
+
     <HomeBanner />
     <section className="w-full bg-gray-50 dark:bg-gray-900 py-16">
       <div className="container mx-auto px-6 md:px-12">
@@ -319,7 +319,7 @@ export default function Home() {
         </div>
       </div>
     </section>
-    <Footer/>
+
     </>
   );
 }

@@ -85,6 +85,7 @@ export default function Footer() {
                 <li>Press Kit</li>
                 <li>Partners</li>
                 <li><Link href="/sustainability" className="block">Sustainability</Link></li>
+                 <li><Link href="/community" className="block">Community</Link></li>
                 <li><Link href="/contact-us" className="block">Contact Us</Link></li>
               </ul>
             </div>
