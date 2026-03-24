@@ -83,7 +83,7 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 <li><Link href="/career" className="block">Careers</Link></li>
                 <li>Press Kit</li>
-                <li><Link href="/partner" className="block">partner</Link></li>
+                <li><Link href="/partners">partners</Link></li>
                 <li><Link href="/sustainability" className="block">Sustainability</Link></li>
                  <li><Link href="/community" className="block">Community</Link></li>
                 <li><Link href="/contact-us" className="block">Contact Us</Link></li>
@@ -97,7 +97,7 @@ export default function Footer() {
                 <li><Link href="/terms-conditions" className="block">Terms of Service</Link></li>
                 <li><Link href="/cookies-policy" className="block">Cookie Policy</Link></li>
                 <li>Compliance</li>
-                <li>Accessibility</li>
+                <li> <Link href="/Accessibility" className="block">Accessibility</Link> </li>
               </ul>
             </div>
           </div>
