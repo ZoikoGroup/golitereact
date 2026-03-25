@@ -1,12 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
-import Header from "./components/Header";
+
 import HomeBanner from "./components/HomeBanner";
 import PlanSlider from "./components/PlanSlider";
 import TestimonialSlider from "./components/TestimonialSlider";
 import BlogSection from "./components/BlogSection";
 import FaqHome from "./components/FaqHome";
-import Footer from "./components/Footer";
+
 
 export default function Home() {
   const router = useRouter();
@@ -58,7 +58,7 @@ export default function Home() {
   ];
   return (
     <>
-
+ 
     <HomeBanner />
     <section className="w-full bg-gray-50 dark:bg-gray-900 py-16">
       <div className="container mx-auto px-6 md:px-12">
@@ -319,7 +319,7 @@ export default function Home() {
         </div>
       </div>
     </section>
-
+ 
     </>
   );
 }
