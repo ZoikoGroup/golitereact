@@ -3,8 +3,10 @@
 import { useState } from "react";
 
 export default function PartnerLegalFramework() {
-  const [openAccordion, setOpenAccordion] = useState(null);
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+
   const [openDoc, setOpenDoc] = useState(null);
+  
 
   // ─── ONBOARDING STEPS ───────────────────────────────────────
   const onboardingSteps = [
@@ -394,7 +396,7 @@ export default function PartnerLegalFramework() {
               className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm"
             >
               <button
-                onClick={() => setOpenAccordion(openAccordion === i ? null : i)}
+               onClick={() => setOpenAccordion(openAccordion === i ? null : i)} 
                 className="w-full flex items-center justify-between px-5 py-4 text-left"
               >
                 <div>

@@ -477,7 +477,7 @@ export default function PressKit() {
                     <span
                       key={ti}
                       className={`text-xs px-2 py-0.5 rounded font-semibold ${
-                        tagColorMap[tag] || "bg-gray-100 text-gray-600"
+                  tagColorMap[tag as keyof typeof tagColorMap] ?? "bg-gray-100 text-gray-600"
                       }`}
                     >
                       {tag}
