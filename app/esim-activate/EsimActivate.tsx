@@ -241,7 +241,7 @@ const activateSim = async () => {
 };
   return (
     <>
-      <Header />
+      
 
       {!showDeviceCheck && (
         <div className="min-h-screen flex items-center justify-center px-4">
@@ -493,7 +493,7 @@ const activateSim = async () => {
 
          
         )}
-      <Footer />
+   
     </>
   );
 }

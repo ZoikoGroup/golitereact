@@ -110,7 +110,7 @@ export default function ContactUs() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+  
       <main className="flex-grow">
         <section className="max-w-4xl mx-auto py-12 px-6 text-center">
           <h1 className="text-5xl font-extrabold text-gray-900 mb-6 dark:text-white">
@@ -211,7 +211,7 @@ export default function ContactUs() {
           </div>
         </div>
       </main>
-      <Footer />
+    
     </div>
   );
 }

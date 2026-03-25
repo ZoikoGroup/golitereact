@@ -28,7 +28,7 @@ export default function MyAccountPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+        {/* extra header removed */}
 
       <main className="flex-grow p-8">
 
@@ -52,7 +52,7 @@ export default function MyAccountPage() {
 
       </main>
 
-      <Footer />
+  {/* extra footer removed */}
     </div>
   );
 }

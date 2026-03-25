@@ -1,3 +1,4 @@
+
 import React from "react";
 import Image from "next/image";
 
@@ -122,6 +123,7 @@ const posts = [
 export default function Communitysec() {
   return (
     <>
+    <header/>
     <div className="w-full bg-gray-50 text-gray-800">
 
       {/* HERO */}

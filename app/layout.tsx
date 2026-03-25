@@ -37,13 +37,14 @@ export default function RootLayout({
           <SessionSync />
 
           {/* ✅ HEADER */}
-          <Header />
-
+            <Header />
+        
           {/* ✅ PAGE CONTENT */}
           <main>{children}</main>
 
           {/* ✅ FOOTER */}
-          <Footer />
+      {/* extra footer removed */}
+         <Footer />
 
         </SessionProviderClient>
 

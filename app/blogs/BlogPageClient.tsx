@@ -29,7 +29,7 @@ const BlogPageClient: React.FC<BlogPageClientProps> = ({ initialBlogs }) => {
 
   return (
     <>
-      <Header />
+      
       {/* HERO SECTION */}
             <section className="w-full bg-[#f05] h-80 mb-12 align-items-center justify-center flex flex-col position-relative">
               <h1 className="text-white text-4xl font-bold text-center">
@@ -127,7 +127,7 @@ const BlogPageClient: React.FC<BlogPageClientProps> = ({ initialBlogs }) => {
               </section>
             </div>
 
-            <Footer />
+            
     </>
   );
 };

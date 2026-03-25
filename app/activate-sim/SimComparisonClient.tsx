@@ -15,8 +15,7 @@ export default function SimComparisonClient() {
 
   return (
     <>
-      <Header />
-
+   
       <div className="min-h-screen 
 bg-gradient-to-br from-orange-50 to-red-50 
 dark:bg-gradient-to-br dark:from-gray-900 dark:to-[#1f0a02]
@@ -71,7 +70,6 @@ flex items-center justify-center p-8">
       </div>
     </div>
 
-      <Footer />
     </>
   );
 }

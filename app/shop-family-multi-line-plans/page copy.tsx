@@ -248,7 +248,7 @@ const faqs = [
   return (
     <>
     
-      <Header />
+        {/* extra header removed */}
 
 
       {/* Banner Section */}
@@ -457,7 +457,7 @@ const faqs = [
 
 
 
-      <Footer />
+  {/* extra footer removed */}
     </>
   );
 }

@@ -522,7 +522,7 @@ export default function CheckoutPage() {
 
   return (
     <>
-      <Header />
+    
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="bg-[#FD4C0E] text-white py-3">
           <div className="container mx-auto px-4 text-center">
@@ -919,7 +919,7 @@ export default function CheckoutPage() {
           )}
         </div>
       </div>
-      <Footer />
+      
 
       {/* Login popup */}
       {showLoginPopup && (

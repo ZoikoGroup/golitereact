@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 export default function App() {
   return (
     <div className="bg-[#fff7f3] min-h-screen">
-        <Header/>
+        
             <section className="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
          
                 {/* text appearing to the left side of the image */}
@@ -107,7 +107,7 @@ export default function App() {
             </section>
         </div>
         <Openings/>
-        <Footer/>
+       
     </div>
     
   );
