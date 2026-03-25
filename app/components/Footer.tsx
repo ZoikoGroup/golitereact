@@ -74,7 +74,7 @@ export default function Footer() {
                 <li><Link href="/activate-sim" className="block">Activate SIM</Link></li>
                 <li><Link href="/help-and-support" className="block">Help Center</Link></li>
                 <li>Community Forum</li>
-                <li>Network Status</li>
+                <li><Link href="/network-status" className="block">Network Status</Link></li>
               </ul>
             </div>
 
@@ -82,8 +82,8 @@ export default function Footer() {
               <h3 className="font-semibold text-white mb-4">Company</h3>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/career" className="block">Careers</Link></li>
-                <li>Press Kit</li>
-                <li><Link href="/partners">partners</Link></li>
+             <li><Link href="/press-kit" className="block">Press kit</Link></li>
+                <li><Link href="/partners">Partners</Link></li>
                 <li><Link href="/sustainability" className="block">Sustainability</Link></li>
                  <li><Link href="/community" className="block">Community</Link></li>
                 <li><Link href="/contact-us" className="block">Contact Us</Link></li>

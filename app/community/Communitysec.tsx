@@ -123,15 +123,14 @@ const posts = [
 export default function Communitysec() {
   return (
     <>
-    <header/>
-    <div className="w-full bg-gray-50 text-gray-800">
+    <div className="w-full dark:bg-gray-950 dark:text-white bg-gray-50 text-gray-800">
 
       {/* HERO */}
-      <section className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-16 px-4 text-center">
+      <section className="bg-gradient-to-r from-indigo-500 to-purple-500 dark:text-white text-white py-16 px-4 text-center">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">
           Connect, Learn and Solve Together
         </h1>
-        <p className="text-sm md:text-base mb-6 opacity-90">
+        <p className="text-sm md:text-base mb-6 opacity-90  ">
           Get answers from the GoLite Mobile community, verified experts, and
           official support resources — all in one place.
         </p>
@@ -149,16 +148,16 @@ export default function Communitysec() {
       </section>
 
       {/* FEATURE BAR */}
-      <div className="bg-gray-100 py-6 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="bg-gray-100 py-6 px-4 dark:bg-gray-950 dark:text-white">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 ">
           {features.map((item, i) => (
             <div key={i} className="flex items-center gap-3">
               <div className="bg-orange-500 p-2 rounded-lg">
                 <Image src={item.icon} alt="" width={40} height={40} />
               </div>
               <div>
-                <p className="text-sm font-semibold">{item.title}</p>
-                <p className="text-xs text-gray-500">{item.desc}</p>
+                <p className="text-sm font-semibold dark:bg-gray-950 dark:text-white  ">{item.title}</p>
+                <p className="text-xs text-gray-500 dark:bg-gray-950 dark:text-white">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -167,33 +166,33 @@ export default function Communitysec() {
 
       {/* STATS */}
       <div className="py-10 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 dark:border-amber-100">
           {stats.map((stat, i) => (
             <div
               key={i}
-              className="bg-white rounded-xl shadow p-6 text-center"
+              className="bg-white rounded-xl shadow p-6 text-center dark:bg-gray-950 dark:text-white dark:border-amber-100"
             >
               <div className="flex justify-center mb-2">
                 <Image src={stat.icon} alt="" width={24} height={24} />
               </div>
-              <p className="text-xl font-bold">{stat.value}</p>
-              <p className="text-sm text-gray-500">{stat.label}</p>
+              <p className="text-xl font-bold ">{stat.value}</p>
+              <p className="text-sm text-gray-500  dark:bg-gray-950 dark:text-white dark:border-amber-100">{stat.label}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* CATEGORIES */}
-      <section className="py-12 px-4 max-w-6xl mx-auto">
+      <section className="py-12 px-4 max-w-6xl mx-auto  dark:bg-gray-950 dark:text-white  dark:border-amber-800-20 dark:border-2 border-blue-400">
         <h2 className="text-3xl font-semibold text-center mb-6">
              What Can We Help You With?
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 ">
           {categories.map((cat, i) => (
             <div
               key={i}
-              className="bg-white p-4 rounded-xl shadow hover:shadow-md transition"
+              className="bg-white p-4 rounded-xl shadow hover:shadow-md transition  dark:bg-gray-950 dark:text-white"
             >
               <div className="mb-3">
                 <Image src={cat.icon} alt="" width={38} height={38} />
@@ -205,28 +204,28 @@ export default function Communitysec() {
       </section>
 
       {/* WHAT'S HAPPENING */}
-<section className="py-12 px-4 bg-gray-50">
+<section className="py-12 px-4 bg-gray-50 dark:bg-gray-950 dark:text-white ">
   <div className="max-w-6xl mx-auto text-center">
     
     <h2 className="text-2xl md:text-3xl font-semibold mb-2">
       What’s Happening in the Community
     </h2>
-    <p className="text-gray-500 text-sm mb-6">
+    <p className="text-gray-500 text-sm mb-6 dark:bg-gray-950 dark:text-white ">
       Official updates, trending discussions, and expert-verified answers.
     </p>
 
     {/* TABS */}
     <div className="flex flex-wrap justify-center gap-3 mb-8">
-      <button className="px-4 py-1.5 rounded-full bg-orange-500 text-white text-sm">
+      <button className="px-4 py-1.5 rounded-full bg-orange-500  dark:text-white  text-white text-sm">
         Official Updates
       </button>
-      <button className="px-4 py-1.5 rounded-full bg-gray-200 text-sm">
+      <button className="px-4 py-1.5 rounded-full  dark:bg-orange-500  dark:text-white  bg-gray-200 text-sm">
         Trending
       </button>
-      <button className="px-4 py-1.5 rounded-full bg-gray-200 text-sm">
+      <button className="px-4 py-1.5 rounded-full dark:bg-orange-500  dark:text-white  bg-gray-200 text-sm">
         Recently Solved
       </button>
-      <button className="px-4 py-1.5 rounded-full bg-gray-200 text-sm">
+      <button className="px-4 py-1.5 rounded-full dark:bg-orange-500  dark:text-white  bg-gray-200 text-sm">
         Popular Guides
       </button>
     </div>
@@ -235,19 +234,19 @@ export default function Communitysec() {
     <div className="grid md:grid-cols-3 gap-6 text-left">
       
       {/* Card 1 */}
-      <div className="border border-orange-400 rounded-xl p-5 bg-white">
+      <div className="border border-orange-400 rounded-xl p-5 bg-white dark:bg-gray-950 dark:text-white">
         <h3 className="font-semibold mb-2">
           5G Network Expansion — New Cities Added This Month
         </h3>
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm text-gray-600 mb-4 dark:bg-gray-950 dark:text-white">
           We’ve expanded 5G coverage to 14 new cities across India, including Pune,
           Ahmedabad, and Jaipur.
         </p>
         <div className="flex items-center gap-3">
-          <div className="w-6 h-6 bg-orange-500 rounded-full" />
+          <div className="w-6 h-6 bg-orange-500 rounded-full dark:bg-gray-950 dark:text-white" />
           <div>
             <p className="text-sm font-medium">GoLite Team</p>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-500 dark:bg-gray-950 dark:text-white">
               Official Announcement · 2 days ago
             </p>
           </div>
@@ -255,7 +254,7 @@ export default function Communitysec() {
       </div>
 
       {/* Card 2 */}
-      <div className="border border-orange-400 rounded-xl p-5 bg-white">
+      <div className="border border-orange-400 rounded-xl p-5 bg-white dark:bg-gray-950 dark:text-white   ">
         <h3 className="font-semibold mb-2">
           Scheduled Maintenance Notice — March 22, 2:00–4:00 AM IST
         </h3>
@@ -275,7 +274,7 @@ export default function Communitysec() {
       </div>
 
       {/* Card 3 */}
-      <div className="border border-orange-400 rounded-xl p-5 bg-white">
+      <div className="border border-orange-400 rounded-xl p-5 dark:bg-gray-950 dark:text-white bg-white">
         <h3 className="font-semibold mb-2">
           Go Unlimited Plan Now Includes Free Roaming
         </h3>
@@ -298,7 +297,7 @@ export default function Communitysec() {
 </section>
 
       {/* COMMUNITY POSTS */}
-      <section className="bg-gray-100 py-12 px-4">
+      <section className="bg-gray-100 py-12 px-4 dark:bg-gray-950 dark:text-white">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-xl font-semibold text-center mb-6">
             Join the Conversation
@@ -308,7 +307,7 @@ export default function Communitysec() {
             {posts.map((post, i) => (
               <div
                 key={i}
-                className="bg-white p-4 rounded-xl shadow flex justify-between items-start"
+                className=" dark:bg-gray-950 dark:text-white bg-white p-4 rounded-xl shadow flex justify-between items-start"
               >
                 <div>
                   <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
@@ -319,7 +318,7 @@ export default function Communitysec() {
                     {post.author}
                   </p>
                 </div>
-                <button className="text-sm text-indigo-500">View</button>
+                <button className="text-sm text-indigo-500 ">View</button>
               </div>
             ))}
           </div>
@@ -327,7 +326,7 @@ export default function Communitysec() {
       </section>
 
       {/* RESOURCES */}
-      <section className="py-12 px-4 max-w-6xl mx-auto">
+      <section className="py-12 px-4 max-w-6xl mx-auto dark:bg-gray-950 dark:text-white">
         <h2 className="text-xl font-semibold text-center mb-6">
           Helpful Resources Before You Post
         </h2>
@@ -341,7 +340,7 @@ export default function Communitysec() {
             "Billing FAQs",
             "Switch to GoLife",
           ].map((item, i) => (
-            <div key={i} className="bg-white p-4 rounded-xl shadow">
+            <div key={i} className= " dark:bg-gray-950 dark:text-white bg-white p-4 rounded-xl shadow">
               <p className="text-sm">{item}</p>
             </div>
           ))}
@@ -349,10 +348,10 @@ export default function Communitysec() {
       </section>
 
       {/* GREEN SECTION */}
-      <section className="bg-green-100 py-12 px-4">
+      <section className="bg-green-100 py-12 px-4 ">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-center">
           <div>
-            <h2 className="text-xl font-bold text-green-800 mb-3">
+            <h2 className="text-xl font-bold  text-green-800 mb-3">
               A Community Built Around a Greener Future
             </h2>
             <ul className="text-sm space-y-2 text-green-900">
@@ -362,7 +361,7 @@ export default function Communitysec() {
               <li>✔ Quarterly sustainability challenges</li>
             </ul>
 
-            <button className="mt-4 bg-green-600 text-white px-4 py-2 rounded-full">
+            <button className="mt-4  bg-green-600 text-white px-4 py-2 rounded-full">
               Explore Sustainability
             </button>
           </div>
@@ -374,7 +373,7 @@ export default function Communitysec() {
                 className="bg-white p-4 rounded-xl text-center shadow"
               >
                 <p className="text-lg font-bold text-green-700">{stat}</p>
-                <p className="text-xs text-gray-500">Impact</p>
+                <p className="text-xs  text-gray-500">Impact</p>
               </div>
             ))}
           </div>
