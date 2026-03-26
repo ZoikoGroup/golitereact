@@ -94,7 +94,7 @@ const BlogPage: React.FC = () => {
 
   return (
     <>
-      <Header />
+        {/* extra header removed */}
 
       {/* HERO SECTION */}
       <section className="w-full bg-[#f05] h-80 mb-12 align-items-center justify-center flex flex-col position-relative">
@@ -193,7 +193,7 @@ const BlogPage: React.FC = () => {
         </section>
       </div>
 
-      <Footer />
+  {/* extra footer removed */}
     </>
   );
 };

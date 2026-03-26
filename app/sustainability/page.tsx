@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Sustainability() {
   return (
     <>
-      <Header />
+        {/* extra header removed */}
       <main className="max-w-4xl mx-auto py-12 px-6">
         <h1 className="text-5xl font-extrabold text-gray-900 mb-6 dark:text-white">Sustainability</h1>
         
@@ -98,7 +98,7 @@ export default function Sustainability() {
           </p>
         </section>
       </main>
-      <Footer />
+  {/* extra footer removed */}
     </>
   );
 }

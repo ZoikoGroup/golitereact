@@ -42,7 +42,7 @@ export default async function BlogPostPage({ params }: Props) {
 
     return (
       <>
-        <Header />
+        
 
         <div className="container mx-auto py-12 px-4">
           <div className="max-w-3xl mx-auto">
@@ -81,7 +81,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </div>
 
-        <Footer />
+    {/* extra footer removed */}
       </>
     );
   } catch {

@@ -86,7 +86,7 @@ export default function StreamingPlans() {
   const rightColumn = faqs.slice(mid);
   return (
     <>
-    <Header />
+      {/* extra header removed */}
     <div className="w-full dark:bg-gray-900">
       {/* Hero Banner */}
       <section className="max-w-7xl mx-auto px-4 pt-10">

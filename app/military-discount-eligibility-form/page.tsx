@@ -145,7 +145,7 @@ export default function MilitaryDiscountEligibilityForm() {
   return (
 
     <>
-      <Header />
+        {/* extra header removed */}
 
       <section className="bg-white dark:bg-gray-800 py-16">
 
@@ -476,7 +476,7 @@ export default function MilitaryDiscountEligibilityForm() {
       </section>
 
 
-      <Footer />
+  {/* extra footer removed */}
 
 
     </>

@@ -329,7 +329,7 @@ const appearance: Appearance = {
 
   return (
     <>
-      <Header />
+        {/* extra header removed */}
 
      <div className="min-h-screen bg-gray-50 ">
 
@@ -696,7 +696,7 @@ const appearance: Appearance = {
         )}
         </div>
 
-      <Footer />
+  {/* extra footer removed */}
 
    {/* Login Required Popup */}
 {showLoginPopup && (

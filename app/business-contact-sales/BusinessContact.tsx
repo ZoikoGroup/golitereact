@@ -102,7 +102,7 @@ export default function ContactUs() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+  
       <main className="flex-grow">
 
         {/* Full-page section with light green background */}
@@ -278,7 +278,7 @@ export default function ContactUs() {
         </section>
 
       </main>
-      <Footer />
+    
     </div>
   );
 }

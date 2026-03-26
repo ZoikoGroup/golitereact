@@ -225,7 +225,7 @@ const specialPlans = [
 
   return (
     <>
-      <Header />
+        {/* extra header removed */}
       <style>{customStyles}</style>
 
       <div className="min-h-screen dark:bg-gray-900 bg-gray-50 py-12 px-4">
@@ -425,7 +425,7 @@ const specialPlans = [
                   </div>
                 </div>
 
-      <Footer />
+  {/* extra footer removed */}
     </>
   );
 }

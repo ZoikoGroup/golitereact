@@ -12,7 +12,7 @@ export default function SimComparison() {
     };
   return (
     <>
-    <Header />
+      {/* extra header removed */}
     <div className="min-h-screen 
 bg-gradient-to-br from-orange-50 to-red-50 
 dark:bg-gradient-to-br dark:from-gray-900 dark:to-[#1f0a02]

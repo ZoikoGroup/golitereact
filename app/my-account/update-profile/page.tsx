@@ -119,7 +119,7 @@ export default function UpdateProfilePage() {
   return (
 
     <>
-      <Header />
+        {/* extra header removed */}
 
 
       <div className="min-h-screen bg-gray-100 py-12">
@@ -221,7 +221,7 @@ export default function UpdateProfilePage() {
       </div>
 
 
-      <Footer />
+  {/* extra footer removed */}
 
     </>
 

@@ -137,7 +137,7 @@ const user: LocalUser | null =
   return (
     <div className="page-wrap">
 
-      <Header />
+        {/* extra header removed */}
 
       <main className="content-wrap">
 
@@ -297,7 +297,7 @@ const user: LocalUser | null =
 
       </main>
 
-      <Footer />
+  {/* extra footer removed */}
 
 {/* ================= STYLES ================= */}
 

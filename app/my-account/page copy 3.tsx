@@ -58,7 +58,7 @@ export default function MyAccountPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Header />
+        {/* extra header removed */}
 
       <main className="flex-grow py-10">
 
@@ -385,7 +385,7 @@ export default function MyAccountPage() {
         </div>
       </main>
 
-      <Footer />
+  {/* extra footer removed */}
 
 {/* ================================================= */}
 {/* STYLES */}

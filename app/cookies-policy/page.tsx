@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function CookiesPolicy() {
   return (
     <>
-      <Header />
+      
       <main className="max-w-4xl mx-auto py-12 px-6">
         <h1 className="text-5xl font-extrabold text-gray-900 mb-6 dark:text-white">Cookies Policy</h1>
         
@@ -179,7 +179,7 @@ export default function CookiesPolicy() {
           By continuing to use our website, you agree to the use of cookies as described in this policy.
         </p>
       </main>
-      <Footer />
+   
     </>
   );
 }

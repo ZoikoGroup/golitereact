@@ -156,7 +156,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
   animation: scaleIn 0.2s ease-out;
 }
 `}</style>
-      <Header />
+      
 
       <div className="w-full dark:bg-gray-900 bg-white">
         {/* ================= HERO ================= */}
@@ -374,7 +374,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
 />
 
 
-      <Footer />
+     
     </>
   );
 }

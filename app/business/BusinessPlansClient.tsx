@@ -146,7 +146,7 @@ const scrollToPlans = () => {
 
   return (
     <>
-      <Header />
+   
 
       {/* Banner */}
       <section className="relative dark:bg-gradient-to-br dark:from-[#0F172A] dark:to-[#1E293B] bg-gradient-to-br from-green-50 via-green-100/80 to-green-200 py-10 px-6 overflow-hidden">
@@ -307,7 +307,7 @@ const scrollToPlans = () => {
         plan={selectedPlan}
       />
 
-      <Footer />
+     
     </>
   );
 }

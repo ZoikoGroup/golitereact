@@ -73,7 +73,7 @@ const missions = [
 export default function AboutUs() {
   return (
     <>
-        <Header />
+   
     <div className="min-h-screen 
 bg-gradient-to-b 
 from-[#FF6B35] via-[#FF6B35] via-[30%] to-white
@@ -239,7 +239,7 @@ flex items-center justify-center p-8">
         </div>
       </div>
     </div>
-    <Footer />
+
     </>
   );
 }

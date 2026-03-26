@@ -209,7 +209,7 @@ const tabs = [
 
   return (
     <>
-    <Header />
+      {/* extra header removed */}
     <div className="h-[20rem] flex items-center justify-center p-8" style={{
       background: 'linear-gradient(to right, #43CAC4, #34136D)'
     }}>
