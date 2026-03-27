@@ -166,7 +166,7 @@ export default function PrepaidBuyNowModal({ open, onClose, plan }: any) {
       `}</style>
 
       <div className="pbnm-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
-        <div className="pbnm-card dark:bg-gray-900">
+        <div className="pbnm-card dark:bg-gray-950">
 
           {/* Header */}
           <div className="px-6 pt-5 pb-4 border-b border-gray-100">

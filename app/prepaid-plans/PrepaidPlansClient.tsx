@@ -322,7 +322,7 @@ const faqs = [
     <>
       {/* extra header removed */}
     {/* Banner Section */}
-    <div className="dark:bg-gray-900 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-950 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white text-center mb-12">
@@ -357,7 +357,7 @@ const faqs = [
     {/* END Banner Section */}
     
 {/* SIM Type Tabs */}
-      {/* <div className="flex justify-center dark:bg-gray-900 bg-gray-50 ">
+      {/* <div className="flex justify-center dark:bg-gray-950 bg-gray-50 ">
   <div className="inline-flex bg-[#FD4C0E] rounded-full mt-6 p-1 w-[35rem] h-[4rem]">
     
     {["pSim", "eSim"].map((simType, idx) => (
@@ -382,7 +382,7 @@ const faqs = [
 </div> */}
 
       {/* Slider with Navigation */}
-      <div className="px-4 md:px-40  relative dark:bg-gray-900 bg-gray-50 py-12">
+      <div className="px-4 md:px-40  relative dark:bg-gray-950 bg-gray-50 py-12">
         {/* Custom Arrow Buttons */}
         <button
           onClick={() => sliderRef.current?.slickPrev()}
@@ -465,7 +465,7 @@ const faqs = [
         </Slider>
         </div>
 
-        <div className="dark:bg-gray-900 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="dark:bg-gray-950 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <h1 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold dark:text-white text-gray-900 text-center mb-12 px-4">
@@ -500,7 +500,7 @@ const faqs = [
     </div>
 
 
-<section className="w-full py-16 dark:bg-gray-900 bg-white">
+<section className="w-full py-16 dark:bg-gray-950 bg-white">
       {/* Heading */}
       <div className="text-center mb-4">
         <h2 className="text-3xl font-bold dark:text-white text-gray-900">
@@ -539,7 +539,7 @@ const faqs = [
         ))}
       </div>
     </section>
- <div className="dark:bg-gray-900 bg-gray-50 py-10">
+ <div className="dark:bg-gray-950 bg-gray-50 py-10">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
         {/* Left Column */}
         <div className="flex-1 flex flex-col gap-4">

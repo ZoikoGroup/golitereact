@@ -303,7 +303,7 @@ export default function PartnerLegalFramework() {
   ];
 
   return (
-    <div className="bg-white  dark:bg-gray-900 dark:text-white text-gray-900 font-sans">
+    <div className="bg-white  dark:bg-gray-950 dark:text-white text-gray-900 font-sans">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-16 px-4 text-center">
@@ -317,36 +317,36 @@ export default function PartnerLegalFramework() {
       </section>
 
       {/* ── PARTNER ONBOARDING JOURNEY ───────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 py-14 dark:bg-gray-900 dark:text-white">
-        <div className="text-center mb-10 dark:bg-gray-900 dark:text-white">
-          <h2 className="text-2xl font-bold dark:bg-gray-900 dark:text-white">Partner Onboarding Journey</h2>
-          <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
+      <section className="max-w-6xl mx-auto px-4 py-14 dark:bg-gray-950 dark:text-white">
+        <div className="text-center mb-10 dark:bg-gray-950 dark:text-white">
+          <h2 className="text-2xl font-bold dark:bg-gray-950 dark:text-white">Partner Onboarding Journey</h2>
+          <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-500 mt-1">
             A defined, end-to-end process for partners to follow, taking steps to go ahead at each stage.
           </p>
         </div>
 
-        <div className="relative flex flex-col md:flex-row gap-4 items-start justify-between dark:bg-gray-900 dark:text-white">
+        <div className="relative flex flex-col md:flex-row gap-4 items-start justify-between dark:bg-gray-950 dark:text-white">
           {/* Connector line */}
-          <div className="hidden md:block absolute top-5 left-[10%] right-[10%] h-0.5 dark:bg-gray-900 dark:text-white bg-gray-200 z-0" />
+          <div className="hidden md:block absolute top-5 left-[10%] right-[10%] h-0.5 dark:bg-gray-950 dark:text-white bg-gray-200 z-0" />
 
           {onboardingSteps.map((step, i) => (
-            <div key={i} className="relative z-10 flex flex-col items-center text-center flex-1 px-2 dark:bg-gray-900 dark:text-white">
-              <div className={`w-10 h-10 rounded-full ${step.color} dark:bg-gray-900 dark:text-white text-white font-bold text-sm flex items-center justify-center mb-3 shadow-md`}>
+            <div key={i} className="relative z-10 flex flex-col items-center text-center flex-1 px-2 dark:bg-gray-950 dark:text-white">
+              <div className={`w-10 h-10 rounded-full ${step.color} dark:bg-gray-950 dark:text-white text-white font-bold text-sm flex items-center justify-center mb-3 shadow-md`}>
                 {step.num}
               </div>
-              <h4 className="text-xs font-bold mb-1 dark:bg-gray-900 dark:text-white">{step.title}</h4>
-              <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 leading-relaxed">{step.desc}</p>
+              <h4 className="text-xs font-bold mb-1 dark:bg-gray-950 dark:text-white">{step.title}</h4>
+              <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 leading-relaxed">{step.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── DOCUMENT SUITE ───────────────────────────────────── */}
-      <section className="bg-gray-50 py-14 px-4 dark:bg-gray-900 dark:text-white">
+      <section className="bg-gray-50 py-14 px-4 dark:bg-gray-950 dark:text-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold">Partner Legal Framework Full Document Suite</h2>
-            <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
+            <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-500 mt-1">
               Eight individually-downloadable documents covering every dimension of the partner relationship.
             </p>
           </div>
@@ -355,7 +355,7 @@ export default function PartnerLegalFramework() {
             {documents.map((doc, i) => (
               <div
                 key={i}
-                className={`dark:bg-gray-900 dark:text-white bg-white rounded-xl border p-5 shadow-sm flex flex-col ${
+                className={`dark:bg-gray-950 dark:text-white bg-white rounded-xl border p-5 shadow-sm flex flex-col ${
                   doc.highlight ? "border-green-400 ring-1 ring-green-300" : "border-gray-200"
                 }`}
               >
@@ -365,10 +365,10 @@ export default function PartnerLegalFramework() {
                   </span>
                 </div>
                 <h3 className="font-bold text-sm mb-1">{doc.title}</h3>
-                <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 mb-3 leading-relaxed">{doc.desc}</p>
+                <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 mb-3 leading-relaxed">{doc.desc}</p>
                 <ul className="mt-auto space-y-1">
                   {doc.points.map((pt, pi) => (
-                    <li key={pi} className="flex items-start gap-1.5 text-xs dark:bg-gray-900 dark:text-white text-gray-600">
+                    <li key={pi} className="flex items-start gap-1.5 text-xs dark:bg-gray-950 dark:text-white text-gray-600">
                       <span className="text-green-500 mt-0.5 flex-shrink-0">✓</span>
                       {pt}
                     </li>
@@ -384,7 +384,7 @@ export default function PartnerLegalFramework() {
       <section className="max-w-6xl mx-auto px-4 py-14">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold">Critical Legal Provisions</h2>
-          <p className="text-sm  dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
+          <p className="text-sm  dark:bg-gray-950 dark:text-white text-gray-500 mt-1">
             Special attention is called to the five conditions, obligations, and provisions points within the framework.
           </p>
         </div>
@@ -393,7 +393,7 @@ export default function PartnerLegalFramework() {
           {legalProvisions.map((item, i) => (
             <div
               key={i}
-              className="border border-gray-200 rounded-xl overflow-hidden dark:bg-gray-900 dark:text-white bg-white shadow-sm"
+              className="border border-gray-200 rounded-xl overflow-hidden dark:bg-gray-950 dark:text-white bg-white shadow-sm"
             >
               <button
                onClick={() => setOpenAccordion(openAccordion === i ? null : i)} 
@@ -401,14 +401,14 @@ export default function PartnerLegalFramework() {
               >
                 <div>
                   <p className="font-semibold text-sm">{item.title}</p>
-                  <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mt-0.5">{item.desc.slice(0, 70)}…</p>
+                  <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mt-0.5">{item.desc.slice(0, 70)}…</p>
                 </div>
-                <span className={`dark:bg-gray-900 dark:text-white text-gray-400 transition-transform text-lg ml-4 ${openAccordion === i ? "rotate-180" : ""}`}>
+                <span className={`dark:bg-gray-950 dark:text-white text-gray-400 transition-transform text-lg ml-4 ${openAccordion === i ? "rotate-180" : ""}`}>
                   ▾
                 </span>
               </button>
               {openAccordion === i && (
-                <div className="px-5 pb-4 text-sm dark:bg-gray-900 dark:text-white text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
+                <div className="px-5 pb-4 text-sm dark:bg-gray-950 dark:text-white text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
                   {item.desc}
                 </div>
               )}
@@ -418,27 +418,27 @@ export default function PartnerLegalFramework() {
       </section>
 
       {/* ── REVENUE & COMMERCIAL MODELS ──────────────────────── */}
-      <section className="bg-gray-50 py-14 px-4 dark:bg-gray-900 dark:text-white">
+      <section className="bg-gray-50 py-14 px-4 dark:bg-gray-950 dark:text-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold">Revenue & Commercial Models</h2>
-            <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
+            <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-500 mt-1">
               Three models are available for selection, discussed by partner type. Integration supply and model content.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-5 dark:bg-gray-900 dark:text-white ">
+          <div className="grid md:grid-cols-3 gap-5 dark:bg-gray-950 dark:text-white ">
             {revenueModels.map((model, i) => (
-              <div key={i} className={`rounded-xl border p-5 dark:bg-gray-900 dark:text-white ${model.color}`}>
-                <div className={`w-10 h-10 rounded-lg ${model.iconBg} flex items-center justify-center text-xl mb-3 dark:bg-gray-900 dark:text-white`}>
+              <div key={i} className={`rounded-xl border p-5 dark:bg-gray-950 dark:text-white ${model.color}`}>
+                <div className={`w-10 h-10 rounded-lg ${model.iconBg} flex items-center justify-center text-xl mb-3 dark:bg-gray-950 dark:text-white`}>
                   {model.icon}
                 </div>
-                <h3 className="font-bold text-sm mb-3 dark:bg-gray-900 dark:text-white">{model.title}</h3>
+                <h3 className="font-bold text-sm mb-3 dark:bg-gray-950 dark:text-white">{model.title}</h3>
                 <div className="space-y-2">
                   {model.rows.map((row, ri) => (
-                    <div key={ri} className="flex justify-between text-xs border-b dark:bg-gray-900 dark:text-white border-black/5 pb-1.5">
-                      <span className="text-gray-500 dark:bg-gray-900 dark:text-white font-medium">{row.label}</span>
-                      <span className="text-gray-700 dark:bg-gray-900 dark:text-white font-semibold text-right max-w-[55%]">{row.value}</span>
+                    <div key={ri} className="flex justify-between text-xs border-b dark:bg-gray-950 dark:text-white border-black/5 pb-1.5">
+                      <span className="text-gray-500 dark:bg-gray-950 dark:text-white font-medium">{row.label}</span>
+                      <span className="text-gray-700 dark:bg-gray-950 dark:text-white font-semibold text-right max-w-[55%]">{row.value}</span>
                     </div>
                   ))}
                 </div>
@@ -450,14 +450,14 @@ export default function PartnerLegalFramework() {
 
       {/* ── JURISDICTION TABLE ───────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 py-14">
-        <div className="text-center mb-10 dark:bg-gray-900 dark:text-white">
+        <div className="text-center mb-10 dark:bg-gray-950 dark:text-white">
           <h2 className="text-2xl font-bold">Applicable Law & Jurisdiction Coverage</h2>
-          <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
+          <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-500 mt-1">
             The framework is developed for UK / EU (applicable with GDPR and applicable law in both jurisdictions to be confirmed by ECIL).
           </p>
         </div>
 
-        <div className="rounded-xl border  dark:bg-gray-900 dark:text-white border-gray-200 overflow-hidden shadow-sm">
+        <div className="rounded-xl border  dark:bg-gray-950 dark:text-white border-gray-200 overflow-hidden shadow-sm">
           {/* Table Header */}
           <div className="grid grid-cols-6 bg-[#0f2244] text-white text-xs font-bold px-4 py-3 gap-2">
             <div className="col-span-2">Document</div>
@@ -471,16 +471,16 @@ export default function PartnerLegalFramework() {
             <div
               key={i}
               className={`grid grid-cols-6 px-4 py-3 gap-2 text-xs items-center border-b border-gray-100 ${
-                i % 2 === 0 ? " dark:bg-gray-900 dark:text-white bg-white" : "dark:bg-gray-900 dark:text-white bg-gray-50"
+                i % 2 === 0 ? " dark:bg-gray-950 dark:text-white bg-white" : "dark:bg-gray-950 dark:text-white bg-gray-50"
               }`}
             >
               <div className="col-span-2">
                 <p className="font-semibold text-gray-800">{row.doc}</p>
-                <p className="dark:bg-gray-900 dark:text-white text-gray-400 text-[11px]">{row.sub}</p>
+                <p className="dark:bg-gray-950 dark:text-white text-gray-400 text-[11px]">{row.sub}</p>
               </div>
               {[row.england, row.gdpr, row.caricom, row.uae].map((cell, ci) => (
                 <div key={ci}>
-                  <span className={`px-2 py-0.5 rounded text-[11px] font-semibold dark:bg-gray-900  ${cell.color}`}>
+                  <span className={`px-2 py-0.5 rounded text-[11px] font-semibold dark:bg-gray-950  ${cell.color}`}>
                     ✓ {cell.label}
                   </span>
                 </div>
@@ -491,21 +491,21 @@ export default function PartnerLegalFramework() {
       </section>
 
       {/* ── PARTNER GOVERNANCE FRAMEWORK ─────────────────────── */}
-      <section className="bg-gray-50 py-14 px-4 dark:bg-gray-900 dark:text-white">
+      <section className="bg-gray-50 py-14 px-4 dark:bg-gray-950 dark:text-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold">Partner Governance Framework</h2>
-            <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
+            <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-500 mt-1">
               Every partnership operates within a structured governance model built around day-to-day use.
             </p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-5 mb-8">
             {governanceFeatures.map((feat, i) => (
-              <div key={i} className="bg-white rounded-xl border dark:bg-gray-900 dark:text-white border-gray-200 p-5 shadow-sm">
+              <div key={i} className="bg-white rounded-xl border dark:bg-gray-950 dark:text-white border-gray-200 p-5 shadow-sm">
                 <div className="text-2xl mb-3">{feat.icon}</div>
-                <h4 className="font-bold text-sm mb-1 dark:bg-gray-900 dark:text-white">{feat.title}</h4>
-                <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 leading-relaxed">{feat.desc}</p>
+                <h4 className="font-bold text-sm mb-1 dark:bg-gray-950 dark:text-white">{feat.title}</h4>
+                <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 leading-relaxed">{feat.desc}</p>
               </div>
             ))}
           </div>
@@ -571,7 +571,7 @@ export default function PartnerLegalFramework() {
                 <button className="w-full bg-green-500 hover:bg-green-600 transition-colors text-white font-bold py-3 rounded-xl text-sm flex items-center justify-center gap-2">
                   ↓ Download Full Pack (ZIP)
                 </button>
-                <button className="w-full bg-white/10 dark:bg-gray-900 dark:text-white hover:bg-white/20 transition-colors text-white font-semibold py-3 rounded-xl text-sm">
+                <button className="w-full bg-white/10 dark:bg-gray-950 dark:text-white hover:bg-white/20 transition-colors text-white font-semibold py-3 rounded-xl text-sm">
                   Speak to Legal Team
                 </button>
               </div>
@@ -593,7 +593,7 @@ export default function PartnerLegalFramework() {
             <button className="bg-green-500 hover:bg-green-600 transition-colors text-white font-bold px-6 py-2.5 rounded-xl text-sm whitespace-nowrap">
               Submit Partner Enquiry
             </button>
-            <button className="bg-white/10 dark:bg-gray-900 dark:text-white hover:bg-white/20 transition-colors text-white font-semibold px-5 py-2.5 rounded-xl text-sm whitespace-nowrap">
+            <button className="bg-white/10 dark:bg-gray-950 dark:text-white hover:bg-white/20 transition-colors text-white font-semibold px-5 py-2.5 rounded-xl text-sm whitespace-nowrap">
               partners@golitemobile.com
             </button>
           </div>

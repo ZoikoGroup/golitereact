@@ -172,7 +172,7 @@ export default function BusinessBuyNowModal({ open, onClose, plan }: any) {
       `}</style>
 
       <div className="bbnm-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
-        <div className="bbnm-card dark:bg-gray-900">
+        <div className="bbnm-card dark:bg-gray-950">
 
           {/* Header */}
           <div className="px-6 pt-5 pb-4 border-b border-gray-100">

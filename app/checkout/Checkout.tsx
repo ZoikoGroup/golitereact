@@ -523,7 +523,7 @@ export default function CheckoutPage() {
   return (
     <>
     
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
         <div className="bg-[#FD4C0E] text-white py-3">
           <div className="container mx-auto px-4 text-center">
             <p className="text-sm md:text-base">Get Our Best Postpaid Mobile Plans & Pay Only for Every Need!</p>

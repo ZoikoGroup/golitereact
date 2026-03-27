@@ -296,7 +296,7 @@ const handleCheckout = () => {
   ---------------------------------- */
 
   return (
-    <div className="dark:bg-gray-900 w-full py-8 px-4">
+    <div className="dark:bg-gray-950 w-full py-8 px-4">
 
       {loading && (
         <p className="text-center text-gray-500 py-10">
@@ -316,7 +316,7 @@ const handleCheckout = () => {
             </p>
           </div>
 
-          <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8 dark:bg-gray-900">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8 dark:bg-gray-950">
 
             {/* LEFT */}
             <div className="lg:col-span-2 bg-gray-100 p-6 rounded-xl dark:bg-gray-800">

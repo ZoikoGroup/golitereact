@@ -31,7 +31,7 @@ export default function BlogSection() {
   }, []);
 
   return (
-    <section className="py-16 bg-white dark:bg-gray-900">
+    <section className="py-16 bg-white dark:bg-gray-950">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold dark:text-white text-gray-900">
           Our Blogs

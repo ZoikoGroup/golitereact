@@ -22,7 +22,7 @@ export default function ShopSpecialPlans() {
   return (
     <>
       {/* extra header removed */}
-    <section className="w-full dark:bg-gray-900">
+    <section className="w-full dark:bg-gray-950">
   <div className="max-w-7xl mx-auto px-6 py-20">
 
       {/* Heading */}
@@ -67,7 +67,7 @@ export default function ShopSpecialPlans() {
       </div>
 </section>
       {/* Travel Banner */}
-       <section className="dark:bg-gray-900 pb-20 px-4">
+       <section className="dark:bg-gray-950 pb-20 px-4">
   <div className="max-w-7xl mx-auto">
     
     <div className="relative dark:bg-gray-800 bg-green-50 border border-green-200 rounded-2xl overflow-hidden py-10 px-6 md:px-10">
@@ -123,7 +123,7 @@ export default function ShopSpecialPlans() {
   </div>
 </section>
 
-   <section className="relative pb-20 px-4 dark:bg-gray-900">
+   <section className="relative pb-20 px-4 dark:bg-gray-950">
   <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[7fr_6fr] rounded-2xl overflow-hidden">
 
     {/* LEFT */}

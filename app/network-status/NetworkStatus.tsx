@@ -119,7 +119,7 @@ export default function NetworkStatus() {
   });
 
   return (
-    <section className="bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-800 min-h-screen">
+    <section className="bg-gray-100 dark:bg-gray-950 dark:text-white text-gray-800 min-h-screen">
       {/* HERO */}
       <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center py-12 px-4">
         <h1 className="text-4xl font-bold">All Systems Operational</h1>
@@ -146,12 +146,12 @@ export default function NetworkStatus() {
       </div>
 
       {/* LOCAL STATUS */}
-      <div className="max-w-5xl mx-auto dark:bg-gray-900 dark:text-white bg-white p-6 rounded-xl shadow mt-6 mx-4">
-        <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 font-semibold uppercase tracking-widest mb-1">
+      <div className="max-w-5xl mx-auto dark:bg-gray-950 dark:text-white bg-white p-6 rounded-xl shadow mt-6 mx-4">
+        <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 font-semibold uppercase tracking-widest mb-1">
           📍 Check Your Area
         </p>
         <h2 className="font-bold text-xl mb-1">Get Your Local Network Status</h2>
-        <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mb-4">
+        <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-500 mb-4">
           Enter your postcode or let us detect your location to see real-time network performance specific to you.
         </p>
 
@@ -182,7 +182,7 @@ export default function NetworkStatus() {
           </div>
         </div>
 
-        <div className="text-center text-xs dark:bg-gray-900 dark:text-white text-gray-400 mt-3">or</div>
+        <div className="text-center text-xs dark:bg-gray-950 dark:text-white text-gray-400 mt-3">or</div>
         <div className="text-center mt-1">
           <button className="text-green-600 text-sm hover:underline">Auto-detect my location</button>
         </div>
@@ -191,13 +191,13 @@ export default function NetworkStatus() {
       {/* SERVICES */}
       <div className="max-w-5xl mx-auto mt-10 px-4">
         <h2 className="text-center text-2xl font-bold">Service-by-Service Status</h2>
-        <p className="text-center text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
+        <p className="text-center text-sm dark:bg-gray-950 dark:text-white text-gray-500 mt-1">
           A real-time view of all GoLite Mobile services across the network.
         </p>
 
         <div className="grid grid-cols-3 gap-4 mt-6">
           {services.map((service, i) => (
-            <div key={i} className="dark:bg-gray-900 dark:text-white bg-white border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div key={i} className="dark:bg-gray-950 dark:text-white bg-white border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
               <div className="flex justify-between items-start mb-3">
                 <span className="text-2xl">{service.icon}</span>
                 <span
@@ -211,9 +211,9 @@ export default function NetworkStatus() {
                 </span>
               </div>
               <h3 className="font-bold text-sm">{service.name}</h3>
-              <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 mt-1 leading-relaxed">{service.description}</p>
+              <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 mt-1 leading-relaxed">{service.description}</p>
               <div className="flex justify-between items-center mt-3">
-                <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400">Updated {service.updated}</p>
+                <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400">Updated {service.updated}</p>
                 <button
                   className={`text-xs font-medium hover:underline ${
                     service.status === "Degraded" ? "text-yellow-600" : "text-green-600"
@@ -228,9 +228,9 @@ export default function NetworkStatus() {
       </div>
 
       {/* METRICS */}
-      <div className="dark:bg-gray-900 dark:text-white bg-white text-black mt-12 py-12 px-4 dark:bg-gray-900 dark:text-white">
+      <div className="dark:bg-gray-950 dark:text-white bg-white text-black mt-12 py-12 px-4 dark:bg-gray-950 dark:text-white">
         <h2 className="text-center text-2xl font-bold">Network Reliability Last 90 Days</h2>
-        <p className="text-center text-sm dark:bg-gray-900 dark:text-white text-gray-400 mt-1">
+        <p className="text-center text-sm dark:bg-gray-950 dark:text-white text-gray-400 mt-1">
           Our track record of uptime, incident frequency, and service consistency.
         </p>
 
@@ -241,9 +241,9 @@ export default function NetworkStatus() {
             { value: metrics.responseTime, label: "Avg. Resolution Time\n30-day average", sub: metrics.responseTimeSub },
             { value: metrics.sla, label: "Network Uptime\nlast 90 days", sub: metrics.slaSub },
           ].map((m, i) => (
-            <div key={i} className="dark:bg-gray-900 dark:text-white bg-white text-black p-5 rounded-xl text-center">
+            <div key={i} className="dark:bg-gray-950 dark:text-white bg-white text-black p-5 rounded-xl text-center">
               <p className="text-3xl font-bold text-green-600">{m.value}</p>
-              <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 mt-1 whitespace-pre-line leading-snug">{m.label}</p>
+              <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 mt-1 whitespace-pre-line leading-snug">{m.label}</p>
               <p className="text-xs text-green-600 mt-2 font-medium">{m.sub}</p>
             </div>
           ))}
@@ -272,7 +272,7 @@ export default function NetworkStatus() {
               />
             ))}
           </div>
-          <div className="flex justify-between text-xs dark:bg-gray-900 dark:text-white text-gray-500 mt-2">
+          <div className="flex justify-between text-xs dark:bg-gray-950 dark:text-white text-gray-500 mt-2">
             <span>Jan 10</span>
             <span>Feb 1</span>
             <span>Feb 15</span>
@@ -323,10 +323,10 @@ export default function NetworkStatus() {
           NEED HELP?
         </div>
         <h2 className="text-2xl font-bold">Still Experiencing an Issue?</h2>
-        <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1 mb-6">
+        <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-500 mt-1 mb-6">
           If your problem isn't reflected above, our team and community are ready to help.
         </p>
-        <div className="grid grid-cols-3 gap-4 dark:bg-gray-900 dark:text-white">
+        <div className="grid grid-cols-3 gap-4 dark:bg-gray-950 dark:text-white">
           {[
             {
               icon: "🎧",
@@ -350,7 +350,7 @@ export default function NetworkStatus() {
               btnStyle: "border border-gray-300 text-gray-700 hover:bg-gray-50",
             },
           ].map((item) => (
-            <div key={item.title} className=" border-2 border-amber-100 dark:bg-gray-900 dark:text-white bg-white p-6 rounded-xl shadow-sm text-center">
+            <div key={item.title} className=" border-2 border-amber-100 dark:bg-gray-950 dark:text-white bg-white p-6 rounded-xl shadow-sm text-center">
               <div className="text-3xl mb-3">{item.icon}</div>
               <h3 className="font-bold text-sm mb-2">{item.title}</h3>
               <p className="text-xs text-gray-500 mb-4">{item.desc}</p>

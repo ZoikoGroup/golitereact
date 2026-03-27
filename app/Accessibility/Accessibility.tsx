@@ -218,7 +218,7 @@ export  function Accessibility() {
   const activeTech = assistiveTechs[selectedTech];
 
   return (
-    <div className=" dark:bg-gray-900 dark:text-white bg-white text-gray-900 font-sans">
+    <div className=" dark:bg-gray-950 dark:text-white bg-white text-gray-900 font-sans">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="bg-gradient-to-r from-indigo-600 to-purple-500 text-white py-16 px-4 text-center">
@@ -235,31 +235,31 @@ export  function Accessibility() {
           <span className="text-xs font-bold bg-green-100 text-green-700 px-3 py-1 rounded-full uppercase tracking-widest">
             Accessibility Features
           </span>
-          <h2 className="text-2xl font-bold mt-4 mb-1 dark:bg-gray-900 dark:text-white text-gray-800">
+          <h2 className="text-2xl font-bold mt-4 mb-1 dark:bg-gray-950 dark:text-white text-gray-800">
             Built-in Accessibility for Everyone
           </h2>
-          <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-400">
+          <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-400">
             A comprehensive set of features ensuring GoLite Mobile is usable regardless of ability, device, or context.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-5">
           {builtInFeatures.map((feat, i) => (
-            <div key={i} className=" dark:bg-gray-900 dark:text-white bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div key={i} className=" dark:bg-gray-950 dark:text-white bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
               <div className="text-2xl mb-3">{feat.icon}</div>
               <h3 className="font-bold text-sm mb-1">{feat.title}</h3>
-              <p className="text-xs text-gray-500 leading-relaxed dark:bg-gray-900 dark:text-white">{feat.desc}</p>
+              <p className="text-xs text-gray-500 leading-relaxed dark:bg-gray-950 dark:text-white">{feat.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── SUPPORTED ASSISTIVE TECHNOLOGIES ────────────────── */}
-      <section className=" dark:bg-gray-900 dark:text-white bg-gray-50 py-14 px-4">
+      <section className=" dark:bg-gray-950 dark:text-white bg-gray-50 py-14 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold">Supported Assistive Technologies</h2>
-            <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
+            <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-500 mt-1">
               Compatibility details, tested configurations, and known limitations for each assistive technology category.
             </p>
           </div>
@@ -267,7 +267,7 @@ export  function Accessibility() {
           <div className="flex flex-col md:flex-row gap-6">
             {/* Sidebar */}
             <div className="md:w-48 flex-shrink-0">
-              <p className="text-xs font-bold dark:bg-gray-900 dark:text-white text-gray-400 uppercase tracking-widest mb-3">Select Technology</p>
+              <p className="text-xs font-bold dark:bg-gray-950 dark:text-white text-gray-400 uppercase tracking-widest mb-3">Select Technology</p>
               <div className="space-y-1">
                 {assistiveTechs.map((tech, i) => (
                   <button
@@ -276,7 +276,7 @@ export  function Accessibility() {
                     className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-left transition-all ${
                       selectedTech === i
                         ? "bg-green-500  text-white font-semibold"
-                        : " dark:bg-gray-900 dark:text-white text-gray-600 hover:bg-gray-100"
+                        : " dark:bg-gray-950 dark:text-white text-gray-600 hover:bg-gray-100"
                     }`}
                   >
                     <span>{tech.icon}</span>
@@ -287,22 +287,22 @@ export  function Accessibility() {
             </div>
 
             {/* Content Panel */}
-            <div className="flex-1 dark:bg-gray-900 dark:text-white bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-              <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-700 leading-relaxed mb-5">{activeTech.content.summary}</p>
+            <div className="flex-1 dark:bg-gray-950 dark:text-white bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+              <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-700 leading-relaxed mb-5">{activeTech.content.summary}</p>
 
-              <div className="grid grid-cols-2 gap-4 mb-5 dark:bg-gray-900 dark:text-white">
-                <div className=" dark:bg-gray-900 dark:text-white bg-gray-50 rounded-lg p-3">
-                  <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 uppercase tracking-wide mb-1">Testing Standard</p>
-                  <p className="font-bold text-sm dark:bg-gray-900 dark:text-white">{activeTech.content.standard}</p>
+              <div className="grid grid-cols-2 gap-4 mb-5 dark:bg-gray-950 dark:text-white">
+                <div className=" dark:bg-gray-950 dark:text-white bg-gray-50 rounded-lg p-3">
+                  <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 uppercase tracking-wide mb-1">Testing Standard</p>
+                  <p className="font-bold text-sm dark:bg-gray-950 dark:text-white">{activeTech.content.standard}</p>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3 dark:bg-gray-900 dark:text-white">
-                  <p className="text-xs dark:bg-gray-900 dark:text-white  text-gray-400 uppercase tracking-wide mb-1">Last Tested</p>
+                <div className="bg-gray-50 rounded-lg p-3 dark:bg-gray-950 dark:text-white">
+                  <p className="text-xs dark:bg-gray-950 dark:text-white  text-gray-400 uppercase tracking-wide mb-1">Last Tested</p>
                   <p className="font-bold text-sm">{activeTech.content.lastTested}</p>
                 </div>
               </div>
 
               <div className="mb-5">
-                <p className="text-xs font-bold dark:bg-gray-900 dark:text-white text-gray-400 uppercase tracking-widest mb-2">Supported & Tested</p>
+                <p className="text-xs font-bold dark:bg-gray-950 dark:text-white text-gray-400 uppercase tracking-widest mb-2">Supported & Tested</p>
                 <div className="flex flex-wrap gap-2">
                   {activeTech.content.tested.map((t, ti) => (
                     <span key={ti} className="text-xs bg-green-50 text-green-700 border border-green-200 px-2 py-1 rounded-full font-medium">
@@ -313,10 +313,10 @@ export  function Accessibility() {
               </div>
 
               <div>
-                <p className="text-xs font-bold dark:bg-gray-900 dark:text-white text-gray-400 uppercase tracking-widest mb-2">Known Limitations</p>
-                <ul className="space-y-1.5 dark:bg-gray-900 dark:text-white">
+                <p className="text-xs font-bold dark:bg-gray-950 dark:text-white text-gray-400 uppercase tracking-widest mb-2">Known Limitations</p>
+                <ul className="space-y-1.5 dark:bg-gray-950 dark:text-white">
                   {activeTech.content.knownLimits.map((lim, li) => (
-                    <li key={li} className="flex items-start gap-2 text-xs dark:bg-gray-900 dark:text-white text-gray-600">
+                    <li key={li} className="flex items-start gap-2 text-xs dark:bg-gray-950 dark:text-white text-gray-600">
                       <span className="text-orange-400 mt-0.5 flex-shrink-0 ">–</span>
                       {lim}
                     </li>
@@ -329,21 +329,21 @@ export  function Accessibility() {
       </section>
 
       {/* ── ACCESSIBILITY SETTINGS ───────────────────────────── */}
-      <section className="bg-white py-14 px-4 dark:bg-gray-900 dark:text-white">
+      <section className="bg-white py-14 px-4 dark:bg-gray-950 dark:text-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-gray-800 dark:bg-gray-900 dark:text-white">Accessibility Settings</h2>
-            <p className="text-sm text-gray-800 mt-1 dark:bg-gray-900 dark:text-white">
+            <h2 className="text-2xl font-bold text-gray-800 dark:bg-gray-950 dark:text-white">Accessibility Settings</h2>
+            <p className="text-sm text-gray-800 mt-1 dark:bg-gray-950 dark:text-white">
               All preferences are saved to your browser and apply instantly across the page. Changes persist between sessions via local storage.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-white/10 p-6 dark:bg-gray-900 dark:text-white">
+          <div className="bg-white rounded-2xl border border-white/10 p-6 dark:bg-gray-950 dark:text-white">
             <div className="flex items-center gap-2 mb-5">
               <span className="text-lg">⚙️</span>
               <div>
-                <p className="font-bold text-white text-sm dark:bg-gray-900 dark:text-white">Display & Interaction Preferences</p>
-                <p className="text-xs text-gray-800 dark:bg-gray-900 dark:text-white">All changes apply immediately and persist across sessions.</p>
+                <p className="font-bold text-white text-sm dark:bg-gray-950 dark:text-white">Display & Interaction Preferences</p>
+                <p className="text-xs text-gray-800 dark:bg-gray-950 dark:text-white">All changes apply immediately and persist across sessions.</p>
               </div>
             </div>
 
@@ -352,8 +352,8 @@ export  function Accessibility() {
                 <div key={i} className="flex items-start gap-3">
                   <span className="text-lg flex-shrink-0">{s.icon}</span>
                   <div>
-                    <p className="font-bold dark:bg-gray-900 dark:text-white text-white text-sm">{s.title}</p>
-                    <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-800 leading-relaxed mt-0.5">{s.desc}</p>
+                    <p className="font-bold dark:bg-gray-950 dark:text-white text-white text-sm">{s.title}</p>
+                    <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-800 leading-relaxed mt-0.5">{s.desc}</p>
                   </div>
                 </div>
               ))}
@@ -366,14 +366,14 @@ export  function Accessibility() {
       <section className="max-w-6xl mx-auto px-4 py-14">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold">Accessibility Compliance Statement</h2>
-          <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
+          <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-500 mt-1">
             GoLite Mobile is committed to maintaining WCAG 2.2 level AA conformance across all digital products and services.
           </p>
         </div>
 
-        <div className="rounded-xl border dark:bg-gray-900 dark:text-white border-gray-200 overflow-hidden shadow-sm">
+        <div className="rounded-xl border dark:bg-gray-950 dark:text-white border-gray-200 overflow-hidden shadow-sm">
           {/* Header */}
-          <div className="grid grid-cols-12 dark:bg-gray-900 dark:text-white bg-[#0f2244] text-white text-xs font-bold px-5 py-3 gap-3">
+          <div className="grid grid-cols-12 dark:bg-gray-950 dark:text-white bg-[#0f2244] text-white text-xs font-bold px-5 py-3 gap-3">
             <div className="col-span-4">Standard / Criterion</div>
             <div className="col-span-1">Level</div>
             <div className="col-span-2">Status</div>
@@ -383,56 +383,56 @@ export  function Accessibility() {
           {complianceRows.map((row, i) => (
             <div
               key={i}
-              className={`grid grid-cols-12 px-5 py-4 gap-3 text-xs items-start border-b dark:bg-gray-900 dark:text-white border-gray-100 ${
+              className={`grid grid-cols-12 px-5 py-4 gap-3 text-xs items-start border-b dark:bg-gray-950 dark:text-white border-gray-100 ${
                 i % 2 === 0 ? "bg-white" : "bg-gray-50"
               }`}
             >
               <div className="col-span-4">
-                <p className="font-semibold text-gray-800 dark:bg-gray-900 dark:text-white">{row.standard}</p>
-                <p className="text-gray-400 dark:bg-gray-900 dark:text-white   text-[11px] mt-0.5">{row.sub}</p>
+                <p className="font-semibold text-gray-800 dark:bg-gray-950 dark:text-white">{row.standard}</p>
+                <p className="text-gray-400 dark:bg-gray-950 dark:text-white   text-[11px] mt-0.5">{row.sub}</p>
               </div>
               <div className="col-span-1">
-                <span className={`px-2 py-0.5 rounded text-[11px] font-bold dark:bg-gray-900 dark:text-white ${row.levelColor}`}>
+                <span className={`px-2 py-0.5 rounded text-[11px] font-bold dark:bg-gray-950 dark:text-white ${row.levelColor}`}>
                   {row.level}
                 </span>
               </div>
               <div className="col-span-2">
-                <span className={`font-bold flex items-center gap-1 dark:bg-gray-900 dark:text-white ${row.statusColor}`}>
+                <span className={`font-bold flex items-center gap-1 dark:bg-gray-950 dark:text-white ${row.statusColor}`}>
                   <span>{row.icon}</span>
                   {row.status}
                 </span>
               </div>
-              <div className="col-span-5 text-gray-600 leading-relaxed dark:bg-gray-900 dark:text-white">{row.note}</div>
+              <div className="col-span-5 text-gray-600 leading-relaxed dark:bg-gray-950 dark:text-white">{row.note}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── ACCESSIBILITY FEEDBACK ───────────────────────────── */}
-      <section className="bg-white py-14 px-4 dark:bg-gray-900 dark:text-white">
+      <section className="bg-white py-14 px-4 dark:bg-gray-950 dark:text-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
             <span className="text-xs font-bold bg-orange-100 text-orange-600 px-3 py-1 rounded-full uppercase tracking-widest">
               Report an Issue
             </span>
-            <h2 className="text-2xl font-bold text-gray-800 mt-4 mb-1  dark:bg-gray-900 dark:text-white">Accessibility Feedback</h2>
-            <p className="text-sm text-gray-500 dark:bg-gray-900 dark:text-white" >
+            <h2 className="text-2xl font-bold text-gray-800 mt-4 mb-1  dark:bg-gray-950 dark:text-white">Accessibility Feedback</h2>
+            <p className="text-sm text-gray-500 dark:bg-gray-950 dark:text-white" >
               Encountered a barrier? Tell us. We aim to respond to all accessibility feedback within 5 business days.
             </p>
           </div>
 
-          <div className="max-w-2xl mx-auto dark:bg-gray-900 dark:text-white bg-white rounded-2xl shadow-xl p-8">
+          <div className="max-w-2xl mx-auto dark:bg-gray-950 dark:text-white bg-white rounded-2xl shadow-xl p-8">
             <div className="flex items-center gap-2 mb-6">
               <span className="text-xl">🛡️</span>
               <div>
                 <p className="font-bold text-sm">Report an Accessibility Issue</p>
-                <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400">All fields marked * are required.</p>
+                <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400">All fields marked * are required.</p>
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="text-xs font-semibold dark:bg-gray-900 dark:text-white text-gray-600 mb-1 block">Full Name *</label>
+                <label className="text-xs font-semibold dark:bg-gray-950 dark:text-white text-gray-600 mb-1 block">Full Name *</label>
                 <input
                   type="text"
                   placeholder="Your Name"
@@ -442,7 +442,7 @@ export  function Accessibility() {
                 />
               </div>
               <div>
-                <label className="text-xs font-semibold dark:bg-gray-900 dark:text-white text-gray-600 mb-1 block">Email Address *</label>
+                <label className="text-xs font-semibold dark:bg-gray-950 dark:text-white text-gray-600 mb-1 block">Email Address *</label>
                 <input
                   type="email"
                   placeholder="you@example.com"
@@ -455,11 +455,11 @@ export  function Accessibility() {
 
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="text-xs font-semibold dark:bg-gray-900 dark:text-white text-gray-600 mb-1 block">Issue Type *</label>
+                <label className="text-xs font-semibold dark:bg-gray-950 dark:text-white text-gray-600 mb-1 block">Issue Type *</label>
                 <select
                   value={formData.issueType}
                   onChange={(e) => setFormData({ ...formData, issueType: e.target.value })}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm dark:bg-gray-900 dark:text-white text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm dark:bg-gray-950 dark:text-white text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400"
                 >
                   <option value="">Select Issue type...</option>
                   <option>Keyboard Navigation</option>
@@ -471,19 +471,19 @@ export  function Accessibility() {
                 </select>
               </div>
               <div>
-                <label className="text-xs font-semibold dark:bg-gray-900 dark:text-white  text-gray-600 mb-1 block">Page or Feature Affected</label>
+                <label className="text-xs font-semibold dark:bg-gray-950 dark:text-white  text-gray-600 mb-1 block">Page or Feature Affected</label>
                 <input
                   type="text"
                   placeholder="e.g. Checkout page, Navigation menu"
                   value={formData.pageAffected}
                   onChange={(e) => setFormData({ ...formData, pageAffected: e.target.value })}
-                  className="w-full border dark:bg-gray-900 dark:text-white border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+                  className="w-full border dark:bg-gray-950 dark:text-white border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
                 />
               </div>
             </div>
 
             <div className="mb-6">
-              <label className="text-xs font-semibold dark:bg-gray-900 dark:text-white text-gray-600 mb-1 block">Description *</label>
+              <label className="text-xs font-semibold dark:bg-gray-950 dark:text-white text-gray-600 mb-1 block">Description *</label>
               <textarea
                 rows={4}
                 placeholder="Please describe the barrier you encountered. The more detail you provide, the faster we can investigate and fix it."

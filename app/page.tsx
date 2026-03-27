@@ -60,7 +60,7 @@ export default function Home() {
     <>
  
     <HomeBanner />
-    <section className="w-full bg-gray-50 dark:bg-gray-900 py-16">
+    <section className="w-full bg-gray-50 dark:bg-gray-950 py-16">
       <div className="container mx-auto px-6 md:px-12">
 
         {/* Heading */}
@@ -207,7 +207,7 @@ export default function Home() {
 
     <PlanSlider/>
 
-    <section className="w-full py-14 bg-white dark:bg-gray-900">
+    <section className="w-full py-14 bg-white dark:bg-gray-950">
       {/* Heading */}
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-200">
@@ -308,7 +308,7 @@ export default function Home() {
         <div className="flex justify-center gap-4 mt-8">
 
           {/* Filled Button */}
-          <button onClick={allplans} className="bg-white dark:border-white dark:bg-gray-900 text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition cursor-pointer">
+          <button onClick={allplans} className="bg-white dark:border-white dark:bg-gray-950 text-[#FD4C0E] font-semibold px-8 py-3 rounded-lg hover:bg-white/90 transition cursor-pointer">
             View Plans
           </button>
 

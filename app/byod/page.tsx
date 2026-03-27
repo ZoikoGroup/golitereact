@@ -158,7 +158,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
 `}</style>
       
 
-      <div className="w-full dark:bg-gray-900 bg-white">
+      <div className="w-full dark:bg-gray-950 bg-white">
         {/* ================= HERO ================= */}
         <section className="dark:bg-gray-800 bg-[#f6faf4] py-16">
           <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
@@ -249,7 +249,7 @@ const filteredFaqs = FAQS.filter((f) => f.tab === activeTab);
             </div>
           </div>
         </section>
-        <section className="py-4 dark:bg-gray-900 bg-white">
+        <section className="py-4 dark:bg-gray-950 bg-white">
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Heading */}
         <h2 className="text-3xl font-bold dark:text-white text-gray-900">

@@ -122,7 +122,7 @@ export default function ContactUs() {
           </p>
         </section>
 
-        <div className="dark:bg-gray-900 bg-gray-50 mb-12 pb-12">
+        <div className="dark:bg-gray-950 bg-gray-50 mb-12 pb-12">
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-2 gap-0 aligns-center">
 

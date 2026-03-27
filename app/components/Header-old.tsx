@@ -139,7 +139,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full border-b bg-white dark:bg-gray-900">
+    <nav className="w-full border-b bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
         {/* Logo */}
@@ -198,7 +198,7 @@ export default function Navbar() {
               </button>
 
               {accountOpen && (
-                <div className="absolute right-0 mt-3 w-44 bg-white dark:bg-gray-900 border rounded-lg shadow-lg z-50">
+                <div className="absolute right-0 mt-3 w-44 bg-white dark:bg-gray-950 border rounded-lg shadow-lg z-50">
                   <button
                     onClick={() => router.push("/my-account")}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100  dark:hover:bg-gray-800"

@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 export default function ExistingSimPortPage() {
   return (
-    <div className="flex flex-col min-h-screen dark:bg-gray-900 bg-[#f6f7f9]">
+    <div className="flex flex-col min-h-screen dark:bg-gray-950 bg-[#f6f7f9]">
         {/* extra header removed */}
 
       <main className="flex-grow py-14">

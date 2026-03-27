@@ -216,7 +216,7 @@ export default function Navbar() {
 
   return (
 
-    <nav className="w-full border-b bg-white dark:bg-gray-900">
+    <nav className="w-full border-b bg-white dark:bg-gray-950">
 
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
@@ -355,7 +355,7 @@ export default function Navbar() {
 
 {/* Mobile Menu — Full Screen Overlay */}
 {menuOpen && (
-  <div className="md:hidden fixed inset-0 z-50 bg-white dark:bg-gray-900 flex flex-col">
+  <div className="md:hidden fixed inset-0 z-50 bg-white dark:bg-gray-950 flex flex-col">
 
     {/* Header row with logo + close button */}
     <div className="flex items-center justify-between px-6 py-4 border-b">
