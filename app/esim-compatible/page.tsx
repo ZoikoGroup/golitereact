@@ -69,7 +69,7 @@ export default function EsimCompatiblePage() {
 
   return (
     <>
-      <Header />
+      
 
       <section className="py-20 dark:bg-gray-900 bg-[#f6faf4]">
         <div className="max-w-xl mx-auto bg-white dark:bg-gray-800 p-10 rounded-xl shadow text-center">
@@ -117,7 +117,7 @@ export default function EsimCompatiblePage() {
         type={modalType}
       />
 
-      <Footer />
+  
     </>
   );
 }

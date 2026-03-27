@@ -307,7 +307,7 @@ const scrollToPlans = () => {
         plan={selectedPlan}
       />
 
-     
+    
     </>
   );
 }
