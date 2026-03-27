@@ -194,7 +194,7 @@ export default function HelpSupport() {
     return (
         <>
         
-        <section className="w-full dark:bg-gray-950 bg-gray-100 h-80 mb-12 align-items-center justify-center flex flex-col position-relative">
+        <section className="w-full dark:bg-gray-900 bg-gray-100 h-80 mb-12 align-items-center justify-center flex flex-col position-relative">
             <h1 className="text-black dark:text-white text-4xl font-bold text-center">Help & Support</h1>
         </section>
         <div className="max-w-4xl mx-auto p-4">

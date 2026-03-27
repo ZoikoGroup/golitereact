@@ -99,7 +99,7 @@ export default function SeniorCitizenDiscountEnrollment() {
     <>
       {/* extra header removed */}
     
-    <section className="dark:bg-gray-950  mx-auto px-4 py-16">
+    <section className="dark:bg-gray-900  mx-auto px-4 py-16">
       <div className="max-w-7xl grid lg:grid-cols-2 gap-12">
         {/* IMAGE */}
         <div className="flex justify-center">

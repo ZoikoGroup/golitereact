@@ -105,7 +105,7 @@ flex items-center justify-center p-8">
       </div>
     </div>
 
-    <div className="dark:bg-gray-950 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-900 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center dark:text-white text-gray-900 mb-16">
@@ -139,7 +139,7 @@ flex items-center justify-center p-8">
       </div>
     </div>
 
-    <div className="dark:bg-gray-950 bg-white py-24 px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-900 bg-white py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-center dark:text-white text-gray-900 mb-16 px-4">
@@ -181,7 +181,7 @@ flex items-center justify-center p-8">
       </div>
     </div>
 
-    <div className="dark:bg-gray-950 min-h-screen bg-white px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-900 min-h-screen bg-white px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}

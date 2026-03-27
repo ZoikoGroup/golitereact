@@ -424,7 +424,7 @@ const activateSim = async () => {
     {showDeviceCheck && (
         
 
-        <div className="w-full flex justify-center py-10 bg-gray-100 dark:bg-gray-950">
+        <div className="w-full flex justify-center py-10 bg-gray-100 dark:bg-gray-900">
       <div className="max-w-4xl w-full bg-green-50 dark:bg-gray-800 border border-green-300 rounded-xl p-8 text-center">
 
         {/* Title */}

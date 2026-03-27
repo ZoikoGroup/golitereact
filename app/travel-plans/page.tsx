@@ -228,7 +228,7 @@ const specialPlans = [
         {/* extra header removed */}
       <style>{customStyles}</style>
 
-      <div className="min-h-screen dark:bg-gray-950 bg-gray-50 py-12 px-4">
+      <div className="min-h-screen dark:bg-gray-900 bg-gray-50 py-12 px-4">
         <h1 className="text-4xl font-bold text-center mb-12">
           Shop Prepaid Travel Plans
         </h1>
@@ -353,7 +353,7 @@ const specialPlans = [
                   </div>
             </section>
 
-            <div className="bg-gray-50 py-10 dark:bg-gray-950">
+            <div className="bg-gray-50 py-10 dark:bg-gray-900">
                   <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-6">
                     {/* Left Column */}
                     <div className="flex-1 flex flex-col gap-4">

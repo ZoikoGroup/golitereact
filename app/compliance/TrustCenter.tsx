@@ -259,7 +259,7 @@ export default function TrustCenter() {
   ];
 
   return (
-    <section className="bg-[#f5f6f7] text-gray-800 min-h-screen dark:bg-gray-950 dark:text-white">
+    <section className="bg-[#f5f6f7] text-gray-800 min-h-screen dark:bg-gray-900 dark:text-white">
 
       {/* HERO */}
       <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center py-12 px-4">
@@ -275,8 +275,8 @@ export default function TrustCenter() {
       <div className="max-w-7xl mx-auto grid grid-cols-12 gap-5 mt-6 px-4 pb-16 items-start">
 
         {/* ── LEFT SIDEBAR ─────────────────────────────────── */}
-        <aside className="col-span-2 dark:bg-gray-950 dark:text-white bg-white rounded-xl p-3 shadow-sm sticky top-4">
-          <p className="text-[10px] font-bold dark:bg-gray-950 dark:text-white text-gray-400 uppercase tracking-widest px-2 mb-2">Navigation</p>
+        <aside className="col-span-2 dark:bg-gray-900 dark:text-white bg-white rounded-xl p-3 shadow-sm sticky top-4">
+          <p className="text-[10px] font-bold dark:bg-gray-900 dark:text-white text-gray-400 uppercase tracking-widest px-2 mb-2">Navigation</p>
           {navItems.map((item) => (
             <button
               key={item.label}
@@ -284,7 +284,7 @@ export default function TrustCenter() {
               className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-left transition-all mb-0.5 ${
                 activeSection === item.label
                   ? "bg-green-50 text-green-700 font-semibold"
-                  : " dark:bg-gray-950 dark:text-white text-gray-600 hover:bg-gray-100"
+                  : " dark:bg-gray-900 dark:text-white text-gray-600 hover:bg-gray-100"
               }`}
             >
               <span>{item.icon}</span>
@@ -297,17 +297,17 @@ export default function TrustCenter() {
         <div className="col-span-7 space-y-5">
 
           {/* OVERVIEW */}
-          <div className=" dark:bg-gray-950 dark:text-white bg-white p-6 rounded-xl shadow-sm">
-            <div className="flex items-center justify-between mb-4 dark:bg-gray-950 dark:text-white">
-              <h2 className="font-bold text-base flex items-center gap-2 dark:bg-gray-950 dark:text-white">📊 Overview</h2>
-              <span className="text-xs dark:bg-gray-950 dark:text-white bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">
+          <div className=" dark:bg-gray-900 dark:text-white bg-white p-6 rounded-xl shadow-sm">
+            <div className="flex items-center justify-between mb-4 dark:bg-gray-900 dark:text-white">
+              <h2 className="font-bold text-base flex items-center gap-2 dark:bg-gray-900 dark:text-white">📊 Overview</h2>
+              <span className="text-xs dark:bg-gray-900 dark:text-white bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">
                 UPDATED MARCH 2026
               </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 text-sm dark:bg-gray-950 dark:text-white">
-              <div className="space-y-3 dark:bg-gray-950 dark:text-white">
-                <p className="dark:bg-gray-950 dark:text-white text-gray-600 leading-relaxed">
+            <div className="grid grid-cols-2 gap-6 text-sm dark:bg-gray-900 dark:text-white">
+              <div className="space-y-3 dark:bg-gray-900 dark:text-white">
+                <p className="dark:bg-gray-900 dark:text-white text-gray-600 leading-relaxed">
                   GoLite Mobile operates a governance-first security and compliance
                   program aligned with international standards. Our Trust Center provides
                   real-time access to all certifications, policies, and regulatory
@@ -316,21 +316,21 @@ export default function TrustCenter() {
                   restricted documentation requires notification and a signed NDA where applicable.
                 </p>
               </div>
-              <div className="space-y-2 bg-gray-50 rounded-xl p-4 dark:bg-gray-950 dark:text-white">
+              <div className="space-y-2 bg-gray-50 rounded-xl p-4 dark:bg-gray-900 dark:text-white">
                 <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="dark:bg-gray-950 dark:text-white text-gray-500">Active Certifications</span>
+                  <span className="dark:bg-gray-900 dark:text-white text-gray-500">Active Certifications</span>
                   <span className="font-bold text-green-600">5</span>
                 </div>
                 <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-gray-500 dark:bg-gray-950 dark:text-white">Compliance Frameworks</span>
+                  <span className="text-gray-500 dark:bg-gray-900 dark:text-white">Compliance Frameworks</span>
                   <span className="font-bold">8</span>
                 </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2 dark:bg-gray-950 dark:text-white">
-                  <span className="text-gray-500 dark:bg-gray-950 dark:text-white">Regions Covered</span>
+                <div className="flex justify-between border-b border-gray-100 pb-2 dark:bg-gray-900 dark:text-white">
+                  <span className="text-gray-500 dark:bg-gray-900 dark:text-white">Regions Covered</span>
                   <span className="font-bold">UK · EU · USA · India</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500 dark:bg-gray-950 dark:text-white">Last Audit</span>
+                  <span className="text-gray-500 dark:bg-gray-900 dark:text-white">Last Audit</span>
                   <span className="font-bold">Feb 2026</span>
                 </div>
               </div>
@@ -338,9 +338,9 @@ export default function TrustCenter() {
           </div>
 
           {/* CERTIFICATIONS */}
-          <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-950 dark:text-white">
+          <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-900 dark:text-white">
             <h2 className="font-bold text-base mb-4 flex items-center gap-2">🏅 Certifications</h2>
-            <p className="text-xs text-gray-400 mb-5 dark:bg-gray-950 dark:text-white">Active certifications and current compliance status of GoLite's key frameworks.</p>
+            <p className="text-xs text-gray-400 mb-5 dark:bg-gray-900 dark:text-white">Active certifications and current compliance status of GoLite's key frameworks.</p>
             <div className="grid grid-cols-3 gap-4">
               {certifications.map((cert, i) => (
                 <div key={i} className="border border-gray-200 rounded-xl p-4 flex flex-col gap-2">
@@ -351,16 +351,16 @@ export default function TrustCenter() {
                     </span>
                   </div>
                   <p className="font-bold text-sm">{cert.name}</p>
-                  <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 leading-relaxed">{cert.desc}</p>
+                  <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 leading-relaxed">{cert.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* SECURITY */}
-          <div className="bg-[#0f1c2e] p-6 rounded-xl shadow-sm dark:bg-gray-950 dark:text-white text-white">
+          <div className="bg-[#0f1c2e] p-6 rounded-xl shadow-sm dark:bg-gray-900 dark:text-white text-white">
             <h2 className="font-bold text-base mb-1 flex items-center gap-2">🔐 Security</h2>
-            <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mb-5">Architecture, controls, and operational security. GoLite Mobile.</p>
+            <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mb-5">Architecture, controls, and operational security. GoLite Mobile.</p>
 
             {/* Security icon bar */}
             <div className="flex gap-3 mb-6 overflow-x-auto pb-2">
@@ -374,25 +374,25 @@ export default function TrustCenter() {
 
             <div className="space-y-3">
               {securityCategories.map((item, i) => (
-                <div key={i} className="bg-white/5 border dark:bg-gray-950 dark:text-white border-white/10 rounded-xl p-4">
+                <div key={i} className="bg-white/5 border dark:bg-gray-900 dark:text-white border-white/10 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-1">
                     <span>{item.icon}</span>
                     <p className="font-semibold text-sm">{item.title}</p>
                   </div>
-                  <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mb-2">{item.sub}</p>
-                  <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-300 leading-relaxed">{item.detail}</p>
+                  <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mb-2">{item.sub}</p>
+                  <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-300 leading-relaxed">{item.detail}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* PRIVACY */}
-          <div className=" dark:bg-gray-950 dark:text-white bg-white p-6 rounded-xl shadow-sm">
+          <div className=" dark:bg-gray-900 dark:text-white bg-white p-6 rounded-xl shadow-sm">
             <div className="flex items-center justify-between mb-1">
               <h2 className="font-bold text-base flex items-center gap-2">🔒 Privacy</h2>
               <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">GDPR Compliant</span>
             </div>
-            <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mb-5">GoLite Mobile processes and protects data with rights.</p>
+            <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mb-5">GoLite Mobile processes and protects data with rights.</p>
 
             <div className="grid grid-cols-2 gap-5">
               {/* Principles */}
@@ -403,7 +403,7 @@ export default function TrustCenter() {
                       <span>{p.icon}</span>
                       <p className="font-semibold text-xs">{p.title}</p>
                     </div>
-                    <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 leading-relaxed">{p.desc}</p>
+                    <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 leading-relaxed">{p.desc}</p>
                   </div>
                 ))}
               </div>
@@ -416,7 +416,7 @@ export default function TrustCenter() {
                       <span>{r.icon}</span>
                       <p className="font-semibold text-xs">{r.title}</p>
                     </div>
-                    <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 leading-relaxed mb-2">{r.desc}</p>
+                    <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 leading-relaxed mb-2">{r.desc}</p>
                     <button className={`text-[10px] text-white font-bold px-3 py-1 rounded-full transition-colors ${r.buttonColor}`}>
                       {r.button}
                     </button>
@@ -427,27 +427,27 @@ export default function TrustCenter() {
           </div>
 
           {/* AI GOVERNANCE */}
-          <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-950 dark:text-white">
+          <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-900 dark:text-white">
             <div className="flex items-center justify-between mb-1">
               <h2 className="font-bold text-base flex items-center gap-2">🤖 AI Governance</h2>
               <span className="text-xs bg-orange-100 text-orange-700 px-3 py-1 rounded-full font-semibold">ISO 42001 In Progress</span>
             </div>
-            <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mb-5">AI ethics, explainability, and responsible deployment — GoLite Mobile.</p>
+            <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mb-5">AI ethics, explainability, and responsible deployment — GoLite Mobile.</p>
             <div className="grid grid-cols-3 gap-4">
               {aiPrinciples.map((item, i) => (
                 <div key={i} className="border border-gray-200 rounded-xl p-4">
                   <div className="text-xl mb-2">{item.icon}</div>
                   <p className="font-bold text-xs mb-1">{item.title}</p>
-                  <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 leading-relaxed">{item.desc}</p>
+                  <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* RISK & COMPLIANCE */}
-          <div className=" dark:bg-gray-950 dark:text-white bg-white p-6 rounded-xl shadow-sm">
+          <div className=" dark:bg-gray-900 dark:text-white bg-white p-6 rounded-xl shadow-sm">
             <h2 className="font-bold text-base mb-1 flex items-center gap-2">⚖️ Risk & Compliance</h2>
-            <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mb-5">Regulatory risk management and framework coverage.</p>
+            <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mb-5">Regulatory risk management and framework coverage.</p>
             <div className="space-y-3">
               {riskItems.map((item, i) => (
                 <div key={i} className="border border-gray-200 rounded-xl p-4 flex items-start justify-between gap-4">
@@ -455,7 +455,7 @@ export default function TrustCenter() {
                     <span className="text-lg flex-shrink-0">{item.icon}</span>
                     <div>
                       <p className="font-semibold text-sm">{item.title}</p>
-                      <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 mt-0.5 leading-relaxed">{item.desc}</p>
+                      <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 mt-0.5 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 ${item.statusColor}`}>
@@ -467,9 +467,9 @@ export default function TrustCenter() {
           </div>
 
           {/* POLICIES */}
-          <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-950 dark:text-white">
+          <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-900 dark:text-white">
             <h2 className="font-bold text-base mb-1 flex items-center gap-2">📜 Policies</h2>
-            <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mb-5">Internal governance policies, available for public review.</p>
+            <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mb-5">Internal governance policies, available for public review.</p>
             <div className="space-y-2">
               {policies.map((p, i) => (
                 <div key={i} className="flex items-center justify-between border border-gray-200 rounded-xl px-4 py-3">
@@ -477,7 +477,7 @@ export default function TrustCenter() {
                     <span>{p.icon}</span>
                     <p className="text-sm font-medium">{p.name}</p>
                   </div>
-                  <div className="flex items-center gap-4 text-xs dark:bg-gray-950 dark:text-white text-gray-400">
+                  <div className="flex items-center gap-4 text-xs dark:bg-gray-900 dark:text-white text-gray-400">
                     <span>{p.version}</span>
                     <span>{p.date}</span>
                     <button className="bg-green-50 text-green-700 font-semibold px-3 py-1 rounded-full hover:bg-green-100 transition-colors">
@@ -490,16 +490,16 @@ export default function TrustCenter() {
           </div>
 
           {/* COMPLIANCE DOCUMENTS */}
-          <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-950 dark:text-white">
-            <div className="flex items-center justify-between mb-4 dark:bg-gray-950 dark:text-white">
-              <h2 className="font-bold text-base flex items-center gap-2 dark:bg-gray-950 dark:text-white">📂 Compliance Documents</h2>
-              <button className="text-xs bg-blue-500 dark:bg-gray-950 dark:text-white text-white px-3 py-1.5 rounded-full font-semibold hover:bg-blue-600 transition-colors">
+          <div className="bg-white p-6 rounded-xl shadow-sm dark:bg-gray-900 dark:text-white">
+            <div className="flex items-center justify-between mb-4 dark:bg-gray-900 dark:text-white">
+              <h2 className="font-bold text-base flex items-center gap-2 dark:bg-gray-900 dark:text-white">📂 Compliance Documents</h2>
+              <button className="text-xs bg-blue-500 dark:bg-gray-900 dark:text-white text-white px-3 py-1.5 rounded-full font-semibold hover:bg-blue-600 transition-colors">
                 Request Access
               </button>
             </div>
 
-            <div className="rounded-xl border dark:bg-gray-950 dark:text-white border-gray-200 overflow-hidden">
-              <div className="grid grid-cols-12 bg-[#0f2244] dark:bg-gray-950 dark:text-white text-white text-xs font-bold px-4 py-3 gap-2">
+            <div className="rounded-xl border dark:bg-gray-900 dark:text-white border-gray-200 overflow-hidden">
+              <div className="grid grid-cols-12 bg-[#0f2244] dark:bg-gray-900 dark:text-white text-white text-xs font-bold px-4 py-3 gap-2">
                 <div className="col-span-4">Document / Name</div>
                 <div className="col-span-2">Category</div>
                 <div className="col-span-2">Access</div>
@@ -510,13 +510,13 @@ export default function TrustCenter() {
               {documents.map((doc, i) => (
                 <div
                   key={i}
-                  className={`grid grid-cols-12 px-4 py-3 gap-2 text-xs items-center border-b dark:bg-gray-950 dark:text-white border-gray-100 ${
-                    i % 2 === 0 ? "bg-white dark:bg-gray-950 dark:text-white" : "bg-gray-50 dark:bg-gray-950 dark:text-white"
+                  className={`grid grid-cols-12 px-4 py-3 gap-2 text-xs items-center border-b dark:bg-gray-900 dark:text-white border-gray-100 ${
+                    i % 2 === 0 ? "bg-white dark:bg-gray-900 dark:text-white" : "bg-gray-50 dark:bg-gray-900 dark:text-white"
                   }`}
                 >
                   <div className="col-span-4">
-                    <p className="font-semibold text-gray-800 dark:bg-gray-950 dark:text-white">{doc.name}</p>
-                    {doc.sub && <p className= "dark:bg-gray-950 dark:text-white  text-gray-400 text-[11px]">{doc.sub}</p>}
+                    <p className="font-semibold text-gray-800 dark:bg-gray-900 dark:text-white">{doc.name}</p>
+                    {doc.sub && <p className= "dark:bg-gray-900 dark:text-white  text-gray-400 text-[11px]">{doc.sub}</p>}
                   </div>
                   <div className="col-span-2">
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${doc.categoryColor}`}>
@@ -528,9 +528,9 @@ export default function TrustCenter() {
                       {doc.access}
                     </span>
                   </div>
-                  <div className="col-span-2 dark:bg-gray-950 dark:text-white text-gray-500">{doc.date}</div>
+                  <div className="col-span-2 dark:bg-gray-900 dark:text-white text-gray-500">{doc.date}</div>
                   <div className="col-span-2">
-                    <button className={ ` dark:bg-gray-950 dark:text-white text-white text-[10px] font-bold px-2 py-1 rounded-full transition-colors ${doc.actionColor}`}>
+                    <button className={ ` dark:bg-gray-900 dark:text-white text-white text-[10px] font-bold px-2 py-1 rounded-full transition-colors ${doc.actionColor}`}>
                       {doc.action}
                     </button>
                   </div>
@@ -545,20 +545,20 @@ export default function TrustCenter() {
         <aside className="col-span-3 space-y-4 sticky top-4">
 
           {/* Downloads */}
-          <div className="bg-white p-4 rounded-xl dark:bg-gray-950 dark:text-white shadow-sm">
+          <div className="bg-white p-4 rounded-xl dark:bg-gray-900 dark:text-white shadow-sm">
             <h3 className="font-bold text-sm mb-1">⬇️ Downloads</h3>
-            <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mb-3">
+            <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mb-3">
               Download all public compliance documents as a single bundle.
             </p>
-            <button className="bg-green-500 hover:bg-green-600 transition-colors dark:bg-gray-950 dark:text-white text-white w-full py-2.5 rounded-xl text-sm font-semibold">
+            <button className="bg-green-500 hover:bg-green-600 transition-colors dark:bg-gray-900 dark:text-white text-white w-full py-2.5 rounded-xl text-sm font-semibold">
               Download All Public Docs
             </button>
           </div>
 
           {/* Request Access */}
-          <div className="bg-white p-4 rounded-xl shadow-sm dark:bg-gray-950 dark:text-white">
+          <div className="bg-white p-4 rounded-xl shadow-sm dark:bg-gray-900 dark:text-white">
             <h3 className="font-bold text-sm mb-1">📩 Request Access</h3>
-            <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mb-3">
+            <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mb-3">
               Need restricted documents? Submit a verified access request and our compliance team will respond within 2 business days.
             </p>
             <button className="bg-orange-500 hover:bg-orange-600 transition-colors text-white w-full py-2.5 rounded-xl text-sm font-semibold">
@@ -569,13 +569,13 @@ export default function TrustCenter() {
           {/* Stay Updated */}
           <div className="bg-[#0f1c2e] text-white p-4 rounded-xl">
             <h3 className="font-bold text-sm mb-1">🔔 Stay Updated</h3>
-            <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-400 mb-3">
+            <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 mb-3">
               Get notified when certifications are renewed or new compliance documents are published.
             </p>
             <input
               type="email"
               placeholder="your@email.com"
-              className="w-full bg-white/10 text-white dark:bg-gray-950 dark:text-white placeholder-gray-500 text-xs rounded-lg px-3 py-2 mb-2 focus:outline-none focus:ring-1 focus:ring-green-400"
+              className="w-full bg-white/10 text-white dark:bg-gray-900 dark:text-white placeholder-gray-500 text-xs rounded-lg px-3 py-2 mb-2 focus:outline-none focus:ring-1 focus:ring-green-400"
             />
             <button className="bg-green-500 hover:bg-green-600 transition-colors text-white w-full py-2.5 rounded-xl text-sm font-semibold">
               Subscribe to Updates

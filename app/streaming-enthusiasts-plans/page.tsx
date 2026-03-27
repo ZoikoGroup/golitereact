@@ -87,7 +87,7 @@ export default function StreamingPlans() {
   return (
     <>
       {/* extra header removed */}
-    <div className="w-full dark:bg-gray-950">
+    <div className="w-full dark:bg-gray-900">
       {/* Hero Banner */}
       <section className="max-w-7xl mx-auto px-4 pt-10">
         <div className="flex flex-col md:flex-row items-center justify-between bg-[#FF6A3D] rounded-2xl overflow-hidden">
@@ -126,7 +126,7 @@ export default function StreamingPlans() {
       {/* <StreamingSlider /> */}
 
       {/* FAQ */}
-      <section className="mx-auto px-4 pt-20 pb-20 dark:bg-gray-950 bg-[#FFF7F7] w-full">
+      <section className="mx-auto px-4 pt-20 pb-20 dark:bg-gray-900 bg-[#FFF7F7] w-full">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-10 dark:text-gray-100">
           Frequently Asked Questions
         </h2>

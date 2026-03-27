@@ -252,7 +252,7 @@ const faqs = [
 
 
       {/* Banner Section */}
-    <div className="dark:bg-gray-950 bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="dark:bg-gray-900 bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         {/* <h1 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-12"> */}
@@ -341,7 +341,7 @@ const faqs = [
     {/* Benefits Section */}
 
 
-<div className="py-16 px-4 sm:px-6 lg:px-8 dark:bg-gray-950 bg-[#F9FAFB]">
+<div className="py-16 px-4 sm:px-6 lg:px-8 dark:bg-gray-900 bg-[#F9FAFB]">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <h2 className="text-4xl md:text-3xl font-bold text-center dark:text-gray-100 text-gray-900 mb-4">
@@ -377,7 +377,7 @@ const faqs = [
 
 
 
-    <div className="dark:bg-gray-950 bg-gray-50 pb-12">
+    <div className="dark:bg-gray-900 bg-gray-50 pb-12">
       <h2 className="text-4xl md:text-3xl font-bold text-center dark:text-gray-100 text-gray-900 mb-10">
           Frequently Asked Questions
         </h2>

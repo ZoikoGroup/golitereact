@@ -178,7 +178,7 @@ const scrollToPlans = () => {
       </section>
 
       {/* Features */}
-      <section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
+      <section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center md:text-left dark:text-white text-gray-900 mb-12">
             Manage Your Business Needs with Ease
@@ -210,7 +210,7 @@ const scrollToPlans = () => {
       </section>
 
       {/* Plans heading — eSIM/pSIM tabs removed */}
-      <div className="w-full dark:bg-gray-950 bg-gray-50 py-8">
+      <div className="w-full dark:bg-gray-900 bg-gray-50 py-8">
         <h1 ref={plansRef} className="text-center text-[28px] md:text-[2.5rem] font-bold text-[#1d1d1f] dark:text-white">
           Shop Postpaid Business Plans
         </h1>
@@ -220,7 +220,7 @@ const scrollToPlans = () => {
       </div>
 
       {/* Slider */}
-      <div className="px-4 md:px-6 relative dark:bg-gray-950 bg-gray-50 py-12">
+      <div className="px-4 md:px-6 relative dark:bg-gray-900 bg-gray-50 py-12">
         <style>{customStyles}</style>
 
         {isMobile && (
@@ -273,7 +273,7 @@ const scrollToPlans = () => {
       <TestimonialSlider bg="dark:bg-gradient-to-br dark:from-[#0F172A] dark:to-[#1E293B] bg-gradient-to-br from-[#F8F9FA] to-[#E3F2FD]" />
 
       {/* FAQs */}
-      <div className="dark:bg-gray-950 bg-gray-50 py-6">
+      <div className="dark:bg-gray-900 bg-gray-50 py-6">
         <h1 className="text-center text-[2rem] font-bold dark:text-white text-[#1d1d1f] py-4">
           Frequently Asked Questions
         </h1>
