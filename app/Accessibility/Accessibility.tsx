@@ -30,7 +30,7 @@ export  function Accessibility() {
       desc: "All text meets WCAG 2.2 AA contrast requirements. High Contrast mode and Dark Mode are available without any account required.",
     },
     {
-      icon: "🔤",
+      icon: "🔠",
       title: "Text & Typography",
       desc: "Text scales from 100% to 200% without breaking layouts. A dyslexia-friendly font option reduces reading friction for affected users.",
     },
@@ -112,108 +112,108 @@ export  function Accessibility() {
     {
       icon: "🔡",
       title: "Text Size",
-      desc: "Scale text between 85% and 200% at the default size. Adjust using the slider or arrow keys when focused.",
+      desc: "Scale all text between 100% and 200% of the default size. Adjust using the slider or arrow keys when focused.",
     },
     {
       icon: "🌙",
       title: "Dark Mode",
-      desc: "Switches to a dark colour scheme, reducing eye strain in low-light environments. Saves energy on OLED screens.",
+      desc: "Switches to a dark colour scheme, reducing eye strain in low-light environments.Saves energy on OLED screens.",
     },
     {
-      icon: "⚡",
+      icon: "⬛",
       title: "High Contrast",
-      desc: "Maximises colour contrast to WCAG AAA level (>7:1). Recommended for low-vision users or bright environmental use.",
+      desc: "Maximises colour contrast to WCAG AAA level (≥7:1). Recommended for low vision users or bright environment use.",
     },
     {
-      icon: "🚫",
+      icon: "🎬",
       title: "Reduce Motion",
       desc: "Disables all decorative animations and transitions. Essential for users with vestibular disorders or motion sensitivity.",
     },
     {
-      icon: "📖",
+      icon: "🔤",
       title: "Dyslexia Font",
       desc: "Switches to OpenDyslexic — a typeface with bottom-weighted letters designed to improve reading accuracy for dyslexic users.",
     },
     {
-      icon: "🎯",
+      icon: "⌨️",
       title: "Focus Indicators",
-      desc: "Enhanced 3px focus rings are shown by default (WCAG 2.2 required). Disable only if OS provides its own custom focus styles.",
+      desc: "Enhanced 3px focus rings are always on by default (WCAG 2.2 required). Disable only if your OS provides its own custom focus styles.",
     },
   ];
 
   // ── COMPLIANCE TABLE ───────────────────────────────────────
   const complianceRows = [
-    {
-      standard: "WCAG 2.2 — Perceivable",
-      sub: "Text alternatives, time-based media, adaptable, distinguishable.",
-      level: "AA",
-      levelColor: "bg-green-100 text-green-700",
-      status: "Conformant",
-      statusColor: "text-green-600",
-      icon: "✓",
-      note: "All images carry alt text; colour never used alone to convey information.",
-    },
-    {
-      standard: "WCAG 2.2 — Operable",
-      sub: "Keyboard accessible, enough time, seizures, navigable. Input modalities.",
-      level: "AA",
-      levelColor: "bg-green-100 text-green-700",
-      status: "Conformant",
-      statusColor: "text-green-600",
-      icon: "✓",
-      note: "Full keyboard access; no keyboard traps; focus always visible.",
-    },
-    {
-      standard: "WCAG 2.2 — Understandable",
-      sub: "Readable, predictable, input assistance.",
-      level: "AA",
-      levelColor: "bg-green-100 text-green-700",
-      status: "Conformant",
-      statusColor: "text-green-600",
-      icon: "✓",
-      note: "Language declared on all pages; error messages descriptive and actionable.",
-    },
-    {
-      standard: "WCAG 2.2 — Robust",
-      sub: "Compatible with current and future user agents.",
-      level: "AA",
-      levelColor: "bg-green-100 text-green-700",
-      status: "Conformant",
-      statusColor: "text-green-600",
-      icon: "✓",
-      note: "Valid HTML; ARIA used per specification; tested with 5 AT combinations.",
-    },
-    {
-      standard: "EN 301 549",
-      sub: "EU accessibility standard for ICT products and services.",
-      level: "B+",
-      levelColor: "bg-blue-100 text-blue-700",
-      status: "Aligned",
-      statusColor: "text-blue-600",
-      icon: "✓",
-      note: "Aligned via WCAG 2.2 AA conformance; Chapter 9 (web) covered.",
-    },
-    {
-      standard: "Equality Act 2010 (UK)",
-      sub: "Reasonable adjustments for persons with disabilities.",
-      level: "UK Law",
-      levelColor: "bg-purple-100 text-purple-700",
-      status: "Compliant",
-      statusColor: "text-purple-600",
-      icon: "✓",
-      note: "Reasonable adjustments supported via settings panel and support team.",
-    },
-    {
-      standard: "ADA Title III (USA)",
-      sub: "Accessibility of places of public accommodation.",
-      level: "US Law",
-      levelColor: "bg-orange-100 text-orange-700",
-      status: "In Progress",
-      statusColor: "text-orange-500",
-      icon: "⏳",
-      note: "WCAG 2.2 AA alignment covers most obligations; formal ADA audit Q2 2026.",
-    },
-  ];
+  {
+    standard: "WCAG 2.2 — Perceivable",
+    sub: "Text alternatives, time-based media, adaptable, distinguishable",
+    level: "AA",
+    levelColor: "bg-gray-100 text-gray-700",
+    status: "Conformant",
+    statusColor: "text-green-600",
+    icon: "✓",
+    note: "All images carry alt text; colour never used alone to convey information",
+  },
+  {
+    standard: "WCAG 2.2 — Operable",
+    sub: "Keyboard accessible, enough time, seizures, navigable, input modalities",
+    level: "AA",
+    levelColor: "bg-gray-100 text-gray-700",
+    status: "Conformant",
+    statusColor: "text-green-600",
+    icon: "✓",
+    note: "Full keyboard access; no keyboard traps; focus always visible",
+  },
+  {
+    standard: "WCAG 2.2 — Understandable",
+    sub: "Readable, predictable, input assistance",
+    level: "AA",
+    levelColor: "bg-gray-100 text-gray-700",
+    status: "Conformant",
+    statusColor: "text-green-600",
+    icon: "✓",
+    note: "Language declared on all pages; error messages descriptive and actionable",
+  },
+  {
+    standard: "WCAG 2.2 — Robust",
+    sub: "Compatible with current and future user agents",
+    level: "AA",
+    levelColor: "bg-gray-100 text-gray-700",
+    status: "Conformant",
+    statusColor: "text-green-600",
+    icon: "✓",
+    note: "Valid HTML; ARIA used per specification; tested with 5 AT combinations",
+  },
+  {
+    standard: "EN 301 549",
+    sub: "EU accessibility standard for ICT products and services",
+    level: "EU",
+    levelColor: "bg-blue-100 text-blue-700",
+    status: "Aligned",
+    statusColor: "text-green-600",
+    icon: "✓",
+    note: "Aligned via WCAG 2.2 AA conformance; Chapter 9 (web) covered",
+  },
+  {
+    standard: "Equality Act 2010 (UK)",
+    sub: "Reasonable adjustments for persons with disabilities",
+    level: "UK LAW",
+    levelColor: "bg-orange-100 text-orange-700",
+    status: "Compliant",
+    statusColor: "text-green-600",
+    icon: "✓",
+    note: "Reasonable adjustments supported via settings panel and support team",
+  },
+  {
+    standard: "ADA Title III (USA)",
+    sub: "Accessibility of places of public accommodation",
+    level: "US LAW",
+    levelColor: "bg-orange-100 text-orange-700",
+    status: "In Progress",
+    statusColor: "text-orange-500",
+    icon: "⏳",
+    note: "WCAG 2.2 AA alignment covers most obligations; formal ADA audit Q2 2026",
+  },
+];
 
   const activeTech = assistiveTechs[selectedTech];
 
@@ -342,7 +342,7 @@ export  function Accessibility() {
             <div className="flex items-center gap-2 mb-5">
               <span className="text-lg">⚙️</span>
               <div>
-                <p className="font-bold text-white text-sm dark:bg-gray-900 dark:text-white">Display & Interaction Preferences</p>
+                <p className="font-bold text-gray-800 text-sm dark:bg-gray-900 dark:text-white">Display & Interaction Preferences</p>
                 <p className="text-xs text-gray-800 dark:bg-gray-900 dark:text-white">All changes apply immediately and persist across sessions.</p>
               </div>
             </div>
@@ -352,7 +352,7 @@ export  function Accessibility() {
                 <div key={i} className="flex items-start gap-3">
                   <span className="text-lg flex-shrink-0">{s.icon}</span>
                   <div>
-                    <p className="font-bold dark:bg-gray-900 dark:text-white text-white text-sm">{s.title}</p>
+                    <p className="font-bold dark:bg-gray-900 dark:text-white text-gray-800 text-sm">{s.title}</p>
                     <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-800 leading-relaxed mt-0.5">{s.desc}</p>
                   </div>
                 </div>

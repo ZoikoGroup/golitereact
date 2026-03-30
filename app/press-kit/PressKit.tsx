@@ -182,7 +182,7 @@ export default function PressKit() {
 
   const sustainabilityFeatures = [
     {
-      icon: "🌳",
+      icon: "🌱",
       title: "1 Plan, 1 Tree",
       desc: "Every active subscription funds tree-planting across India.",
     },
