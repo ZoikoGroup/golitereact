@@ -59,14 +59,20 @@ export default function PressKit() {
   ];
 
   // 📰 NEWS & ANNOUNCEMENTS DATA
-  const newsFilters = ["All", "Product", "Partnership", "Corporate", "Sustainability"];
+  const newsFilters = [
+    "All",
+    "Product",
+    "Partnership",
+    "Corporate",
+    "Sustainability",
+  ];
 
   const news = [
     {
       day: "18",
       month: "MAR",
       year: "2026",
-      tags: ["LATEST", "PRODUCT"],
+      tags: ["📣LATEST", "PRODUCT"],
       title: "GoLite Mobile Launches 5G Network Across 14 New Indian Cities",
       desc: "GoLite Mobile today announced the expansion of its 5G network to 14 additional cities across India, including Pune, Ahmedabad, and Jaipur, bringing its total 5G footprint to 38 cities nationwide.",
       hasPdf: true,
@@ -76,7 +82,8 @@ export default function PressKit() {
       month: "MAR",
       year: "2026",
       tags: ["CORPORATE"],
-      title: "GoLite Mobile Achieves ISO 27001 Certification for Information Security",
+      title:
+        "GoLite Mobile Achieves ISO 27001 Certification for Information Security",
       desc: "GoLite Mobile has been awarded ISO 27001 certification, affirming its commitment to the highest standards of information security management across all operations.",
       hasPdf: true,
     },
@@ -85,7 +92,8 @@ export default function PressKit() {
       month: "FEB",
       year: "2026",
       tags: ["PARTNERSHIP"],
-      title: "GoLite Mobile Partners with Zoiko Financial Group to Launch Integrated Mobile Banking",
+      title:
+        "GoLite Mobile Partners with Zoiko Financial Group to Launch Integrated Mobile Banking",
       desc: "GoLite Mobile has entered a strategic partnership with Zoiko Financial Group to offer integrated mobile banking and payment features directly within the GoLite app for eligible customers.",
       hasPdf: true,
     },
@@ -94,7 +102,8 @@ export default function PressKit() {
       month: "JAN",
       year: "2026",
       tags: ["SUSTAINABILITY"],
-      title: "GoLite Mobile Reaches 50,000 Trees Planted Through Its 1 Plan, 1 Tree Initiative",
+      title:
+        "GoLite Mobile Reaches 50,000 Trees Planted Through Its 1 Plan, 1 Tree Initiative",
       desc: "GoLite Mobile's flagship sustainability programme has surpassed 50,000 trees planted across India, marking a significant milestone in its Blue Economy commitment to environmental impact.",
       hasPdf: true,
     },
@@ -103,7 +112,8 @@ export default function PressKit() {
       month: "NOV",
       year: "2025",
       tags: ["PRODUCT"],
-      title: "GoLite Mobile Introduces Go Unlimited — Premium Unlimited Data Plan with Free International Calls",
+      title:
+        "GoLite Mobile Introduces Go Unlimited — Premium Unlimited Data Plan with Free International Calls",
       desc: "GoLite Mobile unveiled its flagship Go Unlimited plan, offering unlimited high-speed data, free international calls to 200+ countries, and free roaming across Canada and Mexico starting at $59/month.",
       hasPdf: true,
     },
@@ -182,7 +192,7 @@ export default function PressKit() {
 
   const sustainabilityFeatures = [
     {
-      icon: "🌳",
+      icon: "🌱",
       title: "1 Plan, 1 Tree",
       desc: "Every active subscription funds tree-planting across India.",
     },
@@ -219,17 +229,34 @@ export default function PressKit() {
     SUSTAINABILITY: "bg-green-100 text-green-700",
   };
 
+  const contacts = [
+    {
+      icon: "✉️",
+      label: "Media Enquiries",
+      value: "press@golitemobile.com",
+    },
+    {
+      icon: "📞",
+      label: "Press Hotline",
+      value: "+44 (0) 20 8001 5030",
+    },
+    {
+      icon: "🤝",
+      label: "Paid Partnerships",
+      value: "partnerships@golitemobile.com",
+    },
+  ];
   const filteredNews =
     activeFilter === "All"
       ? news
       : news.filter((n) =>
-          n.tags.some((t) => t.toLowerCase() === activeFilter.toLowerCase())
+          n.tags.some((t) => t.toLowerCase() === activeFilter.toLowerCase()),
         );
 
   return (
     <div className="bg-[#f5f6f7]  dark:bg-gray-950 dark:text-white  text-black">
       {/* 🔵 HERO */}
-      <section className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center py-16 px-4">
+      <section className="bg-linear-to-r from-indigo-500 to-purple-500 text-white text-center py-16 px-4">
         <h1 className="text-4xl font-bold mb-3">GoLite Mobile Press Kit</h1>
         <p className="opacity-90 max-w-2xl mx-auto">
           Official resources for media, partners, and stakeholders — company
@@ -242,7 +269,8 @@ export default function PressKit() {
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-2">Media Ready Company Copy</h2>
           <p className="text-sm text-gray-500 max-w-md mx-auto  dark:bg-gray-950 dark:text-white ">
-            Approved for direct use by journalists, editors, and partners without modification.
+            Approved for direct use by journalists, editors, and partners
+            without modification.
           </p>
         </div>
 
@@ -258,8 +286,8 @@ export default function PressKit() {
                 delivering reliable, accessible, and sustainable connectivity
                 solutions. Built on a governance-first foundation, the company
                 integrates advanced digital infrastructure with a commitment to
-                the Blue Economy, supporting responsible innovation and long-term
-                environmental impact.
+                the Blue Economy, supporting responsible innovation and
+                long-term environmental impact.
               </p>
               <div className="bg-green-50 dark:bg-gray-950  text-green-700 text-xs p-3 rounded-lg border border-green-200">
                 Safe for direct publication. Approved for use in editorial copy,
@@ -279,11 +307,25 @@ export default function PressKit() {
                 infrastructure with modern digital systems to provide seamless
                 voice, data, and mobile services.
               </p>
+              <p className="mt-4 text-sm  dark:bg-gray-950 dark:text-white  text-gray-700 leading-relaxed">
+                Positioned within the Blue Economy, GoLite Mobile integrates
+                sustainability into its operational and strategic framework,
+                supporting responsible technology deployment and environmentally
+                conscious growth. The company prioritizes transparency,
+                compliance, and customer trust, ensuring that services are
+                delivered with consistency and accountability.
+              </p>
+              <p className=" mt-4 text-sm  dark:bg-gray-950 dark:text-white  text-gray-700 leading-relaxed">
+                Through continuous innovation and a commitment to operational
+                excellence, GoLite Mobile aims to redefine how
+                telecommunications services are delivered — balancing
+                performance, accessibility, and long-term impact.
+              </p>
             </div>
           </div>
 
           {/* RIGHT — Fact Sheet */}
-          <div className= "bg-white border  dark:bg-gray-950 dark:text-white  border-gray-200 rounded-xl shadow-sm overflow-hidden h-fit">
+          <div className="bg-white border  dark:bg-gray-950 dark:text-white  border-gray-200 rounded-xl shadow-sm overflow-hidden h-fit">
             <div className="px-5 py-3 border-b  border-gray-100">
               <span className="text-xs font-bold text-green-600 uppercase tracking-widest">
                 📋 Fact Sheet
@@ -295,21 +337,31 @@ export default function PressKit() {
                 { label: "Industry", value: "Telecommunications" },
                 { label: "Headquarters", value: "India (Global Operations)" },
                 { label: "Founded", value: "2020" },
-                { label: "Markets Served", value: "India, UK, Caribbean & Global" },
+                {
+                  label: "Markets Served",
+                  value: "India, UK, Caribbean & Global",
+                },
                 { label: "Core Services", value: "Mobile data, Voice, eSIM" },
                 { label: "Network", value: "4G / 5G" },
-                { label: "Parent Group", value: "Zoiko Communications Group Inc." },
+                {
+                  label: "Parent Group",
+                  value: "Zoiko Communications Group Inc.",
+                },
               ].map((item, i) => (
                 <div key={i} className="p-4">
                   <p className="text-xs  dark:bg-gray-950 dark:text-white  text-gray-400 uppercase tracking-wide mb-0.5">
                     {item.label}
                   </p>
-                  <p className="text-sm font-semibold  dark:bg-gray-950 dark:text-white  text-gray-800">{item.value}</p>
+                  <p className="text-sm font-semibold  dark:bg-gray-950 dark:text-white  text-gray-800">
+                    {item.value}
+                  </p>
                 </div>
               ))}
             </div>
             <div className="px-5 py-3 border-t  dark:bg-gray-950 dark:text-white  border-gray-100 bg-gray-50">
-              <p className="text-xs  dark:bg-gray-950 dark:text-white  text-gray-400">Fact Sheet — March 2026</p>
+              <p className="text-xs  dark:bg-gray-950 dark:text-white  text-gray-400">
+                Fact Sheet — March 2026
+              </p>
             </div>
           </div>
         </div>
@@ -337,8 +389,12 @@ export default function PressKit() {
                 />
               </div>
               <div className="p-4  dark:bg-gray-950 dark:text-white ">
-                <h3 className="font-semibold text-sm mb-1  dark:bg-gray-950 dark:text-white ">{item.title}</h3>
-                <p className="text-xs   dark:bg-gray-950 dark:text-white  text-gray-500 mb-3">{item.desc}</p>
+                <h3 className="font-semibold text-sm mb-1  dark:bg-gray-950 dark:text-white ">
+                  {item.title}
+                </h3>
+                <p className="text-xs   dark:bg-gray-950 dark:text-white  text-gray-500 mb-3">
+                  {item.desc}
+                </p>
                 <div className="flex gap-2 flex-wrap">
                   {item.formats.map((f, i) => (
                     <span
@@ -390,14 +446,11 @@ export default function PressKit() {
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 rounded-xl">
           {leaders.map((leader, i) => (
-            <div
-              key={i}
-              className="  dark:bg-gray-950 dark:text-white  bg-white rounded-xl shadow-sm p-6 flex gap-6 items-start"
-            >
-              {/* Headshot */}
-              <div className="relative w-56 h-64 flex-shrink-0 rounded-lg overflow-hidden  dark:bg-gray-950 dark:text-white  bg-gray-200">
+            <div key={i} className="flex flex-col md:flex-row bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm gap-6 items-start">
+              {/* Image */}
+              <div className="relative w-full md:w-56 h-64 shrink-0 overflow-hidden">
                 <Image
                   src={leader.img}
                   alt={leader.name}
@@ -407,14 +460,16 @@ export default function PressKit() {
               </div>
 
               {/* Info */}
-              <div className="flex-1">
-                <p className="text-xs font-semibold  dark:bg-gray-950 dark:text-white  text-gray-400 uppercase tracking-widest mb-1">
+              <div className="flex-1 flex flex-col p-6">
+                <p className="text-xs font-semibold  dark:bg-gray-950 dark:text-white  text-green-600 uppercase tracking-widest mb-1">
                   {leader.role}
                 </p>
-                <h3 className="text-xl font-bold text-green-600 mb-0.5">
+                <h3 className="text-xl font-bold text-black mb-0.5">
                   {leader.name}
                 </h3>
-                <p className="text-xs  dark:bg-gray-950 dark:text-white  text-gray-500 mb-3">{leader.companies}</p>
+                <p className="text-xs  dark:bg-gray-950 dark:text-white  text-gray-500 mb-3">
+                  {leader.companies}
+                </p>
                 <blockquote className="border-l-4  dark:bg-gray-950 dark:text-white  border-green-400 pl-4 text-sm text-gray-600 leading-relaxed">
                   {leader.bio}
                 </blockquote>
@@ -434,7 +489,6 @@ export default function PressKit() {
             Official press releases and corporate announcements, latest first.
           </p>
         </div>
-
         {/* Filter Pills */}
         <div className="flex gap-2 flex-wrap justify-center mb-8">
           {newsFilters.map((f) => (
@@ -453,20 +507,22 @@ export default function PressKit() {
         </div>
 
         {/* News Items */}
-        <div className="space-y-3">
+        <div className="space-y-3 ">
           {filteredNews.map((item, i) => (
             <div
               key={i}
-              className={ `  dark:bg-gray-950 dark:text-white  bg-white rounded-xl shadow-sm p-5 flex gap-5 items-start border-l-4 ${
+              className={` hover:bg-green-100 dark:bg-gray-950 dark:text-white  bg-white rounded-xl shadow-sm p-5 flex gap-5 items-start border-l-4 ${
                 item.tags.includes("LATEST")
                   ? "border-green-500"
                   : "border-transparent"
               }`}
             >
               {/* Date */}
-              <div className="flex-shrink-0 text-center w-10">
+              <div className="shrink-0 text-center w-10">
                 <p className="text-2xl font-bold leading-none">{item.day}</p>
-                <p className="text-xs text-gray-400 font-medium">{item.month}</p>
+                <p className="text-xs text-gray-400 font-medium">
+                  {item.month}
+                </p>
                 <p className="text-xs text-gray-300">{item.year}</p>
               </div>
 
@@ -477,7 +533,8 @@ export default function PressKit() {
                     <span
                       key={ti}
                       className={`text-xs px-2 py-0.5 rounded font-semibold ${
-                  tagColorMap[tag as keyof typeof tagColorMap] ?? "bg-gray-100 text-gray-600"
+                        tagColorMap[tag as keyof typeof tagColorMap] ??
+                        "bg-gray-100 text-gray-600"
                       }`}
                     >
                       {tag}
@@ -485,16 +542,18 @@ export default function PressKit() {
                   ))}
                 </div>
                 <h4 className="font-semibold text-sm mb-1">{item.title}</h4>
-                <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
 
               {/* Actions */}
-              <div className="flex-shrink-0 flex flex-col items-end gap-2">
-                <button className="text-xs text-green-600 font-medium hover:underline whitespace-nowrap">
+              <div className="shrink-0 flex flex-col items-end gap-2">
+                <button className="text-xs text-green-700 font-medium hover:underline whitespace-nowrap">
                   Read More →
                 </button>
                 {item.hasPdf && (
-                  <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded flex items-center gap-1">
+                  <span className="text-xs text-green-700 px-2 py-0.5 rounded flex items-center gap-1">
                     📄 PDF
                   </span>
                 )}
@@ -506,7 +565,7 @@ export default function PressKit() {
         {/* View All */}
         <div className="text-center mt-8">
           <button className="text-sm border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-100 transition-all">
-            View All Press Releases ↓
+            View All Press Releases →
           </button>
         </div>
       </section>
@@ -514,32 +573,42 @@ export default function PressKit() {
       {/* ─────────────────────────────────────────────
           📸  PHOTOGRAPHY & VISUAL ASSETS
       ───────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 pb-16  dark:bg-gray-950 dark:text-white ">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold">Photography & Visual Assets</h2>
-          <p className="text-sm text-gray-500 mt-1  dark:bg-gray-950 dark:text-white ">
+      <section className="max-w-6xl mx-auto px-4 pb-16 dark:bg-gray-950">
+        {/* Heading */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
+            Photography & Visual Assets
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 max-w-xl mx-auto">
             High-resolution images and video assets approved for editorial and
             media publication.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4  dark:bg-gray-950 dark:text-white ">
+        {/* Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {visualAssets.map((asset, i) => (
             <div
               key={i}
-              className={`rounded-xl overflow-hidden shadow-sm cursor-pointer group relative dark:bg-gray-950 dark:text-white ${asset.bg}`}
+              className="rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer group bg-white dark:bg-gray-900"
             >
-              {/* Image area */}
-              <div className="relative h-28 flex items-center justify-center  dark:bg-gray-950 dark:text-white">
-                <span className="text-4xl">{asset.emoji}</span>
-                {/* Overlay on hover */}
-                <div className="absolute inset-0  dark:bg-gray-950 dark:text-white  bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-t-xl" />
+              {/* Top Icon Area */}
+              <div
+                className={`h-28 flex items-center justify-center ${asset.bg} relative`}
+              >
+                {/* Replace emoji with icon later */}
+                <span className="text-3xl">{asset.emoji}</span>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition rounded-t-xl" />
               </div>
 
-              {/* Info */}
-              <div className={`p-3 ${asset.dark ? " dark:bg-gray-950 dark:text-white text-white" : "text-gray-800"}`}>
-                <p className="text-xs font-semibold dark:bg-gray-950 dark:text-white">{asset.title}</p>
-                <p className={`text-xs mt-0.5 ${asset.dark ? "text-gray-300 dark:bg-gray-950 dark:text-white" : "text-gray-500 dark:bg-gray-950 dark:text-white"}`}>
+              {/* Bottom Content */}
+              <div className="p-3">
+                <p className="text-xs font-semibold text-gray-800 dark:text-gray-100">
+                  {asset.title}
+                </p>
+                <p className="text-xs mt-1 text-gray-500 dark:text-gray-400">
                   {asset.desc}
                 </p>
               </div>
@@ -552,47 +621,62 @@ export default function PressKit() {
           🌿  SUSTAINABILITY AT THE CORE
       ───────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pb-16">
-        <div className="bg-green-50 rounded-2xl p-8 dark:bg-gray-950 dark:text-white" >
-          {/* Header */}
-          <p className="text-xs font-bold text-green-600 uppercase tracking-widest mb-1">
-            🌿 Blue Economy Positioning
-          </p>
-          <h2 className="text-2xl font-bold text-green-800 mb-2">
-            Sustainability at the Core
-          </h2>
-          <p className="text-sm dark:bg-gray-950 dark:text-white text-gray-600 max-w-2xl mb-8 leading-relaxed">
-            GoLite Mobile's sustainability framework is not peripheral — it is
-            embedded into the company's operational model, brand identity, and
-            strategic vision. This section provides approved messaging and
-            materials for journalists covering ESG and responsible technology.
-          </p>
+        <div className="rounded-2xl p-8 bg-linear-to-r from-green-50 to-green-100 dark:from-gray-900 dark:to-gray-800">
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            {/* LEFT SIDE */}
+            <div>
+              {/* Header */}
+              <p className="text-xs font-semibold text-green-600 uppercase tracking-widest mb-2">
+                🌿 Blue Economy Positioning
+              </p>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {sustainabilityStats.map((stat, i) => (
-              <div
-                key={i}
-                className=" dark:bg-gray-950 dark:text-white bg-white rounded-xl p-4 text-center shadow-sm"
-              >
-                <p className="text-2xl font-extrabold text-green-600">
-                  {stat.value}
-                </p>
-                <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+              <h2 className="text-3xl font-bold text-green-900 dark:text-white mb-3">
+                Sustainability at the Core
+              </h2>
 
-          {/* Feature Cards */}
-          <div className="grid md:grid-cols-4 gap-4">
-            {sustainabilityFeatures.map((feat, i) => (
-              <div key={i} className= " dark:bg-gray-950 dark:text-white bg-white rounded-xl p-4 shadow-sm">
-                <p className="text-2xl mb-2">{feat.icon}</p>
-                <h4 className="font-semibold text-sm mb-1">{feat.title}</h4>
-                <p className="text-xs text-gray-500 leading-relaxed">
-                  {feat.desc}
-                </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md mb-6 leading-relaxed">
+                GoLite Mobile's sustainability framework is not peripheral — it
+                is embedded into the company's operational model, brand
+                identity, and strategic vision. This section provides approved
+                messaging and materials for journalists covering ESG and
+                responsible technology.
+              </p>
+
+              {/* Feature Cards (2x2) */}
+              <div className="grid grid-cols-2 gap-4">
+                {sustainabilityFeatures.map((feat, i) => (
+                  <div
+                    key={i}
+                    className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-sm"
+                  >
+                    <p className="text-xl mb-2">{feat.icon}</p>
+                    <h4 className="font-semibold text-sm text-gray-800 dark:text-white mb-1">
+                      {feat.title}
+                    </h4>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                      {feat.desc}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* RIGHT SIDE - Stats */}
+            <div className="grid grid-cols-2 gap-4">
+              {sustainabilityStats.map((stat, i) => (
+                <div
+                  key={i}
+                  className="bg-white dark:bg-gray-900 rounded-xl p-5 text-center shadow-sm"
+                >
+                  <p className="text-2xl font-bold text-green-600">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -601,78 +685,77 @@ export default function PressKit() {
           📞  MEDIA CONTACT
       ───────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pb-20">
-        <div className="bg-[#0f1c2e] text-white rounded-2xl p-8 grid md:grid-cols-2 gap-8">
-          {/* Left */}
-          <div>
-            <span className="text-xs bg-white/10 px-3 py-1 rounded-full font-semibold tracking-widest uppercase">
-              Media Contact
-            </span>
-            <h2 className="text-2xl font-bold mt-4 mb-2">
-              Speak with Our Media Team
-            </h2>
-            <p className="text-sm text-gray-400 mb-6 leading-relaxed">
-              Our media relations team is dedicated to supporting journalists,
-              editors, and partners with fast, accurate, and verified
-              information.
-            </p>
+        <div
+          className="rounded-2xl p-5 md:p-8 
+    bg-linear-to-r from-[#1e2f4d] to-[#243b5a] 
+    dark:from-[#0f172a] dark:to-[#1e293b] text-white"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* LEFT */}
+            <div>
+              <span className="text-xs bg-white/10 px-3 py-1 rounded-full font-semibold tracking-widest uppercase">
+                Media Contact
+              </span>
 
-            <div className="space-y-3 text-sm">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm">
-                  ✉️
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400 uppercase tracking-wide">
-                    Media Enquiries
-                  </p>
-                  <p className="font-medium">press@golitemobile.com</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm">
-                  📞
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400 uppercase tracking-wide">
-                    Press Hotline
-                  </p>
-                  <p className="font-medium">+44 (0) 20 8001 5030</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm">
-                  🤝
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400 uppercase tracking-wide">
-                    Paid Partnerships
-                  </p>
-                  <p className="font-medium">partnerships@golitemobile.com</p>
-                </div>
+              <h2 className="text-2xl md:text-3xl font-bold mt-4 mb-2">
+                Speak with Our Media Team
+              </h2>
+
+              <p className="text-sm text-gray-300 mb-6 leading-relaxed">
+                Our media relations team supports journalists and partners with
+                fast, accurate information.
+              </p>
+
+              <div className="space-y-3">
+                {contacts.map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 bg-white/5 rounded-xl p-3 w-full"
+                  >
+                    <div className="w-9 h-9 shrink-0 rounded-lg bg-white/10 flex items-center justify-center">
+                      {item.icon}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-[10px] text-gray-400 uppercase">
+                        {item.label}
+                      </p>
+                      <p className="text-sm font-medium truncate">
+                        {item.value}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
 
-          {/* Right */}
-          <div>
-            <h3 className="font-semibold mb-4 text-sm">Response Commitments</h3>
-            <div className="space-y-2 mb-6">
-              {responseCommitments.map((r, i) => (
-                <div
-                  key={i}
-                  className="flex justify-between items-center text-sm border-b border-white/10 pb-2"
-                >
-                  <span className="text-gray-400">{r.type}</span>
-                  <span className="font-medium text-white whitespace-nowrap">
-                    {r.time}
-                  </span>
+            {/* RIGHT */}
+            <div className="w-full">
+              <div className="bg-white/5 backdrop-blur rounded-xl p-4 md:p-5 border border-white/10 w-full">
+                <h3 className="font-semibold mb-4 text-sm">
+                  Response Commitments
+                </h3>
+
+                <div className="space-y-3 mb-6">
+                  {responseCommitments.map((r, i) => (
+                    <div
+                      key={i}
+                      className="flex justify-between items-start text-sm border-b border-white/10 pb-2 gap-2"
+                    >
+                      <span className="text-gray-300 wrap-break-word">
+                        {r.type}
+                      </span>
+                      <span className="font-semibold whitespace-nowrap">
+                        {r.time}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <button className="w-full bg-green-500 hover:bg-green-600 transition-colors text-white font-semibold py-3 rounded-xl text-sm">
-              Send a Media Enquiry
-            </button>
+                <button className="w-full bg-green-500 hover:bg-green-600 transition py-3 rounded-xl text-sm font-semibold">
+                  Send a Media Enquiry
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
