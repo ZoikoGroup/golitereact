@@ -13,37 +13,49 @@ export default function PressKit() {
       desc: "Full-colour logo on white/light backgrounds",
       img: "/img/Frame 6.png",
       formats: ["PNG", "SVG", "EPS"],
+      variant: "light",
+      updated: "Mar 2025",
     },
     {
       title: "Primary Logo – Dark",
       desc: "Reversed logo for dark/navy backgrounds",
       img: "/img/Background (11).png",
       formats: ["PNG", "SVG", "EPS"],
+      variant: "dark", //  important (navy header)
+      updated: "Mar 2025",
     },
     {
       title: "Icon Mark",
-      desc: "Standalone icon for apps, favicons, social",
+      desc: "Standalone icon for apps, favicons, and social media",
       img: "/img/Vector.png",
       formats: ["PNG", "SVG", "ICO"],
+      variant: "light",
+      updated: "Mar 2025",
     },
     {
       title: "Brand Colour Palette",
       desc: "Primary green, orange, deep navy + neutrals",
       img: "/img/Background (10).png",
       formats: ["ASE", "HEX", "PDF"],
+      variant: "gradient", //  matches colorful card
+      updated: "Mar 2025",
     },
     {
-      title: "Typography – Poppins",
-      desc: "Regular, Medium, SemiBold, Bold, ExtraBold",
+      title: "Poppins",
+      desc: "Regular · Medium · SemiBold · Bold · ExtraBold",
       img: "/img/Paragraph+Background+HorizontalBorder.png",
       formats: ["PDF", "DOC"],
+      variant: "light",
+      updated: "Mar 2025",
     },
     {
-      title: "All Assets",
-      desc: "Complete package — logos, icons, colours",
+      title: "Download All Brand Assets",
+      desc: "Complete package — logos, icons, colours, and typography",
       img: "/img/Paragraph+Background.png",
-      formats: ["ZIP"],
-      highlight: true,
+      formats: ["ZIP (4.2 MB)"],
+      variant: "dark", //  dark header like screenshot
+      highlight: true, //  green border highlight
+      updated: "Mar 2025",
     },
   ];
 
@@ -124,7 +136,7 @@ export default function PressKit() {
     {
       title: "Product Screenshots",
       desc: "App UI · 8 images · 12 min Print",
-      bg: "bg-gray-100",
+      bg: "bg-green-50",
       img: "/img/press/product-screenshots.png",
       emoji: "📱",
     },
@@ -255,7 +267,7 @@ export default function PressKit() {
 
   return (
     <div className="bg-[#f5f6f7]  dark:bg-gray-950 dark:text-white  text-black">
-      {/* 🔵 HERO */}
+      {/*  HERO */}
       <section className="bg-linear-to-r from-indigo-500 to-purple-500 text-white text-center py-16 px-4">
         <h1 className="text-4xl font-bold mb-3">GoLite Mobile Press Kit</h1>
         <p className="opacity-90 max-w-2xl mx-auto">
@@ -367,70 +379,131 @@ export default function PressKit() {
         </div>
       </section>
 
-      {/* 🎨 BRAND ASSETS */}
-      <section className="max-w-6xl mx-auto px-4 py-10  dark:bg-gray-950 dark:text-white ">
-        <h2 className="text-2xl font-bold text-center mb-8">
+      {/*  BRAND ASSETS */}
+      <section className="max-w-6xl mx-auto px-4 py-12 bg-[#f3f4f6] dark:bg-gray-950 transition-colors duration-300">
+        {/* Header */}
+        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white">
           Controlled Brand Distribution
         </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {assets.map((item, index) => (
+        <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2 mb-10">
+          Official assets provided for media and partner use. All usage must
+          comply with brand guidelines.
+        </p>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {assets.map((item) => (
             <div
-              key={index}
-              className={`rounded-xl overflow-hidden shadow-sm border ${
-                item.highlight ? "border-green-500" : "bg-white"
-              }`}
+              key={item.title}
+              className={`
+          rounded-xl overflow-hidden border bg-white dark:bg-gray-900
+          shadow-sm hover:shadow-md transition
+          ${
+            item.highlight
+              ? "border-green-500 dark:border-green-400"
+              : "border-gray-200 dark:border-gray-700"
+          }
+        `}
             >
-              <div className="relative h-40  dark:bg-gray-700 dark:text-white   bg-gray-100">
+              {/*  TOP VISUAL SECTION */}
+              <div
+                className={`h-32 flex items-center justify-center
+          ${
+            item.variant === "dark"
+              ? "bg-[#1e293b]"
+              : item.variant === "gradient"
+                ? "bg-linear-to-r from-green-500 via-orange-500 to-indigo-900"
+                : "bg-gray-100 dark:bg-gray-800"
+          }`}
+              >
                 <Image
                   src={item.img}
                   alt={item.title}
-                  fill
-                  className="object-contain p-4"
+                  width={120}
+                  height={60}
+                  className="object-contain"
                 />
               </div>
-              <div className="p-4  dark:bg-gray-950 dark:text-white ">
-                <h3 className="font-semibold text-sm mb-1  dark:bg-gray-950 dark:text-white ">
+
+              {/*  CONTENT */}
+              <div className="p-4">
+                <h3 className="text-sm font-semibold text-gray-800 dark:text-white">
                   {item.title}
                 </h3>
-                <p className="text-xs   dark:bg-gray-950 dark:text-white  text-gray-500 mb-3">
+
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 mb-3">
                   {item.desc}
                 </p>
-                <div className="flex gap-2 flex-wrap">
-                  {item.formats.map((f, i) => (
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {item.formats.map((f) => (
                     <span
-                      key={i}
-                      className="  dark:bg-gray-950 dark:text-white text-xs bg-gray-200 px-2 py-1 rounded"
+                      key={f}
+                      className="text-[11px] px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
                     >
                       {f}
                     </span>
                   ))}
                 </div>
+
+                {/* Metadata */}
+                {item.updated && (
+                  <p className="text-[11px] text-gray-400 dark:text-gray-500">
+                    Updated {item.updated}
+                  </p>
+                )}
               </div>
             </div>
           ))}
         </div>
-      </section>
 
-      {/* ⚠️ USAGE */}
-      <section className="max-w-6xl mx-auto px-4 pb-16">
-        <div className="bg-white rounded-xl p-6 shadow-sm grid md:grid-cols-3 gap-6 text-sm  dark: border-amber-50   dark:bg-gray-950 dark:text-white ">
-          <div>
-            <h4 className="font-semibold text-green-600 mb-2">Permitted</h4>
-            <p className="text-gray-600  dark:bg-gray-950 dark:text-white ">
-              Use logos on approved backgrounds. Maintain proportions.
-            </p>
+        {/*  USAGE GUIDELINES */}
+        <div className="mt-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
+          <h3 className="font-semibold text-gray-800 dark:text-white mb-4">
+            Usage Guidelines
+          </h3>
+
+          <div className="grid md:grid-cols-3 gap-4 text-sm">
+            <div>
+              <p className="font-semibold text-gray-700 dark:text-green-400 mb-2">
+                Permitted
+              </p>
+              <p className="bg-green-100 dark:bg-green-900/20 p-4 rounded-lg text-gray-600 dark:text-gray-300 text-xs border border-green-400">
+                Use logos on approved light or dark backgrounds. Maintain
+                minimum clear space. Use only provided colour variants.
+                Reproduce with correct proportions.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-gray-600 dark:text-red-400 mb-2">
+                Not Permitted
+              </p>
+              <p className="bg-red-100 p-3.5 rounded-lg dark:bg-red-900/20 text-gray-600 dark:text-gray-300 text-xs border border-red-400">
+                Modify, recolour, or distort the logo. Add effects such as
+                shadows or outlines. Use unapproved colour combinations. Place
+                on visually busy or conflicting backgrounds.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                Minimum Clear Space
+              </p>
+              <p className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-gray-600 dark:text-gray-400 text-xs border border-gray-400">
+                Maintain a minimum clear space equal to the height of the "G"
+                letterform on all sides of the logo. This applies in all digital
+                and print contexts.
+              </p>
+            </div>
           </div>
-          <div>
-            <h4 className="font-semibold text-red-500 mb-2">Not Permitted</h4>
-            <p className="text-gray-600  dark:bg-gray-950 dark:text-white ">
-              Do not recolor, distort, or modify logos.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-2">Clear Space</h4>
-            <p className="text-gray-600  dark:bg-gray-950 dark:text-white ">
-              Maintain minimum spacing equal to logo height.
-            </p>
+          <div className="bg-black text-white w-full p-3 text-sm mt-5 rounded-xl">
+            <span>⚖️ </span>Use of GoLite Mobile brand assets must comply with
+            official brand guidelines. Unauthorized modification, commercial
+            misuse, or reproduction outside of approved media contexts is
+            strictly prohibited. For licensing enquiries contact
+            press@golitemobile.com.
           </div>
         </div>
       </section>
@@ -448,7 +521,10 @@ export default function PressKit() {
 
         <div className="space-y-6 rounded-xl">
           {leaders.map((leader, i) => (
-            <div key={i} className="flex flex-col md:flex-row bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm gap-6 items-start">
+            <div
+              key={i}
+              className="flex flex-col md:flex-row bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm gap-6 items-start"
+            >
               {/* Image */}
               <div className="relative w-full md:w-56 h-64 shrink-0 overflow-hidden">
                 <Image
@@ -630,11 +706,11 @@ export default function PressKit() {
                 🌿 Blue Economy Positioning
               </p>
 
-              <h2 className="text-3xl font-bold text-green-900 dark:text-white mb-3">
+              <h2 className="text-3xl font-bold text-green-600 dark:text-white mb-3">
                 Sustainability at the Core
               </h2>
 
-              <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md mb-6 leading-relaxed">
+              <p className="text-sm text-green-600 dark:text-gray-400 max-w-md mb-6 leading-relaxed">
                 GoLite Mobile's sustainability framework is not peripheral — it
                 is embedded into the company's operational model, brand
                 identity, and strategic vision. This section provides approved
@@ -650,10 +726,10 @@ export default function PressKit() {
                     className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-sm"
                   >
                     <p className="text-xl mb-2">{feat.icon}</p>
-                    <h4 className="font-semibold text-sm text-gray-800 dark:text-white mb-1">
+                    <h4 className="font-semibold text-sm text-green-600 dark:text-white mb-1">
                       {feat.title}
                     </h4>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                    <p className="text-xs text-green-700 dark:text-gray-400 leading-relaxed">
                       {feat.desc}
                     </p>
                   </div>
@@ -671,7 +747,7 @@ export default function PressKit() {
                   <p className="text-2xl font-bold text-green-600">
                     {stat.value}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  <p className="text-xs text-green-700 dark:text-gray-400 mt-1">
                     {stat.label}
                   </p>
                 </div>
