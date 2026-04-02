@@ -15,7 +15,7 @@ export  function Accessibility() {
   // ── BUILT-IN FEATURES ──────────────────────────────────────
   const builtInFeatures = [
     {
-      icon: "⌨️",
+      icon: "/img/compliance/5.png",
       title: "Keyboard Navigation",
       desc: "Every interactive element on every GoLite page is fully reachable and operable using a keyboard alone — no mouse required.",
     },

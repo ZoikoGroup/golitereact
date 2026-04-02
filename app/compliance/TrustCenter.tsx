@@ -1,58 +1,59 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 
 export default function TrustCenter() {
   const [activeSection, setActiveSection] = useState("Overview");
 
   const navItems = [
-    { icon: "🏠", label: "Overview" },
-    { icon: "🏅", label: "Certifications" },
-    { icon: "🛡️", label: "Security" },
-    { icon: "🔐", label: "Privacy" },
-    { icon: "🤖", label: "AI Governance" },
-    { icon: "⚖️", label: "Risk & Compliance" },
-    { icon: "📜", label: "Policies" },
-    { icon: "📄", label: "Documents" },
+    { icon: "/img/compliance/1.png", label: "Overview" },
+    { icon: "/img/compliance/2.png", label: "Certifications" },
+    { icon: "/img/compliance/3.png", label: "Security" },
+    { icon: "/img/compliance/4.png", label: "Privacy" },
+    { icon: "/img/compliance/5.png", label: "AI Governance" },
+    { icon: "/img/compliance/6.png", label: "Risk & Compliance" },
+    { icon: "/img/compliance/7.png", label: "Policies" },
+    { icon: "/img/compliance/8.png", label: "Documents" },
   ];
 
   const certifications = [
     {
-      icon: "🏅",
+      icon: "/img/compliance/5.png",
       name: "ISO 27001",
       status: "✓ Active",
       statusColor: "bg-green-100 text-green-700",
       desc: " Information Security Management System Validates controls protecting the confidentiality, integrity, and availability of  information assets. ",
     },
     {
-      icon: "🛡️",
+      icon: "/img/compliance/5.png",
       name: "SOC 2 Type II",
       status: "✓ Active",
       statusColor: "bg-green-100 text-green-700",
       desc: "Security, Availability, and Confidentiality trust service criteria independently audited and verified across all platform operations.",
     },
     {
-      icon: "🔐",
+      icon: "/img/compliance/5.png",
       name: "GDPR / UK GDPR",
       status: "✓ Compliant",
       statusColor: "bg-green-100 text-green-700",
       desc: "Full compliance with EU and UK GDPR. Includes DPAs, SCCs, and full data subject rights support.",
     },
     {
-      icon: " 🌐",
+      icon: "/img/compliance/5.png",
       name: "Cyber Essentials Plus",
       status: "✓ Certified",
       statusColor: "bg-green-100 text-green-700",
       desc: " UK government-backed scheme validating technical controls against common cyber attack vectors.   ",
     },
     {
-      icon: "🤖",
+      icon: "/img/compliance/5.png",
       name: "ISO 42001 — AI",
       status: "⟳ In Progress",
       statusColor: "bg-orange-100 text-orange-700",
       desc: "AI Management System standard alignment.Covering human oversight, explainability, and responsible AI deployment practices.",
     },
     {
-      icon: "📋",
+      icon: "/img/compliance/5.png",
       name: "CCPA Compliance",
       status: "⟳ In Progress",
       statusColor: "bg-green-100 text-green-700",
@@ -62,27 +63,27 @@ export default function TrustCenter() {
 
  const securityCategories = [
   {
-    icon: "🛡️",
+    icon: "/img/compliance/5.png",
     title: "Security",
     sub: "Architecture, controls, and technical measures",
   },
   {
-    icon: "🧑‍💻",
+    icon: "/img/compliance/5.png",
     title: "Identity & Authentication",
     sub: "MFA · SSO · Zero Trust access",
   },
   {
-    icon: "📋",
+    icon: "/img/compliance/5.png",
     title: "Access Control",
     sub: "RBAC · Least privilege · Privileged access management",
   },
   {
-    icon: "📡",
+    icon: "/img/compliance/5.png",
     title: "Monitoring & Incident Response",
     sub: "24/7 SOC · SIEM · Incident playbooks",
   },
   {
-    icon: "🔒",
+    icon: "/img/compliance/5.png",
     title: "Encryption & Data Protection",
     sub: "AES-256 · TLS 1.3 · Key management",
   },
@@ -90,22 +91,22 @@ export default function TrustCenter() {
 
   const privacyPrinciples = [
     {
-      icon: "⚖️",
+      icon: "/img/compliance/5.png",
       title: "Lawfulness & Transparency",
       desc: "All personal data is processed lawfully, fairly, and transparently. Customers are informed of data use at point of collection.",
     },
     {
-      icon: "🎯",
+      icon: "/img/compliance/5.png",
       title: "Purpose Limitation",
       desc: "Data is collected for specified, explicit purposes and never processed in a manner incompatible with those purposes.",
     },
     {
-      icon: "🗜️",
+      icon: "/img/compliance/5.png",
       title: "Data Minimisation",
       desc: "We collect only the data that is strictly necessary. No excessive collection. Regular data inventory reviews are conducted.",
     },
     {
-      icon: "🗑️",
+      icon: "/img/compliance/5.png",
       title: "Storage Limitation",
       desc: "Personal data is not retained longer than necessary. Defined retention periods apply to all data categories.",
     },
@@ -113,27 +114,27 @@ export default function TrustCenter() {
 
  const privacyRights = [
   {
-    icon: "📥",
+    icon: "/img/compliance/5.png",
     title: "Request Your Data",
     desc: "Subject Access Request (SAR)",
   },
   {
-    icon: "✏️",
+    icon: "/img/compliance/5.png",
     title: "Correct Your Data",
     desc: "Right to rectification",
   },
   {
-    icon: "🗑️",
+    icon: "/img/compliance/5.png",
     title: "Delete Your Data",
     desc: "Right to erasure (Right to be Forgotten)",
   },
   {
-    icon: "📦",
+    icon: "/img/compliance/5.png",
     title: "Data Portability",
     desc: "Receive your data in a structured, machine-readable format",
   },
   {
-    icon: "🛑",
+    icon: "/img/compliance/5.png",
     title: "Object to Processing",
     desc: "Right to restrict or object to certain processing",
   },
@@ -141,32 +142,32 @@ export default function TrustCenter() {
 
  const aiPrinciples = [
   {
-    icon: "👤",
+    icon: "/img/compliance/5.png",
     title: "Human-in-Command",
     desc: "All AI-assisted decisions affecting customers or compliance are reviewed and approved by accountable human operators.",
   },
   {
-    icon: "🔍",
+    icon: "/img/compliance/5.png",
     title: "Explainability",
     desc: "AI recommendations and automated decisions are logged with explainable rationale, accessible on request.",
   },
   {
-    icon: "📋",
+    icon: "/img/compliance/5.png",
     title: "Policy Enforcement",
     desc: "AI usage is governed by a formal policy framework aligned with ISO 42001 and our internal governance board.",
   },
   {
-    icon: "⚖️",
+    icon: "/img/compliance/5.png",
     title: "Fairness & Bias",
     desc: "Models are regularly audited for discriminatory outputs. Bias detection is embedded in our model evaluation pipeline.",
   },
   {
-    icon: "📊",
+    icon: "/img/compliance/5.png",
     title: "AI Disclosure",
     desc: "Customers are informed when AI or automated systems are used in decisions that materially affect them.",
   },
   {
-    icon: "🔒",
+    icon: "/img/compliance/5.png",
     title: "Data Minimisation",
     desc: "AI models are trained and operated with the minimum data necessary. No unnecessary retention for model training.",
   },
@@ -174,42 +175,42 @@ export default function TrustCenter() {
 
   const riskItems = [
   {
-    icon: "📡",
+    icon: "/img/compliance/5.png",
     title: "Telecom Regulatory Compliance",
     desc: "Ongoing alignment with regulatory monitoring and reporting obligations.",
     status: "Active",
     statusColor: "bg-green-100 text-green-700",
   },
   {
-    icon: "🚫",
+    icon: "/img/compliance/5.png",
     title: "Anti-Bribery & Corruption",
     desc: "UK Bribery Act 2010 and US FCPA compliance. Annual training and third-party screening.",
     status: "Active",
     statusColor: "bg-green-100 text-green-700",
   },
   {
-    icon: "🌍",
+    icon: "/img/compliance/5.png",
     title: "Sanctions & Export Controls",
     desc: "OFAC, HM Treasury and EU sanctions screening with ongoing monitoring.",
     status: "Active",
     statusColor: "bg-green-100 text-green-700",
   },
   {
-    icon: "💳",
+    icon: "/img/compliance/5.png",
     title: "PCI DSS (Payments)",
     desc: "Payment Card Industry Data Security Standards compliance for all transactions.",
     status: "In Review",
     statusColor: "bg-orange-100 text-orange-700",
   },
   {
-    icon: "🔁",
+    icon: "/img/compliance/5.png",
     title: "Business Continuity & DR",
     desc: "Tested Business Continuity Plan and Disaster Recovery procedures with defined RPO/RTO targets.",
     status: "Under Review",
     statusColor: "bg-yellow-100 text-yellow-700",
   },
   {
-    icon: "🌱",
+    icon: "/img/compliance/5.png",
     title: "ESG & Sustainability Reporting",
     desc: "Annual sustainability reporting with governance and environmental disclosures.",
     status: "Annual Report",
@@ -218,14 +219,14 @@ export default function TrustCenter() {
 ];
 
   const policies = [
-    { icon: "🔐", name: "Information Security Policy", version: "v3.1", date: "Mar 2026" },
-    { icon: "🔒", name: "Privacy & Data Protection Policy", version: "v4.0", date: "Feb 2026" },
-    { icon: "💻", name: "Acceptable Use Policy", version: "v2.3", date: "Jan 2026" },
-    { icon: "🤖", name: "AI Ethics & Governance Policy", version: "v1.2", date: "Mar 2026" },
-    { icon: "🚫", name: "Anti-Bribery & Anti-Corruption Policy", version: "v2.0", date: "Nov 2025" },
-        { icon: "🌍", name: "Sanctions & Export Control Policy", version: "v1.4", date: "Oct 2025" },
-    { icon: "🔁", name: "Business Continuity & Disaster Recovery Policy", version: "v2.1", date: "Sep 2025" },
-    { icon: "📢", name: "Vulnerability Disclosure Policy", version: "v1.0", date: "Aug 2025" },
+    { icon: "/img/compliance/5.png", name: "Information Security Policy", version: "v3.1", date: "Mar 2026" },
+    { icon: "/img/compliance/5.png", name: "Privacy & Data Protection Policy", version: "v4.0", date: "Feb 2026" },
+    { icon: "/img/compliance/5.png", name: "Acceptable Use Policy", version: "v2.3", date: "Jan 2026" },
+    { icon: "/img/compliance/5.png", name: "AI Ethics & Governance Policy", version: "v1.2", date: "Mar 2026" },
+    { icon: "/img/compliance/5.png", name: "Anti-Bribery & Anti-Corruption Policy", version: "v2.0", date: "Nov 2025" },
+        { icon: "/img/compliance/5.png", name: "Sanctions & Export Control Policy", version: "v1.4", date: "Oct 2025" },
+    { icon: "/img/compliance/5.png", name: "Business Continuity & Disaster Recovery Policy", version: "v2.1", date: "Sep 2025" },
+    { icon: "/img/compliance/5.png", name: "Vulnerability Disclosure Policy", version: "v1.0", date: "Aug 2025" },
   ];
 const documents = [
   { name: "Privacy Policy", sub: "Customer-facing privacy notice", category: "Privacy", categoryColor: "bg-blue-100 text-blue-700", access: "Public", accessColor: "bg-green-100 text-green-700", date: "Mar 2026", action: "Download", actionColor: "bg-green-500 hover:bg-green-600" },
@@ -273,24 +274,34 @@ const documents = [
        <aside className="col-span-2 dark:bg-gray-900 dark:text-white bg-white rounded-xl p-3 shadow-sm sticky top-4">
   <p className="text-[10px] font-bold dark:bg-gray-900 dark:text-white text-gray-400 uppercase tracking-widest px-2 mb-2">Navigation</p>
   {navItems.map((item) => (
-    <button
-      key={item.label}
-      onClick={() => {
-        setActiveSection(item.label);
-        const el = document.getElementById(item.label);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }}
-      className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-left transition-all mb-0.5 ${
-        activeSection === item.label
-          ? "bg-green-50 text-green-700 font-semibold"
-          : " dark:bg-gray-900 dark:text-white text-gray-600 hover:bg-gray-100"
-      }`}
-    >
-      <span>{item.icon}</span>
-      <span>{item.label}</span>
-    </button>
+  <button
+  key={item.label}
+  onClick={() => {
+    setActiveSection(item.label);
+    const el = document.getElementById(item.label);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }}
+  className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-left transition-all mb-0.5 ${
+    activeSection === item.label
+      ? "bg-green-50 text-green-700 font-semibold"
+      : "dark:bg-gray-900 dark:text-white text-gray-600 hover:bg-gray-100"
+  }`}
+>
+  {/* ICON */}
+
+<div className="w-4 h-4 relative">
+  <Image
+    src={item.icon}
+    alt={item.label}
+    fill
+    className="object-contain"
+  />
+</div>
+  {/* LABEL */}
+  <span>{item.label}</span>
+</button>
   ))}
 </aside>
 
@@ -300,7 +311,17 @@ const documents = [
           {/* OVERVIEW */}
           <div className=" dark:bg-gray-900 dark:text-white bg-white p-6 rounded-xl shadow-sm">
             <div className="flex items-center justify-between mb-4 dark:bg-gray-900 dark:text-white">
-              <h2 className="font-bold text-base flex items-center gap-2 dark:bg-gray-900 dark:text-white">📊 Overview</h2>
+              <h2 className="font-bold text-base flex items-center gap-2 dark:bg-gray-900 dark:text-white">
+                  <Image
+                      src={"/img/compliance/1.png"}
+                      alt="icon"
+                      width={20}
+                      height={20}
+                      className="object-contain"
+                    />Overview</h2>
+
+                    <p className="text-gray-700 xl
+                   flex">Trust posture summary</p>
               <span className="text-xs dark:bg-gray-900 dark:text-white bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">
                 UPDATED MARCH 2026
               </span>

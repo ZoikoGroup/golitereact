@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useState } from "react";
 
 export default function PartnerLegalFramework() {
@@ -18,13 +18,13 @@ export default function PartnerLegalFramework() {
     },
     {
       num: 2,
-      color: "bg-orange-400",
+      color: "bg-gray-800",
       title: "Submit Enquiry & NDA",
       desc: "Confidentiality agreement executed before any commercial or technical disclosure",
     },
     {
       num: 3,
-      color: "bg-blue-500",
+      color: "bg-orange-400",
       title: "Receive Legal Pack",
       desc: "Full framework issued: MSA, DPA, API Terms, Brand Licence, and Commercial Schedule",
     },
@@ -36,7 +36,7 @@ export default function PartnerLegalFramework() {
     },
     {
       num: 5,
-      color: "bg-teal-500",
+      color: "bg-green-800",
       title: "Begin Integration",
       desc: "Technical onboarding, API credentials issued, and go-live support provided",
     },
@@ -46,7 +46,7 @@ export default function PartnerLegalFramework() {
   const documents = [
     {
       tag: "DOC 1",
-      icon:"📋",
+   icon: "/img/partners/1.png",
       tagColor: "bg-blue-100 text-blue-700",
       title: "Master Services Agreement",
       desc: "The foundational agreement governing all commercial, technical, and data arrangements between GoLite Mobile and its partners.",
@@ -62,7 +62,7 @@ export default function PartnerLegalFramework() {
     },
     {
       tag: "DOC 2",
-      icon:"📝",
+     icon: "/img/partners/2.png",
       tagColor: "bg-orange-100 text-orange-700",
       title: "Statement of Work",
       desc: "Project-specific agreement that defines the deliverables, timelines, roles, and responsibilities for each individual engagement.",
@@ -77,7 +77,7 @@ export default function PartnerLegalFramework() {
     },
     {
       tag: "DOC 3",
-      icon:"🔒",
+    icon: "/img/partners/3.png",
       tagColor: "bg-red-100 text-red-700",
       title: "Data Processing Agreement",
       desc: "Ensures compliance with GDPR and applicable data protection laws when GoLite Mobile processes personal data on behalf of partners.",
@@ -93,7 +93,7 @@ export default function PartnerLegalFramework() {
     },
     {
       tag: "DOC 4",
-      icon:"⚙️",
+ icon: "/img/partners/4.png",
       tagColor: "bg-green-100 text-green-700",
       title: "API & Platform Terms",
       desc: "Governs access to and use of the GoLite platform, API infrastructure, and developer tools by authorised partner integrations.",
@@ -109,7 +109,7 @@ export default function PartnerLegalFramework() {
     },
     {
       tag: "DOC 5",
-      icon:"🎨",
+    icon: "/img/partners/5.png",
       tagColor: "bg-purple-100 text-purple-700",
       title: "Brand Licence Agreement",
       desc: "Defines the terms under which partners may use the GoLite Mobile brand, trademarks, and co-marketing assets in their commercial activities.",
@@ -124,7 +124,7 @@ export default function PartnerLegalFramework() {
     },
     {
       tag: "DOC 6",
-      icon:"💰",
+     icon: "/img/partners/6.png",
       tagColor: "bg-yellow-100 text-yellow-700",
       title: "Revenue & Commercial Schedule",
       desc: "Sets out the specific commercial terms applicable to each partner type, including revenue share structures, wholesale pricing and commission models.",
@@ -139,7 +139,7 @@ export default function PartnerLegalFramework() {
     },
     {
       tag: "DOC 7",
-      icon: "🤫",
+  icon: "/img/partners/7.png",
       tagColor: "bg-slate-100 text-slate-700",
       title: "Confidentiality Agreement (NDA)",
       desc: "Mutual non-disclosure agreement protecting commercially sensitive information shared during the partner evaluation and onboarding process.",
@@ -153,7 +153,7 @@ export default function PartnerLegalFramework() {
     },
     {
       tag: "NEW",
-      icon:"📦",
+      icon: "/img/partners/8.png",
       tagColor: "bg-green-500 text-white",
       title: "Partner Onboarding Legal Pack",
       desc: "A consolidated onboarding bundle containing all essential legal agreements pre-formatted for efficient review and countersignature.",
@@ -195,7 +195,7 @@ export default function PartnerLegalFramework() {
   // ─── REVENUE MODELS ─────────────────────────────────────────
   const revenueModels = [
   {
-    icon: "📊",
+icon: "/img/partners/9.png",
     title: "Revenue Share",
     desc: "Percentage-based split on revenue generated through the partnership. Aligned incentives for deep commercial relationships.",
     color: "bg-green-50 border-green-200",
@@ -208,7 +208,7 @@ export default function PartnerLegalFramework() {
     ],
   },
   {
-    icon: "🏷️",
+   icon: "/img/partners/10.png",
     title: "Wholesale Pricing",
     desc: "Fixed wholesale rates for services and connectivity, enabling partners to build and price their own propositions on top.",
     color: "bg-orange-50 border-orange-200",
@@ -221,7 +221,7 @@ export default function PartnerLegalFramework() {
     ],
   },
   {
-    icon: "🎯",
+    icon: "/img/partners/11.png",
     title: "Commission-Based",
     desc: "Performance-driven commission on referrals, activations, or customer acquisitions. Ideal for affiliate and referral partners.",
     color: "bg-purple-50 border-purple-200",
@@ -281,22 +281,22 @@ export default function PartnerLegalFramework() {
   // ─── GOVERNANCE FEATURES ─────────────────────────────────────
   const governanceFeatures = [
     {
-      icon: "📋",
+      icon: "/img/partners/1.png",
       title: "Ongoing Compliance Monitoring",
       desc: "No onboarding, system access, or information sharing begins before all required agreements are fully executed.",
     },
     {
-      icon: "🔍",
+      icon: "/img/partners/12.png",
       title: "Ongoing Compliance Monitoring",
       desc: "Partner compliance obligations are monitored continuously throughout the term of the agreement.",
     },
     {
-      icon: "📊",
+     icon: "/img/partners/9.png",
       title: "Audit Rights",
       desc: "GoLite Mobile retains full audit rights over partner activities to verify compliance with all agreement terms.",
     },
     {
-      icon: "⚡",
+      icon: "/img/partners/13.png",
       title: "Termination for Risk Events",
       desc: "Immediate termination rights are reserved for regulatory breach, security incidents, or material compliance failures.",
     },
@@ -304,12 +304,12 @@ export default function PartnerLegalFramework() {
 
   // ─── DOWNLOAD DOCUMENTS ──────────────────────────────────────
 const downloadDocs = [
-  { name: "Master Services Agreement", size: "248 KB", date: "01 Feb 2026", color: "text-blue-600" },
-  { name: "Statement of Work", size: "118 KB", date: "01 Feb 2026", color: "text-orange-600" },
-  { name: "Data Processing Agreement", size: "204 KB", date: "03 Mar 2026", color: "text-red-600" },
-  { name: "API & Platform Terms", size: "96 KB", date: "01 Feb 2026", color: "text-green-600" },
-  { name: "Brand Licence Agreement", size: "88 KB", date: "01 Feb 2026", color: "text-purple-600" },
-  { name: "Commercial Schedule", size: "312 KB", date: "15 Mar 2026", color: "text-yellow-600" },
+  { name: "Master Services Agreement", size: "248 KB", date: "01 Feb 2026", color: "text-blue-600" ,icon: "/img/partners/1.png" ,typeofdoc:"DOCX"},
+  { name: "Statement of Work", size: "118 KB", date: "01 Feb 2026", color: "text-orange-600" ,icon: "/img/partners/2.png",typeofdoc:"DOCX" },
+  { name: "Data Processing Agreement", size: "204 KB", date: "03 Mar 2026", color: "text-red-600"  ,icon: "/img/partners/3.png",typeofdoc:"DOCX" },
+  { name: "API & Platform Terms", size: "96 KB", date: "01 Feb 2026", color: "text-green-600"  ,icon: "/img/partners/4.png" ,typeofdoc:"DOCX"},
+  { name: "Brand Licence Agreement", size: "88 KB", date: "01 Feb 2026", color: "text-purple-600"   ,icon: "/img/partners/5.png",typeofdoc:"PDF"},
+  { name: "Commercial Schedule", size: "312 KB", date: "15 Mar 2026", color: "text-yellow-600"  ,icon: "/img/partners/9.png" ,typeofdoc:" XLSX"},
 ];
   return (
     <div className="bg-white  dark:bg-gray-900 dark:text-white text-gray-900 font-sans">
@@ -340,7 +340,7 @@ const downloadDocs = [
 
           {onboardingSteps.map((step, i) => (
             <div key={i} className="relative z-10 flex flex-col items-center text-center flex-1 px-2 dark:bg-gray-900 dark:text-white">
-              <div className={`w-10 h-10 rounded-full ${step.color} dark:bg-gray-900 dark:text-white text-white font-bold text-sm flex items-center justify-center mb-3 shadow-md`}>
+              <div className={`w-10 h-10 rounded-full ${step.color}  dark:text-white text-white font-bold text-sm flex items-center justify-center mb-3 shadow-md`}>
                 {step.num}
               </div>
               <h4 className="text-xs font-bold mb-1 dark:bg-gray-900 dark:text-white">{step.title}</h4>
@@ -373,7 +373,21 @@ const downloadDocs = [
                     {doc.tag}
                   </span>
                 </div>
-                <div className="text-xl align-middle">{doc.icon}</div>
+           
+
+<div className="text-xl">
+  {doc.icon.includes(".") ? (
+    <Image
+      src={doc.icon}
+      alt="icon"
+      width={20}
+      height={20}
+      className="object-contain"
+    />
+  ) : (
+    <span>{doc.icon}</span>
+  )}
+</div>
                 <h3 className="font-bold text-sm mb-1">{doc.title}</h3>
                 <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 mb-3 leading-relaxed">{doc.desc}</p>
                 <ul className="mt-auto space-y-1">
@@ -441,7 +455,19 @@ const downloadDocs = [
             {revenueModels.map((model, i) => (
               <div key={i} className={`rounded-xl border p-5 dark:bg-gray-900 dark:text-white ${model.color}`}>
                 <div className={`w-10 h-10 rounded-lg ${model.iconBg} flex items-center justify-center text-xl mb-3 dark:bg-gray-900 dark:text-white`}>
-                  {model.icon}
+             <div className="text-xl">
+  {model.icon.includes(".") ? (
+    <Image
+      src={model.icon}
+      alt="icon"
+      width={20}
+      height={20}
+      className="object-contain"
+    />
+  ) : (
+    <span>{model.icon}</span>
+  )}
+</div>
                 </div>
                 <h3 className="font-bold text-sm mb-3 dark:bg-gray-900 dark:text-white">{model.title}</h3>
                 <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1" >{model.desc}</p>
@@ -515,7 +541,19 @@ const downloadDocs = [
           <div className="grid md:grid-cols-4 gap-5 mb-8">
             {governanceFeatures.map((feat, i) => (
               <div key={i} className="bg-white rounded-xl border dark:bg-gray-900 dark:text-white border-gray-200 p-5 shadow-sm">
-                <div className="text-2xl mb-3">{feat.icon}</div>
+                <div className="text-xl">
+  {feat.icon.includes(".") ? (
+    <Image
+      src={feat.icon}
+      alt="icon"
+      width={20}
+      height={20}
+      className="object-contain"
+    />
+  ) : (
+    <span>{feat.icon}</span>
+  )}
+</div>
                 <h4 className="font-bold text-sm mb-1 dark:bg-gray-900 dark:text-white">{feat.title}</h4>
                 <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 leading-relaxed">{feat.desc}</p>
               </div>
@@ -539,20 +577,51 @@ const downloadDocs = [
               <p className="text-sm text-blue-300 mb-6 leading-relaxed">
               All eight institutional-grade templates in a single governed pack.
 Ready for legal review, customisation, and execution.</p>
-              <div className="space-y-2">
-                {downloadDocs.map((doc, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors rounded-lg px-4 py-2.5 cursor-pointer group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className={`text-xs font-bold ${doc.color}`}>📄</span>
-                      <span className="text-sm font-medium">{doc.name}</span>
-                    </div>
-                    <span className="text-xs text-blue-300 group-hover:text-white transition-colors">↓</span>
-                  </div>
-                ))}
-              </div>
+   <div className="space-y-2">
+  {downloadDocs.map((doc, i) => (
+    <div
+      key={i}
+      className="flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors rounded-lg px-4 py-3 cursor-pointer group"
+    >
+      {/* LEFT SIDE */}
+      <div className="flex items-center gap-3">
+        {/* ICON */}
+        {doc.icon ? (
+          <div className="w-8 h-8 relative bg-white/10 rounded-md flex items-center justify-center">
+            <Image
+              src={doc.icon}
+              alt={doc.name}
+              fill
+              className="object-contain p-1"
+            />
+          </div>
+        ) : (
+          <span className={`${doc.color}`}>📄</span>
+        )}
+
+        {/* TEXT */}
+        <div className="flex flex-col">
+          <span className="text-sm font-semibold">{doc.name}</span>
+          <span className="text-xs text-blue-300">
+            
+            {doc.typeofdoc} • {doc.size} • {doc.date}
+          </span>
+        </div>
+      </div>
+
+      {/* RIGHT SIDE (FILE TYPE BADGE) */}
+  <span className="text-[10px] font-bold bg-white/10 px-2 py-1 rounded text-green-400 flex items-center gap-1">
+  <Image 
+    src="/img/partners/14.png" 
+    alt="doc" 
+    width={12} 
+    height={12} 
+  />
+  {doc.typeofdoc}
+</span>
+    </div>
+  ))}
+</div>
             </div>
 
             {/* Right */}
