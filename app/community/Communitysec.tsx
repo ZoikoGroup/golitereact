@@ -31,23 +31,23 @@ const stats = [
   {
     value: "120K+",
     label: "Community Members",
-    icon: "👥",
+    icon: "/img/Community/community.png",
   },
   {
     value: "28,000+",
     label: "Solved Discussions",
-    icon: "✅",
+    icon: "/img/Community/tic.png",
     badge: "✓ Verified Answers",
   },
   {
     value: "92%",
     label: "Helpfulness Rating",
-    icon: "⭐",
+    icon: "/img/Community/star.png",
   },
   {
     value: "24/7",
     label: "Moderated & Verified",
-    icon: "🛡️",
+    icon: "/img/Community/sheild.png",
     badge: "✓ Expert Moderated",
   },
 ];
@@ -59,28 +59,28 @@ const categories = [
     desc: "5G speeds, signal issues, and coverage queries",
     discussions: "4,821 discussions",
     time: "2 min ago",
-    icon: "/img/Background.png",
+    icon: "/img/Community/network.png",
   },
   {
     title: "Devices & eSIM",
     desc: "eSIM activation, device compatibility, and setup",
     discussions: "3,189 discussions",
     time: "5 min ago",
-    icon: "/img/Background (1).png",
+    icon: "/img/Community/mobile.png",
   },
   {
     title: "Billing & Payments",
     desc: "Invoices, refunds, recharges, and payment methods",
     discussions: "2,640 discussions",
     time: "12 min ago",
-    icon: "/img/Background (2).png",
+    icon: "/img/Community/billing.png",
   },
   {
     title: "Plans & Account",
     desc: "Plan changes, SIM management, and account settings",
     discussions: "3,823 discussions",
     time: "8 min ago",
-    icon: "/img/Background (3).png",
+    icon: "/img/Community/account.png",
   },
   {
     title: "Roaming & International",
@@ -94,28 +94,28 @@ const categories = [
     desc: "APN settings, connectivity issues, and troubleshooting",
     discussions: "5,310 discussions",
     time: "Just now",
-    icon: "/img/Background (4).png",
+    icon: "/img/Community/support.png",
   },
   {
     title: "Business Solutions",
     desc: "Enterprise plans, multi-line accounts, and APIs",
     discussions: "870 discussions",
     time: "3 hr ago",
-    icon: "/img/Background (5).png",
+    icon: "/img/Community/bussiness.png",
   },
   {
     title: "Blue Economy & Sustainability",
     desc: "Ocean initiatives, green tech, and sustainability projects",
     discussions: "120 discussions",
     time: "45 min ago",
-    icon: "/img/Background (6).png",
+    icon: "/img/Community/sustainability.png",
   },
   {
     title: "Product Feedback",
     desc: "Share ideas, feature requests, and suggestions",
     discussions: "2,010 discussions",
     time: "30 min ago",
-    icon: "/img/Background (7).png",
+    icon: "/img/Community/bulb.png",
   },
   {
     title: "Announcements",
@@ -262,32 +262,32 @@ const resources = [
   {
     title: "Activate Your eSIM",
     desc: "Step-by-step guide for iOS and Android devices",
-    icon: "📱",
+    icon: "/img/Community/mobile.png",
   },
   {
     title: "Check Coverage in Your Area",
     desc: "Interactive 4G and 5G coverage map",
-    icon: "📶",
+    icon: "/img/Community/check.png",
   },
   {
     title: "Network Status Live",
     desc: "Real-time outage alerts and planned maintenance",
-    icon: "⚡",
+    icon: "/img/Community/thunder.png",
   },
   {
     title: "Manage or Change Your Plan",
     desc: "Upgrade, downgrade, or switch plan anytime",
-    icon: "⚙️",
+    icon: "/img/Community/change.png",
   },
   {
     title: "Billing FAQs",
     desc: "Understand your bill, set up auto-pay, get refunds",
-    icon: "💳",
+    icon: "/img/Community/billing.png",
   },
   {
     title: "Switch to GoLife",
     desc: "How to port your number in under 10 minutes",
-    icon: "📦",
+    icon: "/img/Community/switch.png",
   },
 ];
 
@@ -359,7 +359,16 @@ export default function Communitysec() {
           `}
                 >
                   {/* Icon */}
-                  <div className="mb-3 text-2xl">{stat.icon}</div>
+                  <div
+                    className={`w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 mb-4`}
+                  >
+                    <Image
+                      src={stat.icon}
+                      alt={stat.label}
+                      width={28}
+                      height={28}
+                    />
+                  </div>
 
                   {/* Value */}
                   <p className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
@@ -407,8 +416,8 @@ export default function Communitysec() {
                   <Image
                     src={cat.icon}
                     alt={cat.title}
-                    width={56}
-                    height={56}
+                    width={32}
+                    height={32}
                   />
                 </div>
 
@@ -659,8 +668,15 @@ export default function Communitysec() {
                 {/* Left Content */}
                 <div className="flex items-center gap-3">
                   {/* Icon */}
-                  <div className="w-9 h-9 flex items-center justify-center rounded-lg bg-green-100 dark:bg-gray-800 text-lg">
-                    {item.icon}
+                  <div
+                    className={`w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 mb-4`}
+                  >
+                    <Image
+                      src={item.icon}
+                      alt={item.title}
+                      width={28}
+                      height={28}
+                    />
                   </div>
 
                   {/* Text */}
@@ -702,22 +718,22 @@ export default function Communitysec() {
               {/* Bullet Points */}
               <ul className="mt-4 space-y-2 text-sm text-green-900 dark:text-gray-300">
                 <li className="flex items-center gap-2">
-                  <span className="text-green-600">🌿</span>1Plan =1 Tree planted
-                  across India
+                  <span className="text-green-600"><Image src="/img/Community/leaf.png" alt="Plan Icon" width={18} height={18} /></span>1Plan =1 Tree
+                  planted across India
                 </li>
 
                 <li className="flex items-center gap-2">
-                  <span className="text-green-600">🌿</span>
+                  <span className="text-green-600"><Image src="/img/Community/leaf.png" alt="Ocean Icon" width={18} height={18} /></span>
                   Ocean plastic offset with every subscription
                 </li>
 
                 <li className="flex items-center gap-2">
-                  <span className="text-green-600">🌿</span>
+                  <span className="text-green-600"><Image src="/img/Community/leaf.png" alt="Renewable Icon" width={18} height={18} /></span>
                   Renewable energy powering our network infrastructure
                 </li>
 
                 <li className="flex items-center gap-2">
-                  <span className="text-green-600">🌿</span>
+                  <span className="text-green-600"><Image src="/img/Community/leaf.png" alt="Challenge Icon" width={18} height={18} /></span>
                   Community-driven sustainability challenges each quarter
                 </li>
               </ul>

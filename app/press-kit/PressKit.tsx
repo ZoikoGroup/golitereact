@@ -137,42 +137,39 @@ export default function PressKit() {
       title: "Product Screenshots",
       desc: "App UI · 8 images · 12 min Print",
       bg: "bg-green-50",
-      img: "/img/press/product-screenshots.png",
-      emoji: "📱",
+      img: "/img/Presskit/mobile.png",
     },
     {
       title: "Network Visuals",
       desc: "Infrastructure · 6 images · 4K",
       bg: "bg-blue-50",
-      img: "/img/press/network-visuals.png",
-      emoji: "🛰️",
+      img: "/img/Presskit/network.png",
     },
     {
       title: "Campaign Imagery",
       desc: "Brand Visuals · 11 images · 12 min",
       bg: "bg-orange-50",
-      img: "/img/press/campaign-imagery.png",
-      emoji: "⭐",
+      img: "/img/Presskit/star.png",
     },
     {
       title: "Sustainability Initiatives",
       desc: "Green programme · 8 images · 2K",
       bg: "bg-green-50",
-      img: "/img/press/sustainability.png",
+      img: "/img/Presskit/sustainability.png",
       emoji: "🌿",
     },
     {
       title: "Corporate & Office",
       desc: "HQ & team · 10 images · 10 min",
       bg: "bg-slate-100",
-      img: "/img/press/corporate.png",
+      img: "/img/Presskit/business.png",
       emoji: "🏢",
     },
     {
       title: "Executive Headshots",
       desc: "Leadership team · 4 images · 1K+",
       bg: "bg-gray-800",
-      img: "/img/press/headshots.png",
+      img: "/img/Presskit/account.png",
       emoji: "👤",
       dark: true,
     },
@@ -180,18 +177,18 @@ export default function PressKit() {
       title: "Brand Videos",
       desc: "Deep hero, product demos · OTT",
       bg: "bg-gray-900",
-      img: "/img/press/brand-videos.png",
+      img: "/img/Presskit/video.png",
       emoji: "▶️",
       dark: true,
     },
-    {
-      title: "B-Roll Footage",
-      desc: "Network & lifestyle · 16 clips",
-      bg: "bg-gray-900",
-      img: "/img/press/broll.png",
-      emoji: "🎬",
-      dark: true,
-    },
+    // {
+    //   title: "B-Roll Footage",
+    //   desc: "Network & lifestyle · 16 clips",
+    //   bg: "bg-gray-900",
+    //   img: "/img/Presskit/broll.png",
+    //   emoji: "",
+    //   dark: true,
+    // },
   ];
 
   // 🌿 SUSTAINABILITY STATS
@@ -243,17 +240,17 @@ export default function PressKit() {
 
   const contacts = [
     {
-      icon: "✉️",
+      icon: "/img/Presskit/email.png",
       label: "Media Enquiries",
       value: "press@golitemobile.com",
     },
     {
-      icon: "📞",
+      icon: "/img/Presskit/phone.png",
       label: "Press Hotline",
       value: "+44 (0) 20 8001 5030",
     },
     {
-      icon: "🤝",
+      icon: "/img/Presskit/sms.png",
       label: "Paid Partnerships",
       value: "partnerships@golitemobile.com",
     },
@@ -276,7 +273,7 @@ export default function PressKit() {
         </p>
       </section>
 
-      {/* 📝 COMPANY COPY */}
+      {/*  COMPANY COPY */}
       <section className="max-w-6xl mx-auto px-4 py-12  dark:bg-gray-950 dark:text-white ">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-2">Media Ready Company Copy</h2>
@@ -420,7 +417,7 @@ export default function PressKit() {
                   src={item.img}
                   alt={item.title}
                   width={120}
-                  height={60}
+                  height={80}
                   className="object-contain"
                 />
               </div>
@@ -509,7 +506,7 @@ export default function PressKit() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          👤  FOUNDER & EXECUTIVE LEADERSHIP
+            FOUNDER & EXECUTIVE LEADERSHIP
       ───────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pb-16  dark:bg-gray-950 dark:text-white ">
         <div className="text-center mb-10">
@@ -556,7 +553,7 @@ export default function PressKit() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          📰  NEWS & ANNOUNCEMENTS
+            NEWS & ANNOUNCEMENTS
       ───────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pb-16">
         <div className="text-center mb-8">
@@ -647,7 +644,7 @@ export default function PressKit() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          📸  PHOTOGRAPHY & VISUAL ASSETS
+            PHOTOGRAPHY & VISUAL ASSETS
       ───────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pb-16 dark:bg-gray-950">
         {/* Heading */}
@@ -673,7 +670,14 @@ export default function PressKit() {
                 className={`h-28 flex items-center justify-center ${asset.bg} relative`}
               >
                 {/* Replace emoji with icon later */}
-                <span className="text-3xl">{asset.emoji}</span>
+                <span className="text-3xl">
+                  <Image
+                    src={asset.img}
+                    alt={asset.title}
+                    width={28}
+                    height={28}
+                  />
+                </span>
 
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition rounded-t-xl" />
@@ -690,11 +694,33 @@ export default function PressKit() {
               </div>
             </div>
           ))}
+          <div className="rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer group bg-white dark:bg-gray-900">
+            {/* Top Icon Area */}
+            <div
+              className={`h-28 bg-gray-900 flex items-center justify-center relative`}
+            >
+              {/* Replace emoji with icon later */}
+              <span className="text-3xl">🎬</span>
+
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition rounded-t-xl" />
+            </div>
+
+            {/* Bottom Content */}
+            <div className="p-3">
+              <p className="text-xs font-semibold text-gray-800 dark:text-gray-100">
+                B-Roll Footage
+              </p>
+              <p className="text-xs mt-1 text-gray-500 dark:text-gray-400">
+                Network & lifestyle · 16 clips
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────
-          🌿  SUSTAINABILITY AT THE CORE
+            SUSTAINABILITY AT THE CORE
       ───────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pb-16">
         <div className="rounded-2xl p-8 bg-linear-to-r from-green-50 to-green-100 dark:from-gray-900 dark:to-gray-800">
@@ -702,8 +728,8 @@ export default function PressKit() {
             {/* LEFT SIDE */}
             <div>
               {/* Header */}
-              <p className="text-xs font-semibold text-green-600 uppercase tracking-widest mb-2">
-                🌿 Blue Economy Positioning
+              <p className="flex text-xs font-semibold text-green-600 uppercase tracking-widest mb-2">
+                <span><Image src="/img/Presskit/leaf.png" alt="Blue Economy" width={16} height={16} className="inline-block" /> Blue Economy Positioning</span> 
               </p>
 
               <h2 className="text-3xl font-bold text-green-600 dark:text-white mb-3">
@@ -758,7 +784,7 @@ export default function PressKit() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          📞  MEDIA CONTACT
+            MEDIA CONTACT
       ───────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pb-20">
         <div
@@ -789,7 +815,7 @@ export default function PressKit() {
                     className="flex items-center gap-3 bg-white/5 rounded-xl p-3 w-full"
                   >
                     <div className="w-9 h-9 shrink-0 rounded-lg bg-white/10 flex items-center justify-center">
-                      {item.icon}
+                      <Image src={item.icon} alt={item.label} width={18} height={18} />
                     </div>
                     <div className="min-w-0">
                       <p className="text-[10px] text-gray-400 uppercase">
