@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import Image from "next/image";
 export  function Accessibility() {
   const [selectedTech, setSelectedTech] = useState(0);
   const [formData, setFormData] = useState({
@@ -15,32 +15,32 @@ export  function Accessibility() {
   // ── BUILT-IN FEATURES ──────────────────────────────────────
   const builtInFeatures = [
     {
-      icon: "/img/compliance/5.png",
+      icon: "/img/acccesibility/1.png",
       title: "Keyboard Navigation",
       desc: "Every interactive element on every GoLite page is fully reachable and operable using a keyboard alone — no mouse required.",
     },
     {
-      icon: "🔍",
+      icon: "/img/acccesibility/2.png",
       title: "Screen Reader Support",
       desc: "Semantic HTML, ARIA landmark roles, and descriptive labels ensure full compatibility with major screen readers across all platforms.",
     },
     {
-      icon: "🎨",
+      icon: "/img/acccesibility/3.png",
       title: "Colour & Contrast",
       desc: "All text meets WCAG 2.2 AA contrast requirements. High Contrast mode and Dark Mode are available without any account required.",
     },
     {
-      icon: "🔠",
+      icon: "/img/acccesibility/4.png",
       title: "Text & Typography",
       desc: "Text scales from 100% to 200% without breaking layouts. A dyslexia-friendly font option reduces reading friction for affected users.",
     },
     {
-      icon: "🎬",
+      icon: "/img/acccesibility/5.png",
       title: "Motion & Animation",
       desc: "All decorative animations can be disabled entirely. GoLite respects the prefers-reduced-motion system setting automatically.",
     },
     {
-      icon: "🗣️ ",
+      icon: "/img/acccesibility/6.png",
       title: "Voice Control",
       desc: "All interactive elements carry visible, unique labels compatible with voice control software on all major platforms.",
     },
@@ -50,7 +50,7 @@ export  function Accessibility() {
   const assistiveTechs = [
     {
       label: "Screen Readers",
-      icon: "🔊",
+      icon: "/img/acccesibility/2.png",
       content: {
         summary:
           "GoLite Mobile is tested with major screen readers on their primary platforms. Semantic HTML and comprehensive ARIA implementation ensures a consistent, logical reading experience.",
@@ -65,7 +65,7 @@ export  function Accessibility() {
     },
     {
       label: "Voice Control",
-      icon: "🎙️",
+      icon: "/img/acccesibility/6.png",
       content: {
         summary:
           "All interactive elements carry visible, descriptive labels ensuring full compatibility with Dragon NaturallySpeaking and Apple Voice Control across all key user journeys.",
@@ -79,7 +79,7 @@ export  function Accessibility() {
     },
     {
       label: "Keyboard Only",
-      icon: "⌨️",
+      icon: "/img/acccesibility/1.png",
       content: {
         summary:
           "Every user journey — from onboarding to billing — is fully operable via keyboard. Focus indicators are clearly visible and tab order follows a logical, predictable sequence.",
@@ -93,7 +93,7 @@ export  function Accessibility() {
     },
     {
       label: "Screen Magnifiers",
-      icon: "🔍",
+      icon: "/img/acccesibility/14.png",
       content: {
         summary:
           "GoLite Mobile supports magnification up to 400% without loss of functionality or horizontal scrolling on all core pages. Reflow is tested at all standard zoom levels.",
@@ -110,32 +110,32 @@ export  function Accessibility() {
   // ── SETTINGS ───────────────────────────────────────────────
   const settings = [
     {
-      icon: "🔡",
+      icon: "/img/acccesibility/4.png",
       title: "Text Size",
       desc: "Scale all text between 100% and 200% of the default size. Adjust using the slider or arrow keys when focused.",
     },
     {
-      icon: "🌙",
+      icon: "/img/acccesibility/8.png",
       title: "Dark Mode",
       desc: "Switches to a dark colour scheme, reducing eye strain in low-light environments.Saves energy on OLED screens.",
     },
     {
-      icon: "⬛",
+      icon: "/img/acccesibility/9.png",
       title: "High Contrast",
       desc: "Maximises colour contrast to WCAG AAA level (≥7:1). Recommended for low vision users or bright environment use.",
     },
     {
-      icon: "🎬",
+      icon: "/img/acccesibility/10.png",
       title: "Reduce Motion",
       desc: "Disables all decorative animations and transitions. Essential for users with vestibular disorders or motion sensitivity.",
     },
     {
-      icon: "🔤",
+      icon: "/img/acccesibility/5.png",
       title: "Dyslexia Font",
       desc: "Switches to OpenDyslexic — a typeface with bottom-weighted letters designed to improve reading accuracy for dyslexic users.",
     },
     {
-      icon: "⌨️",
+      icon: "/img/acccesibility/1.png",
       title: "Focus Indicators",
       desc: "Enhanced 3px focus rings are always on by default (WCAG 2.2 required). Disable only if your OS provides its own custom focus styles.",
     },
@@ -243,15 +243,37 @@ export  function Accessibility() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
-          {builtInFeatures.map((feat, i) => (
-            <div key={i} className=" dark:bg-gray-900 dark:text-white bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-2xl mb-3">{feat.icon}</div>
-              <h3 className="font-bold text-sm mb-1">{feat.title}</h3>
-              <p className="text-xs text-gray-500 leading-relaxed dark:bg-gray-900 dark:text-white">{feat.desc}</p>
-            </div>
-          ))}
-        </div>
+       import Image from "next/image";
+
+<div className="grid md:grid-cols-3 gap-5">
+  {builtInFeatures.map((feat, i) => (
+    <div
+      key={i}
+      className="bg-white dark:bg-gray-900 dark:text-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+    >
+      
+      {/* ✅ ICON FIX */}
+      <div className="w-8 h-8 relative mb-3">
+        <Image
+          src={feat.icon}
+          alt={feat.title}
+          fill
+          className="object-contain"
+        />
+      </div>
+
+      {/* TITLE */}
+      <h3 className="font-bold text-sm mb-1">
+        {feat.title}
+      </h3>
+
+      {/* DESC */}
+      <p className="text-xs text-gray-500 dark:text-gray-300 leading-relaxed">
+        {feat.desc}
+      </p>
+    </div>
+  ))}
+</div>
       </section>
 
       {/* ── SUPPORTED ASSISTIVE TECHNOLOGIES ────────────────── */}
@@ -266,25 +288,39 @@ export  function Accessibility() {
 
           <div className="flex flex-col md:flex-row gap-6">
             {/* Sidebar */}
-            <div className="md:w-48 flex-shrink-0">
-              <p className="text-xs font-bold dark:bg-gray-900 dark:text-white text-gray-400 uppercase tracking-widest mb-3">Select Technology</p>
-              <div className="space-y-1">
-                {assistiveTechs.map((tech, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSelectedTech(i)}
-                    className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-left transition-all ${
-                      selectedTech === i
-                        ? "bg-green-500  text-white font-semibold"
-                        : " dark:bg-gray-900 dark:text-white text-gray-600 hover:bg-gray-100"
-                    }`}
-                  >
-                    <span>{tech.icon}</span>
-                    {tech.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+          <div className="md:w-48 flex-shrink-0">
+  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 dark:text-white">
+    Select Technology
+  </p>
+
+  <div className="space-y-1">
+    {assistiveTechs.map((tech, i) => (
+      <button
+        key={i}
+        onClick={() => setSelectedTech(i)}
+        className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-left transition-all ${
+          selectedTech === i
+            ? "bg-green-500 text-white font-semibold"
+            : "text-gray-600 hover:bg-gray-100 dark:text-white"
+        }`}
+      >
+        
+        {/* ✅ ICON FIX */}
+        <div className="w-4 h-4 relative flex-shrink-0">
+          <Image
+            src={tech.icon}
+            alt={tech.label}
+            fill
+            className="object-contain"
+          />
+        </div>
+
+        {/* LABEL */}
+        {tech.label}
+      </button>
+    ))}
+  </div>
+</div>
 
             {/* Content Panel */}
             <div className="flex-1 dark:bg-gray-900 dark:text-white bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
@@ -340,24 +376,43 @@ export  function Accessibility() {
 
           <div className="bg-white rounded-2xl border border-white/10 p-6 dark:bg-gray-900 dark:text-white">
             <div className="flex items-center gap-2 mb-5">
-              <span className="text-lg">⚙️</span>
+              <span className="text-lg">   <Image 
+    src="/img/acccesibility/7.png" 
+    alt="doc" 
+    width={16} 
+    height={16} 
+  /></span>
               <div>
                 <p className="font-bold text-gray-800 text-sm dark:bg-gray-900 dark:text-white">Display & Interaction Preferences</p>
                 <p className="text-xs text-gray-800 dark:bg-gray-900 dark:text-white">All changes apply immediately and persist across sessions.</p>
               </div>
             </div>
+<div className="grid md:grid-cols-2 gap-5">
+  {settings.map((s, i) => (
+    <div key={i} className="flex items-start gap-3">
+      
+      {/* ✅ ICON FIX */}
+      <div className="w-5 h-5 relative flex-shrink-0">
+        <Image
+          src={s.icon}
+          alt={s.title}
+          fill
+          className="object-contain"
+        />
+      </div>
 
-            <div className="grid md:grid-cols-2 gap-5">
-              {settings.map((s, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <span className="text-lg flex-shrink-0">{s.icon}</span>
-                  <div>
-                    <p className="font-bold dark:bg-gray-900 dark:text-white text-gray-800 text-sm">{s.title}</p>
-                    <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-800 leading-relaxed mt-0.5">{s.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+      {/* TEXT */}
+      <div>
+        <p className="font-bold text-gray-800 dark:text-white text-sm">
+          {s.title}
+        </p>
+        <p className="text-xs text-gray-500 dark:text-gray-300 leading-relaxed mt-0.5">
+          {s.desc}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
           </div>
         </div>
       </section>
@@ -423,7 +478,15 @@ export  function Accessibility() {
 
           <div className="max-w-2xl mx-auto dark:bg-gray-900 dark:text-white bg-white rounded-2xl shadow-xl p-8">
             <div className="flex items-center gap-2 mb-6">
-              <span className="text-xl">🛡️</span>
+              <span className="text-xl">
+  <Image 
+    src="/img/acccesibility/13.png" 
+    alt="doc" 
+    width={16} 
+    height={16}
+    />
+
+              </span>
               <div>
                 <p className="font-bold text-sm">Report an Accessibility Issue</p>
                 <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400">All fields marked * are required.</p>
