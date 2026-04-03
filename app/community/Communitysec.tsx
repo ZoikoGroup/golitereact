@@ -297,106 +297,182 @@ export default function Communitysec() {
 
   return (
     <>
-      <div className="w-full dark:bg-gray-950 dark:text-white bg-gray-50 text-gray-800">
-        {/* HERO */}
-        <section className="bg-linear-to-r from-indigo-500 to-purple-500 dark:text-white text-white py-16 px-4 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Connect, Learn and Solve Together
-          </h1>
-          <p className="text-sm md:text-base mb-6 opacity-90  ">
-            Get answers from the GoLite Mobile community, verified experts, and
-            official support resources — all in one place.
-          </p>
+    <div className="w-full dark:bg-gray-900 dark:text-white bg-gray-50 text-gray-800">
 
-          <div className="max-w-xl mx-auto">
-            <div className="flex items-center bg-white rounded-full p-1 shadow-md">
-              {/* Input */}
-              <input
-                type="text"
-                placeholder="Search discussions, guides, or ask a question..."
-                className="flex-1 min-w-0 px-5 py-3 rounded-full text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
-              />
+      {/* HERO */}
+      <section className="bg-gradient-to-r from-indigo-500 to-purple-500 dark:text-white text-white py-16 px-4 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          Connect, Learn and Solve Together
+        </h1>
+        <p className="text-sm md:text-base mb-6 opacity-90  ">
+          Get answers from the GoLite Mobile community, verified experts, and
+          official support resources — all in one place.
+        </p>
 
-              {/* Button */}
-              <button className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-3 py-2 md:px-6 md:py-3 rounded-full transition">
-                Search the Community
-              </button>
-            </div>
-          </div>
-        </section>
+        <div className="flex justify-center gap-2 max-w-xl mx-auto">
+          <input
+            type="text"
+            placeholder="Search discussions, guides, or ask a question..."
+            className="flex-1 px-4 py-2 rounded-full bg-white text-black outline-none"
+          />
+          <button className="bg-orange-500 px-5 py-2 rounded-full font-medium">
+            Search the Community
+          </button>
+        </div>
+      </section>
 
-        {/* FEATURE BAR */}
-        <div className="bg-gray-100 py-6 px-4 dark:bg-gray-950 dark:text-white">
-          <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 ">
-            {features.map((item, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="bg-orange-500 p-2 rounded-lg">
-                  <Image src={item.icon} alt="" width={40} height={40} />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold dark:bg-gray-950 dark:text-white  ">
-                    {item.title}
-                  </p>
-                  <p className="text-xs text-gray-500 dark:bg-gray-950 dark:text-white">
-                    {item.desc}
-                  </p>
-                </div>
+      {/* FEATURE BAR */}
+      <div className="bg-gray-100 py-6 px-4 dark:bg-gray-900 dark:text-white">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 ">
+          {features.map((item, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <div className="bg-orange-500 p-2 rounded-lg">
+                <Image src={item.icon} alt="" width={40} height={40} />
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* STATS */}
-        <div className="py-10 px-4">
-          <div className="max-w-6xl mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
-            <div className="grid grid-cols-2 md:grid-cols-4">
-              {stats.map((stat, i) => (
-                <div
-                  key={i}
-                  className={`
-            flex flex-col items-center justify-center text-center p-6
-            ${i !== stats.length - 1 ? "border-r border-gray-200 dark:border-gray-700" : ""}
-          `}
-                >
-                  {/* Icon */}
-                  <div
-                    className={`w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 mb-4`}
-                  >
-                    <Image
-                      src={stat.icon}
-                      alt={stat.label}
-                      width={28}
-                      height={28}
-                    />
-                  </div>
-
-                  {/* Value */}
-                  <p className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
-                    {stat.value}
-                  </p>
-
-                  {/* Label */}
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    {stat.label}
-                  </p>
-
-                  {/* Optional Badge */}
-                  {stat.badge && (
-                    <span className="mt-2 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-1 rounded-full">
-                      {stat.badge}
-                    </span>
-                  )}
-                </div>
-              ))}
+              <div>
+                <p className="text-sm font-semibold dark:bg-gray-900 dark:text-white  ">{item.title}</p>
+                <p className="text-xs text-gray-500 dark:bg-gray-900 dark:text-white">{item.desc}</p>
+              </div>
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* STATS */}
+      <div className="py-10 px-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 dark:border-amber-100">
+          {stats.map((stat, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-xl shadow p-6 text-center dark:bg-gray-900 dark:text-white dark:border-amber-100"
+            >
+              <div className="flex justify-center mb-2">
+                <Image src={stat.icon} alt="" width={24} height={24} />
+              </div>
+              <p className="text-xl font-bold ">{stat.value}</p>
+              <p className="text-sm text-gray-500  dark:bg-gray-900 dark:text-white dark:border-amber-100">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CATEGORIES */}
+      <section className="py-12 px-4 max-w-6xl mx-auto  dark:bg-gray-900 dark:text-white  dark:border-amber-800-20 dark:border-2 border-blue-400">
+        <h2 className="text-3xl font-semibold text-center mb-6">
+             What Can We Help You With?
+        </h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 ">
+          {categories.map((cat, i) => (
+            <div
+              key={i}
+              className="bg-white p-4 rounded-xl shadow hover:shadow-md transition  dark:bg-gray-900 dark:text-white"
+            >
+              <div className="mb-3">
+                <Image src={cat.icon} alt="" width={38} height={38} />
+              </div>
+              <p className="text-sm font-medium">{cat.title}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* WHAT'S HAPPENING */}
+<section className="py-12 px-4 bg-gray-50 dark:bg-gray-900 dark:text-white ">
+  <div className="max-w-6xl mx-auto text-center">
+    
+    <h2 className="text-2xl md:text-3xl font-semibold mb-2">
+      What’s Happening in the Community
+    </h2>
+    <p className="text-gray-500 text-sm mb-6 dark:bg-gray-900 dark:text-white ">
+      Official updates, trending discussions, and expert-verified answers.
+    </p>
+
+    {/* TABS */}
+    <div className="flex flex-wrap justify-center gap-3 mb-8">
+      <button className="px-4 py-1.5 rounded-full bg-orange-500  dark:text-white  text-white text-sm">
+        Official Updates
+      </button>
+      <button className="px-4 py-1.5 rounded-full  dark:bg-orange-500  dark:text-white  bg-gray-200 text-sm">
+        Trending
+      </button>
+      <button className="px-4 py-1.5 rounded-full dark:bg-orange-500  dark:text-white  bg-gray-200 text-sm">
+        Recently Solved
+      </button>
+      <button className="px-4 py-1.5 rounded-full dark:bg-orange-500  dark:text-white  bg-gray-200 text-sm">
+        Popular Guides
+      </button>
+    </div>
+
+    {/* CARDS */}
+    <div className="grid md:grid-cols-3 gap-6 text-left">
+      
+      {/* Card 1 */}
+      <div className="border border-orange-400 rounded-xl p-5 bg-white dark:bg-gray-900 dark:text-white">
+        <h3 className="font-semibold mb-2">
+          5G Network Expansion — New Cities Added This Month
+        </h3>
+        <p className="text-sm text-gray-600 mb-4 dark:bg-gray-900 dark:text-white">
+          We’ve expanded 5G coverage to 14 new cities across India, including Pune,
+          Ahmedabad, and Jaipur.
+        </p>
+        <div className="flex items-center gap-3">
+          <div className="w-6 h-6 bg-orange-500 rounded-full dark:bg-gray-900 dark:text-white" />
+          <div>
+            <p className="text-sm font-medium">GoLite Team</p>
+            <p className="text-xs text-gray-500 dark:bg-gray-900 dark:text-white">
+              Official Announcement · 2 days ago
+            </p>
           </div>
         </div>
 
-        {/* CATEGORIES */}
-        <section className="py-12 px-4 max-w-6xl mx-auto bg-[#f8fafc] dark:bg-gray-950 transition">
-          {/* Heading */}
-          <h2 className="text-3xl font-semibold text-center text-gray-800 dark:text-white">
-            What Can We Help You With?
+      {/* Card 2 */}
+      <div className="border border-orange-400 rounded-xl p-5 bg-white dark:bg-gray-900 dark:text-white   ">
+        <h3 className="font-semibold mb-2">
+          Scheduled Maintenance Notice — March 22, 2:00–4:00 AM IST
+        </h3>
+        <p className="text-sm text-gray-600 mb-4">
+          Brief planned maintenance may affect data services in select areas.
+          Calls and SMS remain unaffected.
+        </p>
+        <div className="flex items-center gap-3">
+          <div className="w-6 h-6 bg-orange-500 rounded-full" />
+          <div>
+            <p className="text-sm font-medium">GoLite Network Ops</p>
+            <p className="text-xs text-gray-500">
+              Official Notice · 6 hours ago
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Card 3 */}
+      <div className="border border-orange-400 rounded-xl p-5 dark:bg-gray-900 dark:text-white bg-white">
+        <h3 className="font-semibold mb-2">
+          Go Unlimited Plan Now Includes Free Roaming
+        </h3>
+        <p className="text-sm text-gray-600 mb-4">
+          From April 1st, subscribers get free roaming in Canada & Mexico.
+        </p>
+        <div className="flex items-center gap-3">
+          <div className="w-6 h-6 bg-orange-500 rounded-full" />
+          <div>
+            <p className="text-sm font-medium">GoLite Plans Team</p>
+            <p className="text-xs text-gray-500">
+              Official Update · 1 day ago
+            </p>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+      {/* COMMUNITY POSTS */}
+      <section className="bg-gray-100 py-12 px-4 dark:bg-gray-900 dark:text-white">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-xl font-semibold text-center mb-6">
+            Join the Conversation
           </h2>
 
           <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2 mb-8">
@@ -409,7 +485,7 @@ export default function Communitysec() {
             {categories.map((cat, i) => (
               <div
                 key={i}
-                className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:shadow-md transition cursor-pointer"
+                className=" dark:bg-gray-900 dark:text-white bg-white p-4 rounded-xl shadow flex justify-between items-start"
               >
                 {/* Icon with background */}
                 <div className="w-14 h-14 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 mb-3">
@@ -439,13 +515,37 @@ export default function Communitysec() {
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* WHAT'S HAPPENING */}
-        <section className="py-12 px-4 bg-gray-50 dark:bg-gray-950 dark:text-white ">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-2">
-              What’s Happening in the Community
+      {/* RESOURCES */}
+      <section className="py-12 px-4 max-w-6xl mx-auto dark:bg-gray-900 dark:text-white">
+        <h2 className="text-xl font-semibold text-center mb-6">
+          Helpful Resources Before You Post
+        </h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {[
+            "Activate your eSIM",
+            "Check Coverage",
+            "Network Status",
+            "Manage Plan",
+            "Billing FAQs",
+            "Switch to GoLife",
+          ].map((item, i) => (
+            <div key={i} className= " dark:bg-gray-900 dark:text-white bg-white p-4 rounded-xl shadow">
+              <p className="text-sm">{item}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* GREEN SECTION */}
+      <section className="bg-green-100 py-12 px-4 ">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <h2 className="text-xl font-bold  text-green-800 mb-3">
+              A Community Built Around a Greener Future
             </h2>
             <p className="text-gray-500 text-sm mb-6 dark:bg-gray-950 dark:text-white ">
               Official updates, trending discussions, and expert-verified
