@@ -146,7 +146,8 @@ export default function NetworkStatus() {
   });
 
   return (
-    <section className="bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-800 min-h-screen">
+    <section className="bg-gray-100 dark:bg-gray-950 dark:text-white text-gray-800 min-h-screen">
+      
       {/* HERO */}
       <div className="bg-linear-to-r from-[#7085EA] to-[#9476B2] text-white text-center py-12 px-4">
         <h1 className="text-4xl font-bold">All Systems Operational</h1>
@@ -176,14 +177,12 @@ export default function NetworkStatus() {
       </div>
 
       {/* LOCAL STATUS */}
-      <div className="max-w-5xl mx-auto dark:bg-gray-900 dark:text-white bg-white p-6 rounded-xl shadow mt-6 mx-4">
-        <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400 font-semibold uppercase tracking-widest mb-1">
-          📍 Check Your Area
-        </p>
-        <h2 className="font-bold text-xl mb-1">Get Your Local Network Status</h2>
-        <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mb-4">
-          Enter your postcode or let us detect your location to see real-time network performance specific to you.
-        </p>
+      <div className="bg-[#f5f7f6] dark:bg-gray-950 py-10 px-4">
+        <div className="max-w-5xl mx-auto bg-[#f9fbfa] dark:bg-gray-900 rounded-2xl shadow-md p-8">
+          {/* Header */}
+          <p className="bg-green-100 max-w-fit p-2 rounded-2xl text-xs text-green-600 font-semibold uppercase tracking-wide mb-2">
+            📍 Check Your Area
+          </p>
 
           <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">
             Get Your Local Network Status
@@ -253,43 +252,40 @@ export default function NetworkStatus() {
             </div>
           </div>
         </div>
-
-        <div className="text-center text-xs dark:bg-gray-900 dark:text-white text-gray-400 mt-3">or</div>
-        <div className="text-center mt-1">
-          <button className="text-green-600 text-sm hover:underline">Auto-detect my location</button>
-        </div>
       </div>
 
       {/* SERVICES */}
-      <div className="max-w-5xl mx-auto mt-10 px-4">
-        <h2 className="text-center text-2xl font-bold">Service-by-Service Status</h2>
-        <p className="text-center text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1">
-          A real-time view of all GoLite Mobile services across the network.
-        </p>
+      <section className="bg-[#f5f7f6] dark:bg-gray-950 py-12 px-4">
+        <div className="max-w-5xl mx-auto">
+          {/* Heading */}
+          <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
+            Service-by-Service Status
+          </h2>
 
-        <div className="grid grid-cols-3 gap-4 mt-6">
-          {services.map((service, i) => (
-            <div key={i} className="dark:bg-gray-900 dark:text-white bg-white border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex justify-between items-start mb-3">
-                <span className="text-2xl">{service.icon}</span>
-                <span
-                  className={`text-xs font-semibold flex items-center gap-1 ${statusTextColor(service.status)}`}
-                >
-                  <span
-                    className="inline-block w-2 h-2 rounded-full"
-                    style={{ backgroundColor: statusDotColor(service.status) }}
-                  />
-                  {service.status}
-                </span>
-              </div>
-              <h3 className="font-bold text-sm">{service.name}</h3>
-              <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 mt-1 leading-relaxed">{service.description}</p>
-              <div className="flex justify-between items-center mt-3">
-                <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-400">Updated {service.updated}</p>
-                <button
-                  className={`text-xs font-medium hover:underline ${
-                    service.status === "Degraded" ? "text-yellow-600" : "text-green-600"
-                  }`}
+          <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-1">
+            A real-time view of all GoLite Mobile services across the network.
+          </p>
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+            {services.map((service, i) => (
+              <div
+                key={i}
+                className={`
+            rounded-xl p-4 border border-t-4 transition
+            bg-white dark:bg-gray-900
+            ${
+              service.status === "Operational"
+                ? "border-green-500 dark:border-green-700"
+                : "border-yellow-500 dark:border-yellow-700"
+            }
+          `}
+              >
+                {/* Top Row */}
+                <div className="flex justify-between items-start mb-3">
+                  {/* Icon */}
+                  <div
+                  className={`w-12 h-12 bg-gray-200 flex items-center justify-center rounded-lg  dark:bg-gray-800 mb-4`}
                 >
                   <Image
                   src={service.icon} 
@@ -350,10 +346,13 @@ export default function NetworkStatus() {
       </section>
 
       {/* METRICS */}
-      <div className="dark:bg-gray-900 dark:text-white bg-white text-black mt-12 py-12 px-4 dark:bg-gray-900 dark:text-white">
-        <h2 className="text-center text-2xl font-bold">Network Reliability Last 90 Days</h2>
-        <p className="text-center text-sm dark:bg-gray-900 dark:text-white text-gray-400 mt-1">
-          Our track record of uptime, incident frequency, and service consistency.
+      <div className=" bg-white text-black mt-12 py-12 px-4 dark:bg-gray-950 dark:text-white">
+        <h2 className="text-center text-2xl font-bold">
+          Network Reliability Last 90 Days
+        </h2>
+        <p className="text-center text-sm dark:bg-gray-950 dark:text-white text-gray-400 mt-1">
+          Our track record of uptime, incident frequency, and service
+          consistency.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mt-8">
@@ -379,9 +378,14 @@ export default function NetworkStatus() {
               sub: metrics.slaSub,
             },
           ].map((m, i) => (
-            <div key={i} className="dark:bg-gray-900 dark:text-white bg-white text-black p-5 rounded-xl text-center">
+            <div
+              key={i}
+              className="border border-gray-200 dark:bg-gray-950 dark:text-white bg-white text-black p-5 rounded-xl text-center"
+            >
               <p className="text-3xl font-bold text-green-600">{m.value}</p>
-              <p className="text-xs dark:bg-gray-900 dark:text-white text-gray-500 mt-1 whitespace-pre-line leading-snug">{m.label}</p>
+              <p className="text-xs dark:bg-gray-950 dark:text-white text-gray-500 mt-1 whitespace-pre-line leading-snug">
+                {m.label}
+              </p>
               <p className="text-xs text-green-600 mt-2 font-medium">{m.sub}</p>
             </div>
           ))}
@@ -428,7 +432,7 @@ export default function NetworkStatus() {
               />
             ))}
           </div>
-          <div className="flex justify-between text-xs dark:bg-gray-900 dark:text-white text-gray-500 mt-2">
+          <div className="flex justify-between text-xs dark:bg-gray-950 dark:text-white text-gray-500 mt-2">
             <span>Jan 10</span>
             <span>Feb 1</span>
             <span>Feb 15</span>
@@ -505,47 +509,67 @@ export default function NetworkStatus() {
       </section>
 
       {/* SUPPORT */}
-      <div className="max-w-5xl mx-auto mt-12 px-4 text-center">
-        <div className="inline-block bg-orange-500 text-white text-xs px-3 py-1 rounded-full font-semibold mb-3">
-          NEED HELP?
-        </div>
-        <h2 className="text-2xl font-bold">Still Experiencing an Issue?</h2>
-        <p className="text-sm dark:bg-gray-900 dark:text-white text-gray-500 mt-1 mb-6">
-          If your problem isn't reflected above, our team and community are ready to help.
-        </p>
-        <div className="grid grid-cols-3 gap-4 dark:bg-gray-900 dark:text-white">
-          {[
-            {
-              icon: "🎧",
-              title: "Contact Support",
-              desc: "Speak directly with a GoLite support specialist. Available 24/7 via chat, phone, or callback.",
-              btn: "Contact Support",
-              btnStyle: "bg-orange-500 hover:bg-orange-600 text-white",
-            },
-            {
-              icon: "💬",
-              title: "Community Forum",
-              desc: "Browse solved discussions and get advice from 120K+ community members and verified experts.",
-              btn: "Visit Forum",
-              btnStyle: "bg-green-600 hover:bg-green-700 text-white",
-            },
-            {
-              icon: "📖",
-              title: "Troubleshooting Guide",
-              desc: "Step-by-step guides for common issues: data settings, eSIM setup, roaming configuration, and more.",
-              btn: "View Guides",
-              btnStyle: "border border-gray-300 text-gray-700 hover:bg-gray-50",
-            },
-          ].map((item) => (
-            <div key={item.title} className=" border-2 border-amber-100 dark:bg-gray-900 dark:text-white bg-white p-6 rounded-xl shadow-sm text-center">
-              <div className="text-3xl mb-3">{item.icon}</div>
-              <h3 className="font-bold text-sm mb-2">{item.title}</h3>
-              <p className="text-xs text-gray-500 mb-4">{item.desc}</p>
-              <button className={`px-5 py-2 rounded text-sm font-medium ${item.btnStyle}`}>
-                {item.btn}
-              </button>
-            </div>
-          ))}
+      <section className="bg-[#f5f7f6] dark:bg-gray-950 py-14 px-4">
+        <div className="max-w-5xl mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-block bg-orange-100 text-orange-600 text-[11px] px-3 py-1 rounded-full font-semibold mb-3">
+            NEED HELP?
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
+            Still Experiencing an Issue?
+          </h2>
+
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 mb-8">
+            If your problem isn't reflected above, our team and community are
+            ready to help.
+          </p>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {helpItems.map((item) => (
+              <div
+                key={item.title}
+                className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-sm transition"
+              >
+                {/* Icon Box */}
+                <div
+                  className={`w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-${item.bgclr} dark:bg-gray-800 mb-4`}
+                >
+                  <Image
+                  src={item.icon} 
+                  alt={item.title}
+                  width={28}
+                  height={28}
+                />
+                </div>
+
+                {/* Title */}
+                <h3 className="font-semibold text-sm text-gray-800 dark:text-white mb-2">
+                  {item.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-5 leading-relaxed">
+                  {item.desc}
+                </p>
+
+                {/* Button */}
+                <button
+                  className={`px-5 py-2 rounded-full text-sm font-medium transition ${
+                    item.type === "primary"
+                      ? "bg-orange-500 hover:bg-orange-600 text-white"
+                      : item.type === "success"
+                        ? "bg-green-600 hover:bg-green-700 text-white"
+                        : "border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  }`}
+                >
+                  {item.btn}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
